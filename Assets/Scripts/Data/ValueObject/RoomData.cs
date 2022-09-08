@@ -5,20 +5,19 @@ using UnityEngine.InputSystem;
 namespace Data.ValueObject
 {   
     [Serializable]
-    public class RoomData : SaveableEntity,IBuyable
+    public class RoomData :Buyable, ISaveableEntity
     {
         public TurretData TurretData;
         
         public string Key = "RoomData";
-        
-        public override string GetKey()
+
+        public string GetKey()
         {
-            return Key;
+            throw new NotImplementedException();
         }
-        
-        public int Cost { get; set; }
-        
-        public int PayedAmount { get; set; }
-        
+
+        public RoomData(int payedAmount, int cost) : base(payedAmount, cost)
+        {
+        }
     }
 }

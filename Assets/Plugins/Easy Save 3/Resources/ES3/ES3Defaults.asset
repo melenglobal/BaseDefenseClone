@@ -32,6 +32,10 @@ MonoBehaviour:
     - Cinemachine
     - Assembly-CSharp
     - Assembly-CSharp-firstpass
+    - ToonyColorsPro2.Demo
+    - ToonyColorsPro.Runtime
+    - ToonyColorsPro.Editor
+    - ToonyColorsPro.Demo.Editor
     showAdvancedSettings: 0
   addMgrToSceneAutomatically: 0
   autoUpdateReferences: 1

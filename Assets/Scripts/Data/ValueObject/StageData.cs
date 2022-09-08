@@ -5,12 +5,13 @@ using Enums;
 namespace Data.ValueObject
 {  
     [Serializable]
-    public class StageData : IBuyable
+    public class StageData : Buyable
     {
-        public int Cost { get; set; }
-        
-        public int PayedAmount { get; set; }
         
         public AvailabilityType AvailabilityType;
+
+        public StageData(int payedAmount, int cost) : base(payedAmount, cost)
+        {
+        }
     }
 }

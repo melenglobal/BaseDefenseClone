@@ -4,10 +4,10 @@ using Abstract;
 namespace Data.ValueObject
 {   
     [Serializable]
-    public class AmmoWorkerAIData : IWorker
+    public class AmmoWorkerAIData : Worker
     {
-        public int Capacity { get; set; }
-        
-        public float Speed { get; set; }
+        public AmmoWorkerAIData(float speed, int capacity) : base(speed, capacity)
+        {
+        }
     }
 }

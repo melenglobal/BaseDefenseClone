@@ -4,14 +4,12 @@ using Abstract;
 namespace Data.ValueObject
 {   
     [Serializable]
-    public class SoldierAIData: IDamageable
+    public class SoldierAIData: Damageable
     {
         public int AttackRate;
-        
-        public int Damage { get; set; }
-        
-        public int Health { get; set; }
-        
-        public int Speed { get; set; }
+
+        public SoldierAIData(int damage, int health, int speed) : base(damage, health, speed)
+        {
+        }
     }
 }

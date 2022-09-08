@@ -1,11 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using Abstract;
 using Enums;
+using UnityEngine;
 
 namespace Data.ValueObject
 {   
     [Serializable]
-    public class BuyablesData
+    public class BuyablesData : ISaveableEntity
     {
         public int MoneyWorkerCost;
         public int MoneyWorkerPayedAmount;
@@ -15,8 +17,13 @@ namespace Data.ValueObject
 
         public int MoneyWorkerLevel;
         public int AmmoWorkerLevel;
-
-        public AvailabilityType AvailabilityType;
         
+        public AvailabilityType AvailabilityType;
+
+
+        public string GetKey()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

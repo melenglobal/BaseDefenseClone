@@ -1,8 +1,8 @@
 ﻿namespace Abstract
 {
-    public abstract class SaveableEntity
+    public interface ISaveableEntity
     {
-        public abstract string GetKey();
-        
+         string GetKey();
+    
     }
 }

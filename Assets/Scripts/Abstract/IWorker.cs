@@ -1,10 +1,18 @@
-﻿namespace Abstract
+﻿using UnityEngine;
+
+namespace Abstract
 {
-    public interface IWorker
+    public abstract class Worker
     {
-        public int Capacity { get; set; }
-        
-        public float Speed { get; set; }
-        
+        public int Capacity;
+
+        public float Speed;
+
+        protected Worker(float speed, int capacity)
+        {
+            Speed = speed;
+            Capacity = capacity;
+        }
+
     }
 }

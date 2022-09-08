@@ -1,11 +1,18 @@
 ﻿namespace Abstract
 {
-    public interface IDamageable
+    public abstract class Damageable
     {
-        public int Damage { get; set; }
+        public int Damage;
 
-        public int Health { get; set; }
+        public int Health;
 
-        public int Speed { get; set; }
+        public int Speed;
+
+        protected Damageable(int damage, int health, int speed)
+        {
+            Damage = damage;
+            Health = health;
+            Speed = speed;
+        }
     }
 }

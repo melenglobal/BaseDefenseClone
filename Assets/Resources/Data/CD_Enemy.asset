@@ -12,3 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fe383a2cc0a4d248fa44674af181773, type: 3}
   m_Name: CD_Enemy
   m_EditorClassIdentifier: 
+  AmmoWorkerAIData:
+    Capacity: 2
+    Speed: 6.4
+  MoneyWorkerAIData:
+    Capacity: 7
+    Speed: 9.03
+  MineWorkerAIData:
+    Capacity: 10
+    Speed: 1.47
+  SoldierAIData:
+    Damage: 0
+    Health: 0
+    Speed: 0
+    AttackRate: 0
+  EnemyAIData:
+    EnemyDatas:
+    - Health: 0
+      Damage: 0
+      AttackRange: 0
+      Speed: 0
+      ChaseSpeed: 0
+      Chase: 0
+      EnemyType: 0

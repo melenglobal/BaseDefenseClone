@@ -1,15 +1,14 @@
 ﻿using System;
 using Abstract;
+using Enums;
 
 namespace Data.ValueObject
 {   
     [Serializable]
-    public class EnemyData : IEnemy
+    public class EnemyData : Enemy
     {
-        public int Health { get; set; }
-        public int Damage { get; set; }
-        public float AttackRange { get; set; }
-        public float Speed { get; set; }
-        public float ChaseSpeed { get; set; }
+        public EnemyData(int health, int damage, float attackRange, float speed, float chaseSpeed, int chase, EnemyType enemyType) : base(health, damage, attackRange, speed, chaseSpeed, chase, enemyType)
+        {
+        }
     }
 }

@@ -1,15 +1,33 @@
-﻿namespace Abstract
+﻿using Enums;
+
+namespace Abstract
 {
-    public interface IEnemy
+    public abstract class Enemy
     {
-        public int Health { get; set; }
+        public int Health;
 
-        public int Damage { get; set; }
+        public int Damage;
 
-        public float AttackRange { get; set; }
+        public float AttackRange;
 
-        public float Speed { get; set; }
+        public float Speed;
 
-        public float ChaseSpeed { get; set; }
+        public float ChaseSpeed;
+
+        public int Chase;
+        
+        public EnemyType EnemyType;
+
+        protected Enemy(int health, int damage, float attackRange, float speed, float chaseSpeed, int chase, EnemyType enemyType)
+        {
+            Health = health;
+            Damage = damage;
+            AttackRange = attackRange;
+            Speed = speed;
+            ChaseSpeed = chaseSpeed;
+            Chase = chase;
+            EnemyType = enemyType;
+        }
+        
     }
 }

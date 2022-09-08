@@ -4,7 +4,7 @@ using Abstract;
 namespace Data.ValueObject
 {   
     [Serializable]
-    public class MineBaseData : SaveableEntity
+    public class MineBaseData : ISaveableEntity
     {
         public int MaxWorkerAmount;
         
@@ -17,7 +17,9 @@ namespace Data.ValueObject
         public int MineCardCapacity;
         
         public string Key = "MineBaseData";
-        public override string GetKey()
+
+
+        public string GetKey()
         {
             return Key;
         }

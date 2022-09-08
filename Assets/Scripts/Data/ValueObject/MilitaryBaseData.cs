@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Data.ValueObject
 {   
     [Serializable]
-    public class MilitaryBaseData : SaveableEntity
+    public class MilitaryBaseData : ISaveableEntity
     {
         public int MaxSoldierAmount;
 
@@ -25,8 +25,8 @@ namespace Data.ValueObject
         public int AttackTimer;
         
         public string Key = "MilitaryBaseData";
-        
-        public override string GetKey()
+
+        public string GetKey()
         {
             return Key;
         }

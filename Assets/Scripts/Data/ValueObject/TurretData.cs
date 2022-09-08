@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 namespace Data.ValueObject
 {   
     [Serializable]
-    public class TurretData : SaveableEntity,IBuyable
+    public class TurretData : Buyable,ISaveableEntity
     {
         public AvailabilityType AvailabilityType;
 
@@ -21,13 +21,13 @@ namespace Data.ValueObject
         
         public string Key = "TurretData";
         
-        public override string GetKey()
+        public TurretData(int payedAmount, int cost) : base(payedAmount, cost)
+        {
+        }
+
+        public string GetKey()
         {
             return Key;
         }
-
-        public int Cost { get; set; }
-        
-        public int PayedAmount { get; set; }
     }
 }

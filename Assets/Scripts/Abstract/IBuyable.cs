@@ -1,13 +1,19 @@
-﻿using System.CodeDom;
+﻿using System;
+using System.CodeDom;
 using Enums;
 
 namespace Abstract
 {
-    public interface IBuyable
+    public abstract class Buyable
     {
-        public int Cost { get; set; }
+        public int Cost;
 
-        public int PayedAmount { get; set; }
-        
+        public int PayedAmount;
+
+        protected Buyable(int payedAmount, int cost)
+        {
+            PayedAmount = payedAmount;
+            Cost = cost;
+        }
     }
 }
