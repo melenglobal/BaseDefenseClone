@@ -1,25 +1,156 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using AIBrains.EnemyBrain;
 using Data.UnityObject;
 using Data.ValueObject;
+using Enums;
 using UnityEngine;
+using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 namespace Managers
 {
     public class EnemySpawnManager : MonoBehaviour
     {
-        public MineWorkerAIData MineWorkerAIData;
+        public Transform Player;
+        public int NumberOfEnemiesToSpawn = 50;
+        
+        public float SpawnDelay = 2;
 
+        [SerializeField]private List<GameObject> enemies = new List<GameObject>();
 
+        private EnemyType enemyType;
+        
+        private List<EnemyAIBrain> enemyScripts = new List<EnemyAIBrain>();
+        
+        public GameObject EnemyPrefab;
+
+        public SpawnMethod EnemySpawnMethod;
+
+        private NavMeshTriangulation triangulation;
+
+        private void InitEnemyPool()
+        {
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                if (i == 0)
+                {   
+                    Debug.Log(((EnemyType)i).ToString());
+                    ObjectPoolManager.Instance.AddObjectPool(RedEnemyFactoryMethod,TurnOnEnemyAI,TurnOffEnemyAI,((EnemyType)i).ToString(),50,true);
+                }
+                // else if (i == 1)
+                // {
+                //     ObjectPoolManager.Instance.AddObjectPool(OrangeEnemyFactoryMethod,TurnOnEnemyAI,TurnOffEnemyAI,((EnemyType)i).ToString(),50,true);
+                // }
+                // else
+                // {
+                //     ObjectPoolManager.Instance.AddObjectPool(BigRedEnemyFactoryMethod,TurnOnEnemyAI,TurnOffEnemyAI,((EnemyType)i).ToString(),50,true);
+                // }
+                
+                
+            }
+            
+        }
         private void Awake()
         {
-           MineWorkerAIData= GetData();
+            
         }
 
         private void Start()
+        {   
+            InitEnemyPool();
+            
+            triangulation = NavMesh.CalculateTriangulation();
+            
+            StartCoroutine(SpawnEnemies());
+        }
+        
+        private GameObject RedEnemyFactoryMethod()
         {
-            Debug.Log(MineWorkerAIData.Capacity + " / " +MineWorkerAIData.Speed);
+            return  Instantiate(enemies[0]);
         }
 
-        private MineWorkerAIData GetData() => Resources.Load<CD_Enemy>("Data/CD_Enemy").MineWorkerAIData;
+        private GameObject OrangeEnemyFactoryMethod()
+        {
+            return Instantiate(enemies[1]);
+        }
+        private GameObject BigRedEnemyFactoryMethod()
+        {
+            return Instantiate(enemies[2]);
+        }
+
+        private void TurnOnEnemyAI(GameObject enemy)
+        {
+            enemy.SetActive(true);
+        }
+
+        private void TurnOffEnemyAI(GameObject enemy)
+        {
+            enemy.SetActive(false);
+            
+        }
+        private IEnumerator SpawnEnemies()
+        {
+            WaitForSeconds wait = new WaitForSeconds(SpawnDelay);
+            
+            int spawnedEnemies = 0;
+
+            while (spawnedEnemies < NumberOfEnemiesToSpawn)
+            {
+                if (EnemySpawnMethod == SpawnMethod.RoundRobin)
+                {
+                    SpawnRoundRobinEnemy(spawnedEnemies);
+                }
+
+                spawnedEnemies++;
+                yield return wait;
+            }
+        }
+
+        private void SpawnRoundRobinEnemy(int spawnedEnemies)
+        {
+            DoSpawnEnemy();
+        }
+
+        private void SpawnRandomEnemy()
+        {
+            DoSpawnEnemy();
+        }
+        
+        private void ReleaseEnemyObject(GameObject go,Type t)
+        {
+            ObjectPoolManager.Instance.ReturnObject(go,t.ToString());
+        }
+        private void DoSpawnEnemy()
+        {
+           
+           GameObject enemyAI = ObjectPoolManager.Instance.GetObject<GameObject>("Orange");
+           
+           EnemyAIBrain brain = enemyAI.GetComponent<EnemyAIBrain>();
+
+           int vertexIndex = Random.Range(0, triangulation.vertices.Length);
+           
+           NavMeshHit hit;
+
+           if (NavMesh.SamplePosition(triangulation.vertices[vertexIndex],out hit,2f,1)) // 1 for walkable
+           {
+               
+            brain.navMeshAgent.Warp(hit.position);
+            //brain.target = Player;
+            brain.navMeshAgent.enabled = true; // Target may be different
+            //enemyAI.StartChasing();
+
+           }
+           else
+           {
+               Debug.LogError($"Unable to place NavMeshAgent on NavMesh. Tried to use {triangulation.vertices[vertexIndex]}");
+           }
+        }
+        public enum SpawnMethod
+        {
+            RoundRobin,
+            Random
+        }
     }
 }

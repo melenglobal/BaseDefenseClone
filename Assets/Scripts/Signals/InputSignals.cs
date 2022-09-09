@@ -1,18 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
+using Extentions;
+using Keys;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class InputSignals : MonoBehaviour
+public class InputSignals : MonoSingleton<InputSignals>
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public UnityAction onEnableInput = delegate {  };
+    public UnityAction onDisableInput = delegate {  };
+    public UnityAction onFirstTimeTouchTaken = delegate { };
+    public UnityAction onInputTaken = delegate { };
+    public UnityAction<InputParams> onJoyStickInputDragged = delegate { };
+    public UnityAction onInputReleased = delegate { };
 }

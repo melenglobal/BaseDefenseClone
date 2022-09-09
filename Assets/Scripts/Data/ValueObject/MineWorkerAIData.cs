@@ -9,5 +9,6 @@ namespace Data.ValueObject
         public MineWorkerAIData(float speed, int capacity) : base(speed, capacity)
         {
         }
+        
     }
 }
