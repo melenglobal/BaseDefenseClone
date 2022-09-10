@@ -37,7 +37,7 @@ namespace AIBrains.EnemyBrain
             var attack = new Attack(navMeshAgent,animator);
             var move = new Move(this,navMeshAgent,animator);
             var death = new Death(navMeshAgent,animator);
-            var chase = new Chase(navMeshAgent,animator);
+            var chase = new Chase(this,navMeshAgent,animator);
             var moveToBomb = new MoveToBomb(navMeshAgent,animator);
             
             _stateMachine = new StateMachine();
@@ -54,7 +54,7 @@ namespace AIBrains.EnemyBrain
             
             void At(IState to, IState from, Func<bool> condition) => _stateMachine.AddTransition(to, from, condition);
             
-            Func<bool> HasTarget() => () => target == null;
+            Func<bool> HasTarget() => () => target != null;
             Func<bool> AttackRange() => () => target != null && chase.isPlayerInRange;
             Func<bool> AttackOffRange() => () => target != null && !chase.isPlayerInRange;
             Func<bool> TargetNull() => () => target is null;

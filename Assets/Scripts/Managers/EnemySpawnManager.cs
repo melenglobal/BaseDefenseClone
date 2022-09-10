@@ -30,6 +30,8 @@ namespace Managers
 
         private NavMeshTriangulation triangulation;
 
+        public Transform SpawnPos;
+
         private void InitEnemyPool()
         {
             for (int i = 0; i < enemies.Count; i++)
@@ -129,23 +131,50 @@ namespace Managers
            
            EnemyAIBrain brain = enemyAI.GetComponent<EnemyAIBrain>();
 
-           int vertexIndex = Random.Range(0, triangulation.vertices.Length);
+           int vertexIndex = Random.Range(0,triangulation.vertices.Length);
            
-           NavMeshHit hit;
-
-           if (NavMesh.SamplePosition(triangulation.vertices[vertexIndex],out hit,2f,1)) // 1 for walkable
+           Debug.Log(triangulation.vertices);
+           
+           bool RandomPoint(Vector3 center, float range, out Vector3 result)
            {
+               for (int i = 0; i < 60; i++)
+               {
+                   Vector3 randomPoint = center + Random.insideUnitSphere * range;
+                   Vector3 randomPos = new Vector3(randomPoint.x, 0, SpawnPos.transform.position.z);
+                   NavMeshHit hit;
+                   if (NavMesh.SamplePosition(randomPos, out hit, 1.0f, 1))
+                   {
+                       result = hit.position;
+                       return true;
+                  
+                   }
                
-            brain.navMeshAgent.Warp(hit.position);
-            //brain.target = Player;
-            brain.navMeshAgent.enabled = true; // Target may be different
-            //enemyAI.StartChasing();
-
+                   
+               }
+               result = Vector3.zero;
+               return false;
            }
+
+           Vector3 point;
+           if (RandomPoint(SpawnPos.position,20 ,out point))
+           {   
+               brain.navMeshAgent.Warp(point);
+             
+           }
+           // if (NavMesh.SamplePosition(triangulation.vertices[vertexIndex],out hit,2f,1)) // 1 for walkable
+           // {
+           //     
+           //  brain.navMeshAgent.Warp(hit.position);
+           //  //brain.target = Player;
+           //  brain.navMeshAgent.enabled = true; // Target may be different
+           //  //enemyAI.StartChasing();
+           //
+           // }
            else
            {
                Debug.LogError($"Unable to place NavMeshAgent on NavMesh. Tried to use {triangulation.vertices[vertexIndex]}");
            }
+          
         }
         public enum SpawnMethod
         {

@@ -69,8 +69,7 @@ namespace Managers
             InputSignals.Instance.onJoyStickInputDragged += OnGetInputValues;
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onReset += OnReset;
-            // CoreGameSignals.Instance.onFailed += OnFailed;
-     
+
         }
 
         private void UnsubscribeEvents()
@@ -80,17 +79,10 @@ namespace Managers
             InputSignals.Instance.onJoyStickInputDragged -= OnGetInputValues;
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onReset -= OnReset;
-            // CoreGameSignals.Instance.onFailed -= OnFailed;
-  
+            
         }
         #endregion
         
-
-        public void PlayerPhysicDisabled()
-        {
-            playerCollider.enabled = false;
-            playerRigidbody.useGravity = false;
-        }
 
         private void OnDisable()
         {
@@ -99,66 +91,35 @@ namespace Managers
 
         private void OnActivateMovement()
         {
-           ChangePlayerAnimation(PlayerAnimationType.Run);
+            Debug.Log("Movement Activated!");
+            ChangePlayerAnimation(PlayerAnimationType.Run);
 
            movementController.EnableMovement();
         }
 
         private void OnDeactiveMovement()
-        {
+        {   
+            Debug.Log("Movement Deactivated!");
             movementController.DeactiveMovement();
 
             ChangePlayerAnimation(PlayerAnimationType.Idle);
         }
 
-        // public void ExitPaymentArea()
-        // {
-        //     ParticalSignals.Instance.onParticleStop?.Invoke();
-        // }
-        
-
         private void OnGetInputValues(InputParams inputParams)
         {
             movementController.UpdateInputValue(inputParams);
         }
-        
-        
+ 
 
         private void OnPlay() => movementController.IsReadyToPlay(true);
-
-       // private void OnFailed() => movementController.IsReadyToPlay(false);
+        
 
         private void OnReset()
         {
-            //movementController.MovementReset();
-            gameObject.SetActive(false);//changed
-           // movementController.ChangeHorizontalSpeed(HorizontalSpeedStatus.Active);
+          
+            gameObject.SetActive(false);
+           
         }
-        
-
-        // private void OnEnterIdleArea()
-        // {
-        //     movementController.ChangeHorizontalSpeed(HorizontalSpeedStatus.Active);
-        // }
-        //
-
-        // public void IsHitCollectable()
-        // {
-        //     if (_gameStates == GameStates.Idle)
-        //     {
-        //         ScoreSignals.Instance.onUpdateScore?.Invoke(ScoreStatus.plus);
-        //     }
-        // }
-
-        // private void OnSetScoreText(int score)
-        // {
-        //     ScoreVaryant = score;
-        //     playerMeshController.CalculateSmallerRate(score);
-        //     PlayerScoreText(score);
-        // }
-        //private void PlayerScoreText(int score)=> playerScoreController.UpdateScore(score);
-       // public void OnStopVerticalMovement() => movementController.StopVerticalMovement();
-
         
 
         public void ChangePlayerAnimation(PlayerAnimationType animType)

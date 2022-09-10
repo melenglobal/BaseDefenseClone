@@ -8,21 +8,23 @@ namespace AIBrains.EnemyBrain
     {   
         private readonly NavMeshAgent _navMeshAgent;
         private readonly Animator _animator;
-
+        private readonly EnemyAIBrain _enemyAIBrain;
         public bool isPlayerInRange; // check distance agent.remaining
-        public Chase(NavMeshAgent agent,Animator animator)
+        public Chase(EnemyAIBrain enemyAIBrain,NavMeshAgent agent,Animator animator)
         {
+            _enemyAIBrain = enemyAIBrain;
             _navMeshAgent = agent;
             _animator = animator;
         }
         public void Tick()
         {
-            
+            _navMeshAgent.SetDestination(_enemyAIBrain.target.position);
         }
 
         public void OnEnter()
         {
-            //artik kos,
+            Debug.Log("DEBUG CHASE!");
+            _navMeshAgent.enabled = true;
         }
 
         public void OnExit()

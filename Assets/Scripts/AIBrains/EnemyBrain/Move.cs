@@ -20,8 +20,7 @@ namespace AIBrains.EnemyBrain
             _animator = animator;
         }
         public void Tick()
-        {   
-            Debug.Log("Tick is updating!");
+        {
             if (Vector3.Distance(_enemyAIBrain.transform.position, _lastPosition) <= 0f)
                 TimeStuck += Time.deltaTime;
             

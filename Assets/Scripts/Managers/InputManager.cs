@@ -4,8 +4,9 @@ using Data.UnityObject;
 using Data.ValueObject;
 using Keys;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-  public class InputManager : MonoBehaviour
+public class InputManager : MonoBehaviour
     {
         #region Self Variables
 
@@ -19,7 +20,7 @@ using UnityEngine;
 
         [SerializeField] private FloatingJoystick Joystick;
 
-        [SerializeField] private bool isReadyForTouch;
+        [SerializeField] private bool isReadyForTouch,isFirstTimeTouchTaken;
 
 
         #endregion Serialized Variables
@@ -81,57 +82,52 @@ using UnityEngine;
 
         #endregion Event Subscriptions
 
-        private void FixedUpdate()
-        {
+        private void Update()
+        {   
             if (!isReadyForTouch) return;
-
-            if (Input.GetMouseButtonUp(0))
+            
+            if (Input.GetMouseButtonUp(0) && !IsPointerOverUIElement())
             {
                 _isTouching = false;
                 InputSignals.Instance.onInputReleased?.Invoke();
             }
-
-            // if (Input.GetMouseButtonDown(0) && Input.mousePosition.y <= 960)
-            // {
-            //     
-            //     _mousePosition = Input.mousePosition;
-            //     Debug.Log("asjkdaksd");
-            // }
             
+            if (Input.GetMouseButtonDown(0))
+            {
+                _isTouching = true;
+                InputSignals.Instance.onInputTaken?.Invoke();
+                if (!isFirstTimeTouchTaken)
+                {
+                    isFirstTimeTouchTaken = true;
+                    InputSignals.Instance.onFirstTimeTouchTaken?.Invoke();
+                }
+
+                _mousePosition = Input.mousePosition;
+            }
             IdleInput();
         }
 
         private void IdleInput()
         {
             if (Input.GetMouseButton(0))
-            {   
+            {
                 _isTouching = true;
+
                 if (_isTouching)
-                {   
-                   
-                    InputSignals.Instance.onInputTaken?.Invoke();
+                {
+                    
                     if (Joystick.Horizontal != 0 || Joystick.Vertical != 0)
                     {
                         _joystickPosition = new Vector3(Joystick.Horizontal, 0, Joystick.Vertical);
-
-                        _moveVector = _joystickPosition;
-                
-
-                        var InputMagnitude = Mathf.Clamp01(_moveVector.magnitude);
-                
-                
-                        if (_moveVector.magnitude > 0)
+                        InputSignals.Instance.onJoyStickInputDragged?.Invoke(new InputParams()
                         {
-                            InputSignals.Instance.onJoyStickInputDragged?.Invoke(new InputParams()
-                            {
-                                InputValues = _moveVector
-                            });
-                        }
+                            InputValues = _joystickPosition
+                        });
 
                     }
                 }
+
             }
-           
         }
 
         private void OnPlay() => isReadyForTouch = true;
@@ -142,18 +138,17 @@ using UnityEngine;
 
         private void OnReset()
         {
-          
             _isTouching = false;
             isReadyForTouch = false;
         }
 
-        //private bool IsPointerOverUIElement()
-        //{
-        //    var eventData = new PointerEventData(EventSystem.current);
-        //    eventData.position = Input.mousePosition;
-        //    var results = new List<RaycastResult>();
-        //    EventSystem.current.RaycastAll(eventData, results);
-        //    return results.Count > 0;
-        //}
+        private bool IsPointerOverUIElement()
+        {
+            var eventData = new PointerEventData(EventSystem.current);
+            eventData.position = Input.mousePosition;
+            var results = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(eventData, results);
+            return results.Count > 0;
+        }
     }
 
