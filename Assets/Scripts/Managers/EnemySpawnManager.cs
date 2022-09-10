@@ -13,24 +13,47 @@ namespace Managers
 {
     public class EnemySpawnManager : MonoBehaviour
     {
+        #region Self Variables
+
+        #region Serialized Variables
+        
+        [SerializeField]private List<GameObject> enemies = new List<GameObject>();
+        
+        [SerializeField]private List<Transform> targetList = new List<Transform>();
+        
+
+        #endregion
+    
+        #region Public Variables
+
         public Transform Player;
+        
         public int NumberOfEnemiesToSpawn = 50;
         
         public float SpawnDelay = 2;
-
-        [SerializeField]private List<GameObject> enemies = new List<GameObject>();
-
-        private EnemyType enemyType;
-        
-        private List<EnemyAIBrain> enemyScripts = new List<EnemyAIBrain>();
         
         public GameObject EnemyPrefab;
 
         public SpawnMethod EnemySpawnMethod;
+        
+        public Transform SpawnPos;
+
+        #endregion
+
+        #region Private Variables
+        
+        private EnemyType enemyType;
+        
+        private List<EnemyAIBrain> enemyScripts = new List<EnemyAIBrain>();
+        
 
         private NavMeshTriangulation triangulation;
 
-        public Transform SpawnPos;
+        
+
+        #endregion
+        #endregion
+        
 
         private void InitEnemyPool()
         {
@@ -52,10 +75,6 @@ namespace Managers
                 
                 
             }
-            
-        }
-        private void Awake()
-        {
             
         }
 
@@ -159,7 +178,8 @@ namespace Managers
            if (RandomPoint(SpawnPos.position,20 ,out point))
            {   
                brain.navMeshAgent.Warp(point);
-             
+               brain.target = targetList[Random.Range(0,targetList.Count)];
+
            }
            // if (NavMesh.SamplePosition(triangulation.vertices[vertexIndex],out hit,2f,1)) // 1 for walkable
            // {
