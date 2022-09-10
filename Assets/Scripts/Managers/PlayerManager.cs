@@ -91,15 +91,13 @@ namespace Managers
 
         private void OnActivateMovement()
         {
-            Debug.Log("Movement Activated!");
             ChangePlayerAnimation(PlayerAnimationType.Run);
 
            movementController.EnableMovement();
         }
 
         private void OnDeactiveMovement()
-        {   
-            Debug.Log("Movement Deactivated!");
+        {
             movementController.DeactiveMovement();
 
             ChangePlayerAnimation(PlayerAnimationType.Idle);

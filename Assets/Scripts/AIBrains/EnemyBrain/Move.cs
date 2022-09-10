@@ -20,7 +20,7 @@ namespace AIBrains.EnemyBrain
             _animator = animator;
         }
         public void Tick()
-        {
+        {   
             if (Vector3.Distance(_enemyAIBrain.transform.position, _lastPosition) <= 0f)
                 TimeStuck += Time.deltaTime;
             
@@ -30,13 +30,13 @@ namespace AIBrains.EnemyBrain
         public void OnEnter()
         {
             _navMeshAgent.enabled = true;
-            _navMeshAgent.SetDestination(_enemyAIBrain.target.transform.position);
+            _navMeshAgent.SetDestination(_enemyAIBrain._currentTarget.position);
             //_animator.SetFloat(Speed, 1f);
         }
 
         public void OnExit()
         {
-             _navMeshAgent.enabled = false;
+             //_navMeshAgent.enabled = false;
             // _animator.SetFloat(Speed, 0f);
         }
     }

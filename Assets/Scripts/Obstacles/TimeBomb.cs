@@ -51,7 +51,7 @@ namespace Obstacles
                 {
                     if (ExplosionTimer >= 9.7)
                     {
-                        FindEnemyInRange().BombSettled(this.transform); 
+                        //FindEnemyInRange().BombSettled(this.transform); 
                     }
                     
                     ExplosionTimer -= Time.fixedDeltaTime;

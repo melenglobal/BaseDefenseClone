@@ -18,13 +18,14 @@ namespace AIBrains.EnemyBrain
         }
         public void Tick()
         {
-            _navMeshAgent.SetDestination(_enemyAIBrain.target.position);
+            _navMeshAgent.destination = _enemyAIBrain._currentTarget.position;
         }
 
         public void OnEnter()
         {
-            Debug.Log("DEBUG CHASE!");
-            _navMeshAgent.enabled = true;
+            _navMeshAgent.SetDestination(_enemyAIBrain._currentTarget.position);
+            //_navMeshAgent.enabled = true;
+            Debug.Log(_enemyAIBrain._currentTarget.name);
         }
 
         public void OnExit()

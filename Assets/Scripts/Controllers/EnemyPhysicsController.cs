@@ -1,0 +1,53 @@
+﻿using AIBrains.EnemyBrain;
+using Managers;
+using UnityEngine;
+
+namespace Controllers
+{
+    public class EnemyPhysicsController : MonoBehaviour
+    {
+        private Transform _detectedPlayer;
+        private Transform _detectedMine;
+        private EnemyAIBrain _enemyAIBrain;
+        public bool IsPlayerInRange() => _detectedPlayer != null;
+        public bool IsBombInRange() => _detectedMine != null;
+        private void Awake()
+        {
+            _enemyAIBrain = this.gameObject.GetComponentInParent<EnemyAIBrain>();
+        }
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                
+                _detectedPlayer = other.GetComponentInParent<PlayerManager>().transform;
+                
+                _enemyAIBrain.SetTarget(other.transform);
+            }
+
+            // /if (other.GetComponent<Mine>())
+            // {
+            //     _detectedMine = other.GetComponent<Mine>();
+            // }/
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                _detectedPlayer = null;
+                this.gameObject.GetComponentInParent<EnemyAIBrain>().SetTarget(null);
+            }
+
+            // /if (other.GetComponent<Mine>())
+            // {
+            //
+            // }/
+        }
+
+        public Vector3 GetNearestPosition(GameObject gO)
+        {
+            return gO?.transform.position ?? Vector3.zero;
+        }
+    }
+}

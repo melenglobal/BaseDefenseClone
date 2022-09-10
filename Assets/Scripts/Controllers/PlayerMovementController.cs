@@ -73,8 +73,7 @@ namespace Controllers
         }
         
         private void IdleMove()
-        {   
-            Debug.Log("MOVE");
+        {
             var velocity = rigidbody.velocity;
             velocity = new Vector3(_movementDirection.x * _movementData.Speed, velocity.y,
                 _movementDirection.z * _movementData.Speed);
