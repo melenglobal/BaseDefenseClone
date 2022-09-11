@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Abstract;
 using Data.UnityObject;
 using Data.ValueObject;
@@ -8,46 +9,67 @@ using Obstacles;
 using StateBehaviour;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 namespace AIBrains.EnemyBrain
 {
     public class EnemyAIBrain : MonoBehaviour
     {
+        #region Self Variables
+
+        #region Public Variables
+
+        public bool IsBombSettled;
+        
+        
+        public Transform CurrentTarget;
+        public Transform TurretTarget;
+        public EnemyData Data;
+
+        #endregion
+        
+        #region Serialized Variables
+
+        [SerializeField] private Transform spawnPosition;
+        
+        #endregion
+
+        #region Private Variables
+        
+        private EnemyType EnemyType;
+       // private NavMeshAgent navMeshAgent;
         private StateMachine _stateMachine;
 
-        public bool isBombSettled;
-
-        public NavMeshAgent navMeshAgent;
-
-        public EnemyType EnemyType;
+        #endregion
         
-        // Player playerTarget,mayin playerTarget,taret playerTarget
-        public Transform _currentTarget;
-        public Transform _TurretTarget;
 
-        public EnemyData Data;
+        #endregion
+        
+        
+        
         private void Awake()
         {   
-            //playerTarget = FindObjectOfType<PlayerManager>().transform;
             Data = GetEnemyAIData();
-            _TurretTarget = _currentTarget;
-            GetStatesReferences();
             
+            spawnPosition = Data.SpawnPosition;
+            CurrentTarget = Data.TargetList[Random.Range(0,Data.TargetList.Count)];
+            
+            TurretTarget = CurrentTarget;
+            
+            GetStatesReferences();
             
         }
 
         private EnemyData GetEnemyAIData() => Resources.Load<CD_Enemy>("Data/CD_Enemy").EnemyAIData.EnemyDatas[(int)EnemyType];
-
-        private void Start()
-        {   
-            GetStatesReferences();
-        }
+        
 
         private void GetStatesReferences()
         {
             
             var animator = GetComponent<Animator>();
+            var navMeshAgent = GetComponent<NavMeshAgent>();
             
+            var search = new Search(this,navMeshAgent,spawnPosition);
             var attack = new Attack(navMeshAgent,animator);
             var move = new Move(this,navMeshAgent,animator);
             var death = new Death(navMeshAgent,animator);
@@ -55,6 +77,8 @@ namespace AIBrains.EnemyBrain
             var moveToBomb = new MoveToBomb(navMeshAgent,animator);
             
             _stateMachine = new StateMachine();
+            
+            At(search,move,HasInitTarget());
             At(move,chase,HasTargetTurret()); // player chase range
             At(chase,attack,AttackRange()); // remaining distance < 1f
             At(attack,chase,AttackOffRange()); // remaining distance > 1f
@@ -62,16 +86,16 @@ namespace AIBrains.EnemyBrain
             
             _stateMachine.AddAnyTransition(death, ()=> death.IsDead);
             // At(moveToBomb,attack,() => is);
-            _stateMachine.AddAnyTransition(moveToBomb, ()=>isBombSettled);
+            _stateMachine.AddAnyTransition(moveToBomb, ()=>IsBombSettled);
             
-            _stateMachine.SetState(move);
+            _stateMachine.SetState(search);
             
             void At(IState to, IState from, Func<bool> condition) => _stateMachine.AddTransition(to, from, condition);
-            
-            Func<bool> HasTargetTurret() => () => _currentTarget != null && _currentTarget.TryGetComponent(out PlayerManager player);
-            Func<bool> AttackRange() => () => _currentTarget != null  || Vector3.Distance(transform.position, _currentTarget.transform.position) < 1f;;
-            Func<bool> AttackOffRange() => () => _currentTarget != null && Vector3.Distance(transform.position, _currentTarget.transform.position) < 5f;
-            Func<bool> TargetNull() => () => _currentTarget == _TurretTarget && _currentTarget.TryGetComponent(out TurretManager turret);
+            Func<bool> HasInitTarget() => () => TurretTarget != null;
+            Func<bool> HasTargetTurret() => () => CurrentTarget != null && CurrentTarget.TryGetComponent(out PlayerManager player);
+            Func<bool> AttackRange() => () => CurrentTarget != null  || Vector3.Distance(transform.position, CurrentTarget.transform.position) < 1f;;
+            Func<bool> AttackOffRange() => () => CurrentTarget != null && Vector3.Distance(transform.position, CurrentTarget.transform.position) < 5f;
+            Func<bool> TargetNull() => () => CurrentTarget == TurretTarget && CurrentTarget.TryGetComponent(out TurretManager turret);
         }
 
 
@@ -83,17 +107,16 @@ namespace AIBrains.EnemyBrain
 
         public void SetTarget(Transform target)
         {
-            if (target == _currentTarget)
+            if (target == CurrentTarget)
             {
                 return;
             }
             
-            _currentTarget = target;
+            CurrentTarget = target;
             
-            if (_currentTarget == null)
+            if (CurrentTarget == null)
             {   
-                _currentTarget = _TurretTarget;
-                Debug.Log(_currentTarget);
+                CurrentTarget = TurretTarget;
                 return;
             }
             
@@ -103,7 +126,7 @@ namespace AIBrains.EnemyBrain
         // public void BombSettled(Transform bombTransform)
         // {
         //     if (!(Vector3.Distance(bombTransform.position, transform.position) < 25f)) return;
-        //     isBombSettled = true;
+        //     IsBombSettled = true;
         //     playerTarget = bombTransform;
         // }
     }

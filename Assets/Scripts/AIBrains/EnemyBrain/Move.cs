@@ -9,7 +9,6 @@ namespace AIBrains.EnemyBrain
         private readonly EnemyAIBrain _enemyAIBrain;
         private readonly NavMeshAgent _navMeshAgent;
         private readonly Animator _animator;
-        private static readonly int Speed = Animator.StringToHash("Speed");
         private Vector3 _lastPosition = Vector3.zero;
         
         public float TimeStuck;
@@ -30,7 +29,7 @@ namespace AIBrains.EnemyBrain
         public void OnEnter()
         {
             _navMeshAgent.enabled = true;
-            _navMeshAgent.SetDestination(_enemyAIBrain._currentTarget.position);
+            _navMeshAgent.SetDestination(_enemyAIBrain.CurrentTarget.position);
             //_animator.SetFloat(Speed, 1f);
         }
 

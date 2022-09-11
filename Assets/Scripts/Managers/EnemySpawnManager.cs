@@ -19,9 +19,6 @@ namespace Managers
         
         [SerializeField]private List<GameObject> enemies = new List<GameObject>();
         
-        [SerializeField]private List<Transform> targetList = new List<Transform>();
-        
-
         #endregion
     
         #region Public Variables
@@ -30,18 +27,12 @@ namespace Managers
         
         public float SpawnDelay = 2;
 
-        public Transform SpawnPos;
-
         #endregion
 
         #region Private Variables
         
         private EnemyType enemyType;
-        
-        private List<EnemyAIBrain> enemyScripts = new List<EnemyAIBrain>();
-        
         private NavMeshTriangulation triangulation;
-        
         private GameObject _EnemyAIObj;
         private EnemyAIBrain _EnemyAIBrain;
 
@@ -55,8 +46,7 @@ namespace Managers
         private void InitEnemyPool()
         {
             for (int i = 0; i < enemies.Count; i++)
-            {   
-                enemies[i].GetComponent<EnemyAIBrain>()._currentTarget =targetList[Random.Range(0,targetList.Count)];
+            {
                 ObjectPoolManager.Instance.AddObjectPool(()=>Instantiate(enemies[i]),TurnOnEnemyAI,TurnOffEnemyAI,((EnemyType)i).ToString(),50,true);
             }
             
@@ -65,10 +55,14 @@ namespace Managers
         private void Awake()
         {   
             InitEnemyPool();
+            
+        }
 
+        private void Start()
+        {
             StartCoroutine(SpawnEnemies());
         }
-        
+
         private void TurnOnEnemyAI(GameObject enemy)
         {
             enemy.SetActive(true);
@@ -111,33 +105,7 @@ namespace Managers
                     Debug.Log(randomType);
                 }
             }
-            _EnemyAIObj = ObjectPoolManager.Instance.GetObject<GameObject>(((EnemyType)randomType).ToString());
-            _EnemyAIBrain = _EnemyAIObj.GetComponent<EnemyAIBrain>();
-            
-            bool RandomPoint(Vector3 center, float range, out Vector3 result)
-           {
-               for (int i = 0; i < 60; i++)
-               {
-                   Vector3 randomPoint = center + Random.insideUnitSphere * range;
-                   Vector3 randomPos = new Vector3(randomPoint.x, 0, SpawnPos.transform.position.z);
-                   NavMeshHit hit;
-                   if (NavMesh.SamplePosition(randomPos, out hit, 1.0f, 1))
-                   {
-                       result = hit.position;
-                       return true;
-                   }
-                   
-               }
-               result = Vector3.zero;
-               return false;
-
-           }
-
-           Vector3 point;
-           if (!RandomPoint(SpawnPos.position, 20, out point)) return;
-           
-           _EnemyAIBrain.navMeshAgent.Warp(point);
-           
+            ObjectPoolManager.Instance.GetObject<GameObject>(((EnemyType)randomType).ToString());
 
         }
     }
