@@ -11,6 +11,8 @@ namespace AIBrains.EnemyBrain
 
         public int Health;
         public bool IsDead;
+        private static readonly int Death1 = Animator.StringToHash("Death");
+
         public Death(NavMeshAgent agent,Animator animator)
         {
             _navMeshAgent = agent;
@@ -18,12 +20,12 @@ namespace AIBrains.EnemyBrain
         }
         public void Tick()
         {
-            throw new System.NotImplementedException();
+            
         }
 
         public void OnEnter()
         {
-            throw new System.NotImplementedException();
+            _animator.SetTrigger(Death1);
         }
 
         public void OnExit()

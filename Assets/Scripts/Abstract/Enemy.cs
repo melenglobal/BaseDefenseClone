@@ -14,20 +14,16 @@ namespace Abstract
 
         public float ChaseSpeed;
 
-        public int Chase;
-        
         public EnemyType EnemyType;
-
-        protected Enemy(int health, int damage, float attackRange, float speed, float chaseSpeed, int chase, EnemyType enemyType)
+        
+        protected Enemy(int health, int damage, float attackRange, float speed, float chaseSpeed, EnemyType enemyType)
         {
             Health = health;
             Damage = damage;
             AttackRange = attackRange;
             Speed = speed;
             ChaseSpeed = chaseSpeed;
-            Chase = chase;
             EnemyType = enemyType;
         }
-        
     }
 }

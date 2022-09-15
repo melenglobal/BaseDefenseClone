@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 992a3d870fa5f204eb83fe87da00b53b
 ModelImporter:
-  serializedVersion: 21202
+  serializedVersion: 20300
   internalIDToNameTable:
   - first:
       74: -203655887218126122
@@ -17,7 +17,6 @@ ModelImporter:
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
-    removeConstantScaleCurves: 1
     motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 
@@ -25,7 +24,7 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    importAnimatedCustomProperties: 0
+    importAnimatedCustomProperties: 1
     importConstraints: 0
     animationCompression: 3
     animationRotationError: 0.5
@@ -34,7 +33,50 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: mixamo.com
+      takeName: mixamo.com
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 66
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events:
+      - time: 0
+        functionName: NewEvent
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0
+        functionName: NewEvent
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1.36
     isReadable: 0
   meshes:
     lODScreenPercentages: []
@@ -47,7 +89,6 @@ ModelImporter:
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
-    nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
     generateSecondaryUV: 0
@@ -59,7 +100,6 @@ ModelImporter:
     skinWeightsMode: 0
     maxBonesPerVertex: 4
     minBoneWeight: 0.001
-    optimizeBones: 1
     meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
@@ -348,7 +388,7 @@ ModelImporter:
     - name: Root
       parentName: DemoPuppet 1(Clone)
       position: {x: -0, y: 0, z: 0}
-      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      rotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
       scale: {x: 100, y: 100, z: 100}
     - name: LeftFootCtrl
       parentName: Root
@@ -373,12 +413,12 @@ ModelImporter:
     - name: LeftFootIK_end
       parentName: LeftFootIK
       position: {x: 6.868504e-11, y: 0.0030125435, z: 1.0244548e-10}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
+      rotation: {x: 0.4496594, y: -0, z: -0, w: 1}
       scale: {x: 0.99999994, y: 1, z: 1}
     - name: LeftFootIK_end_end
       parentName: LeftFootIK_end
-      position: {x: -0, y: 0.0030125426, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
+      position: {x: -0, y: 0.0030125426, z: 0.0000000072309767}
+      rotation: {x: 0.32104167, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: LeftFootRollCtrl
       parentName: LeftFootCtrl
@@ -388,12 +428,12 @@ ModelImporter:
     - name: LeftFootRollCtrl_end
       parentName: LeftFootRollCtrl
       position: {x: -9.354614e-11, y: 0.0029276672, z: 1.5305072e-10}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
+      rotation: {x: -0.009458279, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: LeftFootRollCtrl_end_end
       parentName: LeftFootRollCtrl_end
-      position: {x: -0, y: 0.0029276663, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
+      position: {x: -0, y: 0.0029276663, z: -7.717361e-11}
+      rotation: {x: 3.7826232e-26, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: LeftKneeCtrl
       parentName: LeftFootCtrl
@@ -403,11 +443,11 @@ ModelImporter:
     - name: LeftKneeCtrl_end
       parentName: LeftKneeCtrl
       position: {x: 1.0555084e-10, y: 0.0033681565, z: 2.281341e-10}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
+      rotation: {x: 0.009459185, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: LeftKneeCtrl_end_end
       parentName: LeftKneeCtrl_end
-      position: {x: -0, y: 0.003368157, z: 0}
+      position: {x: -0, y: 0.003368157, z: -0.0026178784}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: RightFootCtrl
@@ -433,12 +473,12 @@ ModelImporter:
     - name: RightFootIK_end
       parentName: RightFootIK
       position: {x: 1.420267e-10, y: 0.0030125433, z: 1.3038516e-10}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
+      rotation: {x: -0.00791549, y: -0, z: -0, w: 1}
       scale: {x: 1.0000001, y: 1, z: 1}
     - name: RightFootIK_end_end
       parentName: RightFootIK_end
-      position: {x: -0, y: 0.0030125428, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
+      position: {x: -0, y: 0.0030125428, z: 0.0018573648}
+      rotation: {x: 0.007979829, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: RightFootRollCtrl
       parentName: RightFootCtrl
@@ -448,11 +488,11 @@ ModelImporter:
     - name: RightFootRollCtrl_end
       parentName: RightFootRollCtrl
       position: {x: 2.0447728e-10, y: 0.0029276668, z: 1.4533867e-10}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
+      rotation: {x: -0.000015585914, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: RightFootRollCtrl_end_end
       parentName: RightFootRollCtrl_end
-      position: {x: -0, y: 0.0029276663, z: 0}
+      position: {x: -0, y: 0.0029276663, z: -3.3702918e-10}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: RightKneeCtrl
@@ -463,12 +503,12 @@ ModelImporter:
     - name: RightKneeCtrl_end
       parentName: RightKneeCtrl
       position: {x: 1.05550554e-10, y: 0.003368157, z: 4.0304357e-10}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
+      rotation: {x: 0.000005340932, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: RightKneeCtrl_end_end
       parentName: RightKneeCtrl_end
-      position: {x: -0, y: 0.003368157, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
+      position: {x: -0, y: 0.003368157, z: -0.0000000014573709}
+      rotation: {x: -0.00004355874, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: HipsCtrl
       parentName: Root
@@ -508,11 +548,11 @@ ModelImporter:
     - name: Head_end
       parentName: Head
       position: {x: 4.8591112e-14, y: 0.010044103, z: 4.660739e-12}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
+      rotation: {x: -0.00001303281, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 0.99999994, z: 0.99999994}
     - name: Head_end_end
       parentName: Head_end
-      position: {x: -0, y: 0.0100441, z: 0}
+      position: {x: -0, y: 0.0100441, z: -0.0000000012087485}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: LeftShoulder
@@ -557,7 +597,7 @@ ModelImporter:
       scale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
     - name: LeftHandIndex3_end_end
       parentName: LeftHandIndex3_end
-      position: {x: -0, y: 0.0013049894, z: 0}
+      position: {x: -0, y: 0.0013049894, z: 9.4292414e-11}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: LeftHandThumb1
@@ -722,13 +762,13 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 07ad359d59d906341bb1ea5c46619e31,
-    type: 3}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 0eddf8f13f2f00a488f83766a181210e, type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1
   avatarSetup: 2
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
   userData: 
   assetBundleName: 

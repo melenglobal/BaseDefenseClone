@@ -8,6 +8,8 @@ namespace AIBrains.EnemyBrain
     {   
         private readonly NavMeshAgent _navMeshAgent;
         private readonly Animator _animator;
+        private static readonly int Attack1 = Animator.StringToHash("Attack");
+
         public Attack(NavMeshAgent agent,Animator animator)
         {
             _navMeshAgent = agent;
@@ -20,12 +22,13 @@ namespace AIBrains.EnemyBrain
 
         public void OnEnter()
         {
+           _animator.SetTrigger(Attack1);
            
         }
 
         public void OnExit()
         {
-            
+      
         }
     }
 }

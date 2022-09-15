@@ -10,8 +10,11 @@ namespace AIBrains.EnemyBrain
         private readonly NavMeshAgent _navMeshAgent;
         private readonly Animator _animator;
         private Vector3 _lastPosition = Vector3.zero;
-        
-        public float TimeStuck;
+
+        private float timeStuck;
+        private static readonly int Speed = Animator.StringToHash("Speed");
+        private static readonly int Run = Animator.StringToHash("Run");
+
         public Move(EnemyAIBrain enemyAIBrain,NavMeshAgent agent,Animator animator)
         {
             _enemyAIBrain = enemyAIBrain;
@@ -21,22 +24,26 @@ namespace AIBrains.EnemyBrain
         public void Tick()
         {   
             if (Vector3.Distance(_enemyAIBrain.transform.position, _lastPosition) <= 0f)
-                TimeStuck += Time.deltaTime;
+                timeStuck += Time.deltaTime;
             
             _lastPosition = _enemyAIBrain.transform.position;
+            _animator.SetFloat(Speed,_navMeshAgent.velocity.magnitude);
+            
         }
 
         public void OnEnter()
         {
             _navMeshAgent.enabled = true;
-            _navMeshAgent.SetDestination(_enemyAIBrain.CurrentTarget.position);
-            //_animator.SetFloat(Speed, 1f);
+            _navMeshAgent.SetDestination(_enemyAIBrain.TurretTarget.position);
+            _animator.SetTrigger(Run);
+            _navMeshAgent.speed = 1.6f;
         }
 
         public void OnExit()
         {
              //_navMeshAgent.enabled = false;
             // _animator.SetFloat(Speed, 0f);
+         
         }
     }
 }

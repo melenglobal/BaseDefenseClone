@@ -22,7 +22,7 @@ namespace Controllers
                 
                 _detectedPlayer = other.GetComponentInParent<PlayerManager>().transform;
                 
-                _enemyAIBrain.SetTarget(other.transform);
+                _enemyAIBrain.SetTarget(other.transform.parent);
             }
 
             // /if (other.GetComponent<Mine>())
@@ -36,7 +36,7 @@ namespace Controllers
             if (other.CompareTag("Player"))
             {
                 _detectedPlayer = null;
-                this.gameObject.GetComponentInParent<EnemyAIBrain>().SetTarget(null);
+                _enemyAIBrain.SetTarget(null);
             }
 
             // /if (other.GetComponent<Mine>())

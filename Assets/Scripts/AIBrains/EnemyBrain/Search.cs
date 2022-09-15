@@ -28,6 +28,7 @@ namespace AIBrains.EnemyBrain
         public void OnEnter()
         { 
             _navMeshAgent.enabled = true;
+            
 
             GetRandomPointOnBakedSurface();
 
@@ -47,21 +48,17 @@ namespace AIBrains.EnemyBrain
                     Vector3 randomPoint = center + Random.insideUnitSphere * range;
                     Vector3 randomPos = new Vector3(randomPoint.x, 0, _spawnPosition.transform.position.z);
                     NavMeshHit hit;
-                    if (NavMesh.SamplePosition(randomPos, out hit, 1.0f, 1))
-                    {
-                        result = hit.position;
-                        return true;
-                    }
-                   
+                    if (!NavMesh.SamplePosition(randomPos, out hit, 1.0f, 1)) continue;
+                    result = hit.position;
+                    return true;
+
                 }
                 result = Vector3.zero;
                 return false;
 
             }
 
-            Vector3 point;
-            if (!RandomPoint(_spawnPosition.position, 20, out point)) return;
-            Debug.Log(_spawnPosition);
+            if (!RandomPoint(_spawnPosition.position, 20, out var point)) return;
             _navMeshAgent.Warp(point);
         }
         

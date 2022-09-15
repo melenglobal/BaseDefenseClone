@@ -1,6 +1,6 @@
 ﻿namespace Abstract
 {
-    public class WeaponData
+    public abstract class WeaponData
     {
         
     }
