@@ -1,11 +1,15 @@
 ﻿using System;
+using Abstract.Stackable;
+using Concrete;
 using Enums;
 using UnityEngine;
 
 namespace Controllers
 {
     public class PlayerPhysicsController : MonoBehaviour
-    {
+    {   
+        [SerializeField]
+        private PlayerStackController playerStackController;
         public AreaType AreaType;
         private void OnTriggerEnter(Collider other)
         {
@@ -18,9 +22,14 @@ namespace Controllers
                 }
                 else
                 {
-                    AreaType = AreaType.Battle;
+                    AreaType = AreaType.Base;
                 }
             
+            }
+
+            if (other.GetComponent<IStackable>() != null)
+            {
+                playerStackController.SetStackHolder(other.transform);
             }
         }
 

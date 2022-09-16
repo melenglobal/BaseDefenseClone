@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Gate
+  - Collectable
   layers:
   - Default
   - TransparentFX
