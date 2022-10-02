@@ -27,10 +27,6 @@ namespace Concrete
         {
             base.ResetStack(stackable);
         }
-
-        public override void RemoveAllStack(List<IStackable> stackables)
-        {
-            base.RemoveAllStack(stackables);
-        }
+        
     }
 }

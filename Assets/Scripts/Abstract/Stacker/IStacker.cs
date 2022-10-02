@@ -12,7 +12,7 @@ namespace Abstract.Stacker
         void GetStack(GameObject stackableObj);
         void GetAllStack(IStack stack);
         void RemoveStack(IStackable stackable);
-        void RemoveAllStack(List<IStackable> stackables);
+      
         void ResetStack(IStackable stackable);
     }
 }

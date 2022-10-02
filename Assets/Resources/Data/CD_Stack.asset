@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06f75404afa1424d97bbd4e973a40672, type: 3}
+  m_Name: CD_Stack
+  m_EditorClassIdentifier: 
+  StackDatas:
+  - StackingSystem: 0
+    StaticGridDatas:
+    - isDynamic: 0
+      StackerType: 0
+      StackAreaType: 0
+      GridSize: {x: 2, y: 15, z: 2}
+      Offset: {x: 0.1, y: 0.1, z: 0.1}
+      DrawnedMesh: {fileID: 0}
+    - isDynamic: 0
+      StackerType: 0
+      StackAreaType: 1
+      GridSize: {x: 0, y: 0, z: 0}
+      Offset: {x: 0, y: 0, z: 0}
+      DrawnedMesh: {fileID: 0}
+    - isDynamic: 0
+      StackerType: 0
+      StackAreaType: 2
+      GridSize: {x: 0, y: 0, z: 0}
+      Offset: {x: 0, y: 0, z: 0}
+      DrawnedMesh: {fileID: 0}
+    DynamicGridDatas:
+    - isDynamic: 1
+      StackerType: 0
+      StackAreaType: 0
+      GridSize: {x: 1, y: 5, z: 5}
+      Offset: {x: 1, y: 1, z: 1}
+      DrawnedMesh: {fileID: -2929563531361107545, guid: e784bc962bb74704c8746354d33d56d9, type: 3}
+    - isDynamic: 1
+      StackerType: 1
+      StackAreaType: 0
+      GridSize: {x: 10, y: 10, z: 10}
+      Offset: {x: 2, y: 2, z: 2}
+      DrawnedMesh: {fileID: -2644728490783520961, guid: 896509484a75f7e4b805f332ae594c0d, type: 3}
+    - isDynamic: 1
+      StackerType: 2
+      StackAreaType: 0
+      GridSize: {x: 10, y: 15, z: 1}
+      Offset: {x: 0.5, y: 0.5, z: 0.5}
+      DrawnedMesh: {fileID: -5768064660643979799, guid: 896509484a75f7e4b805f332ae594c0d, type: 3}
+    - isDynamic: 1
+      StackerType: 3
+      StackAreaType: 0
+      GridSize: {x: 3, y: 3, z: 3}
+      Offset: {x: 0.2, y: 0.2, z: 0.2}
+      DrawnedMesh: {fileID: 852317729166869766, guid: 896509484a75f7e4b805f332ae594c0d, type: 3}
+  - StackingSystem: 1
+    StaticGridDatas:
+    - isDynamic: 0
+      StackerType: 0
+      StackAreaType: 0
+      GridSize: {x: 6, y: 6, z: 6}
+      Offset: {x: 0.3, y: 0.3, z: 0.3}
+      DrawnedMesh: {fileID: -2315663613580718024, guid: 53547d138a98fbb41b548f321e193441, type: 3}
+    - isDynamic: 0
+      StackerType: 0
+      StackAreaType: 1
+      GridSize: {x: 6, y: 6, z: 6}
+      Offset: {x: 1.4, y: 1.4, z: 1.4}
+      DrawnedMesh: {fileID: 2649434910937755009, guid: d2f4fd1f4a7596b48af0220a94a31e47, type: 3}
+    - isDynamic: 0
+      StackerType: 0
+      StackAreaType: 2
+      GridSize: {x: 6, y: 6, z: 6}
+      Offset: {x: 1.2, y: 1.2, z: 1.2}
+      DrawnedMesh: {fileID: -6403090969542723414, guid: 886207b34405d8044872e334c6ee35ff, type: 3}
+    DynamicGridDatas:
+    - isDynamic: 1
+      StackerType: 0
+      StackAreaType: 0
+      GridSize: {x: 5, y: 5, z: 5}
+      Offset: {x: 1, y: 1, z: 1}
+      DrawnedMesh: {fileID: -7892325559877898083, guid: 21c6b2700fb34ce499b04a51565855eb, type: 3}
+    - isDynamic: 1
+      StackerType: 1
+      StackAreaType: 0
+      GridSize: {x: 3, y: 3, z: 3}
+      Offset: {x: 1, y: 1, z: 1}
+      DrawnedMesh: {fileID: -5517973829356945692, guid: 2c7f45a076b64c84e8eb8d82f56dfd24, type: 3}
+    - isDynamic: 1
+      StackerType: 2
+      StackAreaType: 0
+      GridSize: {x: 1, y: 10, z: 15}
+      Offset: {x: 0.05, y: 0.2, z: 0.09}
+      DrawnedMesh: {fileID: -2929563531361107545, guid: e784bc962bb74704c8746354d33d56d9, type: 3}
+    - isDynamic: 1
+      StackerType: 3
+      StackAreaType: 0
+      GridSize: {x: 7, y: 7, z: 7}
+      Offset: {x: 0.1, y: 0.1, z: 0.1}
+      DrawnedMesh: {fileID: 1051210855347695726, guid: c364e2d4d253f114aadd9d7a6bbdd83d, type: 3}

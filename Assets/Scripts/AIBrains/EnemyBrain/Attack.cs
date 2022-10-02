@@ -17,9 +17,9 @@ namespace AIBrains.EnemyBrain
         }
         public void Tick()
         {
-            
+              
         }
-
+        
         public void OnEnter()
         {
            _animator.SetTrigger(Attack1);

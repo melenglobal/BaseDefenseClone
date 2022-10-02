@@ -18,7 +18,19 @@ MonoBehaviour:
       FrondYardItemsDatas: []
     BaseData:
       BaseRoomData:
-        RoomDatas: []
+        RoomDatas:
+        - Cost: 0
+          PayedAmount: 0
+          TurretData:
+            Cost: 0
+            PayedAmount: 0
+            AvailabilityType: 0
+            HasTurretSoldier: 0
+            AmmoCapacity: 0
+            AmmoDamage: 0
+            TurretParticle: {fileID: 0}
+            Key: 
+          Key: 
       MineBaseData:
         MaxWorkerAmount: 0
         CurrentWorkerAmount: 0
@@ -27,16 +39,63 @@ MonoBehaviour:
         MineCardCapacity: 0
         Key: 
       MilitaryBaseData:
+        slotsGrid: {x: 5, y: 1}
+        slotsOffset: {x: 2, y: 2}
+        MaxSoldierAmount: 37
+        CandidateAmount: 17
+        CurrentSoldierAmount: 18
+        SoldierUpgradeTimer: 23
+        SoldierSlotCost: 22
+        SlotCount: 7
+        Slots:
+        - {fileID: 0}
+        AttackTimer: 0
+        Key: 
+      BuyablesData:
+        MoneyWorkerCost: 0
+        MoneyWorkerPayedAmount: 0
+        AmmoWorkerCost: 0
+        AmmoWorkerPayedAmount: 0
+        MoneyWorkerLevel: 0
+        AmmoWorkerLevel: 0
+        AvailabilityType: 0
+  - FrondYardData:
+      StageDatas: []
+      FrondYardItemsDatas: []
+    BaseData:
+      BaseRoomData:
+        RoomDatas:
+        - Cost: 0
+          PayedAmount: 0
+          TurretData:
+            Cost: 0
+            PayedAmount: 0
+            AvailabilityType: 0
+            HasTurretSoldier: 0
+            AmmoCapacity: 0
+            AmmoDamage: 0
+            TurretParticle: {fileID: 0}
+            Key: 
+          Key: 
+      MineBaseData:
+        MaxWorkerAmount: 0
+        CurrentWorkerAmount: 0
+        DiamondCapacity: 0
+        CurrentDiamondAmount: 0
+        MineCardCapacity: 0
+        Key: MineBaseData
+      MilitaryBaseData:
+        slotsGrid: {x: 0, y: 0}
+        slotsOffset: {x: 0, y: 0}
         MaxSoldierAmount: 0
         CandidateAmount: 0
         CurrentSoldierAmount: 0
         SoldierUpgradeTimer: 0
         SoldierSlotCost: 0
         SlotCount: 0
-        Slots:
-        - {fileID: 0}
+        Slots: []
         AttackTimer: 0
-        Key: 
+        Key: MilitaryBaseData
       BuyablesData:
         MoneyWorkerCost: 0
         MoneyWorkerPayedAmount: 0

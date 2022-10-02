@@ -8,6 +8,8 @@ namespace Abstract.Stacker
 {
     public abstract class AStacker : MonoBehaviour,IStacker
     {
+        public  List<GameObject> StackList = new List<GameObject>();
+        
         public virtual void SetStackHolder(Transform otherTransform)
         {
             otherTransform.SetParent(transform);
@@ -15,7 +17,7 @@ namespace Abstract.Stacker
 
         public virtual void GetStack(GameObject stackableObj)
         {
-            throw new NotImplementedException();
+            
         }
         
 
@@ -28,11 +30,7 @@ namespace Abstract.Stacker
         {
             
         }
-
-        public virtual void RemoveAllStack(List<IStackable> stackables)
-        {
-            
-        }
+        
 
         public virtual void ResetStack(IStackable stackable)
         {

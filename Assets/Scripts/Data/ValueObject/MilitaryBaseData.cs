@@ -8,6 +8,10 @@ namespace Data.ValueObject
     [Serializable]
     public class MilitaryBaseData : ISaveableEntity
     {
+        public Vector2 slotsGrid;
+
+        public Vector2 slotsOffset;
+        
         public int MaxSoldierAmount;
 
         public int CandidateAmount;

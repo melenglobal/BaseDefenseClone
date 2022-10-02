@@ -35,10 +35,7 @@ namespace Managers
         private NavMeshTriangulation triangulation;
         private GameObject _EnemyAIObj;
         private EnemyAIBrain _EnemyAIBrain;
-
-
         
-
         #endregion
         #endregion
         
@@ -89,12 +86,10 @@ namespace Managers
                 spawnedEnemies++;
                 yield return wait;
             }
-            
         }
 
         private void DoSpawnEnemy()
         {
-
             int randomType = Random.Range(0, Enum.GetNames(typeof(EnemyType)).Length);
             int randomPercentage = Random.Range(0, 101);
             if (randomType == (int)EnemyType.BigRed)
@@ -106,7 +101,6 @@ namespace Managers
                 }
             }
             ObjectPoolManager.Instance.GetObject<GameObject>(((EnemyType)randomType).ToString());
-
         }
     }
 }

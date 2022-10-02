@@ -11,6 +11,7 @@ namespace AIBrains.EnemyBrain
         private readonly NavMeshAgent _navMeshAgent;
         private readonly Transform _spawnPosition;
         private readonly List<Transform> _targetList;
+      
 
         public Search(EnemyAIBrain enemyAIBrain,NavMeshAgent navmeshAgent,Transform spawnPosition)
         {

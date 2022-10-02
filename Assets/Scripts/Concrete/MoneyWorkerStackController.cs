@@ -8,6 +8,7 @@ namespace Concrete
 {
     public class MoneyWorkerStackController : AStacker
     {
+
         public override void SetStackHolder(Transform otherTransform)
         {
             base.SetStackHolder(otherTransform);
@@ -27,10 +28,6 @@ namespace Concrete
         {
             base.ResetStack(stackable);
         }
-
-        public override void RemoveAllStack(List<IStackable> stackables)
-        {
-            base.RemoveAllStack(stackables);
-        }
+        
     }
 }

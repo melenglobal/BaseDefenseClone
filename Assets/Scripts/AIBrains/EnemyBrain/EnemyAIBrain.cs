@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Abstract;
 using Data.UnityObject;
@@ -97,11 +98,10 @@ namespace AIBrains.EnemyBrain
         }
         
         private void Update()
-        {
+        {   
             _stateMachine.Tick();
-            
         }
-
+        
         public void SetTarget(Transform target)
         {
             if (target == CurrentTarget)
