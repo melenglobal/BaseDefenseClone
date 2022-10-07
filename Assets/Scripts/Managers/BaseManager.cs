@@ -36,12 +36,12 @@ namespace Managers
         }
         private void SubscribeEvents()
         {   
-            InitializeDataSignals.Instance.onLoadBaseRoomData += OnLoadData;
+           // InitializeDataSignals.Instance.onLoadBaseRoomData += OnLoadData;
             BaseSignals.Instance.onChangeExtentionVisibility += OnChangeVisibility;
         }
         private void UnsubscribeEvents()
         {   
-            InitializeDataSignals.Instance.onLoadBaseRoomData -= OnLoadData;
+           // InitializeDataSignals.Instance.onLoadBaseRoomData -= OnLoadData;
             BaseSignals.Instance.onChangeExtentionVisibility -= OnChangeVisibility;
         }
         private void OnDisable()

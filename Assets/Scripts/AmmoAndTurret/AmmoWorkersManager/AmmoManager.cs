@@ -14,7 +14,7 @@ namespace Managers
     {
         #region Self-Private Variabels
         [SerializeField]
-        private CD_Enemy AmmowWorkerData;
+        private CD_AI AmmowWorkerData;
 
         private int counter;
 

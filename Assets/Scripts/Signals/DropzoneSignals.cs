@@ -6,6 +6,6 @@ namespace Signals
 {
     public class DropzoneSignals : MonoSingleton<DropzoneSignals>
     {
-        public UnityAction<bool> onDropZoneFull=delegate{};
+        public UnityAction<bool> onDropZoneFull = delegate{};
     }
 }

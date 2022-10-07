@@ -27,31 +27,31 @@ public class StoreManager : MonoBehaviour
     #endregion
 
 
-    #region Event Subscribetions
+    // #region Event Subscribetions
 
-    private void OnEnable()
-    {
-        SubscribeEvents();
-    }
+    // private void OnEnable()
+    // {
+    //     SubscribeEvents();
+    // }
 
-    private void SubscribeEvents()
-    {
-        InitializeDataSignals.Instance.onLoadBuyablesData += OnLoadData;
-    }
+    // private void SubscribeEvents()
+    // {
+    //     InitializeDataSignals.Instance.onLoadBuyablesData += OnLoadData;
+    // }
 
-    private void UnsubscribeEvents()
-    {
-        InitializeDataSignals.Instance.onLoadBuyablesData -= OnLoadData;
-    }
-    private void OnDisable()
-    {
-        UnsubscribeEvents();
-    }
-
-    #endregion
-
-    private void OnLoadData(BuyablesData mineBaseData)
-    {
-        _data = mineBaseData;
-    }
+    // private void UnsubscribeEvents()
+    // {
+    //     // InitializeDataSignals.Instance.onLoadBuyablesData -= OnLoadData;
+    // }
+    // private void OnDisable()
+    // {
+    //     UnsubscribeEvents();
+    // }
+    //
+    // #endregion
+    //
+    // private void OnLoadData(BuyablesData mineBaseData)
+    // {
+    //     _data = mineBaseData;
+    // }
 }

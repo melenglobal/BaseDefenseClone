@@ -22,7 +22,7 @@ public class DataInitializer : MonoBehaviour,ISaveable
     private CD_Level cdLevel;
     
     [SerializeField] 
-    private CD_Enemy cdEnemy;
+    private CD_AI cdAI;
 
     #endregion
     

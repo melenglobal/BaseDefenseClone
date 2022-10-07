@@ -40,12 +40,12 @@ namespace Managers
 
         private void SubscribeEvents()
         {
-            InitializeDataSignals.Instance.onLoadMineBaseData += OnLoadData;
+            //InitializeDataSignals.Instance.onLoadMineBaseData += OnLoadData;
         }
 
         private void UnsubscribeEvents()
         {
-            InitializeDataSignals.Instance.onLoadMineBaseData -= OnLoadData;
+            //InitializeDataSignals.Instance.onLoadMineBaseData -= OnLoadData;
         }
         private void OnDisable()
         {

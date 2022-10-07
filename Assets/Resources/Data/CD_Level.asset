@@ -62,12 +62,9 @@ MonoBehaviour:
             AmmoDamage: 0
             TurretParticle: {fileID: 0}
       MineBaseData:
-        MaxWorkerAmount: 0
-        CurrentWorkerAmount: 0
-        DiamondCapacity: 0
-        CurrentDiamondAmount: 0
-        MineCardCapacity: 0
-        Key: 
+        MaxWorkerAmount: 12
+        CurrentWorkerAmount: 5
+        GemCollectionOffset: 5
       MilitaryBaseData:
         BaseCapacity: 20
         TentCapacity: 5
@@ -104,10 +101,7 @@ MonoBehaviour:
       MineBaseData:
         MaxWorkerAmount: 0
         CurrentWorkerAmount: 0
-        DiamondCapacity: 0
-        CurrentDiamondAmount: 0
-        MineCardCapacity: 0
-        Key: MineBaseData
+        GemCollectionOffset: 0
       MilitaryBaseData:
         BaseCapacity: 0
         TentCapacity: 0
@@ -128,3 +122,4 @@ MonoBehaviour:
         AmmoWorkerLevel: 0
         AvailabilityType: 0
   LevelId: 0
+  Key: LevelData

@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace Controllers.PlayerControllers
 {
-    [RequireComponent(typeof(StackController))]
+    [RequireComponent(typeof(PlayerStackController))]
     public class PlayerMoneyStackerController : AStacker
     {
         [SerializeField] private List<Vector3> positionList;

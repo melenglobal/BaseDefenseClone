@@ -68,7 +68,7 @@ namespace AIBrain
         }
         public void InitBrain()
         {
-            _ammoWorkerAIData = Resources.Load<CD_Enemy>("Data/CD_AIData").AmmoWorkerAIData;
+            _ammoWorkerAIData = Resources.Load<CD_AI>("Data/CD_AIData").AmmoWorkerAIData;
             GetStatesReferences();
             TransitionofState();
         }

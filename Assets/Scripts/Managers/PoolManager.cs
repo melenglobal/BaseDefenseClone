@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Data.UnityObject;
 using Data.ValueObject;
@@ -64,6 +62,7 @@ namespace Managers
         private void OnReleaseObjectFromPool(PoolType poolType, GameObject obj)
         {
             _listCountCache = (int)poolType;
+            obj.transform.parent = transform;
             ObjectPoolManager.Instance.ReturnObject<GameObject>(obj, poolType.ToString());
         }
 

@@ -100,8 +100,8 @@ public class InputManager : MonoBehaviour
                     });
                     break;
                 
-                case InputHandlers.Turret when joystick.Vertical <= -0.6f:                                           //Player bu karakter ile triggerlandiginda o objenin childi yapmak gerekiyor.
-                    _inputHandlers = InputHandlers.Character;                                                   //Player asagiya dogru input verdiginde characteri o objenin childi yapmaktan çikartmak gerekiyor
+                case InputHandlers.Turret when joystick.Vertical <= -0.6f:                                      
+                    _inputHandlers = InputHandlers.Character;                                                 
                     CoreGameSignals.Instance.onCharacterInputRelease?.Invoke();
                     return;
                 

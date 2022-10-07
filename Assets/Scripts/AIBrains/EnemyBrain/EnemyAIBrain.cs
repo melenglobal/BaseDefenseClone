@@ -51,7 +51,7 @@ namespace AIBrains.EnemyBrain
         {   
             Data = GetEnemyAIData();
             
-            spawnPosition = Data.SpawnPosition; // Levele göre konusucaz
+            spawnPosition = Data.SpawnPosition;
             CurrentTarget = Data.TargetList[Random.Range(0,Data.TargetList.Count)];
             
             TurretTarget = CurrentTarget;
@@ -60,7 +60,7 @@ namespace AIBrains.EnemyBrain
             
         }
 
-        private EnemyData GetEnemyAIData() => Resources.Load<CD_Enemy>("Data/CD_Enemy").EnemyAIData.EnemyDatas[(int)EnemyType];
+        private EnemyData GetEnemyAIData() => Resources.Load<CD_AI>("Data/CD_AI").EnemyAIData.EnemyDatas[(int)EnemyType];
         
         private void GetStatesReferences()
         {

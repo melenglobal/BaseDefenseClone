@@ -71,7 +71,7 @@ namespace AIBrains.SoldierBrain
         {
             GetStateReferences();
         }
-        private SoldierAIData GetSoldierAIData() => Resources.Load<CD_Enemy>("Data/CD_Enemy").SoldierAIData;
+        private SoldierAIData GetSoldierAIData() => Resources.Load<CD_AI>("Data/CD_AI").SoldierAIData;
 
         private void SetSoldierAIData()
         {
