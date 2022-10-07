@@ -1,4 +1,5 @@
 ﻿using Abstract;
+using Abstract.Interfaces;
 using Data.ValueObject;
 using Enums;
 

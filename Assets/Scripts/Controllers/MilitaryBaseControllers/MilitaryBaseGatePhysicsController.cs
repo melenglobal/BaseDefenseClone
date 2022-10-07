@@ -26,11 +26,11 @@ namespace Controllers.MilitaryBaseControllers
         #endregion
         private void OnTriggerEnter(Collider other)
         {
-            if (manager.IsBaseAvailable && TryGetComponent(typeof(ACandidate),out Component candidate))
-            {
-                manager.UpdateTotalAmount(_IncreaseAmount);
-                //Manager.goWaitZone
-            }
+            // if (manager.IsBaseAvailable && TryGetComponent(typeof(ACandidate),out Component candidate))
+            // {
+            //     manager.UpdateTotalAmount(_IncreaseAmount);
+            //     //Manager.goWaitZone
+            // }
         }
 
 

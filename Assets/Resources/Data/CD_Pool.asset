@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3093b510a0ebbac4aa969b167a50e7f1, type: 3}
+  m_Name: CD_Pool
+  m_EditorClassIdentifier: 
+  PoolDataDic:
+    m_Keys: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d000000
+    m_Values:
+    - ObjectType: {fileID: 0}
+      PoolHolder: {fileID: 0}
+      initalAmount: 0
+      isDynamic: 0
+    - ObjectType: {fileID: 0}
+      PoolHolder: {fileID: 0}
+      initalAmount: 0
+      isDynamic: 0
+    - ObjectType: {fileID: 0}
+      PoolHolder: {fileID: 0}
+      initalAmount: 0
+      isDynamic: 0
+    - ObjectType: {fileID: 1365581117700200714, guid: dc1d4e211089787428ad7636de24681a, type: 3}
+      PoolHolder: {fileID: 0}
+      initalAmount: 200
+      isDynamic: 1
+    - ObjectType: {fileID: 0}
+      PoolHolder: {fileID: 0}
+      initalAmount: 0
+      isDynamic: 0
+    - ObjectType: {fileID: 0}
+      PoolHolder: {fileID: 0}
+      initalAmount: 0
+      isDynamic: 0
+    - ObjectType: {fileID: 0}
+      PoolHolder: {fileID: 0}
+      initalAmount: 0
+      isDynamic: 0
+    - ObjectType: {fileID: 0}
+      PoolHolder: {fileID: 0}
+      initalAmount: 0
+      isDynamic: 0
+    - ObjectType: {fileID: 2810693081564467305, guid: 7ac3e19a8cca8bb44bebaff288520fc4, type: 3}
+      PoolHolder: {fileID: 0}
+      initalAmount: 10
+      isDynamic: 1
+    - ObjectType: {fileID: 0}
+      PoolHolder: {fileID: 0}
+      initalAmount: 0
+      isDynamic: 0
+    - ObjectType: {fileID: 6421847800292410629, guid: cb6965dfc328751439b57defa17eb728, type: 3}
+      PoolHolder: {fileID: 0}
+      initalAmount: 30
+      isDynamic: 0
+    - ObjectType: {fileID: 3243807756733028534, guid: 2137d0927d2011141901c0e80b1eac0f, type: 3}
+      PoolHolder: {fileID: 0}
+      initalAmount: 30
+      isDynamic: 0
+    - ObjectType: {fileID: 6246987831049551891, guid: 6b05233dc5232b7479f8211437123a99, type: 3}
+      PoolHolder: {fileID: 0}
+      initalAmount: 30
+      isDynamic: 0
+    - ObjectType: {fileID: 0}
+      PoolHolder: {fileID: 0}
+      initalAmount: 0
+      isDynamic: 0

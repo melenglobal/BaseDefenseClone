@@ -1,14 +1,17 @@
+using Enums;
 using Extentions;
 using Keys;
-using UnityEngine;
 using UnityEngine.Events;
 
-public class InputSignals : MonoSingleton<InputSignals>
+namespace Signals
 {
-    public UnityAction onEnableInput = delegate {  };
-    public UnityAction onDisableInput = delegate {  };
-    public UnityAction onFirstTimeTouchTaken = delegate { };
-    public UnityAction onInputTaken = delegate { };
-    public UnityAction<InputParams> onJoyStickInputDragged = delegate { };
-    public UnityAction onInputReleased = delegate { };
+    public class InputSignals : MonoSingleton<InputSignals>
+    {   
+        
+        public UnityAction<InputParams> onJoystickInputDragged = delegate { };
+        
+        public UnityAction<InputParams> onJoystickInputDraggedforTurret = delegate(InputParams arg0) {  };
+
+
+    }
 }

@@ -1,4 +1,5 @@
 using Enums;
+using Signals;
 using TMPro;
 using UnityEngine;
 
@@ -81,12 +82,6 @@ namespace Managers
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
             CoreGameSignals.Instance.onReset?.Invoke();
         }
-
-        public void EnterIdleArea()
-        {
-            CoreGameSignals.Instance.onEnterIdleArea();
-        }
-
         public void NextLevel()
         {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.IdlePanel);

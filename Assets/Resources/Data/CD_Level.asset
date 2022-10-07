@@ -19,18 +19,48 @@ MonoBehaviour:
     BaseData:
       BaseRoomData:
         RoomDatas:
-        - Cost: 0
-          PayedAmount: 0
+        - TurretLocationType: 0
           TurretData:
-            Cost: 0
-            PayedAmount: 0
             AvailabilityType: 0
             HasTurretSoldier: 0
             AmmoCapacity: 0
             AmmoDamage: 0
             TurretParticle: {fileID: 0}
-            Key: 
-          Key: 
+        - TurretLocationType: 1
+          TurretData:
+            AvailabilityType: 0
+            HasTurretSoldier: 0
+            AmmoCapacity: 0
+            AmmoDamage: 0
+            TurretParticle: {fileID: 0}
+        - TurretLocationType: 2
+          TurretData:
+            AvailabilityType: 0
+            HasTurretSoldier: 0
+            AmmoCapacity: 0
+            AmmoDamage: 0
+            TurretParticle: {fileID: 0}
+        - TurretLocationType: 3
+          TurretData:
+            AvailabilityType: 0
+            HasTurretSoldier: 0
+            AmmoCapacity: 0
+            AmmoDamage: 0
+            TurretParticle: {fileID: 0}
+        - TurretLocationType: 4
+          TurretData:
+            AvailabilityType: 0
+            HasTurretSoldier: 0
+            AmmoCapacity: 0
+            AmmoDamage: 0
+            TurretParticle: {fileID: 0}
+        - TurretLocationType: 5
+          TurretData:
+            AvailabilityType: 0
+            HasTurretSoldier: 0
+            AmmoCapacity: 0
+            AmmoDamage: 0
+            TurretParticle: {fileID: 0}
       MineBaseData:
         MaxWorkerAmount: 0
         CurrentWorkerAmount: 0
@@ -39,9 +69,8 @@ MonoBehaviour:
         MineCardCapacity: 0
         Key: 
       MilitaryBaseData:
-        slotsGrid: {x: 5, y: 1}
-        slotsOffset: {x: 2, y: 2}
-        MaxSoldierAmount: 37
+        BaseCapacity: 20
+        TentCapacity: 5
         CandidateAmount: 17
         CurrentSoldierAmount: 18
         SoldierUpgradeTimer: 23
@@ -65,18 +94,13 @@ MonoBehaviour:
     BaseData:
       BaseRoomData:
         RoomDatas:
-        - Cost: 0
-          PayedAmount: 0
+        - TurretLocationType: 0
           TurretData:
-            Cost: 0
-            PayedAmount: 0
             AvailabilityType: 0
             HasTurretSoldier: 0
             AmmoCapacity: 0
             AmmoDamage: 0
             TurretParticle: {fileID: 0}
-            Key: 
-          Key: 
       MineBaseData:
         MaxWorkerAmount: 0
         CurrentWorkerAmount: 0
@@ -85,9 +109,8 @@ MonoBehaviour:
         MineCardCapacity: 0
         Key: MineBaseData
       MilitaryBaseData:
-        slotsGrid: {x: 0, y: 0}
-        slotsOffset: {x: 0, y: 0}
-        MaxSoldierAmount: 0
+        BaseCapacity: 0
+        TentCapacity: 0
         CandidateAmount: 0
         CurrentSoldierAmount: 0
         SoldierUpgradeTimer: 0
@@ -97,10 +120,11 @@ MonoBehaviour:
         AttackTimer: 0
         Key: MilitaryBaseData
       BuyablesData:
-        MoneyWorkerCost: 0
-        MoneyWorkerPayedAmount: 0
-        AmmoWorkerCost: 0
-        AmmoWorkerPayedAmount: 0
-        MoneyWorkerLevel: 0
+        MoneyWorkerCost: 10
+        MoneyWorkerPayedAmount: 20
+        AmmoWorkerCost: 30
+        AmmoWorkerPayedAmount: 15
+        MoneyWorkerLevel: 31
         AmmoWorkerLevel: 0
         AvailabilityType: 0
+  LevelId: 0

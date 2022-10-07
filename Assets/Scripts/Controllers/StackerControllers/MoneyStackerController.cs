@@ -32,7 +32,7 @@ namespace Controllers.StackerControllers
         {
             DOTween.Init(true, true, LogBehaviour.Verbose).SetCapacity(500, 125);
         }
-        private List<GameObject> StackList
+        private new List<GameObject> StackList
         {
             get => base.StackList;
             set => base.StackList = value;
@@ -93,6 +93,7 @@ namespace Controllers.StackerControllers
                     RemoveStackAnimation(StackList[i]);
                     StackList.TrimExcess();
                 }
+                canRemove = true;
                 
             }
         }

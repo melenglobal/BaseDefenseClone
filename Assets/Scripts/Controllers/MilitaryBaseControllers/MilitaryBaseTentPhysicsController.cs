@@ -25,10 +25,10 @@ namespace Controllers.MilitaryBaseControllers
 
         private void OnTriggerEnter(Collider other)
         {
-            if (manager.IsTentAvailable && TryGetComponent(typeof(ACandidate),out Component candidate))
-            {
-                manager.UpdateSoldierAmount(_IncreaseAmount);
-            }
+            // if (manager.IsTentAvailable && TryGetComponent(typeof(ACandidate),out Component candidate))
+            // {
+            //     manager.UpdateSoldierAmount(_IncreaseAmount);
+            // }
         }
     }
 }

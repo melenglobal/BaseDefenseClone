@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using Abstract;
+using Abstract.Interfaces;
 using UnityEngine;
 
 namespace Data.ValueObject
 {   
     [Serializable]
     public class MilitaryBaseData : ISaveableEntity
-    {
-        public Vector2 slotsGrid;
+    {   
+        public int BaseCapacity;
 
-        public Vector2 slotsOffset;
+        public int TentCapacity;
         
-        public int MaxSoldierAmount;
-
         public int CandidateAmount;
 
         public int CurrentSoldierAmount;

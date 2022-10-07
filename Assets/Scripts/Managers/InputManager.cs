@@ -1,10 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using Data.UnityObject;
 using Data.ValueObject;
+using Enums;
 using Keys;
+using Signals;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
     {
@@ -18,9 +23,10 @@ public class InputManager : MonoBehaviour
 
         #region Serialized Variables
 
-        [SerializeField] private FloatingJoystick Joystick;
+        [SerializeField] private FloatingJoystick joystick;
 
-        [SerializeField] private bool isReadyForTouch,isFirstTimeTouchTaken;
+        [SerializeField] private bool isReadyForTouch;
+        private InputHandlers _inputHandlers = InputHandlers.Character;
 
 
         #endregion Serialized Variables
@@ -29,26 +35,13 @@ public class InputManager : MonoBehaviour
 
         private bool _isTouching;
 
-        private float _currentVelocity; //ref type
-
-        private Vector2? _mousePosition; //ref type
-
-        private Vector3 _moveVector; //ref type
-
-        private Vector3 _joystickPosition;
-       // public bool IsJoystickMoving => Joystick != null && ();
+        private bool _hasTouched;
+        
 
         #endregion Private Variables
 
         #endregion Self Variables
-
-        private void Awake()
-        {
-            Data = GetInputData();
-            
-        }
-
-        private InputData GetInputData() => Resources.Load<CD_Input>("Data/CD_Input").InputData;
+        
 
         #region Event Subscriptions
 
@@ -59,20 +52,18 @@ public class InputManager : MonoBehaviour
 
         private void SubscribeEvents()
         {
-            InputSignals.Instance.onEnableInput += OnEnableInput;
-            InputSignals.Instance.onDisableInput += OnDisableInput;
+       
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onReset += OnReset;
-         
+            CoreGameSignals.Instance.onInputHandlerChange += OnInputHandlerChange;
+
         }
 
         private void UnsubscribeEvents()
         {
-            InputSignals.Instance.onEnableInput -= OnEnableInput;
-            InputSignals.Instance.onDisableInput -= OnDisableInput;
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onReset -= OnReset;
-           
+            CoreGameSignals.Instance.onInputHandlerChange -= OnInputHandlerChange;
         }
 
         private void OnDisable()
@@ -85,70 +76,67 @@ public class InputManager : MonoBehaviour
         private void Update()
         {   
             if (!isReadyForTouch) return;
-            
-            if (Input.GetMouseButtonUp(0) && !IsPointerOverUIElement())
+            if (Input.GetMouseButton(0) && !_hasTouched)
             {
-                _isTouching = false;
-                InputSignals.Instance.onInputReleased?.Invoke();
+                _hasTouched = true;
             }
+            if (!_hasTouched) return;
             
-            if (Input.GetMouseButtonDown(0))
-            {
-                _isTouching = true;
-                InputSignals.Instance.onInputTaken?.Invoke();
-                if (!isFirstTimeTouchTaken)
-                {
-                    isFirstTimeTouchTaken = true;
-                    InputSignals.Instance.onFirstTimeTouchTaken?.Invoke();
-                }
+            HandleJoystickInput();
 
-                _mousePosition = Input.mousePosition;
-            }
-            IdleInput();
+            _hasTouched = joystick.Direction.sqrMagnitude > 0;                         
+            
         }
 
-        private void IdleInput()
-        {
-            if (Input.GetMouseButton(0))
+        private void HandleJoystickInput()
+        {   
+            Debug.Log(_inputHandlers);
+            switch (_inputHandlers)
             {
-                _isTouching = true;
-
-                if (_isTouching)
-                {
-                    
-                    if (Joystick.Horizontal != 0 || Joystick.Vertical != 0)
+                case InputHandlers.Character:
+                    InputSignals.Instance.onJoystickInputDragged?.Invoke(new InputParams()
                     {
-                        _joystickPosition = new Vector3(Joystick.Horizontal, 0, Joystick.Vertical);
-                        InputSignals.Instance.onJoyStickInputDragged?.Invoke(new InputParams()
+                        InputValues = new Vector2(joystick.Horizontal, joystick.Vertical)
+                    });
+                    break;
+                
+                case InputHandlers.Turret when joystick.Vertical <= -0.6f:                                           //Player bu karakter ile triggerlandiginda o objenin childi yapmak gerekiyor.
+                    _inputHandlers = InputHandlers.Character;                                                   //Player asagiya dogru input verdiginde characteri o objenin childi yapmaktan çikartmak gerekiyor
+                    CoreGameSignals.Instance.onCharacterInputRelease?.Invoke();
+                    return;
+                
+                case InputHandlers.Turret:
+                    InputSignals.Instance.onJoystickInputDraggedforTurret?.Invoke(new InputParams()
+                    {
+                        InputValues = new Vector2(joystick.Horizontal,joystick.Vertical)
+                    });
+                    if (joystick.Direction.sqrMagnitude != 0)
+                    {
+                        InputSignals.Instance.onJoystickInputDragged?.Invoke(new InputParams()
                         {
-                            InputValues = _joystickPosition
+                            InputValues = Vector2.zero
                         });
-
                     }
-                }
-
+                    break;
+                
+                case InputHandlers.Drone:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
 
+        private void OnInputHandlerChange(InputHandlers inputHandlers)
+        {
+            _inputHandlers = inputHandlers;
+        }
         private void OnPlay() => isReadyForTouch = true;
-
-        private void OnEnableInput() => isReadyForTouch = true;
-
-        private void OnDisableInput() => isReadyForTouch = false;
-
+        
         private void OnReset()
         {
             _isTouching = false;
             isReadyForTouch = false;
         }
-
-        private bool IsPointerOverUIElement()
-        {
-            var eventData = new PointerEventData(EventSystem.current);
-            eventData.position = Input.mousePosition;
-            var results = new List<RaycastResult>();
-            EventSystem.current.RaycastAll(eventData, results);
-            return results.Count > 0;
-        }
+        
     }
 

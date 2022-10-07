@@ -21,14 +21,19 @@ namespace Controllers
 
         [Header("Data")] private PlayerMovementData _movementData;
 
+        [SerializeField] private PlayerManager manager;
+
         private bool _isReadyToMove, _isReadyToPlay, _isMovingVertical;
 
         private float _inputValueX;
 
-        private Vector2 _clampValues;
+        private bool HasEnemyTarget;
+
+        private Vector2 _InputVector;
 
         private Vector3 _movementDirection;
-        
+
+
 
         #endregion Private Variables
 
@@ -36,82 +41,56 @@ namespace Controllers
 
         public void SetMovementData(PlayerMovementData dataMovementData) => _movementData = dataMovementData;
 
-        public void EnableMovement() => _isReadyToMove = true;
-
-        public void DeactiveMovement() => _isReadyToMove = false;
-
-
-        public void UpdateInputValue(InputParams inputParam)
-        {
-            _movementDirection = inputParam.InputValues;
-        }
 
         public void IsReadyToPlay(bool state) => _isReadyToPlay = state;
         
 
         private void FixedUpdate()
         {
-            if (_isReadyToPlay)
+            PlayerMove();
+        }
+        public void UpdateInputValues(InputParams inputParams)
+        {
+            _InputVector = inputParams.InputValues;
+            EnableMovement(_InputVector.sqrMagnitude > 0);
+            
+            if (!HasEnemyTarget)
             {
-                if (_isReadyToMove)
-                {
-    
-                   IdleMove();
-                   
-                  
-                }
-                else
-                {
-   
-                 
-                  Stop();
-                    
-                }
+                RotatePlayer(inputParams);
             }
-            else
-                Stop();
         }
         
-        private void IdleMove()
+        private void PlayerMove()
         {
-            var velocity = rigidbody.velocity;
-            velocity = new Vector3(_movementDirection.x * _movementData.Speed, velocity.y,
-                _movementDirection.z * _movementData.Speed);
-            rigidbody.velocity = velocity;
-
-            Vector3 position;
-            position = new Vector3(rigidbody.position.x, (position = rigidbody.position).y, position.z);
-            rigidbody.position = position;
-
-            if (_movementDirection != Vector3.zero)
+            if (_isReadyToMove)
             {
-                Quaternion toRotation = Quaternion.LookRotation(_movementDirection);
-
-                transform.GetChild(0).rotation = toRotation;
+                var velocity = rigidbody.velocity; 
+                velocity = new Vector3(_InputVector.x,velocity.y, _InputVector.y)*_movementData.Speed;
+                rigidbody.velocity = velocity;
+            }
+            else if(rigidbody.velocity != Vector3.zero)
+            {
+                rigidbody.velocity = Vector3.zero;
             }
         }
+        private void RotatePlayer(InputParams inputParams)
+        {
+            Vector3 movementDirection = new Vector3(inputParams.InputValues.x, 0, inputParams.InputValues.y);
+            if (movementDirection == Vector3.zero) return;
+            Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 30);
+        }
 
+        private void EnableMovement(bool movementStatus)
+        {
+            _isReadyToMove = movementStatus;
+        }
 
-        private void Stop()
+        public void DisableMovement()
         {
             rigidbody.velocity = Vector3.zero;
-
-            rigidbody.angularVelocity = Vector3.zero;
-            _isReadyToMove = false;
+            transform.rotation = new Quaternion(0, 0, 0, 0);
         }
-        
 
-        public void MovementReset()
-        {
-            Stop();
-
-            _isReadyToPlay = false;
-
-            _isReadyToMove = false;
-
-            gameObject.transform.position = Vector3.zero;
-            gameObject.transform.rotation = Quaternion.identity;
-        }
-        
     }
 }

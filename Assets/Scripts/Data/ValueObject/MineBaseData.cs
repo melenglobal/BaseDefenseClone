@@ -1,5 +1,6 @@
 ﻿using System;
 using Abstract;
+using Abstract.Interfaces;
 
 namespace Data.ValueObject
 {   

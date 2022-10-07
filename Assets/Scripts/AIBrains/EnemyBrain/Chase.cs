@@ -24,16 +24,12 @@ namespace AIBrains.EnemyBrain
             _navMeshAgent.destination = _enemyAIBrain.CurrentTarget.position;
             _animator.SetFloat(Speed,_navMeshAgent.velocity.magnitude);
         }
-
         public void OnEnter()
         {
             _navMeshAgent.SetDestination(_enemyAIBrain.CurrentTarget.position);
             _animator.SetTrigger(Run);
             _navMeshAgent.speed = 7.6f;
-           
-           
         }
-
         public void OnExit()
         {
            

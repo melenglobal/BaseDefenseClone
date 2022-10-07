@@ -13,5 +13,7 @@ namespace Abstract.Stackable
         void EmitParticle();
         
         void PlayAnimation();
+
+        GameObject SendToStack();
     }
 }

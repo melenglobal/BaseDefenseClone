@@ -4,6 +4,6 @@ namespace Abstract.Interfaces
 {
     public interface ILevelLoader
     {
-        void InitializeLevel(int _levelID,Transform levelHolder);
+        void InitializeLevel(int levelID,Transform levelHolder);
     }
 }

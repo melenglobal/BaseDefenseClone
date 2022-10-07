@@ -20,7 +20,7 @@ namespace Data.ValueObject
         [Title("Int")]
         [Tooltip("Row, Column and Depth Settings")]
         [MinValue(1)]
-        public Vector3 GridSize;
+        public Vector3Int GridSize;
 
         [Tooltip("Distance between two objects")]
         public Vector3 Offset; 

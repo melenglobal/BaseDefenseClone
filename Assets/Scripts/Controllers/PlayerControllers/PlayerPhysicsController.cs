@@ -2,6 +2,7 @@
 using Abstract.Stackable;
 using Concrete;
 using Enums;
+using Managers;
 using UnityEngine;
 
 namespace Controllers
@@ -10,6 +11,8 @@ namespace Controllers
     {   
         [SerializeField]
         private PlayerStackController playerStackController;
+
+        [SerializeField] private PlayerManager playerManager;
         public AreaType AreaType;
         private void OnTriggerEnter(Collider other)
         {
@@ -32,6 +35,16 @@ namespace Controllers
                 playerStackController.SetStackHolder(other.transform);
                 
             }
+            if (other.TryGetComponent(typeof(TurretPhysicsController),out Component physicController))
+            {   
+                
+                
+            }
+
+            if (other.CompareTag("AmmoSpawner"))
+            {
+                playerManager.IsEnterAmmoCreater(other.gameObject.transform);
+            }
         }
 
         private void OnTriggerExit(Collider other)
@@ -49,6 +62,11 @@ namespace Controllers
               
                }
 
+            }
+
+            if (other.TryGetComponent(typeof(TurretPhysicsController),out Component physicController))
+            {
+                
             }
             
         }

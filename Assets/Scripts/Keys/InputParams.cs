@@ -4,6 +4,6 @@ namespace Keys
 {
     public struct InputParams
     {
-        public Vector3 InputValues;
+        public Vector2 InputValues;
     }
 }

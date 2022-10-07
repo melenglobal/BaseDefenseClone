@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Gate
   - Collectable
+  - AmmoSpawner
   layers:
   - Default
   - TransparentFX
@@ -16,19 +17,19 @@ TagManager:
   - 
   - 
   - 
+  - Base
+  - FrondYard
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - SoldierBody
+  - EnemyBody
+  - EnemyDetection
+  - SoldierDetection
+  - PlayerBody
+  - PlayerDetection
+  - Collectable
+  - SoldierBullets
+  - BombBody
+  - BombAggro
   - 
   - 
   - 

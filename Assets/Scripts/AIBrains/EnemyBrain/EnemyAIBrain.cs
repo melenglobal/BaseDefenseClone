@@ -111,11 +111,8 @@ namespace AIBrains.EnemyBrain
             
             CurrentTarget = target;
 
-            if (CurrentTarget == null)
-            {   
-                CurrentTarget = TurretTarget;
-                return;
-            }
+            if (CurrentTarget != null) return;
+            CurrentTarget = TurretTarget;
         }
 
         // public void BombSettled(Transform bombTransform)

@@ -1,5 +1,6 @@
 ﻿using System;
 using Abstract;
+using Abstract.Interfaces;
 using Enums;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -7,27 +8,21 @@ using UnityEngine.InputSystem;
 namespace Data.ValueObject
 {   
     [Serializable]
-    public class TurretData : Buyable,ISaveableEntity
+    public class TurretData : Buyable
     {
-        public AvailabilityType AvailabilityType;
+        public AvailabilityType AvailabilityType; // Player etkileşime geçebilir mi geçemez mi diye
 
-        public bool HasTurretSoldier;
+        public bool HasTurretSoldier; // Has turret soldier savelenecek data
 
-        public int AmmoCapacity;
+        public int AmmoCapacity;  // Maksimum tasiyabilecegi Ammo miktrari
 
-        public int AmmoDamage;
+        public int AmmoDamage;  // bir Ammonun verdigi damage miktari
 
         public ParticleSystem TurretParticle;
-        
-        public string Key = "TurretData";
-        
+
         public TurretData(int payedAmount, int cost) : base(payedAmount, cost)
         {
         }
 
-        public string GetKey()
-        {
-            return Key;
-        }
     }
 }

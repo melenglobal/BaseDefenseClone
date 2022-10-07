@@ -1,4 +1,5 @@
 using Command.SaveLoadCommands;
+using Data.UnityObject;
 using Data.ValueObject;
 using Signals;
 using UnityEngine;
@@ -22,7 +23,6 @@ namespace Managers
         private void Awake()
         {
             Initialization();
-         
         }
 
         private void Initialization()
@@ -40,22 +40,14 @@ namespace Managers
 
         private void SubscribeEvents()
         {
-            // SaveLoadSignals.Instance.onSaveGameData += _saveGameCommand.Execute;
-            // SaveLoadSignals.Instance.onLoadGameData += _loadGameCommand.Execute<LevelIdData>;
-            // SaveLoadSignals.Instance.onSaveBuildingsData += _saveGameCommand.Execute;
-            // SaveLoadSignals.Instance.onLoadBuildingsData += _loadGameCommand.Execute<BuildingsData>;
-            // SaveLoadSignals.Instance.onSaveIdleData += _saveGameCommand.Execute;
-            // SaveLoadSignals.Instance.onLoadIdleData += _loadGameCommand.Execute<IdleLevelData>;
+           SaveLoadSignals.Instance.onSaveGameData += _saveGameCommand.Execute;
+           SaveLoadSignals.Instance.onLoadGameData += _loadGameCommand.Execute<CD_Level>;
         }
 
         private void UnsubscribeEvents()
         {
-            // SaveLoadSignals.Instance.onSaveGameData -= _saveGameCommand.Execute;
-            // SaveLoadSignals.Instance.onLoadGameData -= _loadGameCommand.Execute<LevelIdData>;
-            // SaveLoadSignals.Instance.onSaveIdleData-= _saveGameCommand.Execute;
-            // SaveLoadSignals.Instance.onLoadBuildingsData -= _loadGameCommand.Execute<BuildingsData>;
-            // SaveLoadSignals.Instance.onSaveIdleData -= _saveGameCommand.Execute;
-            // SaveLoadSignals.Instance.onLoadIdleData -= _loadGameCommand.Execute<IdleLevelData>;
+            SaveLoadSignals.Instance.onSaveGameData -= _saveGameCommand.Execute;
+            SaveLoadSignals.Instance.onLoadGameData -= _loadGameCommand.Execute<CD_Level>;
         }
         private void OnDisable()
         {

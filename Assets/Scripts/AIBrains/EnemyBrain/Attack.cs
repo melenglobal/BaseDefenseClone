@@ -8,6 +8,7 @@ namespace AIBrains.EnemyBrain
     {   
         private readonly NavMeshAgent _navMeshAgent;
         private readonly Animator _animator;
+        private readonly EnemyAIBrain _enemyAIBrain;
         private static readonly int Attack1 = Animator.StringToHash("Attack");
 
         public Attack(NavMeshAgent agent,Animator animator)
@@ -17,13 +18,15 @@ namespace AIBrains.EnemyBrain
         }
         public void Tick()
         {
-              
+            if (_navMeshAgent.remainingDistance < _navMeshAgent.stoppingDistance)
+            {
+                _animator.SetTrigger(Attack1);
+            }
         }
         
         public void OnEnter()
         {
-           _animator.SetTrigger(Attack1);
-           
+          
         }
 
         public void OnExit()

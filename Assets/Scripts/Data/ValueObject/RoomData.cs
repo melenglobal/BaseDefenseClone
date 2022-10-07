@@ -1,21 +1,18 @@
 ﻿using System;
 using Abstract;
+using Abstract.Interfaces;
+using Enums;
 using UnityEngine.InputSystem;
 
 namespace Data.ValueObject
 {   
     [Serializable]
-    public class RoomData :Buyable, ISaveableEntity
+    public class RoomData :Buyable
     {
-        public TurretData TurretData;
+        public TurretLocationType TurretLocationType;
         
-        public string Key = "RoomData";
-
-        public string GetKey()
-        {
-            throw new NotImplementedException();
-        }
-
+        public TurretData TurretData; 
+        
         public RoomData(int payedAmount, int cost) : base(payedAmount, cost)
         {
         }

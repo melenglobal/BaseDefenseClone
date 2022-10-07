@@ -26,6 +26,8 @@ MonoBehaviour:
     Health: 0
     Speed: 0
     AttackRate: 0
+    AttackRadius: 0
+    SpawnPoint: {fileID: 0}
   EnemyAIData:
     EnemyDatas:
     - Health: 0

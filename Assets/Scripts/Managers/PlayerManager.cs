@@ -1,8 +1,10 @@
+using System.Collections.Generic;
 using Controllers;
 using Data.UnityObject;
 using Data.ValueObject;
 using Enums;
 using Keys;
+using Signals;
 using UnityEngine;
 
 namespace Managers
@@ -15,8 +17,6 @@ namespace Managers
 
         [Header("Data")] public PlayerData Data;
 
-        public int ScoreVaryant;
-
         #endregion Public Variables
 
         #region Serialized Variables
@@ -25,13 +25,8 @@ namespace Managers
 
         [SerializeField] private PlayerAnimationController animationController;
 
-        //[SerializeField] private PlayerScoreController playerScoreController;
-
-        [SerializeField] private GameObject scoreHolder;
-
-        [SerializeField] private Rigidbody playerRigidbody;
-
-        [SerializeField] private CapsuleCollider playerCollider;
+        [SerializeField] private InputHandlers InputHandlers = InputHandlers.Character;
+        
 
         #endregion Serialized Variables
 
@@ -41,6 +36,7 @@ namespace Managers
 
         #endregion Self Variables
 
+     
         private void Awake()
         {
             Data = GetPlayerData();
@@ -64,21 +60,22 @@ namespace Managers
 
         private void SubscribeEvents()
         {
-            InputSignals.Instance.onInputTaken += OnActivateMovement;
-            InputSignals.Instance.onInputReleased += OnDeactiveMovement;
-            InputSignals.Instance.onJoyStickInputDragged += OnGetInputValues;
+            
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onReset += OnReset;
+            CoreGameSignals.Instance.onInputHandlerChange += OnDisableMovement;
+            InputSignals.Instance.onJoystickInputDragged += OnUpdateInputParams;
 
         }
 
         private void UnsubscribeEvents()
         {
-            InputSignals.Instance.onInputTaken -= OnActivateMovement;
-            InputSignals.Instance.onInputReleased -= OnDeactiveMovement;
-            InputSignals.Instance.onJoyStickInputDragged -= OnGetInputValues;
+     
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onReset -= OnReset;
+            CoreGameSignals.Instance.onInputHandlerChange -= OnDisableMovement;
+            InputSignals.Instance.onJoystickInputDragged -= OnUpdateInputParams;
+            
             
         }
         #endregion
@@ -89,41 +86,39 @@ namespace Managers
             UnsubscribeEvents();
         }
 
-        private void OnActivateMovement()
-        {
-            ChangePlayerAnimation(PlayerAnimationType.Run);
-
-           movementController.EnableMovement();
+        private void OnUpdateInputParams(InputParams inputParams)
+        {   
+            movementController.UpdateInputValues(inputParams);
+           
         }
 
-        private void OnDeactiveMovement()
+        private void OnDisableMovement(InputHandlers ınputHandlers)
         {
-            movementController.DeactiveMovement();
-
-            ChangePlayerAnimation(PlayerAnimationType.Idle);
+            if (ınputHandlers == InputHandlers.Turret)
+            {
+                movementController.DisableMovement();
+                //movementController.enabled = false;
+            }
+            
         }
-
-        private void OnGetInputValues(InputParams inputParams)
-        {
-            movementController.UpdateInputValue(inputParams);
-        }
- 
 
         private void OnPlay() => movementController.IsReadyToPlay(true);
         
 
         private void OnReset()
         {
-          
             gameObject.SetActive(false);
-           
         }
         
-
+    
         public void ChangePlayerAnimation(PlayerAnimationType animType)
         {
             animationController.ChangeAnimationState(animType);
         }
+        public void IsEnterAmmoCreater(Transform transform) => AmmoManagerSignals.Instance.onPlayerEnterAmmoWorkerCreaterArea(transform);
+        // public void IsEnterTurret(GameObject turretObj) => movementController.EnterToTurret(turretObj);
+        // public void IsExitTurret() => movementController.ExitToTurret();
+        
 
     }
 }

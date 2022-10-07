@@ -2,8 +2,8 @@
 {
     public enum EnemyType
     {
-        Orange,
-        Red,
-        BigRed
+        OrangeEnemy,
+        RedEnemy,
+        BigRedEnemy
     }
 }

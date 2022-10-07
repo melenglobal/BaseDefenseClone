@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Abstract.Interfaces.Pool;
 using AIBrains.EnemyBrain;
 using Data.UnityObject;
 using Data.ValueObject;
 using Enums;
+using Signals;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
 namespace Managers
 {
-    public class EnemySpawnManager : MonoBehaviour
+    public class EnemySpawnManager : MonoBehaviour,IGetPoolObject
     {
         #region Self Variables
 
@@ -32,6 +34,7 @@ namespace Managers
         #region Private Variables
         
         private EnemyType enemyType;
+        private PoolType poolType;
         private NavMeshTriangulation triangulation;
         private GameObject _EnemyAIObj;
         private EnemyAIBrain _EnemyAIBrain;
@@ -40,38 +43,9 @@ namespace Managers
         #endregion
         
 
-        private void InitEnemyPool()
-        {
-            for (int i = 0; i < enemies.Count; i++)
-            {
-                ObjectPoolManager.Instance.AddObjectPool(()=>Instantiate(enemies[i]),TurnOnEnemyAI,TurnOffEnemyAI,((EnemyType)i).ToString(),50,true);
-            }
-            
-        }
-
-        private void Awake()
-        {   
-            InitEnemyPool();
-            
-        }
-
         private void Start()
         {
             StartCoroutine(SpawnEnemies());
-        }
-
-        private void TurnOnEnemyAI(GameObject enemy)
-        {
-            enemy.SetActive(true);
-        }
-
-        private void TurnOffEnemyAI(GameObject enemy)
-        {
-            enemy.SetActive(false);
-        }
-        private void ReleaseEnemyObject(GameObject go,Type t)
-        {
-            ObjectPoolManager.Instance.ReturnObject(go,t.ToString());
         }
         
         private IEnumerator SpawnEnemies()
@@ -92,15 +66,20 @@ namespace Managers
         {
             int randomType = Random.Range(0, Enum.GetNames(typeof(EnemyType)).Length);
             int randomPercentage = Random.Range(0, 101);
-            if (randomType == (int)EnemyType.BigRed)
+            if (randomType == (int)EnemyType.BigRedEnemy)
             {
                 if (randomPercentage<30)
                 {
-                    randomType = (int)EnemyType.Red;
-                    Debug.Log(randomType);
+                    randomType = (int)EnemyType.RedEnemy;
                 }
             }
-            ObjectPoolManager.Instance.GetObject<GameObject>(((EnemyType)randomType).ToString());
+            var poolType = (PoolType)Enum.Parse(typeof(PoolType), ((EnemyType)randomType).ToString());
+            GetObject(poolType);
+        }
+
+        public GameObject GetObject(PoolType poolName)
+        {
+            return CoreGameSignals.Instance.onGetObjectFromPool(poolName);
         }
     }
 }

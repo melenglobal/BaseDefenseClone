@@ -564,7 +564,7 @@ GameObject:
   - component: {fileID: 3142702944623949440}
   - component: {fileID: 9042440225600548090}
   m_Layer: 0
-  m_Name: Character_15
+  m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -584,7 +584,7 @@ Transform:
   - {fileID: 8188392274851942490}
   - {fileID: 6712762774019361431}
   m_Father: {fileID: 6246987831049551892}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &9042440225600548090
 Animator:
@@ -1206,13 +1206,13 @@ GameObject:
   - component: {fileID: 6246987831049551895}
   - component: {fileID: 6246987831049551889}
   - component: {fileID: 6246987831049551888}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: BigRed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6246987831049551892
 Transform:
   m_ObjectHideFlags: 0
@@ -1224,8 +1224,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.583, z: 0}
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children:
-  - {fileID: 8057233417974341561}
   - {fileID: 3142702944623949440}
+  - {fileID: 8057233417974341561}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -1237,7 +1237,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6246987831049551891}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 1.6941934
   m_Height: 8.341666
@@ -1257,14 +1257,14 @@ NavMeshAgent:
   m_Acceleration: 40
   avoidancePriority: 50
   m_AngularSpeed: 720
-  m_StoppingDistance: 2
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 7.94
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 0
+  m_ObstacleAvoidanceType: 1
 --- !u!114 &6246987831049551888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1286,7 +1286,6 @@ MonoBehaviour:
     AttackRange: 0
     Speed: 0
     ChaseSpeed: 0
-    Chase: 0
     EnemyType: 0
     TargetList: []
     SpawnPosition: {fileID: 0}
@@ -1301,8 +1300,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8057233417974341561}
   - component: {fileID: 7335406243956553077}
-  - component: {fileID: 6458963626269792901}
-  m_Layer: 0
+  - component: {fileID: 175283946772971499}
+  m_Layer: 14
   m_Name: Physics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1321,7 +1320,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6246987831049551892}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &7335406243956553077
 SphereCollider:
@@ -1336,7 +1335,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 42.12927
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6458963626269792901
+--- !u!114 &175283946772971499
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

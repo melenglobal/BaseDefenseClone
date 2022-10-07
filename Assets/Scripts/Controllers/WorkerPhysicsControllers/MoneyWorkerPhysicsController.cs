@@ -1,7 +1,5 @@
-﻿using System;
-using Abstract.Interfaces;
-using Commands.EnvironmentCommands;
-using Concrete;
+﻿using Abstract.Interfaces;
+using Abstract.Stackable;
 using Controllers.StackerControllers;
 using UnityEngine;
 
@@ -11,23 +9,18 @@ namespace Controllers.WorkerPhysicsControllers
     public class MoneyWorkerPhysicsController : MonoBehaviour
     {
         [SerializeField] private MoneyStackerController moneyStackerController;
-        [SerializeField] private CapsuleCollider capsuleCollider;
+        [SerializeField] private Collider collider;
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent<ITriggerEnter>(out ITriggerEnter trigger))
+            if (other.TryGetComponent<IStackable>(out IStackable stackable))
             {
-                moneyStackerController.SetStackHolder(trigger.TriggerEnter().transform);
-                moneyStackerController.GetStack(trigger.TriggerEnter());
+                moneyStackerController.SetStackHolder(stackable.SendToStack().transform);
+                moneyStackerController.GetStack(stackable.SendToStack());
             }
             else if (other.TryGetComponent<IInteractable>(out IInteractable interactable))
-            {   
-              
+            {
                 moneyStackerController.OnRemoveAllStack();
-                capsuleCollider.enabled = false;
-
             }
         }
-
-    
     }
 }

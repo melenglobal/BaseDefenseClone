@@ -1,6 +1,3 @@
-using System;
-using Abstract;
-using Abstract.Interfaces;
 using Commands.LevelCommands;
 using Data.UnityObject;
 using Data.ValueObject;
@@ -9,21 +6,17 @@ using UnityEngine;
 
 namespace Managers
 {
-    public class LevelManager : MonoBehaviour,ISaveable
+    public class LevelManager : MonoBehaviour
     {
         #region Self Variables
 
         #region Public Variables
-
-        [Header("Data")] public LevelData Data;
-
+        
         #endregion
 
         #region Private Variables
 
         private int _levelID;
-        
-        private int _uniqueID;
         
         #endregion
 
@@ -36,33 +29,9 @@ namespace Managers
         #endregion
 
         #endregion
-
-
-        private void Awake()
-        {
-            GetData();
-        }
-
-        private void GetData()
-        {
-            if (!ES3.FileExists($"Level{_uniqueID}.es3"))
-            {
-                if (!ES3.KeyExists("Level"))
-                {
-                    Data = GetLevelData();
-                }
-            }
-        }
         
-        private LevelData GetLevelData()
-        {
-            var newLevelData = _levelID % Resources.Load<CD_Level>("Data/CD_Level").LevelDatas.Count;
-            return Resources.Load<CD_Level>("Data/CD_Level").LevelDatas[newLevelData];
-        }
-         
-
         #region Event Subscribetions
-
+        
         private void OnEnable()
         {
             SubscribeEvents();
@@ -70,22 +39,18 @@ namespace Managers
 
         private void SubscribeEvents()
         {
+            InitializeDataSignals.Instance.onLoadLevelID += OnLoadLevelID;
             CoreGameSignals.Instance.onLevelInitialize += OnInitializeLevel;
             CoreGameSignals.Instance.onClearActiveLevel += OnClearActiveLevel;
             CoreGameSignals.Instance.onNextLevel += OnNextLevel;
-            CoreGameSignals.Instance.onApplicationPause += OnSave;
-            CoreGameSignals.Instance.onApplicationQuit += OnSave;
-            CoreGameSignals.Instance.onReset += OnReset;
         }
 
         private void UnsubscribeEvents()
         {
+            InitializeDataSignals.Instance.onLoadLevelID -= OnLoadLevelID;
             CoreGameSignals.Instance.onLevelInitialize -= OnInitializeLevel;
             CoreGameSignals.Instance.onClearActiveLevel -= OnClearActiveLevel;
             CoreGameSignals.Instance.onNextLevel -= OnNextLevel;
-            CoreGameSignals.Instance.onApplicationPause -= OnSave;
-            CoreGameSignals.Instance.onApplicationQuit -= OnSave;
-            CoreGameSignals.Instance.onReset -= OnReset;
         }
         private void OnDisable()
         {
@@ -97,10 +62,21 @@ namespace Managers
         private void OnNextLevel()
         {
             _levelID++;
-            Save(_levelID);
+            SaveLevelID(_levelID);
+            //UISignals
             CoreGameSignals.Instance.onReset?.Invoke();
         }
-        
+
+        private void SaveLevelID(int levelID)
+        {
+            InitializeDataSignals.Instance.onSaveLevelID?.Invoke(levelID);
+        }
+
+        private void OnLoadLevelID(int levelID)
+        {   
+            Debug.Log(levelID);
+            _levelID = levelID;
+        }
         private void OnInitializeLevel()
         {
             int newlevelData = _levelID % Resources.Load<CD_Level>("Data/CD_Level").LevelDatas.Count;
@@ -111,33 +87,6 @@ namespace Managers
         {
             clearActiveLevelCommand.ClearActiveLevel(levelHolder.transform);
         }
-
-        private void OnSave()
-        {
-            Save(_levelID);
-        }
-
-        private void OnLoad()
-        {
-            Load(_levelID);
-        }
-        public void Save(int uniqueId)
-        {
-            LevelData levelData = new LevelData();
-            
-            //SaveLoadSignals.Instance.
-        }
-
-        public void Load(int uniqueId)
-        {
-            
-        }
-
-        private void OnReset()
-        {
-            CoreGameSignals.Instance.onClearActiveLevel?.Invoke();
-            CoreGameSignals.Instance.onLevelInitialize?.Invoke();
-     
-        }
+ 
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Abstract;
+using Abstract.Interfaces;
 using Enums;
 using UnityEngine;
 

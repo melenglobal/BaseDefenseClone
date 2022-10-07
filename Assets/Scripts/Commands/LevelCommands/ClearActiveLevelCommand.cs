@@ -8,7 +8,6 @@ namespace Commands.LevelCommands
         public void ClearActiveLevel(Transform levelHolder)
         {
             Destroy(levelHolder.GetChild(0).gameObject);
-            //ReleasePool
         }
     }
 }

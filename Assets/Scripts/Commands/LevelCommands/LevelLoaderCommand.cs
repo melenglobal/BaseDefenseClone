@@ -6,10 +6,9 @@ namespace Commands.LevelCommands
 {
     public class LevelLoaderCommand : MonoBehaviour,ILevelLoader
     {
-        public void InitializeLevel(int _levelID, Transform levelHolder)
+        public void InitializeLevel(int levelID, Transform levelHolder)
         {
-            Instantiate(Resources.Load<GameObject>($"Prefabs/LevelPrefabs/level {_levelID}"), levelHolder);
-            //Get From Pool
+            Instantiate(Resources.Load<GameObject>($"LevelPrefabs/Level{levelID}"), levelHolder);
         }
     }
 }
