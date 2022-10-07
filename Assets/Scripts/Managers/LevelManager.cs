@@ -73,8 +73,7 @@ namespace Managers
         }
 
         private void OnLoadLevelID(int levelID)
-        {   
-            Debug.Log(levelID);
+        {
             _levelID = levelID;
         }
         private void OnInitializeLevel()

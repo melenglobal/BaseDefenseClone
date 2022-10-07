@@ -7,6 +7,7 @@ using Controllers;
 using Controllers.SoldierPhysicsControllers;
 using Data.UnityObject;
 using Data.ValueObject;
+using Data.ValueObject.WeaponData;
 using Enums;
 using Signals;
 using Sirenix.OdinInspector;

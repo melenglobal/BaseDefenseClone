@@ -3,13 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using Abstract.Interfaces.Pool;
 using AIBrains.EnemyBrain;
-using Data.UnityObject;
-using Data.ValueObject;
 using Enums;
 using Signals;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
+
 
 namespace Managers
 {
@@ -64,7 +63,7 @@ namespace Managers
 
         private void DoSpawnEnemy()
         {
-            int randomType = Random.Range(0, Enum.GetNames(typeof(EnemyType)).Length);
+            int randomType = Random.Range(0, System.Enum.GetNames(typeof(EnemyType)).Length);
             int randomPercentage = Random.Range(0, 101);
             if (randomType == (int)EnemyType.BigRedEnemy)
             {
@@ -73,7 +72,7 @@ namespace Managers
                     randomType = (int)EnemyType.RedEnemy;
                 }
             }
-            var poolType = (PoolType)Enum.Parse(typeof(PoolType), ((EnemyType)randomType).ToString());
+            var poolType = (PoolType)System.Enum.Parse(typeof(PoolType), ((EnemyType)randomType).ToString());
             GetObject(poolType);
         }
 

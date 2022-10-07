@@ -22,10 +22,11 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Diamond
   m_Shader: {fileID: 4800000, guid: f67804e22f42e8441879353a5604515d, type: 3}
-  m_ShaderKeywords: _MK_ARTISTIC_PROJECTION_SCREEN_SPACE _MK_BLEND_PREMULTIPLY _MK_ENVIRONMENT_REFLECTIONS_AMBIENT
-    _MK_IRIDESCENCE_DEFAULT _MK_LIGHT_CEL _MK_RECEIVE_SHADOWS _MK_RIM_SPLIT _MK_SURFACE_TYPE_TRANSPARENT
-    _MK_WRAPPED_DIFFUSE _RECEIVESHADOWS_ON _WRAPPEDLIGHTING_ON
-  m_LightmapFlags: 6
+  m_ShaderKeywords: _MK_ARTISTIC_PROJECTION_SCREEN_SPACE _MK_BLEND_PREMULTIPLY _MK_COLOR_GRADING_ALBEDO
+    _MK_EMISSION _MK_ENVIRONMENT_REFLECTIONS_AMBIENT _MK_IRIDESCENCE_DEFAULT _MK_LIGHT_CEL
+    _MK_RECEIVE_SHADOWS _MK_RIM_SPLIT _MK_SURFACE_TYPE_TRANSPARENT _MK_WRAPPED_DIFFUSE
+    _RECEIVESHADOWS_ON _WRAPPEDLIGHTING_ON
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 3000
@@ -176,7 +177,7 @@ Material:
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _ColorGrading: 0
+    - _ColorGrading: 1
     - _Contrast: 1
     - _Cull: 2
     - _Cutoff: 0.5
@@ -259,11 +260,11 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DissolveBorderColor: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionColor: {r: 1, g: 0, b: 0.5416179, a: 1}
     - _GoochBrightColor: {r: 1, g: 1, b: 1, a: 1}
     - _GoochDarkColor: {r: 0.3490566, g: 0.3490566, b: 0.3490566, a: 1}
     - _IridescenceColor: {r: 1, g: 1, b: 1, a: 0.5}
-    - _RimBrightColor: {r: 0.56102854, g: 0, b: 0.5660378, a: 1}
+    - _RimBrightColor: {r: 0.99305534, g: 0, b: 1, a: 1}
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
     - _RimDarkColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}

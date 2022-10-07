@@ -91,6 +91,12 @@ public class DataInitializer : MonoBehaviour,ISaveable
         InitializeDataSignals.Instance.onSaveMineBaseData += SyncMineBaseDatas;
         InitializeDataSignals.Instance.onSaveMilitaryBaseData += SyncMilitaryBaseData;
         InitializeDataSignals.Instance.onSaveBuyablesData += SyncBuyablesData;
+        
+        InitializeDataSignals.Instance.onLoadMilitaryBaseData += OnLoadMilitaryBaseData;
+        InitializeDataSignals.Instance.onLoadBaseRoomData += OnLoadBaseRoomData;
+        InitializeDataSignals.Instance.onLoadBuyablesData += OnLoadBuyablesData;
+        InitializeDataSignals.Instance.onLoadMineBaseData += OnLoadMineBaseData;
+        //CoreGameSignals.Instance.onApplicationQuit += OnApplicationQuit;
     }
 
     private void UnsubscribeEvents()
@@ -101,6 +107,13 @@ public class DataInitializer : MonoBehaviour,ISaveable
         InitializeDataSignals.Instance.onSaveMineBaseData -= SyncMineBaseDatas;
         InitializeDataSignals.Instance.onSaveMilitaryBaseData -= SyncMilitaryBaseData;
         InitializeDataSignals.Instance.onSaveBuyablesData -= SyncBuyablesData;
+        
+        InitializeDataSignals.Instance.onLoadMilitaryBaseData -= OnLoadMilitaryBaseData;
+        InitializeDataSignals.Instance.onLoadBaseRoomData -= OnLoadBaseRoomData;
+        InitializeDataSignals.Instance.onLoadBuyablesData -= OnLoadBuyablesData;
+        InitializeDataSignals.Instance.onLoadMineBaseData -= OnLoadMineBaseData;
+        
+        //CoreGameSignals.Instance.onApplicationQuit -= OnApplicationQuit;
     }
     private void OnDisable()
     {
@@ -108,15 +121,28 @@ public class DataInitializer : MonoBehaviour,ISaveable
     }
 
     #endregion
-
+    #region ManagersData
     private void SendDataManagers()
-    {   
+    {
         InitializeDataSignals.Instance.onLoadLevelID?.Invoke(_levelID);
-        InitializeDataSignals.Instance.onLoadBaseRoomData?.Invoke(_baseRoomData);
-        InitializeDataSignals.Instance.onLoadMineBaseData?.Invoke(_mineBaseData);
-        InitializeDataSignals.Instance.onLoadMilitaryBaseData?.Invoke(_militaryBaseData);
-        InitializeDataSignals.Instance.onLoadBuyablesData?.Invoke(_buyablesData);
     }
+    private MilitaryBaseData OnLoadMilitaryBaseData()
+    {
+        return _militaryBaseData;
+    }
+    private BaseRoomData OnLoadBaseRoomData()
+    {
+        return _baseRoomData;
+    }
+    private MineBaseData OnLoadMineBaseData()
+    {
+        return _mineBaseData;
+    }
+    private BuyablesData OnLoadBuyablesData()
+    {
+        return _buyablesData;
+    }
+    #endregion
     #region Level Save - Load 
 
     public void Save(int uniqueId)
@@ -130,8 +156,6 @@ public class DataInitializer : MonoBehaviour,ISaveable
     {
         CD_Level cdLevel = SaveLoadSignals.Instance.onLoadGameData.Invoke(this.cdLevel.GetKey(), uniqueId);
         _levelID = cdLevel.LevelId;
-        Debug.Log(_levelID);
-        Debug.Log(cdLevel.LevelDatas);
         levelDatas = cdLevel.LevelDatas;
         _baseRoomData = cdLevel.LevelDatas[_levelID].BaseData.BaseRoomData;
         _mineBaseData = cdLevel.LevelDatas[_levelID].BaseData.MineBaseData;

@@ -9,66 +9,52 @@ namespace Controllers
 {
     public class PlayerPhysicsController : MonoBehaviour
     {   
-        [SerializeField]
-        private PlayerStackController playerStackController;
+        #region Self Variables
 
+        #region Public Variables
+        
+        #endregion
+
+        #region Serialized Variables,
+        
         [SerializeField] private PlayerManager playerManager;
-        public AreaType AreaType;
+        
+        #endregion
+
+        #region Private Variables
+
+        #endregion
+        
+        #endregion
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Gate"))
+            if (other.TryGetComponent(out GatePhysicsController physicsController))
             {
-
-                if (other.transform.position.z > transform.position.z)
-                {
-                    AreaType = AreaType.Base;
-                }
-                else
-                {
-                    AreaType = AreaType.Base;
-                }
-            
-            }
-
-            if (other.GetComponent<IStackable>() != null)
-            {
-                playerStackController.SetStackHolder(other.transform);
-                
-            }
-            if (other.TryGetComponent(typeof(TurretPhysicsController),out Component physicController))
-            {   
-                
-                
-            }
-
-            if (other.CompareTag("AmmoSpawner"))
-            {
-                playerManager.IsEnterAmmoCreater(other.gameObject.transform);
+                GateEnter(other);
             }
         }
-
         private void OnTriggerExit(Collider other)
         {
-            if (other.CompareTag("Gate"))
+            if (other.TryGetComponent(out GatePhysicsController physicsController))
             {
-               
-               if (other.transform.position.z < transform.position.z)
-               {
-                   AreaType = AreaType.Battle;
-               }
-               else
-               {
-                   AreaType = AreaType.Base;
-              
-               }
-
+                GateExit(other);
             }
-
-            if (other.TryGetComponent(typeof(TurretPhysicsController),out Component physicController))
-            {
-                
-            }
-            
+        }
+        private void GateEnter(Collider other)
+        {
+            var playerIsGoingToFrontYard = other.transform.position.z > transform.position.z;
+            gameObject.layer = LayerMask.NameToLayer("PlayerBase");
+            playerManager.CheckAreaStatus(playerIsGoingToFrontYard ? AreaType.Battle : AreaType.Base);
+        }
+        private void GateExit(Collider other)
+        {
+            var playerIsGoingToFrontYard = other.transform.position.z < transform.position.z;
+            gameObject.layer = LayerMask.NameToLayer(playerIsGoingToFrontYard ? "PlayerFrontYard" : "PlayerBase");
+            playerManager.CheckAreaStatus(playerIsGoingToFrontYard ? AreaType.Battle : AreaType.Base);
+            if(!playerIsGoingToFrontYard) return;
+            playerManager.DamageableEnemy = null;
+            playerManager.HasEnemyTarget = false;
+            playerManager.EnemyList.Clear();
         }
     }
 }

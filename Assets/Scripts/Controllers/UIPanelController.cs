@@ -1,19 +1,21 @@
-using System.Collections;
 using System.Collections.Generic;
 using Enums;
 using UnityEngine;
 
-public class UIPanelController : MonoBehaviour
+namespace Controllers
 {
-    [SerializeField]
-    List<GameObject> UIPanelsList = new List<GameObject>();        
-    public void OpenPanel(UIPanels panelParams)
+    public class UIPanelController : MonoBehaviour
     {
-        UIPanelsList[(int)panelParams].SetActive(true);
-    }
+        [SerializeField]
+        List<GameObject> UIPanelsList = new List<GameObject>();        
+        public void OpenPanel(UIPanels panelParams)
+        {
+            UIPanelsList[(int)panelParams].SetActive(true);
+        }
 
-    public  void ClosePanel(UIPanels panelParams)
-    {
-        UIPanelsList[(int)panelParams].SetActive(false);
+        public  void ClosePanel(UIPanels panelParams)
+        {
+            UIPanelsList[(int)panelParams].SetActive(false);
+        }
     }
 }

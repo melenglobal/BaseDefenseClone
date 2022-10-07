@@ -1,5 +1,10 @@
 fileFormatVersion: 2
 guid: abc83c21d57d4a74cabe12065fa1a8b2
+labels:
+- ramp
+- shader
+- toon
+- toonygooch
 TextureImporter:
   fileIDToRecycleName: {}
   serializedVersion: 4

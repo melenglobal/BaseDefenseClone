@@ -80,6 +80,11 @@ namespace Controllers
             Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 30);
         }
+        
+        public void RotateThePlayer(Transform enemyTransform)
+        {
+            transform.LookAt(enemyTransform, Vector3.up*3f);
+        }
 
         private void EnableMovement(bool movementStatus)
         {

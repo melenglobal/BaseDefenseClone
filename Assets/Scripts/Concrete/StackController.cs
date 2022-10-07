@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Abstract.Stack;
+using Controllers.PlayerControllers;
 using Controllers.StackerControllers;
 using Data.UnityObject;
 using Data.ValueObject;
@@ -34,7 +35,7 @@ namespace Concrete
         [ShowIf("stackingSystem",Enums.StackingSystem.Dynamic)]
         [SerializeField] private GridData stackerGridData;
 
-        [SerializeField] private MoneyStackerController moneyStackerController;
+        [SerializeField] private PlayerMoneyStackerController moneyStackerController;
 
         #endregion
 

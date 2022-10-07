@@ -17,5 +17,6 @@ namespace Enums
         RedEnemy,
         BigRedEnemy,
         BossEnemy,
+        MinerWorkerAI
     } 
 }

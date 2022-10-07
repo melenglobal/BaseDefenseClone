@@ -5,24 +5,13 @@ using Abstract.Interfaces;
 namespace Data.ValueObject
 {   
     [Serializable]
-    public class MineBaseData : ISaveableEntity
+    public class MineBaseData
     {
         public int MaxWorkerAmount;
         
         public int CurrentWorkerAmount;
-        
-        public int DiamondCapacity;
-        
-        public int CurrentDiamondAmount;
-        
-        public int MineCardCapacity;
-        
-        public string Key = "MineBaseData";
 
+        public int GemCollectionOffset;
 
-        public string GetKey()
-        {
-            return Key;
-        }
     }
 }
