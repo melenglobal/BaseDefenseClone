@@ -7,5 +7,6 @@ namespace Data.ValueObject
     public class BaseRoomData
     {
         public List<RoomData> RoomDatas = new List<RoomData>();
+        public MainRoomData MainRoomData;
     }
 }

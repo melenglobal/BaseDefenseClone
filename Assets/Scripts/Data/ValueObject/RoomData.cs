@@ -7,14 +7,18 @@ using UnityEngine.InputSystem;
 namespace Data.ValueObject
 {   
     [Serializable]
-    public class RoomData :Buyable
+    public class RoomData
     {
+        public RoomTypes RoomTypes;
+        
+        public AvailabilityType AvailabilityType;
+        
         public TurretLocationType TurretLocationType;
         
-        public TurretData TurretData; 
+        public TurretData TurretData;
         
-        public RoomData(int payedAmount, int cost) : base(payedAmount, cost)
-        {
-        }
+        public int PayedAmount;
+        
+        public int Cost;
     }
 }

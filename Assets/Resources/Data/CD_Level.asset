@@ -19,42 +19,44 @@ MonoBehaviour:
     BaseData:
       BaseRoomData:
         RoomDatas:
-        - TurretLocationType: 0
+        - RoomTypes: 0
+          AvailabilityType: 1
+          TurretLocationType: 0
           TurretData:
             AvailabilityType: 0
             HasTurretSoldier: 0
             AmmoCapacity: 0
             AmmoDamage: 0
             TurretParticle: {fileID: 0}
-        - TurretLocationType: 1
+        - RoomTypes: 1
+          AvailabilityType: 1
+          TurretLocationType: 1
           TurretData:
             AvailabilityType: 0
             HasTurretSoldier: 0
             AmmoCapacity: 0
             AmmoDamage: 0
             TurretParticle: {fileID: 0}
-        - TurretLocationType: 2
+        - RoomTypes: 2
+          AvailabilityType: 0
+          TurretLocationType: 2
           TurretData:
             AvailabilityType: 0
             HasTurretSoldier: 0
             AmmoCapacity: 0
             AmmoDamage: 0
             TurretParticle: {fileID: 0}
-        - TurretLocationType: 3
+        - RoomTypes: 3
+          AvailabilityType: 0
+          TurretLocationType: 3
           TurretData:
             AvailabilityType: 0
             HasTurretSoldier: 0
             AmmoCapacity: 0
             AmmoDamage: 0
             TurretParticle: {fileID: 0}
-        - TurretLocationType: 4
-          TurretData:
-            AvailabilityType: 0
-            HasTurretSoldier: 0
-            AmmoCapacity: 0
-            AmmoDamage: 0
-            TurretParticle: {fileID: 0}
-        - TurretLocationType: 5
+        RoomData:
+          TurretLocationType: 0
           TurretData:
             AvailabilityType: 0
             HasTurretSoldier: 0
@@ -83,42 +85,6 @@ MonoBehaviour:
         AmmoWorkerCost: 0
         AmmoWorkerPayedAmount: 0
         MoneyWorkerLevel: 0
-        AmmoWorkerLevel: 0
-        AvailabilityType: 0
-  - FrondYardData:
-      StageDatas: []
-      FrondYardItemsDatas: []
-    BaseData:
-      BaseRoomData:
-        RoomDatas:
-        - TurretLocationType: 0
-          TurretData:
-            AvailabilityType: 0
-            HasTurretSoldier: 0
-            AmmoCapacity: 0
-            AmmoDamage: 0
-            TurretParticle: {fileID: 0}
-      MineBaseData:
-        MaxWorkerAmount: 0
-        CurrentWorkerAmount: 0
-        GemCollectionOffset: 0
-      MilitaryBaseData:
-        BaseCapacity: 0
-        TentCapacity: 0
-        CandidateAmount: 0
-        CurrentSoldierAmount: 0
-        SoldierUpgradeTimer: 0
-        SoldierSlotCost: 0
-        SlotCount: 0
-        Slots: []
-        AttackTimer: 0
-        Key: MilitaryBaseData
-      BuyablesData:
-        MoneyWorkerCost: 10
-        MoneyWorkerPayedAmount: 20
-        AmmoWorkerCost: 30
-        AmmoWorkerPayedAmount: 15
-        MoneyWorkerLevel: 31
         AmmoWorkerLevel: 0
         AvailabilityType: 0
   LevelId: 0

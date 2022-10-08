@@ -1,4 +1,6 @@
-﻿using Data.ValueObject;
+﻿using System;
+using Controllers.BaseControllers;
+using Data.ValueObject;
 using Enums;
 using Signals;
 using UnityEngine;
@@ -13,12 +15,12 @@ namespace Managers
        
         [SerializeField] private BaseExtentionController extentionController;
         
-        public BaseRoomData BaseRoomData;
-        
         #endregion
     
         #region Public Variables
-
+        
+        private BaseRoomData baseRoomData;
+        
         #endregion
 
         #region Private Variables
@@ -27,21 +29,26 @@ namespace Managers
         #endregion
         
         #endregion
-        
-        #region Event Subscription
 
+        private void Awake()
+        {
+            baseRoomData = GetData();
+            SetExistingRooms();
+        }
+        
+
+        #region Event Subscription
+        
         private void OnEnable()
         {
             SubscribeEvents();
         }
         private void SubscribeEvents()
-        {   
-           // InitializeDataSignals.Instance.onLoadBaseRoomData += OnLoadData;
+        {
             BaseSignals.Instance.onChangeExtentionVisibility += OnChangeVisibility;
         }
         private void UnsubscribeEvents()
-        {   
-           // InitializeDataSignals.Instance.onLoadBaseRoomData -= OnLoadData;
+        { 
             BaseSignals.Instance.onChangeExtentionVisibility -= OnChangeVisibility;
         }
         private void OnDisable()
@@ -49,17 +56,31 @@ namespace Managers
             UnsubscribeEvents();
         }
         #endregion  
-        private void OnLoadData(BaseRoomData baseRoomData)
+        private BaseRoomData GetData()
         {
-            BaseRoomData = baseRoomData;
+            return InitializeDataSignals.Instance.onLoadBaseRoomData?.Invoke();
         }
+
+        private void SetExistingRooms()
+        {
+            for (int i = 0; i < baseRoomData.RoomDatas.Count; i++)
+            {
+                if (baseRoomData.RoomDatas[i].AvailabilityType == AvailabilityType.Unlocked)
+                {
+                    ChangeVisibility(baseRoomData.RoomDatas[i].RoomTypes);
+                }
+                
+            }
+        }
+       
         
         private void OnChangeVisibility(RoomTypes roomTypes)
         {
             ChangeVisibility(roomTypes);
         }
         private void ChangeVisibility(RoomTypes roomTypes)
-        {
+        {   
+            Debug.Log("ChangeVisibility");
             extentionController.ChangeExtentionVisibility(roomTypes);
         }
     }

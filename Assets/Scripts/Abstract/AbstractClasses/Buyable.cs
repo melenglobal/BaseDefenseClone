@@ -6,7 +6,7 @@ using Enums;
 namespace Abstract
 {
     public abstract class Buyable
-    {
+    {   
         private int Cost;
 
         private int PayedAmount;

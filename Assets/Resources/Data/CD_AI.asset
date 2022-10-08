@@ -15,9 +15,11 @@ MonoBehaviour:
   AmmoWorkerAIData:
     Capacity: 2
     Speed: 6.4
+    WorkerINitTransform: {fileID: 0}
   MoneyWorkerAIData:
     Capacity: 7
     Speed: 9.03
+    InitPosition: {x: 0, y: 0, z: 8}
   MineWorkerAIData:
     Capacity: 10
     Speed: 1.47

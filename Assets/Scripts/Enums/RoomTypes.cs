@@ -2,9 +2,9 @@
 {
     public enum RoomTypes
     {
-        FirstRightRoom,
         FirstLeftRoom,
-        SecondRightRoom,
-        SecondLeftRoom
+        FirstRightRoom,
+        SecondLeftRoom,
+        SecondRightRoom
     }
 }
