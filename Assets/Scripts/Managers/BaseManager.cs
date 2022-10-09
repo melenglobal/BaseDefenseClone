@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Controllers.BaseControllers;
 using Data.ValueObject;
 using Enums;
@@ -46,10 +47,14 @@ namespace Managers
         private void SubscribeEvents()
         {
             BaseSignals.Instance.onChangeExtentionVisibility += OnChangeVisibility;
+            BaseSignals.Instance.onTakePayment += OnTakePayment;
+            BaseSignals.Instance.onUpdateRoomCostText += OnUpdateRoomCostText;
         }
         private void UnsubscribeEvents()
         { 
             BaseSignals.Instance.onChangeExtentionVisibility -= OnChangeVisibility;
+            BaseSignals.Instance.onTakePayment -= OnTakePayment;
+            BaseSignals.Instance.onUpdateRoomCostText += OnUpdateRoomCostText;
         }
         private void OnDisable()
         {
@@ -63,24 +68,35 @@ namespace Managers
 
         private void SetExistingRooms()
         {
-            for (int i = 0; i < baseRoomData.RoomDatas.Count; i++)
+            foreach (var t in baseRoomData.RoomDatas.Where(t => t.AvailabilityType == AvailabilityType.Unlocked))
             {
-                if (baseRoomData.RoomDatas[i].AvailabilityType == AvailabilityType.Unlocked)
-                {
-                    ChangeVisibility(baseRoomData.RoomDatas[i].RoomTypes);
-                }
-                
+                ChangeVisibility(t.RoomTypes);
             }
         }
-       
-        
+
+        private void OnTakePayment(RoomTypes roomTypes, int payedAmount)
+        {
+            baseRoomData.RoomDatas[(int)roomTypes].Cost -= payedAmount;
+        }
+
+        private int OnUpdateRoomCostText(RoomTypes roomTypes)
+        {
+            return baseRoomData.RoomDatas[(int)roomTypes].Cost;
+        }
         private void OnChangeVisibility(RoomTypes roomTypes)
         {
             ChangeVisibility(roomTypes);
+            ChangeAvailabilityType(roomTypes);
         }
+        
+        private void ChangeAvailabilityType(RoomTypes roomTypes)
+        {
+            baseRoomData.RoomDatas[(int)roomTypes].AvailabilityType = AvailabilityType.Unlocked;
+            InitializeDataSignals.Instance.onSaveBaseRoomData?.Invoke(baseRoomData);
+        }
+        
         private void ChangeVisibility(RoomTypes roomTypes)
-        {   
-            Debug.Log("ChangeVisibility");
+        {
             extentionController.ChangeExtentionVisibility(roomTypes);
         }
     }

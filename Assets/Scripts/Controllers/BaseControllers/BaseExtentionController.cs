@@ -15,7 +15,7 @@ namespace Controllers.BaseControllers
         
         public void ChangeExtentionVisibility(RoomTypes roomTypes)
         {   
-            Debug.Log(roomTypes);
+        
             SideOpenClose[(int)roomTypes].SetActive(false);
             OpenUpExtentions[(int)roomTypes].SetActive(true);
             CloseDownExtentions[(int)roomTypes].SetActive(false);

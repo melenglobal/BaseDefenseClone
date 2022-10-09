@@ -13,16 +13,15 @@ namespace Managers
         #region SerializeField Variables
 
         [SerializeField] private UIPanelController UIPanelController;
-        [SerializeField] private TextMeshProUGUI textMeshPro;
-        [SerializeField] private TextMeshProUGUI textMeshPro2;
+        [SerializeField] private TextMeshProUGUI gemScore; 
+        [SerializeField] private TextMeshProUGUI moneyScore;
         [SerializeField] private TextMeshProUGUI levelText;
-
-
+        
         #endregion SerializeField Variables
 
         #endregion Self Veriables
 
-        #region Event Subcription
+        #region Event Subcriptions
 
         private void OnEnable() => SubscribeEvents();
 
@@ -30,7 +29,6 @@ namespace Managers
         {
             UISignals.Instance.onOpenPanel += OnOpenPanel;
             UISignals.Instance.onClosePanel += OnClosePanel;
-            UISignals.Instance.onMultiplyArea += OnMultiplyArea;
             UISignals.Instance.onSetLevelText += OnSetLevelText;
             CoreGameSignals.Instance.onPlay += OnPlay;
         }
@@ -39,70 +37,37 @@ namespace Managers
         {
             UISignals.Instance.onOpenPanel -= OnOpenPanel;
             UISignals.Instance.onClosePanel -= OnClosePanel;
-            UISignals.Instance.onMultiplyArea -= OnMultiplyArea;
             UISignals.Instance.onSetLevelText -= OnSetLevelText;
             CoreGameSignals.Instance.onPlay -= OnPlay;
         }
 
         private void OnDisable() => UnsubscribeEvents();
 
-        #endregion Event Subcription
+        #endregion Event Subcriptions
         
+        private void OnOpenPanel(UIPanels panels) => UIPanelController.OpenPanel(panels);
 
-        private void OnOpenPanel(UIPanels panels)
-        {
-            UIPanelController.OpenPanel(panels);
-        }
+        private void OnClosePanel(UIPanels panels) => UIPanelController.ClosePanel(panels);
+   
+        public void Play() =>  CoreGameSignals.Instance.onPlay?.Invoke();
 
-        private void OnClosePanel(UIPanels panels)
-        {
-            UIPanelController.ClosePanel(panels);
-        }
-        
-        public void OnPlay()
+        private void OnPlay()
         {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.StartPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.LevelPanel);
         }
 
-        
-        public void OnMultiplyArea()
-        {
-            UISignals.Instance.onClosePanel?.Invoke(UIPanels.LevelPanel);
-      
-            UISignals.Instance.onOpenPanel?.Invoke(UIPanels.IdlePanel);
-        }
-        
-        public void Play()
-        {
-            CoreGameSignals.Instance.onPlay?.Invoke();
-        }
-
-        public void TryAgain()
-        {
-            UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
-            CoreGameSignals.Instance.onReset?.Invoke();
-        }
-        public void NextLevel()
+        public void OnNextLevel()
         {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.IdlePanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.LevelPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
             CoreGameSignals.Instance.onNextLevel?.Invoke();
         }
+     
+        private void OnUpdateMoneyScore(int score) => moneyScore.text = score.ToString();
 
-        public void Restart()
-        {
-            UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
-           
-            CoreGameSignals.Instance.onReset?.Invoke();
-        }
-        
-        private void OnUpdateCurrentScore(int score)
-        {
-            textMeshPro.text = score.ToString();
-            textMeshPro2.text = score.ToString();
-        }
+        private void OnUpdateGemScore(int score) =>  gemScore.text = score.ToString();
 
         private void OnSetLevelText(int nextLevel)
         {

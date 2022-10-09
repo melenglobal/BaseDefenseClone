@@ -10,10 +10,6 @@ namespace Managers
     {
         #region Self Variables
 
-        #region Public Variables
-        
-        #endregion
-
         #region Private Variables
 
         private int _levelID;
@@ -63,7 +59,6 @@ namespace Managers
         {
             _levelID++;
             SaveLevelID(_levelID);
-            //UISignals
             CoreGameSignals.Instance.onReset?.Invoke();
         }
 
@@ -76,6 +71,7 @@ namespace Managers
         {
             _levelID = levelID;
         }
+        
         private void OnInitializeLevel()
         {
             int newlevelData = _levelID % Resources.Load<CD_Level>("Data/CD_Level").LevelDatas.Count;

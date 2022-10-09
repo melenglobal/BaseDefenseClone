@@ -7,6 +7,10 @@ namespace Data.ValueObject
     {
         public FrondYardData FrondYardData;
         public BaseData BaseData;
+
+        public int TotalGemScore;
         
+        public int TotalMoneyScore;
+
     }
 }

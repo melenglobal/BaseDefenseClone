@@ -20,7 +20,7 @@ MonoBehaviour:
       BaseRoomData:
         RoomDatas:
         - RoomTypes: 0
-          AvailabilityType: 1
+          AvailabilityType: 0
           TurretLocationType: 0
           TurretData:
             AvailabilityType: 0
@@ -28,8 +28,10 @@ MonoBehaviour:
             AmmoCapacity: 0
             AmmoDamage: 0
             TurretParticle: {fileID: 0}
+          PayedAmount: 0
+          Cost: 100
         - RoomTypes: 1
-          AvailabilityType: 1
+          AvailabilityType: 0
           TurretLocationType: 1
           TurretData:
             AvailabilityType: 0
@@ -37,6 +39,8 @@ MonoBehaviour:
             AmmoCapacity: 0
             AmmoDamage: 0
             TurretParticle: {fileID: 0}
+          PayedAmount: 0
+          Cost: 100
         - RoomTypes: 2
           AvailabilityType: 0
           TurretLocationType: 2
@@ -46,6 +50,8 @@ MonoBehaviour:
             AmmoCapacity: 0
             AmmoDamage: 0
             TurretParticle: {fileID: 0}
+          PayedAmount: 0
+          Cost: 200
         - RoomTypes: 3
           AvailabilityType: 0
           TurretLocationType: 3
@@ -55,7 +61,9 @@ MonoBehaviour:
             AmmoCapacity: 0
             AmmoDamage: 0
             TurretParticle: {fileID: 0}
-        RoomData:
+          PayedAmount: 0
+          Cost: 200
+        MainRoomData:
           TurretLocationType: 0
           TurretData:
             AvailabilityType: 0
