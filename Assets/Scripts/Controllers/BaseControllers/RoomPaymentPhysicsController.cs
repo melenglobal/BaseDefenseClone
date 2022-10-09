@@ -8,35 +8,20 @@ using UnityEngine;
 namespace Controllers.BaseControllers
 {
     public class RoomPaymentPhysicsController : MonoBehaviour
-    {   
-        [SerializeField] 
-        private TextMeshPro remainingCostText;
-        
-        [SerializeField]
-        private RoomTypes roomTypes;
-
-        private void Awake()
-        {
-            SetInitText();
-        }
-
-        private void SetInitText()
-        {
-            var cost = BaseSignals.Instance.onUpdateRoomCostText(roomTypes);
-            remainingCostText.text = cost.ToString();
-        }
+    {
+        [SerializeField] private RoomManager roomManager;
         private void OnTriggerEnter(Collider other)
         {
             if (!other.TryGetComponent(out ICustomer customer)) return;
-            customer.MakePayment(); 
-            UpdateText(-1);
+            customer.StartPayment();
+            roomManager.StartRoomPayment(customer.canPay,customer);
+            Debug.Log(customer.canPay);
         }
-  
-        private void UpdateText(int payedAmount)
-        {
-            var cost=BaseSignals.Instance.onUpdateRoomCostText(roomTypes);
-            cost -= payedAmount;
-            remainingCostText.text = cost.ToString();
+        private void OnTriggerExit(Collider other)
+        {   
+            if (!other.TryGetComponent(out ICustomer customer)) return;
+            customer.StopPayment();
+            roomManager.StopRoomPayment(false);
         }
     }
 }

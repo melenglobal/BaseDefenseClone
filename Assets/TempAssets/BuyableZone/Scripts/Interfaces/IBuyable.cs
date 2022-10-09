@@ -7,7 +7,7 @@ namespace Buyablezone.Interfaces
             /// <summary>
             /// GetBuyableData(): Required Amount have to return in here
             /// TriggerBuyingEvent(): This function Will trigger on buyablezone completed
-            ///  MakePayment(): Payment have to Handle in interface instance func ,it returns Pay statements succes or not legible states as a bool
+            ///  StartPayment(): Payment have to Handle in interface instance func ,it returns Pay statements succes or not legible states as a bool
             /// </summary>    
             public BuyableZoneDataList GetBuyableData();
             

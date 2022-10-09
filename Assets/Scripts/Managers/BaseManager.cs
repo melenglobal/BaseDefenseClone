@@ -17,15 +17,10 @@ namespace Managers
         [SerializeField] private BaseExtentionController extentionController;
         
         #endregion
-    
-        #region Public Variables
-        
-        private BaseRoomData baseRoomData;
-        
-        #endregion
 
         #region Private Variables
         
+        private BaseRoomData baseRoomData;
         
         #endregion
         
@@ -40,31 +35,20 @@ namespace Managers
 
         #region Event Subscription
         
-        private void OnEnable()
-        {
-            SubscribeEvents();
-        }
+        private void OnEnable() => SubscribeEvents();
         private void SubscribeEvents()
         {
             BaseSignals.Instance.onChangeExtentionVisibility += OnChangeVisibility;
-            BaseSignals.Instance.onTakePayment += OnTakePayment;
-            BaseSignals.Instance.onUpdateRoomCostText += OnUpdateRoomCostText;
+            BaseSignals.Instance.onSetRoomData += OnSetRoomData;
         }
         private void UnsubscribeEvents()
         { 
             BaseSignals.Instance.onChangeExtentionVisibility -= OnChangeVisibility;
-            BaseSignals.Instance.onTakePayment -= OnTakePayment;
-            BaseSignals.Instance.onUpdateRoomCostText += OnUpdateRoomCostText;
+            BaseSignals.Instance.onSetRoomData += OnSetRoomData;
         }
-        private void OnDisable()
-        {
-            UnsubscribeEvents();
-        }
+        private void OnDisable() => UnsubscribeEvents();
         #endregion  
-        private BaseRoomData GetData()
-        {
-            return InitializeDataSignals.Instance.onLoadBaseRoomData?.Invoke();
-        }
+        private BaseRoomData GetData() => InitializeDataSignals.Instance.onLoadBaseRoomData?.Invoke();
 
         private void SetExistingRooms()
         {
@@ -73,16 +57,8 @@ namespace Managers
                 ChangeVisibility(t.RoomTypes);
             }
         }
-
-        private void OnTakePayment(RoomTypes roomTypes, int payedAmount)
-        {
-            baseRoomData.RoomDatas[(int)roomTypes].Cost -= payedAmount;
-        }
-
-        private int OnUpdateRoomCostText(RoomTypes roomTypes)
-        {
-            return baseRoomData.RoomDatas[(int)roomTypes].Cost;
-        }
+        
+        private RoomData OnSetRoomData(RoomTypes roomTypes) => baseRoomData.RoomDatas[(int)roomTypes];
         private void OnChangeVisibility(RoomTypes roomTypes)
         {
             ChangeVisibility(roomTypes);
@@ -95,9 +71,6 @@ namespace Managers
             InitializeDataSignals.Instance.onSaveBaseRoomData?.Invoke(baseRoomData);
         }
         
-        private void ChangeVisibility(RoomTypes roomTypes)
-        {
-            extentionController.ChangeExtentionVisibility(roomTypes);
-        }
+        private void ChangeVisibility(RoomTypes roomTypes) => extentionController.ChangeExtentionVisibility(roomTypes);
     }
 }

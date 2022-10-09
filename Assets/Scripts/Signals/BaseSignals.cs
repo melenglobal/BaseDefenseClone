@@ -1,4 +1,5 @@
 ﻿using System;
+using Data.ValueObject;
 using Enums;
 using Extentions;
 using UnityEngine.Events;
@@ -9,6 +10,6 @@ namespace Signals
     {
        public UnityAction<RoomTypes> onChangeExtentionVisibility = delegate(RoomTypes arg0) {  }; 
        public UnityAction<RoomTypes,int> onTakePayment =delegate(RoomTypes arg0, int i) {  };
-       public Func<RoomTypes, int> onUpdateRoomCostText;
+       public Func<RoomTypes, RoomData> onSetRoomData;
     }
 }

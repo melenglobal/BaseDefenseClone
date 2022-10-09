@@ -2,6 +2,10 @@
 {
     public interface ICustomer
     {
-        int MakePayment();
+
+        public bool canPay { get; set; } 
+        int StartPayment();
+
+        void StopPayment();
     }
 }

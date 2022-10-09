@@ -4,6 +4,7 @@ using Data.UnityObject;
 using Data.ValueObject;
 using Signals;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class DataInitializer : MonoBehaviour,ISaveable
 {
@@ -36,6 +37,7 @@ public class DataInitializer : MonoBehaviour,ISaveable
     private MineBaseData _mineBaseData;
     private MilitaryBaseData _militaryBaseData;
     private BuyablesData _buyablesData;
+    private ScoreData _scoreData;
 
     #endregion
     
@@ -59,8 +61,7 @@ public class DataInitializer : MonoBehaviour,ISaveable
     #region InıtData
     
     private void InitData()
-    {   
-        
+    {
         if (!ES3.FileExists($"LevelData{_uniqueID}.es3"))
         {
             if (!ES3.KeyExists("LevelData"))
@@ -78,10 +79,7 @@ public class DataInitializer : MonoBehaviour,ISaveable
 
     #region Event Subscriptions
 
-    private void OnEnable()
-    {   
-        SubscribeEvents();
-    }
+    private void OnEnable() => SubscribeEvents();
 
     private void SubscribeEvents()
     {
@@ -91,12 +89,14 @@ public class DataInitializer : MonoBehaviour,ISaveable
         InitializeDataSignals.Instance.onSaveMineBaseData += SyncMineBaseDatas;
         InitializeDataSignals.Instance.onSaveMilitaryBaseData += SyncMilitaryBaseData;
         InitializeDataSignals.Instance.onSaveBuyablesData += SyncBuyablesData;
+        InitializeDataSignals.Instance.onSaveGameScore += SyncScoreData;
         
         InitializeDataSignals.Instance.onLoadMilitaryBaseData += OnLoadMilitaryBaseData;
         InitializeDataSignals.Instance.onLoadBaseRoomData += OnLoadBaseRoomData;
         InitializeDataSignals.Instance.onLoadBuyablesData += OnLoadBuyablesData;
         InitializeDataSignals.Instance.onLoadMineBaseData += OnLoadMineBaseData;
-        //CoreGameSignals.Instance.onApplicationQuit += OnApplicationQuit;
+        InitializeDataSignals.Instance.onLoadGameScore += OnLoadScoreData;
+        CoreGameSignals.Instance.onApplicationQuit += OnSave;
     }
 
     private void UnsubscribeEvents()
@@ -107,49 +107,41 @@ public class DataInitializer : MonoBehaviour,ISaveable
         InitializeDataSignals.Instance.onSaveMineBaseData -= SyncMineBaseDatas;
         InitializeDataSignals.Instance.onSaveMilitaryBaseData -= SyncMilitaryBaseData;
         InitializeDataSignals.Instance.onSaveBuyablesData -= SyncBuyablesData;
+        InitializeDataSignals.Instance.onSaveGameScore -= SyncScoreData;
         
         InitializeDataSignals.Instance.onLoadMilitaryBaseData -= OnLoadMilitaryBaseData;
         InitializeDataSignals.Instance.onLoadBaseRoomData -= OnLoadBaseRoomData;
         InitializeDataSignals.Instance.onLoadBuyablesData -= OnLoadBuyablesData;
         InitializeDataSignals.Instance.onLoadMineBaseData -= OnLoadMineBaseData;
-        
-        //CoreGameSignals.Instance.onApplicationQuit -= OnApplicationQuit;
+        InitializeDataSignals.Instance.onLoadGameScore -= OnLoadScoreData;
+        CoreGameSignals.Instance.onApplicationQuit -= OnSave;
     }
-    private void OnDisable()
-    {
-        UnsubscribeEvents();
-    }
+    private void OnDisable() => UnsubscribeEvents();
 
     #endregion
     #region ManagersData
-    private void SendDataManagers()
-    {
-        InitializeDataSignals.Instance.onLoadLevelID?.Invoke(_levelID);
-    }
-    private MilitaryBaseData OnLoadMilitaryBaseData()
-    {
-        return _militaryBaseData;
-    }
-    private BaseRoomData OnLoadBaseRoomData()
-    {
-        return _baseRoomData;
-    }
-    private MineBaseData OnLoadMineBaseData()
-    {
-        return _mineBaseData;
-    }
-    private BuyablesData OnLoadBuyablesData()
-    {
-        return _buyablesData;
-    }
-    #endregion
-    #region Level Save - Load 
+    private void SendDataManagers() => InitializeDataSignals.Instance.onLoadLevelID?.Invoke(_levelID);
 
+    private ScoreData OnLoadScoreData() => _scoreData;
+    private MilitaryBaseData OnLoadMilitaryBaseData() =>_militaryBaseData;
+
+    private BaseRoomData OnLoadBaseRoomData() => _baseRoomData;
+ 
+    private MineBaseData OnLoadMineBaseData() =>_mineBaseData;
+
+    private BuyablesData OnLoadBuyablesData() => _buyablesData;
+    
+    #endregion
+    #region Level Save - Load
+
+    private void OnSave() => Save(_uniqueID);
     public void Save(int uniqueId)
     {
-        CD_Level cdLevel = new CD_Level(_levelID,levelDatas);
+        
+        cdLevel = new CD_Level(_levelID,levelDatas);
         
         SaveLoadSignals.Instance.onSaveGameData.Invoke(cdLevel,uniqueId);
+        
     }
     
     public void Load(int uniqueId)
@@ -161,41 +153,26 @@ public class DataInitializer : MonoBehaviour,ISaveable
         _mineBaseData = cdLevel.LevelDatas[_levelID].BaseData.MineBaseData;
         _militaryBaseData = cdLevel.LevelDatas[_levelID].BaseData.MilitaryBaseData;
         _buyablesData = cdLevel.LevelDatas[_levelID].BaseData.BuyablesData;
+        _scoreData = cdLevel.LevelDatas[_levelID].ScoreData;
 
     }
 
     #endregion
     
-    private void OnSyncLevel() 
-    {
-        SendDataManagers();
-    }
+    private void OnSyncLevel() => SendDataManagers();
 
     #region Data Sync
 
-    private void OnSyncLevelID(int levelID)
-    {
-        cdLevel.LevelId = levelID;
-    }
-    private void SyncBaseRoomDatas(BaseRoomData baseRoomData)
-    {
-        cdLevel.LevelDatas[_levelID].BaseData.BaseRoomData = baseRoomData;
-    }
+    private void OnSyncLevelID(int levelID) => _levelID= levelID;
 
-    private void SyncMineBaseDatas(MineBaseData mineBaseData)
-    {
-        cdLevel.LevelDatas[_levelID].BaseData.MineBaseData = mineBaseData;
-    }
+    private void SyncScoreData(ScoreData scoreData) => _scoreData = scoreData;
+    private void SyncBaseRoomDatas(BaseRoomData baseRoomData) => _baseRoomData = baseRoomData;
 
-    private void SyncMilitaryBaseData(MilitaryBaseData militaryBaseData)
-    {
-        cdLevel.LevelDatas[_levelID].BaseData.MilitaryBaseData = militaryBaseData;
-    }
-    
-    private void SyncBuyablesData(BuyablesData buyablesData)
-    {
-        cdLevel.LevelDatas[_levelID].BaseData.BuyablesData = buyablesData;
-    }
+    private void SyncMineBaseDatas(MineBaseData mineBaseData) => _mineBaseData = mineBaseData;
+
+    private void SyncMilitaryBaseData(MilitaryBaseData militaryBaseData) => _militaryBaseData= militaryBaseData;
+
+    private void SyncBuyablesData(BuyablesData buyablesData) => _buyablesData = buyablesData;
 
     #endregion
    

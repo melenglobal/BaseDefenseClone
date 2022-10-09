@@ -1,4 +1,5 @@
 ﻿using System;
+using Abstract.Interfaces;
 using Abstract.Stackable;
 using Concrete;
 using Enums;
@@ -18,7 +19,7 @@ namespace Controllers
         #region Serialized Variables,
         
         [SerializeField] private PlayerManager playerManager;
-        
+
         #endregion
 
         #region Private Variables
@@ -56,5 +57,6 @@ namespace Controllers
             playerManager.HasEnemyTarget = false;
             playerManager.EnemyList.Clear();
         }
+
     }
 }

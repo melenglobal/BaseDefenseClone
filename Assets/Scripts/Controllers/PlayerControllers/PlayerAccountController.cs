@@ -5,8 +5,10 @@ using UnityEngine;
 
 namespace Controllers.PlayerControllers
 {
-    public class PlayerCollectorController : MonoBehaviour
+    public class PlayerAccountController : MonoBehaviour,ICustomer
     {
+        private int _moneyAmount = 100000;
+        private int _gemAmounth;
         [SerializeField] private PlayerMoneyStackerController playerMoneyStackerController;
         private void OnTriggerEnter(Collider other)
         {
@@ -19,6 +21,21 @@ namespace Controllers.PlayerControllers
             {
                 playerMoneyStackerController.OnRemoveAllStack();
             }
+        }
+
+        public bool canPay { get => _moneyAmount!=0; set { } }
+        public int StartPayment()
+        {
+            return -1;
+        }
+
+        public void StopPayment()
+        {
+            if (_moneyAmount == 0)
+            {
+                canPay = false;
+            }
+            
         }
     }
 }
