@@ -1,14 +1,13 @@
 ﻿using Abstract.Interfaces;
 using Abstract.Stackable;
+using Signals;
 using UnityEngine;
-
 
 namespace Controllers.PlayerControllers
 {
     public class PlayerAccountController : MonoBehaviour,ICustomer
     {
-        private int _moneyAmount = 100000;
-        private int _gemAmounth;
+        
         [SerializeField] private PlayerMoneyStackerController playerMoneyStackerController;
         private void OnTriggerEnter(Collider other)
         {
@@ -23,19 +22,22 @@ namespace Controllers.PlayerControllers
             }
         }
 
-        public bool canPay { get => _moneyAmount!=0; set { } }
-        public int StartPayment()
+        #region Account
+
+        public bool canPay { get => CoreGameSignals.Instance.onHasEnoughMoney.Invoke(); set { } }
+        public void MakePayment()
         {
-            return -1;
+            if (!canPay)
+            {
+                CoreGameSignals.Instance.onStopMoneyPayment?.Invoke();
+                Debug.Log("StopPayment");
+                return;
+            }
+            CoreGameSignals.Instance.onStartMoneyPayment?.Invoke();
+            Debug.Log("StartPayment");
         }
 
-        public void StopPayment()
-        {
-            if (_moneyAmount == 0)
-            {
-                canPay = false;
-            }
-            
-        }
+        #endregion
+       
     }
 }

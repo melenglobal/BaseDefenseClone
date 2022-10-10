@@ -7,7 +7,6 @@ namespace Data.ValueObject
     {
         public FrondYardData FrondYardData;
         public BaseData BaseData;
-        public ScoreData ScoreData;
-        
+
     }
 }

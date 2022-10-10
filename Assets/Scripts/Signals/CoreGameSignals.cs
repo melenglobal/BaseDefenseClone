@@ -8,17 +8,13 @@ using UnityEngine.Events;
 
 namespace Signals
 {
-    public class CoreGameSignals :MonoSingleton<CoreGameSignals>
+    public class CoreGameSignals : MonoSingleton<CoreGameSignals>
     {
 
         public UnityAction onLevelInitialize = delegate { };
-        
-        public UnityAction onIdleLevelInitialize = delegate { };
-        
+
         public UnityAction onClearActiveLevel = delegate { };
-        
-        public UnityAction onClearActiveIdleLevel = delegate { };
-        
+
         public UnityAction onFailed = delegate { };
 
         public UnityAction onNextLevel = delegate { };
@@ -32,26 +28,29 @@ namespace Signals
         public UnityAction onApplicationPause = delegate { };
         
         public UnityAction onApplicationQuit = delegate { };
-
-        //public Func<int> onGetLevelID = delegate { return 0; };
         
-        public Func<int> onGetIdleLevelID = delegate { return 0; };
-        
-        public UnityAction onIdleLevelChange = delegate { };
-    
         public Func<PoolType,GameObject> onGetObjectFromPool = delegate { return null;};
         
         public UnityAction<PoolType,GameObject> onReleaseObjectFromPool = delegate {  };
 
-        public UnityAction<int> onUpdateGemScore = delegate(int arg0) {  };
+        public UnityAction<int> onUpdateGemScoreData = delegate(int arg0) {  };
         
-        public UnityAction<int> onUpdateMoneyScore = delegate(int arg0) {  };
+        public UnityAction<int> onUpdateMoneyScoreData = delegate(int arg0) {  };
         
         public UnityAction<InputHandlers> onInputHandlerChange = delegate(InputHandlers arg0) {  };
 
         public UnityAction onCharacterInputRelease = delegate {  };
 
         public UnityAction<TurretLocationType> onSetCurrentTurret = delegate(TurretLocationType arg0) {  };
-  
+
+        public Func<bool> onHasEnoughMoney;
+
+        public Func<bool> onHasEnoughGem;
+        
+        public UnityAction onStartMoneyPayment = delegate {  };
+        
+        public UnityAction onStopMoneyPayment = delegate { };
+
+
     }
 }

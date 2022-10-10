@@ -8031,7 +8031,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomTypes: 1
-  roomPaymentPhysicsController: {fileID: 7850039606170391357}
   roomPaymentTextController: {fileID: 3273972568240364977}
 --- !u!1 &4416529064517198851
 GameObject:
@@ -8842,7 +8841,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomTypes: 2
-  roomPaymentPhysicsController: {fileID: 8535023287500681039}
   roomPaymentTextController: {fileID: 2019558539718631455}
 --- !u!1 &4416529064770833801
 GameObject:
@@ -10376,7 +10374,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomTypes: 0
-  roomPaymentPhysicsController: {fileID: 6320657736270892596}
   roomPaymentTextController: {fileID: 6343541449046442889}
 --- !u!1 &4416529065162616746
 GameObject:
@@ -10677,7 +10674,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomTypes: 3
-  roomPaymentPhysicsController: {fileID: 6204604745468222274}
   roomPaymentTextController: {fileID: 7105124764402566767}
 --- !u!1 &4416529065281812254
 GameObject:
@@ -11830,7 +11826,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2888347742295236559
 Transform:
   m_ObjectHideFlags: 0

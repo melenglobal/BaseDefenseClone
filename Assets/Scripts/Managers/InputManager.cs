@@ -89,8 +89,7 @@ public class InputManager : MonoBehaviour
         }
 
         private void HandleJoystickInput()
-        {   
-            Debug.Log(_inputHandlers);
+        {
             switch (_inputHandlers)
             {
                 case InputHandlers.Character:

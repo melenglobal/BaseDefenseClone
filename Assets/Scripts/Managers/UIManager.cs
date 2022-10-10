@@ -27,6 +27,8 @@ namespace Managers
 
         private void SubscribeEvents()
         {
+            UISignals.Instance.onUpdateMoneyScore += OnUpdateMoneyScore;
+            UISignals.Instance.onUpdateGemScore += OnUpdateGemScore;
             UISignals.Instance.onOpenPanel += OnOpenPanel;
             UISignals.Instance.onClosePanel += OnClosePanel;
             UISignals.Instance.onSetLevelText += OnSetLevelText;
@@ -34,7 +36,9 @@ namespace Managers
         }
 
         private void UnsubscribeEvents()
-        {
+        {   
+            UISignals.Instance.onUpdateMoneyScore -= OnUpdateMoneyScore;
+            UISignals.Instance.onUpdateGemScore -= OnUpdateGemScore;
             UISignals.Instance.onOpenPanel -= OnOpenPanel;
             UISignals.Instance.onClosePanel -= OnClosePanel;
             UISignals.Instance.onSetLevelText -= OnSetLevelText;
@@ -64,8 +68,12 @@ namespace Managers
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
             CoreGameSignals.Instance.onNextLevel?.Invoke();
         }
-     
-        private void OnUpdateMoneyScore(int score) => moneyScore.text = score.ToString();
+
+        private void OnUpdateMoneyScore(int score)
+        {   
+            Debug.Log(score);
+            moneyScore.text = score.ToString();
+        }
 
         private void OnUpdateGemScore(int score) =>  gemScore.text = score.ToString();
 
@@ -74,6 +82,7 @@ namespace Managers
             nextLevel++;
             levelText.text = "Level " + nextLevel;
         }
+        
 
     }
 }

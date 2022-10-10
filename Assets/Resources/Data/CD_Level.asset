@@ -95,5 +95,8 @@ MonoBehaviour:
         MoneyWorkerLevel: 0
         AmmoWorkerLevel: 0
         AvailabilityType: 0
+  ScoreData:
+    TotalGemScore: 7500
+    TotalMoneyScore: 7500
   LevelId: 0
   Key: LevelData

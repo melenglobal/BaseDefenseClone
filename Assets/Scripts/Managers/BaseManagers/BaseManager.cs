@@ -53,7 +53,7 @@ namespace Managers
         #endregion  
         private BaseRoomData GetData() => InitializeDataSignals.Instance.onLoadBaseRoomData?.Invoke();
 
-        private void SaveData() => InitializeDataSignals.Instance.onSaveBaseRoomData(baseRoomData);
+        private void SaveData() => InitializeDataSignals.Instance.onSaveBaseRoomData?.Invoke(baseRoomData);
 
         private void SetExistingRooms()
         {

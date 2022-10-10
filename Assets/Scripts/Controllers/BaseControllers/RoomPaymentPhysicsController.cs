@@ -1,8 +1,4 @@
-﻿using System;
-using Abstract.Interfaces;
-using Enums;
-using Signals;
-using TMPro;
+﻿using Abstract.Interfaces;
 using UnityEngine;
 
 namespace Controllers.BaseControllers
@@ -13,14 +9,14 @@ namespace Controllers.BaseControllers
         private void OnTriggerEnter(Collider other)
         {
             if (!other.TryGetComponent(out ICustomer customer)) return;
-            customer.StartPayment();
+            customer.MakePayment();
             roomManager.StartRoomPayment(customer.canPay,customer);
-            Debug.Log(customer.canPay);
         }
         private void OnTriggerExit(Collider other)
         {   
             if (!other.TryGetComponent(out ICustomer customer)) return;
-            customer.StopPayment();
+            customer.canPay = false;
+            customer.MakePayment();
             roomManager.StopRoomPayment(false);
         }
     }

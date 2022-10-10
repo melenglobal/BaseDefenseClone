@@ -3,7 +3,7 @@
 namespace Data.ValueObject
 {   
     [Serializable]
-    public struct ScoreData
+    public class ScoreData
     {
         public int TotalGemScore;
         

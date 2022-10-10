@@ -4,8 +4,6 @@
     {
 
         public bool canPay { get; set; } 
-        int StartPayment();
-
-        void StopPayment();
+        void MakePayment();
     }
 }

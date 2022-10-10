@@ -3,6 +3,7 @@ using Abstract.Interfaces;
 using Controllers.BaseControllers;
 using Data.ValueObject;
 using Enums;
+using Managers;
 using Signals;
 using UnityEngine;
 
@@ -16,14 +17,12 @@ namespace Controllers
         private RoomPaymentTextController roomPaymentTextController;
         
         private RoomData _roomData;
-        private int _cost;
         private int _payedAmount = 1;
         private bool _canTake;
         private void Start()
         {
             _roomData = GetRoomData();
-            _cost = _roomData.Cost;
-            SetRoomCost(_cost);
+            SetRoomCost(_roomData.Cost);
         }
         private RoomData GetRoomData() => BaseSignals.Instance.onSetRoomData(roomTypes);
         private void SetRoomCost(int cost) => roomPaymentTextController.SetInitText(cost);
@@ -37,19 +36,29 @@ namespace Controllers
         public void StopRoomPayment(bool canTake) =>_canTake = canTake;
         private async void UpdatePayment(ICustomer customer)
         {
-            if (!_canTake || customer.canPay)
+            if (!_canTake || !customer.canPay)
             {
                 _canTake = true;
+                CoreGameSignals.Instance.onStopMoneyPayment?.Invoke();
                 return;
             }
-            if (_cost == 0)
+            if (_roomData.Cost == 0)
             {
+                _canTake = false;
+                
                 _roomData.AvailabilityType = AvailabilityType.Unlocked;
+                BaseSignals.Instance.onChangeExtentionVisibility(roomTypes);
+                UpdateRoomData();
             }
-            _cost -= _payedAmount; 
-            roomPaymentTextController.UpdateText(_cost);
+            
+            _roomData.Cost -= _payedAmount; 
+            CoreGameSignals.Instance.onStartMoneyPayment?.Invoke();
+            roomPaymentTextController.UpdateText(_roomData.Cost);
+            UpdateRoomData();
             await Task.Delay(100);
             UpdatePayment(customer);
         }
+
+        private void UpdateRoomData() => BaseSignals.Instance.onUpdateRoomData(_roomData,roomTypes);
     }
 }
