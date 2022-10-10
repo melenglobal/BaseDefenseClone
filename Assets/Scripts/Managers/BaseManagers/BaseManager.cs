@@ -40,15 +40,20 @@ namespace Managers
         {
             BaseSignals.Instance.onChangeExtentionVisibility += OnChangeVisibility;
             BaseSignals.Instance.onSetRoomData += OnSetRoomData;
+            BaseSignals.Instance.onUpdateRoomData += OnUpdateRoomData;
+
         }
         private void UnsubscribeEvents()
         { 
             BaseSignals.Instance.onChangeExtentionVisibility -= OnChangeVisibility;
             BaseSignals.Instance.onSetRoomData += OnSetRoomData;
+            BaseSignals.Instance.onUpdateRoomData += OnUpdateRoomData;
         }
         private void OnDisable() => UnsubscribeEvents();
         #endregion  
         private BaseRoomData GetData() => InitializeDataSignals.Instance.onLoadBaseRoomData?.Invoke();
+
+        private void SaveData() => InitializeDataSignals.Instance.onSaveBaseRoomData(baseRoomData);
 
         private void SetExistingRooms()
         {
@@ -57,7 +62,13 @@ namespace Managers
                 ChangeVisibility(t.RoomTypes);
             }
         }
-        
+
+        private void OnUpdateRoomData(RoomData roomData, RoomTypes roomTypes)
+        {
+            baseRoomData.RoomDatas[(int)roomTypes] = roomData;
+            SaveData();
+        }
+            
         private RoomData OnSetRoomData(RoomTypes roomTypes) => baseRoomData.RoomDatas[(int)roomTypes];
         private void OnChangeVisibility(RoomTypes roomTypes)
         {
