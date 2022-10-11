@@ -1,4 +1,6 @@
-﻿using Abstract.Stackable;
+﻿using System;
+using Abstract.Stackable;
+using DG.Tweening;
 using UnityEngine;
 
 namespace Controllers.StackableControllers
@@ -7,7 +9,12 @@ namespace Controllers.StackableControllers
     {   
         [SerializeField] private Rigidbody rigidbody;
         [SerializeField] private BoxCollider collider;
-        
+
+        private void OnEnable()
+        {
+            DOVirtual.DelayedCall(2f, EditPhysics);
+        }
+
         public override void SetInit(Transform initTransform, Vector3 position)
         {
             base.SetInit(initTransform, position);
@@ -34,11 +41,15 @@ namespace Controllers.StackableControllers
         }
 
         public override GameObject SendToStack()
-        {   
-            rigidbody.useGravity = false;
-            rigidbody.isKinematic = true;
+        {
             collider.enabled = false;
             return transform.gameObject;
+        }
+
+        private void EditPhysics()
+        {
+            rigidbody.useGravity = false;
+            rigidbody.isKinematic = true;
         }
     }
 }

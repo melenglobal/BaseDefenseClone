@@ -17,7 +17,6 @@ namespace Controllers.PlayerControllers
             
             if (!other.TryGetComponent(out IDamageable damagable)) return;
             
-            Debug.Log("EnemyTarget");
             if(damagable.IsTaken) return;
             
             manager.EnemyList.Add(damagable);

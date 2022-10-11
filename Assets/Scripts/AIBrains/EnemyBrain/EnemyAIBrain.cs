@@ -33,8 +33,7 @@ namespace AIBrains.EnemyBrain
         
         [SerializeField]
         private EnemyType enemyType;
-
-        [SerializeField] private List<Transform> targetList;
+        
 
         #endregion
 
@@ -51,28 +50,31 @@ namespace AIBrains.EnemyBrain
         private void Awake()
         {   
             _data = GetEnemyAIData();
+            
+            
             Health = _data.Health;
-            
-            spawnPosition =AISignals.Instance.getSpawnTransform?.Invoke();
-            
-            CurrentTarget = AISignals.Instance.getRandomTransform?.Invoke();
-     
-            
-            TurretTarget = CurrentTarget;
-            
-            GetStatesReferences();
             
         }
 
         private void OnEnable()
         {
-            Health= _data.Health;
+            spawnPosition = AISignals.Instance.getSpawnTransform?.Invoke();
             
+            CurrentTarget = AISignals.Instance.getRandomTransform?.Invoke();
+            
+            TurretTarget = CurrentTarget;
+            
+            Health= _data.Health;
         }
 
         private void OnDisable()
         {
             // Enemy must be ready to pool
+        }
+
+        private void Start()
+        {   
+            GetStatesReferences();
         }
 
         private EnemyData GetEnemyAIData() => Resources.Load<CD_AI>("Data/CD_AI").EnemyAIData.EnemyDatas[(int)enemyType];
@@ -106,9 +108,9 @@ namespace AIBrains.EnemyBrain
             void At(IState to, IState from, Func<bool> condition) => _stateMachine.AddTransition(to, from, condition);
             Func<bool> HasInitTarget() => () => TurretTarget != null;
             Func<bool> HasTargetTurret() => () => CurrentTarget != null && CurrentTarget.TryGetComponent(out PlayerManager player);
-            Func<bool> AttackRange() => () => CurrentTarget != null  && Vector3.Distance(transform.position, CurrentTarget.transform.position) < 1f;;
-            Func<bool> AttackOffRange() => () => CurrentTarget != null && Vector3.Distance(transform.position, CurrentTarget.transform.position) > 1f;
-            Func<bool> TargetNull() => () => CurrentTarget != null && CurrentTarget.TryGetComponent(out TurretManager turret);
+            Func<bool> AttackRange() => () => CurrentTarget != null  && Vector3.Distance(transform.position, CurrentTarget.transform.position) < navMeshAgent.stoppingDistance;;
+            Func<bool> AttackOffRange() => () => CurrentTarget != null && Vector3.Distance(transform.position, CurrentTarget.transform.position) > navMeshAgent.stoppingDistance;
+            Func<bool> TargetNull() => () => CurrentTarget == null;
             Func<bool> IsDead() => () => Health <= 0;
         }
         

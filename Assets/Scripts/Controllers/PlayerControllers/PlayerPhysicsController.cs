@@ -20,8 +20,7 @@ namespace Controllers.PlayerControllers
         private void OnTriggerEnter(Collider other)
         {
             if (other.TryGetComponent(out GatePhysicsController physicsController))
-            {   
-                Debug.Log("Gate");
+            {
                 GateEnter(other);
             }
         }

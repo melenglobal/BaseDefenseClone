@@ -17,31 +17,27 @@ MonoBehaviour:
     WeaponMesh: {fileID: 6908739434531237095, guid: 7a1d13925b6590f4f9b6fad7fa9cb71f, type: 3}
     HasSideMesh: 0
     SideMesh: {fileID: 0}
-    Damage: 0
+    Damage: 20
     AttackRate: 0
     WeaponLevel: 1
-    Bullet: {fileID: 0}
   - WeaponType: 1
     WeaponMesh: {fileID: 1659898151575521214, guid: 579a45d28287c05408dae28f02a4dfd4, type: 3}
     HasSideMesh: 0
     SideMesh: {fileID: 0}
-    Damage: 0
+    Damage: 25
     AttackRate: 0
     WeaponLevel: 1
-    Bullet: {fileID: 0}
   - WeaponType: 2
     WeaponMesh: {fileID: 8055710117737666997, guid: 64512233f5db1354a81e508fc23b070b, type: 3}
     HasSideMesh: 0
     SideMesh: {fileID: 0}
-    Damage: 0
+    Damage: 20
     AttackRate: 0
     WeaponLevel: 1
-    Bullet: {fileID: 0}
   - WeaponType: 3
     WeaponMesh: {fileID: -6080893442825186160, guid: abfc91e8a4c77ac41b30bc250135dbff, type: 3}
     HasSideMesh: 1
     SideMesh: {fileID: 4510576883206382148, guid: abfc91e8a4c77ac41b30bc250135dbff, type: 3}
-    Damage: 0
+    Damage: 20
     AttackRate: 0
     WeaponLevel: 1
-    Bullet: {fileID: 0}

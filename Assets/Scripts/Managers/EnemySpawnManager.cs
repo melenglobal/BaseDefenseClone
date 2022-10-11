@@ -52,13 +52,15 @@ namespace Managers
         }
 
         private void SubscribeEvents()
-        {
+        {   
+            AISignals.Instance.getSpawnTransform += SetSpawnTransform;
             AISignals.Instance.getRandomTransform += SetRandomTransform;
         }
 
         private void UnsubscribeEvents()
-        {
-            
+        {   
+            AISignals.Instance.getSpawnTransform -= SetSpawnTransform;
+            AISignals.Instance.getRandomTransform -= SetRandomTransform;
         }
 
         private void OnDisable()
