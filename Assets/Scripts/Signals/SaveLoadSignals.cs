@@ -1,18 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine.Events;
+using System;
+using Data.UnityObject;
+using Extentions;
 
-public class SaveLoadSignals : MonoBehaviour
+
+namespace Signals
 {
-    // Start is called before the first frame update
-    void Start()
+    public class SaveLoadSignals : MonoSingleton<SaveLoadSignals>
     {
+        public UnityAction<CD_Level,int> onSaveGameData = delegate { };
         
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public Func<string, int, CD_Level> onLoadGameData;
     }
 }

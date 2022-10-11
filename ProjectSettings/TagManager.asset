@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Gate
+  - Collectable
+  - AmmoSpawner
+  - Gem
   layers:
   - Default
   - TransparentFX
@@ -14,20 +18,20 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Base
+  - FrondYard
+  - PlayerCollector
+  - SoldierBody
+  - EnemyBody
+  - EnemyDetection
+  - SoldierDetection
+  - PlayerBody
+  - PlayerDetection
+  - Collectable
+  - SoldierBullets
+  - BombBody
+  - BombAggro
+  - Gate
   - 
   - 
   - 

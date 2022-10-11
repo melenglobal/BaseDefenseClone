@@ -1,18 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using Enums;
+using Extentions;
+using UnityEngine.Events;
 
-public class UISignals : MonoBehaviour
+namespace Signals
 {
-    // Start is called before the first frame update
-    void Start()
+    public class UISignals : MonoSingleton<UISignals>
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public UnityAction<UIPanels> onOpenPanel = delegate { };
+        public UnityAction<UIPanels> onClosePanel = delegate { };
+        public UnityAction<int> onSetLevelText=delegate { };
+        public UnityAction<int> onUpdateMoneyScore = delegate(int arg0) {  };
+        public UnityAction<int> onUpdateGemScore = delegate(int arg0) {  };
     }
 }

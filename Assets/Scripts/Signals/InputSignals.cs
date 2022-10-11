@@ -1,18 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using Enums;
+using Extentions;
+using Keys;
+using UnityEngine.Events;
 
-public class InputSignals : MonoBehaviour
+namespace Signals
 {
-    // Start is called before the first frame update
-    void Start()
-    {
+    public class InputSignals : MonoSingleton<InputSignals>
+    {   
         
-    }
+        public UnityAction<InputParams> onJoystickInputDragged = delegate { };
+        
+        public UnityAction<InputParams> onJoystickInputDraggedforTurret = delegate(InputParams arg0) {  };
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+
     }
 }

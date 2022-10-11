@@ -1,0 +1,113 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18a881339c2943f2991c9f1d61a85514, type: 3}
+  m_Name: CD_Level
+  m_EditorClassIdentifier: 
+  LevelDatas:
+  - FrondYardData:
+      StageDatas: []
+      FrondYardItemsDatas: []
+    BaseData:
+      BaseRoomData:
+        RoomDatas:
+        - RoomTypes: 0
+          AvailabilityType: 0
+          TurretLocationType: 0
+          TurretData:
+            AvailabilityType: 0
+            HasTurretSoldier: 0
+            AmmoCapacity: 0
+            AmmoDamage: 0
+            TurretParticle: {fileID: 0}
+          PayedAmount: 0
+          Cost: 0
+        - RoomTypes: 1
+          AvailabilityType: 0
+          TurretLocationType: 2
+          TurretData:
+            AvailabilityType: 0
+            HasTurretSoldier: 0
+            AmmoCapacity: 0
+            AmmoDamage: 0
+            TurretParticle: {fileID: 0}
+          PayedAmount: 0
+          Cost: 100
+        - RoomTypes: 2
+          AvailabilityType: 0
+          TurretLocationType: 1
+          TurretData:
+            AvailabilityType: 0
+            HasTurretSoldier: 0
+            AmmoCapacity: 0
+            AmmoDamage: 0
+            TurretParticle: {fileID: 0}
+          PayedAmount: 0
+          Cost: 100
+        - RoomTypes: 3
+          AvailabilityType: 0
+          TurretLocationType: 4
+          TurretData:
+            AvailabilityType: 0
+            HasTurretSoldier: 0
+            AmmoCapacity: 0
+            AmmoDamage: 0
+            TurretParticle: {fileID: 0}
+          PayedAmount: 0
+          Cost: 200
+        - RoomTypes: 4
+          AvailabilityType: 0
+          TurretLocationType: 3
+          TurretData:
+            AvailabilityType: 0
+            HasTurretSoldier: 0
+            AmmoCapacity: 0
+            AmmoDamage: 0
+            TurretParticle: {fileID: 0}
+          PayedAmount: 0
+          Cost: 200
+        MainRoomData:
+          TurretLocationType: 0
+          TurretData:
+            AvailabilityType: 0
+            HasTurretSoldier: 0
+            AmmoCapacity: 0
+            AmmoDamage: 0
+            TurretParticle: {fileID: 0}
+      MineBaseData:
+        MaxWorkerAmount: 12
+        CurrentWorkerAmount: 5
+        GemCollectionOffset: 5
+      MilitaryBaseData:
+        BaseCapacity: 20
+        TentCapacity: 5
+        CandidateAmount: 17
+        CurrentSoldierAmount: 18
+        SoldierUpgradeTimer: 23
+        SoldierSlotCost: 22
+        SlotCount: 7
+        Slots:
+        - {fileID: 0}
+        AttackTimer: 0
+        Key: 
+      BuyablesData:
+        MoneyWorkerCost: 0
+        MoneyWorkerPayedAmount: 0
+        AmmoWorkerCost: 0
+        AmmoWorkerPayedAmount: 0
+        MoneyWorkerLevel: 0
+        AmmoWorkerLevel: 0
+        AvailabilityType: 0
+  ScoreData:
+    TotalGemScore: 7500
+    TotalMoneyScore: 7500
+  LevelId: 0
+  Key: LevelData
