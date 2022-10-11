@@ -2,9 +2,9 @@
 {
     public enum WeaponTypes
     {
-        Pistol,
-        Riffle,
-        ShotGun,
-        MiniGun,
+        PistolBullet,
+        RiffleBullet,
+        PumpBullet,
+        MiniGunBullet,
     }
 }

@@ -86,9 +86,9 @@ namespace Controllers.AIStackControllers
         }
 
       
-        public override void SetStackHolder(GameObject gameObject)
+        public override void SetStackHolder(GameObject moneyHolder)
         {
-            gameObject.transform.SetParent(transform);
+            moneyHolder.transform.SetParent(transform);
         }
         
         

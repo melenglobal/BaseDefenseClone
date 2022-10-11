@@ -1,12 +1,11 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Controllers.BaseControllers;
 using Data.ValueObject;
 using Enums;
 using Signals;
 using UnityEngine;
 
-namespace Managers
+namespace Managers.BaseManagers
 {
     public class BaseManager : MonoBehaviour
     {

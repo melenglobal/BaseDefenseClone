@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using Abstract;
 using Controllers;
+using Controllers.PlayerControllers;
 using Data.UnityObject;
 using Data.ValueObject;
-using Data.ValueObject.WeaponData;
 using Enums;
 using Keys;
 using Signals;
@@ -44,16 +44,12 @@ namespace Managers
     
         public WeaponTypes WeaponTypes;
         
-        
         public Transform EnemyTarget;
         
         private PlayerAnimationType playerAnimation;
 
         public bool HasEnemyTarget;
-
-        public IDamageable DamageableEnemy;
         
-
         #endregion Self Variables
 
      
@@ -94,13 +90,10 @@ namespace Managers
 
         private void UnsubscribeEvents()
         {
-     
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onReset -= OnReset;
             CoreGameSignals.Instance.onInputHandlerChange -= OnDisableMovement;
             InputSignals.Instance.onJoystickInputDragged -= OnUpdateInputParams;
-            
-            
         }
         #endregion
         
@@ -114,7 +107,8 @@ namespace Managers
         {   
             movementController.UpdateInputValues(inputParams);
             animationController.PlayAnimation(inputParams);
-           
+            if (!HasEnemyTarget) return;
+            AimEnemy();
         }
 
         private void OnDisableMovement(InputHandlers ınputHandlers)
@@ -123,7 +117,6 @@ namespace Managers
             {
                 movementController.DisableMovement();
             }
-            
         }
 
         public void SetEnemyTarget()
@@ -135,11 +128,9 @@ namespace Managers
 
         private void AimEnemy()
         {
-            if (EnemyList.Count != 0)
-            {
-                var transformEnemy = EnemyList[0].GetTransform();
-                movementController.RotateThePlayer(transformEnemy);
-            }
+            if (EnemyList.Count == 0) return;
+            var transformEnemy = EnemyList[0].GetTransform();
+            movementController.RotatePlayerToTarget(transformEnemy);
         }
         private void OnPlay() => movementController.IsReadyToPlay(true);
         
@@ -149,13 +140,13 @@ namespace Managers
             gameObject.SetActive(false);
         }
 
-        public void CheckAreaStatus(AreaType AreaStatus)
+        public void CheckAreaStatus(AreaType areaStatus)
         {
-            currentAreaType = AreaStatus;             
-            meshController.ChangeAreaStatus(AreaStatus);
+            currentAreaType = areaStatus;             
+            meshController.ChangeAreaStatus(areaStatus);
         }
         
-        public void IsEnterAmmoCreater(Transform transform) => AmmoManagerSignals.Instance.onPlayerEnterAmmoWorkerCreaterArea(transform);
+        //public void IsEnterAmmoCreater(Transform transform) => AmmoManagerSignals.Instance.onPlayerEnterAmmoWorkerCreaterArea(transform);
         // public void IsEnterTurret(GameObject turretObj) => movementController.EnterToTurret(turretObj);
         // public void IsExitTurret() => movementController.ExitToTurret();
         

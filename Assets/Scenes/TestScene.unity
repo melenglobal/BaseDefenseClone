@@ -1140,7 +1140,6 @@ GameObject:
   m_Component:
   - component: {fileID: 524234480}
   - component: {fileID: 524234483}
-  - component: {fileID: 524234481}
   - component: {fileID: 524234482}
   m_Layer: 0
   m_Name: Physics
@@ -1163,20 +1162,6 @@ Transform:
   m_Father: {fileID: 1213169931}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &524234481
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 524234479}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 174b2630a66e478cb649e4dc29154521, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moneyStackerController: {fileID: 1248833666}
-  collider: {fileID: 524234482}
 --- !u!135 &524234482
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2381,7 +2366,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1248833664}
   - component: {fileID: 1248833665}
-  - component: {fileID: 1248833666}
   - component: {fileID: 1248833668}
   - component: {fileID: 1248833667}
   m_Layer: 0
@@ -2418,7 +2402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc7c1726977e4622829dda9a0723de4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moneyTransformParent: {fileID: 254062899}
+  gridHolder: {fileID: 0}
   stackingSystem: 0
   stackAreaType: 1
   stackAreaGridData:
@@ -2436,22 +2420,7 @@ MonoBehaviour:
     GridSize: {x: 0, y: 0, z: 0}
     Offset: {x: 0, y: 0, z: 0}
     DrawnedMesh: {fileID: 0}
-  moneyStackerController: {fileID: 1248833666}
---- !u!114 &1248833666
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1248833663}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac8c478640ba48408d2d083fb9ea6fe7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StackList: []
-  positionList: []
-  radiusAround: 1.2
+  moneyStackerController: {fileID: 0}
 --- !u!33 &1248833667
 MeshFilter:
   m_ObjectHideFlags: 0

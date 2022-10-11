@@ -1,8 +1,6 @@
 using System;
-using Controllers;
 using Enums;
 using Extentions;
-using Managers;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -41,7 +39,7 @@ namespace Signals
 
         public UnityAction onCharacterInputRelease = delegate {  };
 
-        public UnityAction<TurretLocationType> onSetCurrentTurret = delegate(TurretLocationType arg0) {  };
+        public UnityAction<TurretLocationType,GameObject> onSetCurrentTurret = delegate(TurretLocationType arg0, GameObject o) {  };
 
         public Func<bool> onHasEnoughMoney;
 
@@ -50,6 +48,12 @@ namespace Signals
         public UnityAction onStartMoneyPayment = delegate {  };
         
         public UnityAction onStopMoneyPayment = delegate { };
+        
+        public UnityAction onEnterTurret = delegate {  };
+        
+        public UnityAction onLevel = delegate {  };
+        
+        public UnityAction onFinish = delegate {  };
 
 
     }

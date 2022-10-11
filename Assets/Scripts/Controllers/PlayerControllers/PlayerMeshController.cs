@@ -1,8 +1,8 @@
-﻿using Data.ValueObject.WeaponData;
+﻿using Data.ValueObject;
 using Enums;
 using UnityEngine;
 
-namespace Controllers
+namespace Controllers.PlayerControllers
 {
     public class PlayerMeshController : MonoBehaviour
     {

@@ -12,7 +12,7 @@ namespace Managers
 
         #region SerializeField Variables
 
-        [SerializeField] private UIPanelController UIPanelController;
+        [SerializeField] private UIPanelController uiPanelController;
         [SerializeField] private TextMeshProUGUI gemScore; 
         [SerializeField] private TextMeshProUGUI moneyScore;
         [SerializeField] private TextMeshProUGUI levelText;
@@ -49,9 +49,9 @@ namespace Managers
 
         #endregion Event Subcriptions
         
-        private void OnOpenPanel(UIPanels panels) => UIPanelController.OpenPanel(panels);
+        private void OnOpenPanel(UIPanels panels) => uiPanelController.OpenPanel(panels);
 
-        private void OnClosePanel(UIPanels panels) => UIPanelController.ClosePanel(panels);
+        private void OnClosePanel(UIPanels panels) => uiPanelController.ClosePanel(panels);
    
         public void Play() =>  CoreGameSignals.Instance.onPlay?.Invoke();
 
@@ -70,11 +70,10 @@ namespace Managers
         }
 
         private void OnUpdateMoneyScore(int score)
-        {   
-            Debug.Log(score);
+        {
             moneyScore.text = score.ToString();
         }
-
+        
         private void OnUpdateGemScore(int score) =>  gemScore.text = score.ToString();
 
         private void OnSetLevelText(int nextLevel)

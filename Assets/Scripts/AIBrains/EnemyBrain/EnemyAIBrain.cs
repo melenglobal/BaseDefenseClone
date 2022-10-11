@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using Abstract;
 using Data.UnityObject;
 using Data.ValueObject;
 using Enums;
 using Managers;
-using Obstacles;
+using Signals;
 using StateBehaviour;
 using UnityEngine;
 using UnityEngine.AI;
@@ -21,38 +20,43 @@ namespace AIBrains.EnemyBrain
         #region Public Variables
 
         public bool IsBombSettled;
-        
-        
         public Transform CurrentTarget;
         public Transform TurretTarget;
-        public EnemyData Data;
+        public int Health { get => _health; set => _health = value; } 
 
         #endregion
         
         #region Serialized Variables
 
-        [SerializeField] private Transform spawnPosition;
+        [SerializeField] 
+        private Transform spawnPosition;
         
+        [SerializeField]
+        private EnemyType enemyType;
+
+        [SerializeField] private List<Transform> targetList;
+
         #endregion
 
         #region Private Variables
         
-        private EnemyType EnemyType;
+        private int _health;
+        private EnemyData _data;
         private StateMachine _stateMachine;
 
         #endregion
         
-
         #endregion
-        
-        
         
         private void Awake()
         {   
-            Data = GetEnemyAIData();
+            _data = GetEnemyAIData();
+            Health = _data.Health;
             
-            spawnPosition = Data.SpawnPosition;
-            CurrentTarget = Data.TargetList[Random.Range(0,Data.TargetList.Count)];
+            spawnPosition =AISignals.Instance.getSpawnTransform?.Invoke();
+            
+            CurrentTarget = AISignals.Instance.getRandomTransform?.Invoke();
+     
             
             TurretTarget = CurrentTarget;
             
@@ -60,7 +64,18 @@ namespace AIBrains.EnemyBrain
             
         }
 
-        private EnemyData GetEnemyAIData() => Resources.Load<CD_AI>("Data/CD_AI").EnemyAIData.EnemyDatas[(int)EnemyType];
+        private void OnEnable()
+        {
+            Health= _data.Health;
+            
+        }
+
+        private void OnDisable()
+        {
+            // Enemy must be ready to pool
+        }
+
+        private EnemyData GetEnemyAIData() => Resources.Load<CD_AI>("Data/CD_AI").EnemyAIData.EnemyDatas[(int)enemyType];
         
         private void GetStatesReferences()
         {
@@ -71,20 +86,19 @@ namespace AIBrains.EnemyBrain
             var search = new Search(this,navMeshAgent,spawnPosition);
             var attack = new Attack(navMeshAgent,animator);
             var move = new Move(this,navMeshAgent,animator);
-            var death = new Death(navMeshAgent,animator);
+            var death = new Death(navMeshAgent,animator,this,enemyType);
             var chase = new Chase(this,navMeshAgent,animator);
             var moveToBomb = new MoveToBomb(navMeshAgent,animator);
             
             _stateMachine = new StateMachine();
             
             At(search,move,HasInitTarget());
-            At(move,chase,HasTargetTurret()); // player chase range
-            At(chase,attack,AttackRange()); // remaining distance < 1f
-            At(attack,chase,AttackOffRange()); // remaining distance > 1f
+            At(move,chase,HasTargetTurret()); 
+            At(chase,attack,AttackRange()); 
+            At(attack,chase,AttackOffRange()); 
             At(chase,move,TargetNull());
-            
-            _stateMachine.AddAnyTransition(death, ()=> death.IsDead);
-            // At(moveToBomb,attack,() => is);
+
+            _stateMachine.AddAnyTransition(death,  IsDead());
             _stateMachine.AddAnyTransition(moveToBomb, ()=>IsBombSettled);
             
             _stateMachine.SetState(search);
@@ -95,6 +109,7 @@ namespace AIBrains.EnemyBrain
             Func<bool> AttackRange() => () => CurrentTarget != null  && Vector3.Distance(transform.position, CurrentTarget.transform.position) < 1f;;
             Func<bool> AttackOffRange() => () => CurrentTarget != null && Vector3.Distance(transform.position, CurrentTarget.transform.position) > 1f;
             Func<bool> TargetNull() => () => CurrentTarget != null && CurrentTarget.TryGetComponent(out TurretManager turret);
+            Func<bool> IsDead() => () => Health <= 0;
         }
         
         private void Update()
@@ -115,11 +130,5 @@ namespace AIBrains.EnemyBrain
             CurrentTarget = TurretTarget;
         }
 
-        // public void BombSettled(Transform bombTransform)
-        // {
-        //     if (!(Vector3.Distance(bombTransform.position, transform.position) < 25f)) return;
-        //     IsBombSettled = true;
-        //     playerTarget = bombTransform;
-        // }
     }
 }

@@ -1,11 +1,9 @@
 ﻿using Data.ValueObject;
-using DG.Tweening;
-using Enums;
 using Keys;
 using Managers;
 using UnityEngine;
 
-namespace Controllers
+namespace Controllers.PlayerControllers
 {
     public class PlayerMovementController : MonoBehaviour
     {
@@ -14,49 +12,45 @@ namespace Controllers
         #region Serialized Variables
         
         [SerializeField] private new Rigidbody rigidbody;
+        
+        [SerializeField] private PlayerManager manager;
 
         #endregion Serialized Variables
 
         #region Private Variables
-
-        [Header("Data")] private PlayerMovementData _movementData;
-
-        [SerializeField] private PlayerManager manager;
+        
+        private PlayerMovementData _movementData;
 
         private bool _isReadyToMove, _isReadyToPlay, _isMovingVertical;
 
         private float _inputValueX;
 
-        private bool HasEnemyTarget;
+        private bool _hasEnemyTarget;
 
-        private Vector2 _InputVector;
+        private Vector2 _inputVector;
 
         private Vector3 _movementDirection;
-
-
-
+        
         #endregion Private Variables
 
         #endregion Self Variables
 
         public void SetMovementData(PlayerMovementData dataMovementData) => _movementData = dataMovementData;
-
-
+        
         public void IsReadyToPlay(bool state) => _isReadyToPlay = state;
         
-
         private void FixedUpdate()
         {
             PlayerMove();
         }
         public void UpdateInputValues(InputParams inputParams)
         {
-            _InputVector = inputParams.InputValues;
-            EnableMovement(_InputVector.sqrMagnitude > 0);
+            _inputVector = inputParams.InputValues;
+            EnableMovement(_inputVector.sqrMagnitude > 0);
             
-            if (!HasEnemyTarget)
+            if (!_hasEnemyTarget)
             {
-                RotatePlayer(inputParams);
+                
             }
         }
         
@@ -65,25 +59,29 @@ namespace Controllers
             if (_isReadyToMove)
             {
                 var velocity = rigidbody.velocity; 
-                velocity = new Vector3(_InputVector.x,velocity.y, _InputVector.y)*_movementData.Speed;
+                velocity = new Vector3(_inputVector.x,velocity.y, _inputVector.y)*_movementData.Speed;
                 rigidbody.velocity = velocity;
+                if (!manager.HasEnemyTarget)
+                {
+                    RotatePlayer();
+                }
             }
             else if(rigidbody.velocity != Vector3.zero)
             {
                 rigidbody.velocity = Vector3.zero;
             }
         }
-        private void RotatePlayer(InputParams inputParams)
+        private void RotatePlayer()
         {
-            Vector3 movementDirection = new Vector3(inputParams.InputValues.x, 0, inputParams.InputValues.y);
+            Vector3 movementDirection = new Vector3(_inputVector.x, 0, _inputVector.y);
             if (movementDirection == Vector3.zero) return;
             Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, 30);
+            rigidbody.rotation = Quaternion.RotateTowards(rigidbody.rotation, toRotation,30);
         }
-        
-        public void RotateThePlayer(Transform enemyTransform)
+
+        public void RotatePlayerToTarget(Transform enemyTarget)
         {
-            transform.LookAt(enemyTransform, Vector3.up*3f);
+            transform.LookAt(enemyTarget,Vector3.up * 3f);
         }
 
         private void EnableMovement(bool movementStatus)

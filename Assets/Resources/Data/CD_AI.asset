@@ -32,8 +32,8 @@ MonoBehaviour:
     SpawnPoint: {fileID: 0}
   EnemyAIData:
     EnemyDatas:
-    - Health: 0
-      Damage: 0
+    - Health: 100
+      Damage: 25
       AttackRange: 0
       Speed: 0
       ChaseSpeed: 0
@@ -47,12 +47,12 @@ MonoBehaviour:
       - {fileID: 3496609261866872995, guid: 0f74dab1dce75b6428600fb2a9707291, type: 3}
       - {fileID: 134614171339021996, guid: fc458dd8f5bd5b540afd88ab57d25fc3, type: 3}
       SpawnPosition: {fileID: 6564808086716466647, guid: 72d320f9a7b083f45981461ba881c671, type: 3}
-    - Health: 0
-      Damage: 0
+    - Health: 100
+      Damage: 25
       AttackRange: 0
       Speed: 0
       ChaseSpeed: 0
-      EnemyType: 0
+      EnemyType: 1
       TargetList:
       - {fileID: 3852332971795383485, guid: 448d22774e1293a489264200d9c12849, type: 3}
       - {fileID: 4588384430701986907, guid: 64525b4bfe41f9a4d9921c789e4cdfc3, type: 3}
@@ -62,3 +62,11 @@ MonoBehaviour:
       - {fileID: 3496609261866872995, guid: 0f74dab1dce75b6428600fb2a9707291, type: 3}
       - {fileID: 134614171339021996, guid: fc458dd8f5bd5b540afd88ab57d25fc3, type: 3}
       SpawnPosition: {fileID: 6564808086716466647, guid: 72d320f9a7b083f45981461ba881c671, type: 3}
+    - Health: 100
+      Damage: 25
+      AttackRange: 0
+      Speed: 0
+      ChaseSpeed: 0
+      EnemyType: 2
+      TargetList: []
+      SpawnPosition: {fileID: 0}

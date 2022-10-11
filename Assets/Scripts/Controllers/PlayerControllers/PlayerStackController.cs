@@ -14,8 +14,8 @@ namespace Controllers.PlayerControllers
 
         #region Serialized Variables
 
-        [SerializeField] private Transform moneyTransformParent;
-        
+        [SerializeField] private Transform gridHolder;
+
         [SerializeField] private StackingSystem stackingSystem;
 
         [ShowIf("stackingSystem", Enums.StackingSystem.Static)] 
@@ -84,9 +84,9 @@ namespace Controllers.PlayerControllers
         }
 
       
-        public override void SetStackHolder(GameObject gameObject)
+        public override void SetStackHolder(GameObject moneyHolder)
         {
-            gameObject.transform.SetParent(transform);
+            moneyHolder.transform.SetParent(transform);
         }
         
         
@@ -113,9 +113,10 @@ namespace Controllers.PlayerControllers
                         modZ * _gridData.Offset.z,divideXZ * _gridData.Offset.y);
                 }
                 else
-                {
-                    _gridPositions = new Vector3(modX * _gridData.Offset.x,divideXZ * _gridData.Offset.y,
-                        modZ * _gridData.Offset.z);
+                {    
+                    var position = gridHolder.transform.localPosition;
+                    _gridPositions = new Vector3(modX * _gridData.Offset.x,divideXZ +position.x * _gridData.Offset.y +position.y,
+                        modZ * _gridData.Offset.z +position.z);
                     
                 }
                 gridPositionsData.Add(_gridPositions);

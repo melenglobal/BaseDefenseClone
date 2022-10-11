@@ -7,6 +7,7 @@ TagManager:
   - Gate
   - Collectable
   - AmmoSpawner
+  - Gem
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - 
   - Base
   - FrondYard
-  - 
+  - PlayerCollector
   - SoldierBody
   - EnemyBody
   - EnemyDetection
@@ -30,7 +31,7 @@ TagManager:
   - SoldierBullets
   - BombBody
   - BombAggro
-  - 
+  - Gate
   - 
   - 
   - 

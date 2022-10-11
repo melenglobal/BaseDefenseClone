@@ -109,10 +109,6 @@ namespace Controllers.AIStackerControllers
                 });
             });
         }
-        public void ResetStack(IStackable stackable)
-        {
-           
-        } 
         public void GetStackPositions(List<Vector3> stackPositions)
         {
             positionList = stackPositions;

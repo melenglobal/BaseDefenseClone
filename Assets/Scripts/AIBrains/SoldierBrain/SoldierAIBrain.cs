@@ -7,7 +7,6 @@ using Controllers;
 using Controllers.SoldierPhysicsControllers;
 using Data.UnityObject;
 using Data.ValueObject;
-using Data.ValueObject.WeaponData;
 using Enums;
 using Signals;
 using Sirenix.OdinInspector;
@@ -84,7 +83,7 @@ namespace AIBrains.SoldierBrain
         {
             var bulletPrefab = CoreGameSignals.Instance.onGetObjectFromPool?.Invoke(poolName);
             bulletPrefab.transform.position = weaponHolder.position;
-            bulletPrefab.GetComponent<BulletPhysicsController>().soldierAIBrain = this;
+            // bulletPrefab.GetComponent<BulletPhysicsController>().soldierAIBrain = this;
             FireBullet(bulletPrefab);
             return bulletPrefab;
         }

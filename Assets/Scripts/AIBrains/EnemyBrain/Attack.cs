@@ -18,15 +18,15 @@ namespace AIBrains.EnemyBrain
         }
         public void Tick()
         {
-            if (_navMeshAgent.remainingDistance < _navMeshAgent.stoppingDistance)
-            {
-                _animator.SetTrigger(Attack1);
-            }
+            
         }
         
         public void OnEnter()
         {
-          
+            if (_navMeshAgent.remainingDistance < _navMeshAgent.stoppingDistance)
+            {
+                _animator.SetTrigger(Attack1);
+            }
         }
 
         public void OnExit()

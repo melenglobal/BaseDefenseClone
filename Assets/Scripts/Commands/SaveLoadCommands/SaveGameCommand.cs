@@ -1,6 +1,6 @@
 ﻿using Abstract.Interfaces;
 
-namespace Command.SaveLoadCommands
+namespace Commands.SaveLoadCommands
 {
     public class SaveGameCommand
     {

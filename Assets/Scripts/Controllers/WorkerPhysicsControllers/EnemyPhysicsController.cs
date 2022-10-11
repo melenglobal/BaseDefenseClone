@@ -1,63 +1,65 @@
 ﻿using Abstract;
+using Abstract.Interfaces;
 using AIBrains.EnemyBrain;
 using Managers;
 using UnityEngine;
 
-namespace Controllers
+namespace Controllers.WorkerPhysicsControllers
 {
     public class EnemyPhysicsController : MonoBehaviour,IDamageable
     {
         private Transform _detectedPlayer;
         private Transform _detectedMine;
+        [SerializeField]
         private EnemyAIBrain _enemyAIBrain;
         public bool IsPlayerInRange() => _detectedPlayer != null;
         public bool IsBombInRange() => _detectedMine != null;
-        private void Awake()
-        {
-            _enemyAIBrain = this.gameObject.GetComponentInParent<EnemyAIBrain>();
-        }
+        
+        public bool IsTaken { get; set; }
+        public bool IsDead { get; set; }
+
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Player"))
+            if (!other.CompareTag("Player")) return;
+            _detectedPlayer = other.GetComponentInParent<PlayerManager>().transform;
+                
+            _enemyAIBrain.SetTarget(other.transform.parent);
+
+            if (!other.TryGetComponent(out IAttacker attacker)) return;
+
+            var damage = attacker.Damage();
+            _enemyAIBrain.Health -= damage;
+            if (_enemyAIBrain.Health ==0)
             {
-                
-                _detectedPlayer = other.GetComponentInParent<PlayerManager>().transform;
-                
-                _enemyAIBrain.SetTarget(other.transform.parent);
+                IsDead = true;
             }
-
-            // /if (other.GetComponent<Mine>())
-            // {
-            //     _detectedMine = other.GetComponent<Mine>();
-            // }/
         }
-
         private void OnTriggerExit(Collider other)
         {
-            if (other.CompareTag("Player"))
-            {
-                _detectedPlayer = null;
-                _enemyAIBrain.SetTarget(null);
-            }
+            if (!other.CompareTag("Player")) return;
+            
+            _detectedPlayer = null;
+            
+            _enemyAIBrain.SetTarget(null);
 
-            // /if (other.GetComponent<Mine>())
-            // {
-            //
-            // }/
         }
-
         public Vector3 GetNearestPosition(GameObject gO)
         {
             return gO?.transform.position ?? Vector3.zero;
         }
-
-        public bool IsTaken { get; set; }
-        public bool IsDead { get; set; }
+        
         public int TakeDamage(int damage)
         {
-            return 1;
-        }
+            if (_enemyAIBrain.Health <= 0) return 0;
+            _enemyAIBrain.Health = _enemyAIBrain.Health - damage;
+            
+            if (_enemyAIBrain.Health != 0) return _enemyAIBrain.Health;
+            
+            IsDead = true;
+            
+            return _enemyAIBrain.Health;
 
+        }
         public Transform GetTransform()
         {
             return transform;

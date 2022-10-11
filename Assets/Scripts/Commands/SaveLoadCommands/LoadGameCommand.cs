@@ -1,9 +1,6 @@
-﻿using Abstract;
-using Abstract.Interfaces;
-using Data.ValueObject;
-using Enums;
+﻿using Abstract.Interfaces;
 
-namespace Command.SaveLoadCommands
+namespace Commands.SaveLoadCommands
 {
     public class LoadGameCommand
     {

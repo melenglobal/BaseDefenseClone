@@ -1,5 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections;
+using System.Threading.Tasks;
 using Abstract.Interfaces.Pool;
+using Controllers.PlayerControllers;
 using Enums;
 using Managers;
 using Signals;
@@ -7,33 +10,44 @@ using UnityEngine;
 
 namespace Controllers
 {
-    public class PlayerShootingController : MonoBehaviour, IGetPoolObject
+    public class PlayerShootingController : MonoBehaviour
     {
         [SerializeField] 
         private PlayerManager manager;
 
         [SerializeField]
         private Transform weaponHolder;
+
+        private FireController _fireController;
+        
+        private const float _fireRate = 0.3f;
+        
+        private void Awake()
+        {
+            _fireController = new FireController(manager.WeaponTypes); // weapon type oyunda dinamik degisiyor
+        }
+
+        
         public void SetEnemyTargetTransform()
         {
             manager.EnemyTarget = manager.EnemyList[0].GetTransform();
-            manager.DamageableEnemy = manager.EnemyList[0];
             manager.HasEnemyTarget = true;
             Shoot();
         }
-        public void EnemyTargetStatus()
+
+        private void EnemyTargetStatus()
         {
             if (manager.EnemyList.Count != 0)
             {
-                manager.EnemyTarget = manager.EnemyList[0].GetTransform();
-                manager.DamageableEnemy = manager.EnemyList[0];
+               SetEnemyTargetTransform();
             }
             else
             {
                 manager.HasEnemyTarget = false;
             }
         }
-        public void RemoveTarget()
+
+        private void RemoveTarget()
         {
             if (manager.EnemyList.Count == 0) return;
             manager.EnemyList.RemoveAt(0);
@@ -41,29 +55,25 @@ namespace Controllers
             manager.EnemyTarget = null;
             EnemyTargetStatus();
         }
-        public async void Shoot()
+
+        private void Shoot()
         {
             if(!manager.EnemyTarget) 
                 return;
-            if (manager.DamageableEnemy.IsDead)
+            if (manager.EnemyList[0].IsDead)
             {
                 RemoveTarget();
             }
             else
             {
-                GetObject(PoolType.RifleBullet);
-                await Task.Delay(400);
-                Shoot();
+                StartCoroutine(FireBullet());
             }
         }
-
-        public GameObject GetObject(PoolType poolName)
+        private IEnumerator FireBullet()
         {
-            var bulletPrefab = CoreGameSignals.Instance.onGetObjectFromPool?.Invoke(poolName);
-            bulletPrefab.transform.position = weaponHolder.position;
-            //bulletPrefab.GetComponent<PlayerBulletPhysicsController>().Controller = this;
-            FireBullet(bulletPrefab);
-            return bulletPrefab;
+            yield return new WaitForSeconds(_fireRate);
+            _fireController.FireBullets(weaponHolder);
+            Shoot();
         }
         private void FireBullet(GameObject bulletPrefab)
         {

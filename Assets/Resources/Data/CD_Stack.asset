@@ -26,7 +26,7 @@ MonoBehaviour:
       StackAreaType: 1
       GridSize: {x: 5, y: 10, z: 5}
       Offset: {x: 1, y: 1, z: 1}
-      DrawnedMesh: {fileID: -2934717439318261032, guid: 79b4c0ee6e51b2848b554589b737d862, type: 3}
+      DrawnedMesh: {fileID: 0}
     - isDynamic: 0
       StackerType: 0
       StackAreaType: 2
@@ -82,9 +82,9 @@ MonoBehaviour:
     - isDynamic: 1
       StackerType: 0
       StackAreaType: 0
-      GridSize: {x: 1, y: 1, z: 1}
-      Offset: {x: 1, y: 1, z: 1}
-      DrawnedMesh: {fileID: -7892325559877898083, guid: 21c6b2700fb34ce499b04a51565855eb, type: 3}
+      GridSize: {x: 1, y: 10, z: 15}
+      Offset: {x: 0.02, y: 0.5, z: 0.2}
+      DrawnedMesh: {fileID: 0}
     - isDynamic: 1
       StackerType: 1
       StackAreaType: 0

@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Enums;
 using Enums.Player;
 using Keys;
 using Managers;
 using UnityEngine;
 
-namespace Controllers
+namespace Controllers.PlayerControllers
 {
     public class PlayerAnimationController : MonoBehaviour
     {
@@ -46,10 +45,10 @@ namespace Controllers
         {
             _animationStatesMap = new Dictionary<WeaponTypes, PlayerAnimationStates>()
             {
-                {WeaponTypes.Pistol, PlayerAnimationStates.Pistol},
-                {WeaponTypes.Riffle, PlayerAnimationStates.Riffle},
-                {WeaponTypes.ShotGun, PlayerAnimationStates.ShotGun},
-                {WeaponTypes.MiniGun, PlayerAnimationStates.MiniGun},
+                {WeaponTypes.PistolBullet, PlayerAnimationStates.Pistol},
+                {WeaponTypes.RiffleBullet, PlayerAnimationStates.Riffle},
+                {WeaponTypes.PumpBullet, PlayerAnimationStates.ShotGun},
+                {WeaponTypes.MiniGunBullet, PlayerAnimationStates.MiniGun},
             };
         }
         private void Init()
@@ -58,7 +57,7 @@ namespace Controllers
         }
         public void PlayAnimation(InputParams inputParams)
         { 
-            if (playerManager.NextAreaType == AreaType.Battle)
+            if (playerManager.currentAreaType == AreaType.Battle)
             {
                 animator.SetLayerWeight(1,1);
                 animator.SetBool("IsBattleOn",true);
