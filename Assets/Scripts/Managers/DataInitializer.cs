@@ -43,7 +43,8 @@ namespace Managers
         #endregion
     
         #endregion
-
+        
+        #region Initialize Scriptable Data
         private CD_Level GetLevelDatas() => Resources.Load<CD_Level>("Data/CD_Level");
 
         private void Awake()
@@ -60,8 +61,6 @@ namespace Managers
             CoreGameSignals.Instance.onLevelInitialize?.Invoke();
         }
 
-        #region InıtData
-    
         private void InitData()
         {
             if (!ES3.FileExists($"LevelData{_uniqueID}.es3"))
@@ -123,7 +122,7 @@ namespace Managers
 
         #endregion
     
-        #region ManagersData
+        #region Send Data to Managers
         private void SendDataManagers() => InitializeDataSignals.Instance.onLoadLevelID?.Invoke(_levelID);
         private ScoreData OnLoadScoreData() => _scoreData;
         private MilitaryBaseData OnLoadMilitaryBaseData() =>_militaryBaseData;
@@ -160,7 +159,7 @@ namespace Managers
 
         #endregion
     
-        #region Data Sync
+        #region Get Data from Managers
         private void OnSyncLevel() => SendDataManagers();
         private void OnSyncLevelID(int levelID) => _levelID= levelID;
 

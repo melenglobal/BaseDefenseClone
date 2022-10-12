@@ -18,9 +18,9 @@ namespace Managers
         #region Private Variables
 
         [ShowInInspector]
-        private List<Transform> _targetList = new List<Transform>();
+        private List<Transform> targetList = new List<Transform>();
         [ShowInInspector]
-        private List<MoneyWorkerAIBrain> _workerList = new List<MoneyWorkerAIBrain>();
+        private List<MoneyWorkerAIBrain> workerList = new List<MoneyWorkerAIBrain>();
 
         #endregion
 
@@ -60,37 +60,37 @@ namespace Managers
 
         private void OnAddMoneyPositionToList(Transform pos)
         {
-            _targetList.Add(pos);
+            targetList.Add(pos);
         }
 
         private Transform OnSendMoneyPositionToWorkers(Transform workerTransform)
         {
-            /*if (_workerList[0].transform == workerTransform)
+            /*if (workerList[0].transform == workerTransform)
             {
-                var _targetT = _targetList.OrderBy(t => Vector3.Distance(t.transform.position, workerTransform.position))
+                var _targetT = targetList.OrderBy(t => Vector3.Distance(t.transform.position, workerTransform.position))
                 .Take(1)
                 .FirstOrDefault();
-                _targetList.Remove(_targetT);
+                targetList.Remove(_targetT);
                 Debug.Log("worker 0");
                 return _targetT;
             }
-            else if (_workerList[1].transform == workerTransform)
+            else if (workerList[1].transform == workerTransform)
             {*/
-                var _targetT = _targetList.OrderBy(t => Vector3.Distance(t.transform.position, workerTransform.position))
-                .Take(_targetList.Count)
+                var targetMoney = targetList.OrderBy(t => Vector3.Distance(t.transform.position, workerTransform.position))
+                .Take(targetList.Count)
                 .OrderBy(t => UnityEngine.Random.Range(0,int.MaxValue))
                 .LastOrDefault();
-                _targetList.Remove(_targetT);
-                return _targetT;
+                targetList.Remove(targetMoney);
+                return targetMoney;
             /*}
             else
             {
-                int randomIndex = Random.Range(10,_targetList.Count-10);
-                var _targetT = _targetList.OrderBy(t => Vector3.Distance(t.transform.position, workerTransform.position))
+                int randomIndex = Random.Range(10,targetList.Count-10);
+                var _targetT = targetList.OrderBy(t => Vector3.Distance(t.transform.position, workerTransform.position))
                 .Take(1)
                 .OrderBy(t => randomIndex)
                 .FirstOrDefault(); 
-                _targetList.Remove(_targetT);
+                targetList.Remove(_targetT);
                 return _targetT;
             }*/
 
@@ -103,17 +103,17 @@ namespace Managers
 
         private void OnThisMoneyTaken(Transform gO)
         {
-            for (int i = 0; i < _workerList.Count; i++)
+            foreach (var t in workerList)
             {
-                if (_workerList[i].CurrentTarget == gO)
+                if (t.CurrentTarget == gO)
                 {
-                    SendMoneyPositionToWorkers(_workerList[i].transform);
+                    SendMoneyPositionToWorkers(t.transform);
                 }
                 else
                 {
-                    if (_targetList.Contains(gO))
+                    if (targetList.Contains(gO))
                     {
-                        _targetList.Remove(gO);
+                        targetList.Remove(gO);
                     }
                 }
             }
@@ -121,30 +121,21 @@ namespace Managers
 
         private Transform OnMyMoneyTaken(Transform gameOTransform, Transform workerTransform)
         {
-            if (_targetList.Contains(gameOTransform))
-            {
-                return gameOTransform;
-            }
-            else
-            {
-                return OnSendMoneyPositionToWorkers(workerTransform);
-            }
+            return targetList.Contains(gameOTransform) ? gameOTransform : OnSendMoneyPositionToWorkers(workerTransform);
         }
         [Button("Add Money Worker")]
         private void CreateMoneyWorker()
         {
             var obj = GetObject(PoolType.MoneyWorkerAI) ;
-            _workerList.Add(obj.GetComponent<MoneyWorkerAIBrain>());
+            workerList.Add(obj.GetComponent<MoneyWorkerAIBrain>());
         }
         [Button("Release Worker")]
         private void ReleaseMoneyWorker()
         {
-            if (_workerList[0])
-            {
-                var obj = _workerList[0];
-                ReleaseObject(obj.gameObject, PoolType.MoneyWorkerAI);
-                _workerList.Remove(obj);
-            }
+            if (!workerList[0]) return;
+            var obj = workerList[0];
+            ReleaseObject(obj.gameObject, PoolType.MoneyWorkerAI);
+            workerList.Remove(obj);
         }
         public void ReleaseObject(GameObject obj, PoolType poolName)
         {

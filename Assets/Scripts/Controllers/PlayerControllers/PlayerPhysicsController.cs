@@ -1,5 +1,6 @@
 ﻿using Abstract.Interfaces;
 using Controllers.BaseControllers;
+using Controllers.TurretControllers;
 using Enums;
 using Managers;
 using UnityEngine;
@@ -23,12 +24,21 @@ namespace Controllers.PlayerControllers
             {
                 GateEnter(other);
             }
+
+            if (other.TryGetComponent(out TurretPhysicsController turretPhysicsController))
+            {
+                playerManager.SetTurretAnimation(true);
+            }
         }
         private void OnTriggerExit(Collider other)
         {
             if (other.TryGetComponent(out GatePhysicsController physicsController))
             {
                 GateExit(other);
+            }
+            if (other.TryGetComponent(out TurretPhysicsController turretPhysicsController))
+            {
+                playerManager.SetTurretAnimation(false);
             }
         }
         private void GateEnter(Collider other)

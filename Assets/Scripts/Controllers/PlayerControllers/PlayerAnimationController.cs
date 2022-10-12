@@ -120,5 +120,10 @@ namespace Controllers.PlayerControllers
         {
             animator.SetBool("Aimed",hasTarget);
         }
+
+        public void HoldTurret(bool hold)
+        {
+            animator.SetLayerWeight(2,hold ? 1:0);
+        }
     }
     }

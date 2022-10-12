@@ -145,6 +145,11 @@ namespace Managers
             currentAreaType = areaStatus;             
             meshController.ChangeAreaStatus(areaStatus);
         }
+
+        public void SetTurretAnimation(bool holdTurret)
+        {
+            animationController.HoldTurret(holdTurret);
+        }
         
         //public void IsEnterAmmoCreater(Transform transform) => AmmoManagerSignals.Instance.onPlayerEnterAmmoWorkerCreaterArea(transform);
         // public void IsEnterTurret(GameObject turretObj) => movementController.EnterToTurret(turretObj);

@@ -79,7 +79,7 @@ namespace AIBrains.WorkerBrain.MoneyWorker
         private MoneyWorkerAIData GetData() => Resources.Load<CD_AI>("Data/CD_AI").MoneyWorkerAIData;
         private void SetWorkerComponentVariables()
         {
-            baseInitTransform = moneyWorkerAIData.InitPosition;
+            baseInitTransform = moneyWorkerAIData.InitPosition; // Pozisyon managerdan
             _navmeshAgent = GetComponent<NavMeshAgent>();
             _animator = GetComponentInChildren<Animator>();
         }

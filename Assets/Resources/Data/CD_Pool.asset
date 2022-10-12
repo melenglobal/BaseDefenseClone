@@ -41,8 +41,8 @@ MonoBehaviour:
       isDynamic: 0
     - ObjectType: {fileID: 5455066261541432749, guid: 184f26222370a5b40917157ffb84d45c, type: 3}
       PoolHolder: {fileID: 0}
-      initalAmount: 5
-      isDynamic: 0
+      initalAmount: 10
+      isDynamic: 1
     - ObjectType: {fileID: 0}
       PoolHolder: {fileID: 0}
       initalAmount: 0

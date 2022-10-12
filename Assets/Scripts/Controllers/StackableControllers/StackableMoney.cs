@@ -1,6 +1,7 @@
 ﻿using System;
 using Abstract.Stackable;
 using DG.Tweening;
+using Signals;
 using UnityEngine;
 
 namespace Controllers.StackableControllers
@@ -13,6 +14,7 @@ namespace Controllers.StackableControllers
         private void OnEnable()
         {
             DOVirtual.DelayedCall(2f, EditPhysics);
+            DOVirtual.DelayedCall(2f,() => MoneyWorkerSignals.Instance.onSetMoneyPosition?.Invoke(transform));
         }
 
         public override void SetInit(Transform initTransform, Vector3 position)
