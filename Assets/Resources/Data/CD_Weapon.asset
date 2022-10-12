@@ -41,3 +41,10 @@ MonoBehaviour:
     Damage: 20
     AttackRate: 0
     WeaponLevel: 1
+  - WeaponType: 4
+    WeaponMesh: {fileID: 0}
+    HasSideMesh: 0
+    SideMesh: {fileID: 0}
+    Damage: 25
+    AttackRate: 0.1
+    WeaponLevel: 1

@@ -63,8 +63,9 @@ namespace Managers
             ChangeCamera(CameraTypes.Level);
             CoreGameSignals.Instance.onSetCameraTarget?.Invoke();
         }
-
-        private void OnFinish()
+        
+        [Button]
+        public void OnFinish()
         {   
             stateDrivenCamera.Follow = playerManager.transform;
             ChangeCamera(CameraTypes.Finish);

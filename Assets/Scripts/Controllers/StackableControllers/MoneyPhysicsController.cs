@@ -6,8 +6,8 @@ namespace Controllers.StackableControllers
     //[RequireComponent(typeof(Collider))]
     public class MoneyPhysicsController : MonoBehaviour,ITriggerEnter
     {
-        [SerializeField] private Rigidbody rigidbody;
-        [SerializeField] private BoxCollider collider;
+        [SerializeField] private new Rigidbody rigidbody;
+        [SerializeField] private new BoxCollider collider;
         public GameObject TriggerEnter()
         {
             rigidbody.useGravity = false;

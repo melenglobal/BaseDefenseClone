@@ -3,8 +3,9 @@
     public enum WeaponTypes
     {
         PistolBullet,
-        RiffleBullet,
+        RifleBullet,
         PumpBullet,
         MiniGunBullet,
+        TurretBullet,
     }
 }

@@ -29,17 +29,9 @@ namespace Controllers
         private void Awake()
         {
             AddToDictionary();
-            CloseAllObject();
-            
-        }
 
-        private void CloseAllObject()
-        {
-            for (int index = 0; index < ItemList.Count; index++)
-            {
-                ItemList.ElementAt(index).Value.SetActive(false);
-            }
         }
+        
 
         private void AddToDictionary()
         {

@@ -1,17 +1,13 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
-using Data.UnityObject;
 using Data.ValueObject;
 using Enums;
 using Keys;
 using Signals;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 
-public class InputManager : MonoBehaviour
+namespace Managers
+{
+    public class InputManager : MonoBehaviour
     {
         #region Self Variables
 
@@ -55,7 +51,7 @@ public class InputManager : MonoBehaviour
        
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onReset += OnReset;
-            CoreGameSignals.Instance.onInputHandlerChange += OnInputHandlerChange;
+            InputSignals.Instance.onInputHandlerChange += OnInputHandlerChange;
 
         }
 
@@ -63,7 +59,7 @@ public class InputManager : MonoBehaviour
         {
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onReset -= OnReset;
-            CoreGameSignals.Instance.onInputHandlerChange -= OnInputHandlerChange;
+            InputSignals.Instance.onInputHandlerChange -= OnInputHandlerChange;
         }
 
         private void OnDisable()
@@ -101,7 +97,7 @@ public class InputManager : MonoBehaviour
                 
                 case InputHandlers.Turret when joystick.Vertical <= -0.6f:                                      
                     _inputHandlers = InputHandlers.Character;                                                 
-                    CoreGameSignals.Instance.onCharacterInputRelease?.Invoke();
+                    InputSignals.Instance.onCharacterInputRelease?.Invoke();
                     return;
                 
                 case InputHandlers.Turret:
@@ -138,4 +134,5 @@ public class InputManager : MonoBehaviour
         }
         
     }
+}
 

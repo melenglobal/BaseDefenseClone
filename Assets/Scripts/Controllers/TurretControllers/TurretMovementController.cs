@@ -1,8 +1,8 @@
-﻿using Keys;
+﻿using Enums;
+using Keys;
 using UnityEngine;
-using Enums;
 
-namespace Controllers
+namespace Controllers.TurretControllers
 {
   
     public class TurretMovementController : MonoBehaviour

@@ -32,9 +32,9 @@ TagManager:
   - BombBody
   - BombAggro
   - Gate
-  - 
-  - 
-  - 
+  - TurretEnemyDetection
+  - Bullets
+  - Buyable
   - 
   - 
   - 

@@ -34,10 +34,6 @@ namespace Signals
         public UnityAction<int> onUpdateGemScoreData = delegate(int arg0) {  };
         
         public UnityAction<int> onUpdateMoneyScoreData = delegate(int arg0) {  };
-        
-        public UnityAction<InputHandlers> onInputHandlerChange = delegate(InputHandlers arg0) {  };
-
-        public UnityAction onCharacterInputRelease = delegate {  };
 
         public UnityAction<TurretLocationType,GameObject> onSetCurrentTurret = delegate(TurretLocationType arg0, GameObject o) {  };
 

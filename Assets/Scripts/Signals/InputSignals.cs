@@ -11,6 +11,11 @@ namespace Signals
         public UnityAction<InputParams> onJoystickInputDragged = delegate { };
         
         public UnityAction<InputParams> onJoystickInputDraggedforTurret = delegate(InputParams arg0) {  };
+        
+        public UnityAction<InputHandlers> onInputHandlerChange = delegate(InputHandlers arg0) {  };
+        
+        public UnityAction onCharacterInputRelease = delegate {  };
+        
 
 
     }

@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45f1fdb497194236ad19990ae38e6fa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponType: 1
+  weaponType: 4
   physicsController: {fileID: 5870069527895995986}
 --- !u!114 &6556710508350579973
 MonoBehaviour:
@@ -278,7 +278,7 @@ GameObject:
   - component: {fileID: 772997214697872311}
   - component: {fileID: 5870069527895995986}
   - component: {fileID: 2455131860651324925}
-  m_Layer: 13
+  m_Layer: 24
   m_Name: Physics
   m_TagString: Untagged
   m_Icon: {fileID: 0}

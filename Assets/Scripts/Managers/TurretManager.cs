@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Controllers;
+using Controllers.PlayerControllers;
+using Controllers.TurretControllers;
 using Datas.ValueObject;
 using Enums;
 using Keys;
@@ -18,8 +21,10 @@ namespace Managers
         [SerializeField]
         private List<TurretMovementController> turretMovementControllers = new List<TurretMovementController>(6);
 
-        private TurretMovementController _currentMovementController;
-        
+        [SerializeField] private WeaponTypes weaponTypes = WeaponTypes.TurretBullet;
+
+
+
         // [SerializeField]
         // private TurretOtoAtackController _otoAtackController;
         // [SerializeField]
@@ -27,19 +32,23 @@ namespace Managers
         #endregion
 
         #region Private Variables
+        
+        private TurretMovementController _currentMovementController;
+        
+        
         #endregion
 
         #endregion
-
+        
 
         #region Event Subscription
-        private void OnEnable() => SubscribeEvents();
+        private void OnEnable() => SubscribeEvents(); 
 
         private void SubscribeEvents()
         {
             CoreGameSignals.Instance.onSetCurrentTurret += OnGetCurrentTurretMovementController;
             InputSignals.Instance.onJoystickInputDraggedforTurret += OnGetInputValues;
-            CoreGameSignals.Instance.onCharacterInputRelease += OnCharacterRelease;
+            InputSignals.Instance.onCharacterInputRelease += OnCharacterRelease;
             // TurretSignals.Instance.onPressTurretButton += OnPressTurretButton;
             // TurretSignals.Instance.onDeadEnemy += OnDeadEnemy;
         }
@@ -49,7 +58,7 @@ namespace Managers
             
             CoreGameSignals.Instance.onSetCurrentTurret -= OnGetCurrentTurretMovementController;
             InputSignals.Instance.onJoystickInputDraggedforTurret -= OnGetInputValues;
-            CoreGameSignals.Instance.onCharacterInputRelease -= OnCharacterRelease;
+            InputSignals.Instance.onCharacterInputRelease -= OnCharacterRelease;
             // TurretSignals.Instance.onPressTurretButton -= OnPressTurretButton;
             // TurretSignals.Instance.onDeadEnemy -= OnDeadEnemy;
         }
@@ -66,17 +75,12 @@ namespace Managers
             // _otoAtackController.FollowToEnemy();
         }
 
-        // public void IsEnemyEnterTurretRange(GameObject enemy) => _otoAtackController.AddDeathList(enemy);
-        public void IsEnemyExitTurretRange()
-        {
-            // _otoAtackController.RemoveDeathList();
-            // ShootController.DeactiveGattaling();
-        } 
+   
         #endregion
 
         #region Character on the Turret
 
-        private void CharacterParentChange()   // Character must be release his weapon ınvoke onPlayeronTheTurret
+        private void CharacterParentChange()  
         {
             player.transform.SetParent(_currentMovementController.transform);
             var controllerTransform = _currentMovementController.transform;

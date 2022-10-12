@@ -278,7 +278,7 @@ GameObject:
   - component: {fileID: 2059032980994470061}
   - component: {fileID: 5143029871089687880}
   - component: {fileID: 3763736200319229671}
-  m_Layer: 13
+  m_Layer: 24
   m_Name: Physics
   m_TagString: Untagged
   m_Icon: {fileID: 0}

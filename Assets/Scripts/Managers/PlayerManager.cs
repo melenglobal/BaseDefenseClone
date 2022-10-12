@@ -83,7 +83,7 @@ namespace Managers
             
             CoreGameSignals.Instance.onPlay += OnPlay;
             CoreGameSignals.Instance.onReset += OnReset;
-            CoreGameSignals.Instance.onInputHandlerChange += OnDisableMovement;
+            InputSignals.Instance.onInputHandlerChange += OnDisableMovement;
             InputSignals.Instance.onJoystickInputDragged += OnUpdateInputParams;
 
         }
@@ -92,7 +92,7 @@ namespace Managers
         {
             CoreGameSignals.Instance.onPlay -= OnPlay;
             CoreGameSignals.Instance.onReset -= OnReset;
-            CoreGameSignals.Instance.onInputHandlerChange -= OnDisableMovement;
+            InputSignals.Instance.onInputHandlerChange -= OnDisableMovement;
             InputSignals.Instance.onJoystickInputDragged -= OnUpdateInputParams;
         }
         #endregion
