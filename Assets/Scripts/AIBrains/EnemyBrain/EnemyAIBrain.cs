@@ -108,8 +108,8 @@ namespace AIBrains.EnemyBrain
             void At(IState to, IState from, Func<bool> condition) => _stateMachine.AddTransition(to, from, condition);
             Func<bool> HasInitTarget() => () => TurretTarget != null;
             Func<bool> HasTargetTurret() => () => CurrentTarget != null && CurrentTarget.TryGetComponent(out PlayerManager player);
-            Func<bool> AttackRange() => () => CurrentTarget != null  && Vector3.Distance(transform.position, CurrentTarget.transform.position) < navMeshAgent.stoppingDistance;;
-            Func<bool> AttackOffRange() => () => CurrentTarget != null && Vector3.Distance(transform.position, CurrentTarget.transform.position) > navMeshAgent.stoppingDistance;
+            Func<bool> AttackRange() => () => CurrentTarget != null  && (transform.position - CurrentTarget.transform.position).sqrMagnitude< Mathf.Pow(navMeshAgent.stoppingDistance,2);;
+            Func<bool> AttackOffRange() => () => CurrentTarget != null && (transform.position - CurrentTarget.transform.position).sqrMagnitude > Mathf.Pow(navMeshAgent.stoppingDistance,2);
             Func<bool> TargetNull() => () => CurrentTarget == null;
             Func<bool> IsDead() => () => Health <= 0;
         }

@@ -123,14 +123,14 @@ namespace AIBrains.WorkerBrain.MoneyWorker
         }
         public bool IsAvailable() => _currentStock < Capacity;
 
-        public void SetTarget()
+        private void SetTarget()
         {
             CurrentTarget = GetMoneyPosition();
             if (CurrentTarget)
                 _navmeshAgent.SetDestination(CurrentTarget.position);
         }
 
-        public Transform GetMoneyPosition()
+        private Transform GetMoneyPosition()
         {
             return MoneyWorkerSignals.Instance.onGetTransformMoney?.Invoke(this.transform);
         }

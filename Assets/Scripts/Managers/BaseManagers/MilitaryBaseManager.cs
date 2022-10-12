@@ -79,13 +79,15 @@ namespace Managers
         {
             _isTentAvaliable = true;
         }
-        public GameObject GetObject(PoolType poolName)
+
+        private GameObject GetObject(PoolType poolName)
         {
              var soldierAIPrefab = CoreGameSignals.Instance.onGetObjectFromPool?.Invoke(poolName);
+             if (soldierAIPrefab == null) return soldierAIPrefab;
              var soldierBrain = soldierAIPrefab.GetComponent<SoldierAIBrain>();
              Debug.Log(soldierBrain);
              SetSlotZoneTransformsToSoldiers(soldierBrain);
-             
+
              return soldierAIPrefab;
         }
         private void SetSlotZoneTransformsToSoldiers(SoldierAIBrain soldierBrain)
@@ -99,12 +101,12 @@ namespace Managers
             CoreGameSignals.Instance.onReleaseObjectFromPool?.Invoke(poolName,obj);
         }
         
-        public void UpdateTotalAmount(int Amount)
+        public void UpdateTotalAmount(int amount)
         {
             if(!_isBaseAvaliable) return;
             if (_totalAmount < _data.BaseCapacity)
             {
-                _totalAmount += Amount;
+                _totalAmount += amount;
             }
             else
             {
@@ -129,10 +131,10 @@ namespace Managers
         }
         public void GetStackPositions(List<Vector3> gridPositionData)
         {
-            for (int i = 0; i < gridPositionData.Count; i++)
+            foreach (var t in gridPositionData)
             {
-               _slotTransformList.Add(gridPositionData[i]);
-               var obj=  Instantiate(WaitPointPrefab,gridPositionData[i],Quaternion.identity,WaitPointsParent.transform);
+                _slotTransformList.Add(t);
+                var obj=  Instantiate(WaitPointPrefab,t,Quaternion.identity,WaitPointsParent.transform);
             }
         }
         
