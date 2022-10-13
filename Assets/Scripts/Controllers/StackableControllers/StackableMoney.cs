@@ -14,7 +14,7 @@ namespace Controllers.StackableControllers
         private void OnEnable()
         {
             DOVirtual.DelayedCall(2f, EditPhysics);
-            DOVirtual.DelayedCall(2f,() => MoneyWorkerSignals.Instance.onSetMoneyPosition?.Invoke(transform));
+           DOVirtual.DelayedCall(2f,() => MoneyWorkerSignals.Instance.onSetStackable?.Invoke(this));
         }
 
         public override void SetInit(Transform initTransform, Vector3 position)
@@ -44,9 +44,17 @@ namespace Controllers.StackableControllers
 
         public override GameObject SendToStack()
         {
-            collider.enabled = false;
+            collider.enabled = false; // layer -logic kurulmalı
             return transform.gameObject;
         }
+        
+        public override void SendStackable(StackableMoney stackable)
+        {
+            base.SendStackable(stackable);
+        }
+        
+        public override bool IsSelected { get; set; }
+        public override bool IsCollected { get; set; }
 
         private void EditPhysics()
         {

@@ -9,14 +9,7 @@ namespace Data.ValueObject
     public class GridData
     {
         public bool isDynamic;
-        
-        [ShowIf("isDynamic")]
-        public StackerType StackerType;
-        
-        [HideIf("isDynamic")]
-        public StackAreaType StackAreaType;
-        
-        
+
         [Title("Int")]
         [Tooltip("Row, Column and Depth Settings")]
         [MinValue(1)]
@@ -27,5 +20,11 @@ namespace Data.ValueObject
         
         [Tooltip("Choose which mesh will be drawned in the Editor Scene")]
         public Mesh DrawnedMesh;
+        
+        [ShowIf("isDynamic")]
+        public StackerType StackerType;
+        
+        [HideIf("isDynamic")]
+        public StackAreaType StackAreaType;
     }
 }

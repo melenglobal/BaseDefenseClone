@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Controllers.StackableControllers;
+using UnityEngine;
 
 namespace Abstract.Stackable
 {
@@ -15,5 +16,10 @@ namespace Abstract.Stackable
         void PlayAnimation();
 
         GameObject SendToStack();
+
+        void SendStackable(StackableMoney stackable);
+        public bool IsSelected { get; set; }
+
+        public bool IsCollected { get; set; }
     }
 }

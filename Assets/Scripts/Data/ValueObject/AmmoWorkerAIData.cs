@@ -1,5 +1,6 @@
 ﻿using System;
 using Abstract;
+using Abstract.AbstractClasses;
 using UnityEngine;
 
 namespace Data.ValueObject

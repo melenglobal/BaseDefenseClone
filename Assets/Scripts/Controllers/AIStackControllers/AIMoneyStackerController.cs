@@ -41,7 +41,7 @@ namespace Controllers.AIStackerControllers
            otherTransform.SetParent(transform);
         }
         public override void GetStack(GameObject stackableObj)
-        {   
+        {
             GetStackSequence = DOTween.Sequence();
             var randomBouncePosition =CalculateRandomAddStackPosition();
             var randomRotation = CalculateRandomStackRotation();

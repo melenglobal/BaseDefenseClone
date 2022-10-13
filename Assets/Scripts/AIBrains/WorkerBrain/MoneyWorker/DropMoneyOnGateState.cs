@@ -11,7 +11,7 @@ namespace StateMachines.AIBrain.Workers.MoneyStates
         private readonly Animator _animator;
         private readonly Vector3 _startPos;
         private static readonly int Speed = Animator.StringToHash("Speed");
-        public DropMoneyOnGateState(NavMeshAgent navMeshAgent, Animator animator, ref Vector3 startPos)
+        public DropMoneyOnGateState(NavMeshAgent navMeshAgent, Animator animator, Vector3 startPos)
         {
             _navmeshAgent = navMeshAgent;
             _animator = animator;

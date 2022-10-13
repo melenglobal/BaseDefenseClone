@@ -1208,6 +1208,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4219423354569248909}
   - component: {fileID: 440757186458724895}
+  - component: {fileID: 3820142622146077938}
   m_Layer: 0
   m_Name: MoneyWorkerManager
   m_TagString: Untagged
@@ -1223,7 +1224,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1635217509486874938}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 8.54}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6433960028050988179}
@@ -1242,6 +1243,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1151d3d66aae3849b6853e485c45488, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3820142622146077938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1635217509486874938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d701878382c548048f2fb6fd14727de2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GridParent: {fileID: 6433960028050988179}
+  moneyWorkerManager: {fileID: 440757186458724895}
+  stackingSystem: 0
+  stackAreaType: 3
+  stackAreaGridData:
+    isDynamic: 0
+    GridSize: {x: 0, y: 0, z: 0}
+    Offset: {x: 0, y: 0, z: 0}
+    DrawnedMesh: {fileID: 0}
+    StackerType: 0
+    StackAreaType: 0
+  stackerType: 0
+  stackerGridData:
+    isDynamic: 0
+    GridSize: {x: 0, y: 0, z: 0}
+    Offset: {x: 0, y: 0, z: 0}
+    DrawnedMesh: {fileID: 0}
+    StackerType: 0
+    StackAreaType: 0
 --- !u!1 &1699499103322545137
 GameObject:
   m_ObjectHideFlags: 0
@@ -7777,19 +7809,19 @@ MonoBehaviour:
   stackAreaType: 2
   stackAreaGridData:
     isDynamic: 0
-    StackerType: 0
-    StackAreaType: 0
     GridSize: {x: 0, y: 0, z: 0}
     Offset: {x: 0, y: 0, z: 0}
     DrawnedMesh: {fileID: 0}
+    StackerType: 0
+    StackAreaType: 0
   stackerType: 0
   stackerGridData:
     isDynamic: 0
-    StackerType: 0
-    StackAreaType: 0
     GridSize: {x: 0, y: 0, z: 0}
     Offset: {x: 0, y: 0, z: 0}
     DrawnedMesh: {fileID: 0}
+    StackerType: 0
+    StackAreaType: 0
   militaryBaseManager: {fileID: 2699608318297225740}
 --- !u!1 &2699608318303131940
 GameObject:
@@ -7843,19 +7875,19 @@ MonoBehaviour:
   stackAreaType: 1
   stackAreaGridData:
     isDynamic: 0
-    StackerType: 0
-    StackAreaType: 0
     GridSize: {x: 0, y: 0, z: 0}
     Offset: {x: 0, y: 0, z: 0}
     DrawnedMesh: {fileID: 0}
+    StackerType: 0
+    StackAreaType: 0
   stackerType: 0
   stackerGridData:
     isDynamic: 0
-    StackerType: 0
-    StackAreaType: 0
     GridSize: {x: 0, y: 0, z: 0}
     Offset: {x: 0, y: 0, z: 0}
     DrawnedMesh: {fileID: 0}
+    StackerType: 0
+    StackAreaType: 0
   gemStackerController: {fileID: 4545986513474932018}
 --- !u!114 &4545986513474932018
 MonoBehaviour:
@@ -16861,7 +16893,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5734812042968340504, guid: 3e491b53c8239d34da36a85d76b1201e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 2.05
       objectReference: {fileID: 0}
     - target: {fileID: 5734812042968340504, guid: 3e491b53c8239d34da36a85d76b1201e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -16869,7 +16901,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5734812042968340504, guid: 3e491b53c8239d34da36a85d76b1201e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8.13
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5734812042968340504, guid: 3e491b53c8239d34da36a85d76b1201e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -16877,15 +16909,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5734812042968340504, guid: 3e491b53c8239d34da36a85d76b1201e, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5734812042968340504, guid: 3e491b53c8239d34da36a85d76b1201e, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5734812042968340504, guid: 3e491b53c8239d34da36a85d76b1201e, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5734812042968340504, guid: 3e491b53c8239d34da36a85d76b1201e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -20204,11 +20236,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85164d7df24882249bb24c2ed8266c27, type: 3}
---- !u!4 &6752753460379994193 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8701084259259244768, guid: 85164d7df24882249bb24c2ed8266c27, type: 3}
-  m_PrefabInstance: {fileID: 2699608316947900593}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &3591961219143940177 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1490650539956048096, guid: 85164d7df24882249bb24c2ed8266c27, type: 3}
@@ -20220,6 +20247,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24bcfb45cccca1846aab90c4f4793031, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &6752753460379994193 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8701084259259244768, guid: 85164d7df24882249bb24c2ed8266c27, type: 3}
+  m_PrefabInstance: {fileID: 2699608316947900593}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2699608316956990304
 PrefabInstance:
   m_ObjectHideFlags: 0

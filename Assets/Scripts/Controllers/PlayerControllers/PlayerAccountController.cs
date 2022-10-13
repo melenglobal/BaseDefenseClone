@@ -12,7 +12,9 @@ namespace Controllers.PlayerControllers
         private void OnTriggerEnter(Collider other)
         {
             if (other.TryGetComponent<IStackable>(out IStackable stackable))
-            {
+            {   
+                stackable.IsCollected = true;
+                MoneyWorkerSignals.Instance.onThisMoneyTaken?.Invoke();
                 playerMoneyStackerController.SetStackHolder(stackable.SendToStack().transform);
                 playerMoneyStackerController.GetStack(stackable.SendToStack());
             }

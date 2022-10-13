@@ -63,6 +63,8 @@ namespace Managers
         {
             _listCountCache = (int)poolType;
             obj.transform.parent = transform;
+            obj.transform.position = Vector3.zero;
+            obj.transform.rotation = new Quaternion(0, 0, 0, 0).normalized;
             ObjectPoolManager.Instance.ReturnObject<GameObject>(obj, poolType.ToString());
         }
 

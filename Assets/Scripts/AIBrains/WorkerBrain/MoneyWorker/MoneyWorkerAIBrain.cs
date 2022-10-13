@@ -25,23 +25,12 @@ namespace AIBrains.WorkerBrain.MoneyWorker
 
         #endregion
 
-        #region Serilizable Variables
-        
-        [BoxGroup("Serializable Variables")]
-        [SerializeField]
-        private MoneyWorkerPhysicController moneyWorkerDetector;
-
-        [SerializeField] private MoneyWorkerAIData moneyWorkerAIData;
-
-        [SerializeField] private Vector3 baseInitTransform;
-        [SerializeField] private int Capacity;
-
-        #endregion
-
         #region Private Variables
         
         private Animator _animator;
         private NavMeshAgent _navmeshAgent;
+        private MoneyWorkerAIData _moneyWorkerAIData;
+        private Vector3 _waitPos;
 
         #region States
         
@@ -65,9 +54,15 @@ namespace AIBrains.WorkerBrain.MoneyWorker
 
         #endregion
 
+
         private void Awake()
         {
-            moneyWorkerAIData = GetData();
+            _moneyWorkerAIData = GetData();
+   
+        }
+
+        private void Start()
+        {
             SetWorkerComponentVariables();
             InitWorker();
             GetReferenceStates();
@@ -79,7 +74,6 @@ namespace AIBrains.WorkerBrain.MoneyWorker
         private MoneyWorkerAIData GetData() => Resources.Load<CD_AI>("Data/CD_AI").MoneyWorkerAIData;
         private void SetWorkerComponentVariables()
         {
-            baseInitTransform = moneyWorkerAIData.InitPosition; // Pozisyon managerdan
             _navmeshAgent = GetComponent<NavMeshAgent>();
             _animator = GetComponentInChildren<Animator>();
         }
@@ -90,10 +84,10 @@ namespace AIBrains.WorkerBrain.MoneyWorker
         private void GetReferenceStates()
         {
             _searchState = new SearchState(_navmeshAgent, _animator, this);
-            _moveToGateState = new MoveToGateState(_navmeshAgent, _animator, ref baseInitTransform);
+            _moveToGateState = new MoveToGateState(_navmeshAgent, _animator, _waitPos,_moneyWorkerAIData.Speed);
             _waitOnGateState = new WaitOnGateState(_navmeshAgent, _animator, this);
-            _stackMoneyState = new StackMoneyState(_navmeshAgent, _animator, this);
-            _dropMoneyOnGateState = new DropMoneyOnGateState(_navmeshAgent, _animator, ref baseInitTransform);
+            _stackMoneyState = new StackMoneyState(_navmeshAgent, _animator, this,_moneyWorkerAIData.Speed);
+            _dropMoneyOnGateState = new DropMoneyOnGateState(_navmeshAgent, _animator, _waitPos);
 
             _stateMachine = new StateMachine();
 
@@ -121,13 +115,17 @@ namespace AIBrains.WorkerBrain.MoneyWorker
         {
 
         }
-        public bool IsAvailable() => _currentStock < Capacity;
+        public bool IsAvailable() => _currentStock < _moneyWorkerAIData.Capacity;
 
         private void SetTarget()
         {
             CurrentTarget = GetMoneyPosition();
             if (CurrentTarget)
                 _navmeshAgent.SetDestination(CurrentTarget.position);
+        }
+        public void SetInitPosition(Vector3 slotPosition)
+        {
+            _waitPos = slotPosition;
         }
 
         private Transform GetMoneyPosition()
@@ -155,13 +153,13 @@ namespace AIBrains.WorkerBrain.MoneyWorker
 
         public void SetCurrentStock()
         {
-            if (_currentStock < Capacity)
+            if (_currentStock < _moneyWorkerAIData.Capacity)
                 _currentStock++;
         }
 
         public void RemoveAllStock()
         {
-            for (int i = 0; i < Capacity; i++)
+            for (int i = 0; i <  _moneyWorkerAIData.Capacity; i++)
             {
                 if (_currentStock > 0)
                     _currentStock--;
