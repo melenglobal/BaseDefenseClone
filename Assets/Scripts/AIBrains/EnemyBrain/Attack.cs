@@ -10,7 +10,6 @@ namespace AIBrains.EnemyBrain
         private readonly Animator _animator;
         private readonly EnemyAIBrain _enemyAIBrain;
         private static readonly int Attack1 = Animator.StringToHash("Attack");
-        private static readonly int Run = Animator.StringToHash("Run");
 
         private float _attackTimer = 1f;
 
@@ -32,13 +31,12 @@ namespace AIBrains.EnemyBrain
         }
         
         public void OnEnter()
-        {   
-            // _animator.SetTrigger(Attack1);
+        {
         }
 
         public void OnExit()
-        {   
-            _animator.SetTrigger(Run);
+        {
+            
         }
     }
 }

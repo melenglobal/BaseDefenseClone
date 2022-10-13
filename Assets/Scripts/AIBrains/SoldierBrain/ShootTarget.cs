@@ -31,14 +31,13 @@ namespace AIBrains.SoldierBrain
             }
             if (_soldierAIBrain.EnemyTarget != null)
             {
-                LookTarget();
+                LookTarget(); // search
             }
             _timer -= Time.deltaTime*_attackTime;
-            if (_timer <= 0 )
-            {
-                _soldierAIBrain.GetObject(PoolType.PistolBullet);
-                _timer = 0.2f;
-            }
+            
+            if (!(_timer <= 0)) return;
+            _soldierAIBrain.GetObject(PoolType.PistolBullet);
+            _timer = 0.2f;
         }
         private void LookTarget()
         {

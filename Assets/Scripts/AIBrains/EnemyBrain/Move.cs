@@ -15,6 +15,8 @@ namespace AIBrains.EnemyBrain
         private static readonly int Speed = Animator.StringToHash("Speed");
         private static readonly int Run = Animator.StringToHash("Run");
 
+        private float _enemySpeed = 2.242956f;
+
         public Move(EnemyAIBrain enemyAIBrain,NavMeshAgent agent,Animator animator)
         {
             _enemyAIBrain = enemyAIBrain;
@@ -23,7 +25,7 @@ namespace AIBrains.EnemyBrain
         }
         public void Tick()
         {   
-            if (Vector3.Distance(_enemyAIBrain.transform.position, _lastPosition) <= 0f)
+            if ((_enemyAIBrain.transform.position-_lastPosition).sqrMagnitude <= 0f)
                 timeStuck += Time.deltaTime;
             
             _lastPosition = _enemyAIBrain.transform.position;
@@ -36,7 +38,7 @@ namespace AIBrains.EnemyBrain
             _navMeshAgent.enabled = true;
             _navMeshAgent.SetDestination(_enemyAIBrain.TurretTarget.position);
             _animator.SetTrigger(Run);
-            _navMeshAgent.speed = 1.6f;
+            _navMeshAgent.speed = 2.242956f;
         }
 
         public void OnExit()

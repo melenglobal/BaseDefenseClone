@@ -1,9 +1,8 @@
 ﻿using AIBrains.EnemyBrain;
 using Controllers.PlayerControllers;
-using Managers;
 using UnityEngine;
 
-namespace Controllers.WorkerPhysicsControllers
+namespace Controllers.AIControllers
 {
     public class EnemyDetectionController : MonoBehaviour
     {

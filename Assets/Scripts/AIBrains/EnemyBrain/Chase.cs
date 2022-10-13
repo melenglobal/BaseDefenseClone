@@ -11,6 +11,7 @@ namespace AIBrains.EnemyBrain
         private readonly EnemyAIBrain _enemyAIBrain;
         private static readonly int Speed = Animator.StringToHash("Speed");
         private static readonly int Run = Animator.StringToHash("Run");
+        private const float _enemySpeed = 6.256048f;
 
         public Chase(EnemyAIBrain enemyAIBrain,NavMeshAgent agent,Animator animator)
         {
@@ -21,14 +22,13 @@ namespace AIBrains.EnemyBrain
         public void Tick()
         {
             _navMeshAgent.destination = _enemyAIBrain.CurrentTarget.position;
-            _animator.SetFloat(Speed,_navMeshAgent.velocity.magnitude);
+             
         }
         public void OnEnter()
-        {   
-           
+        {
             _navMeshAgent.SetDestination(_enemyAIBrain.CurrentTarget.position);
             _animator.SetTrigger(Run);
-            _navMeshAgent.speed = 6.256048f;
+            _navMeshAgent.speed = _enemySpeed;
         }
         public void OnExit()
         {

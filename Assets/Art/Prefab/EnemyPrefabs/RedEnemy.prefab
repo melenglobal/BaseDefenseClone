@@ -771,7 +771,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3243807756733028529
 Transform:
   m_ObjectHideFlags: 0
@@ -828,12 +828,6 @@ MonoBehaviour:
   TurretTarget: {fileID: 0}
   spawnPosition: {fileID: 8965314844710460317, guid: 81322c27152a7994896025ef68b85537, type: 3}
   enemyType: 0
-  targetList:
-  - {fileID: 6009953371363724169, guid: e03c7992ea6c8f442a2c19ab26943e77, type: 3}
-  - {fileID: 6540085594896736554, guid: c809b96b508fb554c8d51ce82e55dc28, type: 3}
-  - {fileID: 7562009722535035351, guid: e3f25961582031d4e959be59e7dba0ae, type: 3}
-  - {fileID: 3661513579959121681, guid: bd563e9ce43ed1f458073f97d2df549e, type: 3}
-  - {fileID: 3116730548557065255, guid: 1072025235bec6d45b08a19417fa7401, type: 3}
 --- !u!1 &3431285260894626589
 GameObject:
   m_ObjectHideFlags: 0
