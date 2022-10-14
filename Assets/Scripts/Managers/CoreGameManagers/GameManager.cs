@@ -1,7 +1,7 @@
 ﻿using Signals;
 using UnityEngine;
 
-namespace Managers
+namespace Managers.CoreGameManagers
 {
     public class GameManager : MonoBehaviour
     {

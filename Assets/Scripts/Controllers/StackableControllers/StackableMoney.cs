@@ -13,38 +13,15 @@ namespace Controllers.StackableControllers
 
         private void OnEnable()
         {
-            DOVirtual.DelayedCall(2f, EditPhysics);
-           DOVirtual.DelayedCall(2f,() => MoneyWorkerSignals.Instance.onSetStackable?.Invoke(this));
-        }
-
-        public override void SetInit(Transform initTransform, Vector3 position)
-        {
-            base.SetInit(initTransform, position);
-        }
-
-        public override void SetVibration(bool isVibrate)
-        {
-            base.SetVibration(isVibrate);
-        }
-
-        public override void SetSound()
-        {
-            base.SetSound();
-        }
-
-        public override void EmitParticle()
-        {
-            base.EmitParticle();
-        }
-
-        public override void PlayAnimation()
-        {
-            base.PlayAnimation();
+            EditPhysics();
+            DOVirtual.DelayedCall(2f,() => MoneyWorkerSignals.Instance.onSetStackable?.Invoke(this));
         }
 
         public override GameObject SendToStack()
         {
-            collider.enabled = false; // layer -logic kurulmalı
+            collider.enabled = false;
+            rigidbody.isKinematic = true;
+            rigidbody.useGravity = false;
             return transform.gameObject;
         }
         
@@ -58,8 +35,9 @@ namespace Controllers.StackableControllers
 
         private void EditPhysics()
         {
-            rigidbody.useGravity = false;
-            rigidbody.isKinematic = true;
+            rigidbody.useGravity = true;
+            rigidbody.isKinematic = false;
+  
         }
     }
 }

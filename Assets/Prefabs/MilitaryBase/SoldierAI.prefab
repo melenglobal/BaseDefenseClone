@@ -669,7 +669,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2810693081564467310
 Transform:
   m_ObjectHideFlags: 0
@@ -741,9 +741,10 @@ MonoBehaviour:
   TentPosition: {fileID: 0}
   FrontYardStartPosition: {fileID: 0}
   EnemyTarget: {fileID: 0}
-  physicsController: {fileID: 4819023296814801526}
+  WeaponHolder: {fileID: 5546547731481178150}
+  HasSoldiersActivated: 0
   animator: {fileID: 7848361392648306053}
-  weaponHolder: {fileID: 5546547731481178150}
+  _navMeshAgent: {fileID: 2810693081564467307}
 --- !u!1 &2818447995649971874
 GameObject:
   m_ObjectHideFlags: 0

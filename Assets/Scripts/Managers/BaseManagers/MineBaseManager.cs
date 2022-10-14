@@ -10,7 +10,7 @@ using Signals;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Managers
+namespace Managers.BaseManagers
 {
     public class MineBaseManager : MonoBehaviour,IGetPoolObject
     {

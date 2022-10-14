@@ -27,16 +27,14 @@ namespace AIBrains.SoldierBrain
         public void Tick()
         {
             _animator.SetFloat(Speed,_navMeshAgent.velocity.magnitude);
-            if ((_navMeshAgent.transform.position - _slotPosition).sqrMagnitude < _stoppingDistance)
-            {
-                _hasReachToTarget = true;
-                _soldierAIBrain.HasReachedSlotTarget = _hasReachToTarget;
-            }
+            if (!((_navMeshAgent.transform.position - _slotPosition).sqrMagnitude < _stoppingDistance)) return;
+            _hasReachToTarget = true;
+            _soldierAIBrain.HasReachedSlotTarget = _hasReachToTarget;
         } 
         public void OnEnter()
         {
             _navMeshAgent.SetDestination(_slotPosition);
-            _navMeshAgent.speed = 1.80f;
+            _navMeshAgent.speed = 1.80f; //Data
         }
         public void OnExit()
         {

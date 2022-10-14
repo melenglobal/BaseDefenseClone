@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Managers
+namespace Managers.AIManagers
 {
     public class HostageManager : MonoBehaviour
     {

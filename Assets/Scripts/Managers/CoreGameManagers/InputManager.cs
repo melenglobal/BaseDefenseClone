@@ -5,7 +5,7 @@ using Keys;
 using Signals;
 using UnityEngine;
 
-namespace Managers
+namespace Managers.CoreGameManagers
 {
     public class InputManager : MonoBehaviour
     {

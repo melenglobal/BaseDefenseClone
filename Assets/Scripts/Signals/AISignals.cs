@@ -14,5 +14,9 @@ namespace Signals
         public Func<Transform> getSpawnTransform;
 
         public Func<Transform> getRandomTransform;
+
+        public UnityAction<GameObject> onReleaseObjectUpdate = delegate(GameObject arg0) {  };
+        
+        public UnityAction onSoldierAmountUpgrade  =delegate {  };
     }
 }

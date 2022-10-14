@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using UnityEngine;
-using Signals;
 using System.Linq;
 using Abstract.Interfaces.Pool;
 using AIBrains.WorkerBrain.MoneyWorker;
@@ -8,11 +6,11 @@ using Controllers.StackableControllers;
 using Data.UnityObject;
 using Data.ValueObject;
 using Enums;
+using Signals;
 using Sirenix.OdinInspector;
+using UnityEngine;
 
-
-
-namespace Managers
+namespace Managers.BaseManagers
 {
     public class MoneyWorkerManager : MonoBehaviour, IGetPoolObject, IReleasePoolObject
     {

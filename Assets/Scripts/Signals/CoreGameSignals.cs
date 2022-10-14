@@ -31,9 +31,9 @@ namespace Signals
         
         public UnityAction<PoolType,GameObject> onReleaseObjectFromPool = delegate {  };
 
-        public UnityAction<int> onUpdateGemScoreData = delegate(int arg0) {  };
+        public UnityAction onUpdateGemScoreData = delegate {  };
         
-        public UnityAction<int> onUpdateMoneyScoreData = delegate(int arg0) {  };
+        public UnityAction onUpdateMoneyScoreData = delegate {  };
 
         public UnityAction<TurretLocationType,GameObject> onSetCurrentTurret = delegate(TurretLocationType arg0, GameObject o) {  };
 

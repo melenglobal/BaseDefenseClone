@@ -1,11 +1,10 @@
 using Cinemachine;
-using DG.Tweening;
 using Enums;
 using Signals;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Managers
+namespace Managers.CoreGameManagers
 {
     public class CameraManager : MonoBehaviour
     {

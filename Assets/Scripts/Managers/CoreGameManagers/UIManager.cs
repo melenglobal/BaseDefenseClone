@@ -4,7 +4,7 @@ using Signals;
 using TMPro;
 using UnityEngine;
 
-namespace Managers
+namespace Managers.CoreGameManagers
 {
     public class UIManager : MonoBehaviour
     {
@@ -12,10 +12,14 @@ namespace Managers
 
         #region SerializeField Variables
 
-        [SerializeField] private UIPanelController uiPanelController;
-        [SerializeField] private TextMeshProUGUI gemScore; 
-        [SerializeField] private TextMeshProUGUI moneyScore;
-        [SerializeField] private TextMeshProUGUI levelText;
+        [SerializeField] 
+        private UIPanelController uiPanelController;
+        [SerializeField] 
+        private TextMeshProUGUI gemScore; 
+        [SerializeField] 
+        private TextMeshProUGUI moneyScore;
+        [SerializeField] 
+        private TextMeshProUGUI levelText;
         
         #endregion SerializeField Variables
 
@@ -69,11 +73,8 @@ namespace Managers
             CoreGameSignals.Instance.onNextLevel?.Invoke();
         }
 
-        private void OnUpdateMoneyScore(int score)
-        {
-            moneyScore.text = score.ToString();
-        }
-        
+        private void OnUpdateMoneyScore(int score) => moneyScore.text = score.ToString();
+
         private void OnUpdateGemScore(int score) =>  gemScore.text = score.ToString();
 
         private void OnSetLevelText(int nextLevel)

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Abstract;
 using Extentions;
 
-namespace Managers
+namespace Managers.CoreGameManagers
 {
     public class ObjectPoolManager
     {

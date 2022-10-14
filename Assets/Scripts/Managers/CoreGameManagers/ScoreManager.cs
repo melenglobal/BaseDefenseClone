@@ -1,9 +1,8 @@
-﻿using System.Threading.Tasks;
-using Data.ValueObject;
+﻿using Data.ValueObject;
 using Signals;
 using UnityEngine;
 
-namespace Managers
+namespace Managers.CoreGameManagers
 {
     public class ScoreManager : MonoBehaviour
     {
@@ -39,6 +38,7 @@ namespace Managers
         }
         private void UnsubscribeEvents()
         {   
+            CoreGameSignals.Instance.onLevelInitialize -= OnGetData;
             CoreGameSignals.Instance.onHasEnoughMoney -= OnHasMoney;
             CoreGameSignals.Instance.onHasEnoughGem -= OnHasGem;
             CoreGameSignals.Instance.onUpdateGemScoreData -= OnUpdateGemScore;
@@ -52,7 +52,7 @@ namespace Managers
         }
 
         #endregion
-        private bool OnHasMoney() =>  _scoreData.TotalMoneyScore!=0 || isStop;
+        private bool OnHasMoney() =>  _scoreData.TotalMoneyScore !=0;
 
         private bool OnHasGem() => _scoreData.TotalGemScore != 0;
         private void SetGameScore()
@@ -65,29 +65,30 @@ namespace Managers
         {
             UpdateMoneyScore(_paymentAmount);
         }
+        
 
         private void OnStopMoneyPayment()
         {
             isStop = true;
         }
 
-        private void UpdateGemScore(int _amount)
+        private void OnUpdateGemScore()
         {
-            OnUpdateGemScore(_amount);
+            UpdateGemScore(_earningAmount);
         }
 
-        private void UpdateMoneyScore(int _amount)
+        private void OnUpdateMoneyScore()
         {
-            OnUpdateMoneyScore(_amount);
+            UpdateMoneyScore(_earningAmount);
         }
-        private void OnUpdateMoneyScore(int _amount)
+        private void UpdateMoneyScore(int _amount)
         {
             _scoreData.TotalMoneyScore += _amount;
             UISignals.Instance.onUpdateMoneyScore?.Invoke(_scoreData.TotalMoneyScore);
             UpdateGameScoreData();
         }
 
-        private void OnUpdateGemScore(int _amount)
+        private void UpdateGemScore(int _amount)
         {
             _scoreData.TotalGemScore += _amount;
             UISignals.Instance.onUpdateGemScore?.Invoke(_scoreData.TotalGemScore);

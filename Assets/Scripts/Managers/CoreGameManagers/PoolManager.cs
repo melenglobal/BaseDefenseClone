@@ -1,12 +1,12 @@
-using UnityEngine;
 using Data.UnityObject;
 using Data.ValueObject;
 using Enums;
 using Signals;
-using UnityEngine.Rendering;
 using Sirenix.OdinInspector;
+using UnityEngine;
+using UnityEngine.Rendering;
 
-namespace Managers
+namespace Managers.CoreGameManagers
 {
 
     public class PoolManager : MonoBehaviour

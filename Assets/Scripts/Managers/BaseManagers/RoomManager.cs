@@ -3,11 +3,10 @@ using Abstract.Interfaces;
 using Controllers.BaseControllers;
 using Data.ValueObject;
 using Enums;
-using Managers;
 using Signals;
 using UnityEngine;
 
-namespace Controllers
+namespace Managers.BaseManagers
 {
     public class RoomManager : MonoBehaviour
     {
@@ -17,7 +16,7 @@ namespace Controllers
         private RoomPaymentTextController roomPaymentTextController;
         
         private RoomData _roomData;
-        private int _payedAmount = 1;
+        private int _payedAmount = 10;
         private bool _canTake;
         private void Start()
         {
@@ -35,23 +34,25 @@ namespace Controllers
         }
         public void StopRoomPayment(bool canTake) =>_canTake = canTake;
         private async void UpdatePayment(ICustomer customer)
-        {
-            if (!_canTake || !customer.canPay)
-            {
-                _canTake = true;
-                CoreGameSignals.Instance.onStopMoneyPayment?.Invoke();
-                return;
-            }
+        {   
+            
             if (_roomData.Cost == 0)
             {
                 _canTake = false;
-                
+                customer.CanPay = false;
                 _roomData.AvailabilityType = AvailabilityType.Unlocked;
                 BaseSignals.Instance.onChangeExtentionVisibility(roomTypes);
                 UpdateRoomData();
             }
             
-            _roomData.Cost -= _payedAmount; 
+            if (!_canTake || !customer.CanPay)
+            {
+                _canTake = true;
+                CoreGameSignals.Instance.onStopMoneyPayment?.Invoke();
+                return;
+            }
+
+            _roomData.Cost -= _payedAmount;
             CoreGameSignals.Instance.onStartMoneyPayment?.Invoke();
             roomPaymentTextController.UpdateText(_roomData.Cost);
             UpdateRoomData();

@@ -1,14 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Abstract.Stackable;
 using Abstract.Stacker;
 using DG.Tweening;
 using Enums;
 using Signals;
-
 using UnityEngine;
 
-namespace Controllers.AIStackerControllers
+namespace Controllers.AIStackControllers
 {
     public class AIMoneyStackerController : AStacker
     {
@@ -54,6 +52,8 @@ namespace Controllers.AIStackerControllers
                 StackList.Add(stackableObj);
             
                 stackableObj.transform.DOLocalMove(positionList[StackList.Count - 1], 0.3f);
+
+                stackableObj.transform.localRotation = new Quaternion(0, 0, 0, 0).normalized;
             });
             
         }
@@ -77,6 +77,7 @@ namespace Controllers.AIStackerControllers
             {
                 RemoveStackAnimation(StackList[StackList.Count - 1]);
                 StackList.TrimExcess();
+                CoreGameSignals.Instance.onUpdateMoneyScoreData?.Invoke();
                 await Task.Delay(201);
                 RemoveAllStack();
             }
@@ -86,6 +87,7 @@ namespace Controllers.AIStackerControllers
                 {   
                     RemoveStackAnimation(StackList[i]);
                     StackList.TrimExcess();
+                    CoreGameSignals.Instance.onUpdateMoneyScoreData?.Invoke();
                 }
                 canRemove = true;
             }

@@ -1,10 +1,9 @@
 using Commands.LevelCommands;
 using Data.UnityObject;
-using Data.ValueObject;
 using Signals;
 using UnityEngine;
 
-namespace Managers
+namespace Managers.CoreGameManagers
 {
     public class LevelManager : MonoBehaviour
     {

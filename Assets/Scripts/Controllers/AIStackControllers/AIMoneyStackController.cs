@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Abstract.Stack;
-using Controllers.AIStackerControllers;
 using Controllers.PlayerControllers;
 using Data.UnityObject;
 using Data.ValueObject;

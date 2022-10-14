@@ -1,9 +1,7 @@
-﻿using System;
-using Data.ValueObject;
-using Signals;
+﻿using Data.ValueObject;
 using UnityEngine;
 
-namespace Managers
+namespace Managers.BaseManagers
 {
     public class MineManager : MonoBehaviour
     {

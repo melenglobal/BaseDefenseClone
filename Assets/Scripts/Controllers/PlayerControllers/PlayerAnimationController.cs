@@ -3,6 +3,7 @@ using Enums;
 using Enums.Player;
 using Keys;
 using Managers;
+using Managers.CoreGameManagers;
 using UnityEngine;
 
 namespace Controllers.PlayerControllers
@@ -57,11 +58,11 @@ namespace Controllers.PlayerControllers
         }
         public void PlayAnimation(InputParams inputParams)
         { 
-            if (playerManager.currentAreaType == AreaType.Battle)
+            if (playerManager.CurrentAreaType == AreaType.Battle)
             {
                 animator.SetLayerWeight(1,1);
                 animator.SetBool("IsBattleOn",true);
-                ChangeAnimations(_animationStatesMap[playerManager.WeaponTypes]);
+                ChangeAnimations(_animationStatesMap[playerManager.WeaponType]);
                 animator.SetBool("Aimed",true);
                 _velocityX = inputParams.InputValues.x;
                 _velocityZ = inputParams.InputValues.y;

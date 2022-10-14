@@ -1,6 +1,8 @@
 ﻿using Data.ValueObject;
+using Enums;
 using Keys;
 using Managers;
+using Managers.CoreGameManagers;
 using UnityEngine;
 
 namespace Controllers.PlayerControllers
@@ -81,6 +83,7 @@ namespace Controllers.PlayerControllers
 
         public void RotatePlayerToTarget(Transform enemyTarget)
         {
+            if (enemyTarget == null) return;
             transform.LookAt(enemyTarget,Vector3.up * 3f);
         }
 
@@ -89,9 +92,10 @@ namespace Controllers.PlayerControllers
             _isReadyToMove = movementStatus;
         }
 
-        public void DisableMovement()
+        public void DisableMovement(InputHandlers inputHandlers)
         {
-            rigidbody.velocity = Vector3.zero;
+            if (inputHandlers != InputHandlers.Turret) return;
+                rigidbody.velocity = Vector3.zero;
             transform.rotation = new Quaternion(0, 0, 0, 0);
         }
 

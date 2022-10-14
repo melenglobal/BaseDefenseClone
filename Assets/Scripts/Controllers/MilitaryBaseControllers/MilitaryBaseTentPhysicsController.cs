@@ -1,5 +1,6 @@
 ﻿using Abstract.Stackable;
 using Managers;
+using Managers.BaseManagers;
 using UnityEngine;
 
 namespace Controllers.MilitaryBaseControllers

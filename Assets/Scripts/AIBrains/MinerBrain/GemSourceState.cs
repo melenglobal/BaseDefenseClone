@@ -1,6 +1,7 @@
 using Abstract;
 using Enum;
 using Managers;
+using Managers.BaseManagers;
 using UnityEngine;
 
 namespace AI.MinerAI.States

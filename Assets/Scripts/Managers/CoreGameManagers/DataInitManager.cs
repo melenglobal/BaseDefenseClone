@@ -5,9 +5,9 @@ using Data.ValueObject;
 using Signals;
 using UnityEngine;
 
-namespace Managers
+namespace Managers.CoreGameManagers
 {
-    public class DataInitializer : MonoBehaviour,ISaveable
+    public class DataInitManager : MonoBehaviour,ISaveable
     {
         #region Self Variables
     
@@ -87,11 +87,11 @@ namespace Managers
         {
             InitializeDataSignals.Instance.onSaveLevelID += OnSyncLevelID;
             CoreGameSignals.Instance.onLevelInitialize += OnSyncLevel;
-            InitializeDataSignals.Instance.onSaveBaseRoomData += SyncBaseRoomDatas;
-            InitializeDataSignals.Instance.onSaveMineBaseData += SyncMineBaseDatas;
-            InitializeDataSignals.Instance.onSaveMilitaryBaseData += SyncMilitaryBaseData;
-            InitializeDataSignals.Instance.onSaveBuyablesData += SyncBuyablesData;
-            InitializeDataSignals.Instance.onSaveGameScore += SyncScoreData;
+            InitializeDataSignals.Instance.onSaveBaseRoomData += OnSyncBaseRoomDatas;
+            InitializeDataSignals.Instance.onSaveMineBaseData += OnSyncMineBaseDatas;
+            InitializeDataSignals.Instance.onSaveMilitaryBaseData += OnSyncMilitaryBaseData;
+            InitializeDataSignals.Instance.onSaveBuyablesData += OnSyncBuyablesData;
+            InitializeDataSignals.Instance.onSaveGameScore += OnSyncScoreData;
         
             InitializeDataSignals.Instance.onLoadMilitaryBaseData += OnLoadMilitaryBaseData;
             InitializeDataSignals.Instance.onLoadBaseRoomData += OnLoadBaseRoomData;
@@ -105,11 +105,11 @@ namespace Managers
         {
             InitializeDataSignals.Instance.onSaveLevelID -= OnSyncLevelID;
             CoreGameSignals.Instance.onLevelInitialize -= OnSyncLevel;
-            InitializeDataSignals.Instance.onSaveBaseRoomData -= SyncBaseRoomDatas;
-            InitializeDataSignals.Instance.onSaveMineBaseData -= SyncMineBaseDatas;
-            InitializeDataSignals.Instance.onSaveMilitaryBaseData -= SyncMilitaryBaseData;
-            InitializeDataSignals.Instance.onSaveBuyablesData -= SyncBuyablesData;
-            InitializeDataSignals.Instance.onSaveGameScore -= SyncScoreData;
+            InitializeDataSignals.Instance.onSaveBaseRoomData -= OnSyncBaseRoomDatas;
+            InitializeDataSignals.Instance.onSaveMineBaseData -= OnSyncMineBaseDatas;
+            InitializeDataSignals.Instance.onSaveMilitaryBaseData -= OnSyncMilitaryBaseData;
+            InitializeDataSignals.Instance.onSaveBuyablesData -= OnSyncBuyablesData;
+            InitializeDataSignals.Instance.onSaveGameScore -= OnSyncScoreData;
         
             InitializeDataSignals.Instance.onLoadMilitaryBaseData -= OnLoadMilitaryBaseData;
             InitializeDataSignals.Instance.onLoadBaseRoomData -= OnLoadBaseRoomData;
@@ -137,7 +137,6 @@ namespace Managers
         private void OnSave() => Save(_uniqueID);
         public void Save(int uniqueId)
         {
-        
             cdLevel = new CD_Level(_levelID,levelDatas,_scoreData);
         
             SaveLoadSignals.Instance.onSaveGameData.Invoke(cdLevel,uniqueId);
@@ -163,15 +162,15 @@ namespace Managers
         private void OnSyncLevel() => SendDataManagers();
         private void OnSyncLevelID(int levelID) => _levelID= levelID;
 
-        private void SyncScoreData(ScoreData scoreData) => _scoreData = scoreData;
+        private void OnSyncScoreData(ScoreData scoreData) => _scoreData = scoreData;
 
-        private void SyncBaseRoomDatas(BaseRoomData baseRoomData) => _baseRoomData = baseRoomData;
+        private void OnSyncBaseRoomDatas(BaseRoomData baseRoomData) => _baseRoomData = baseRoomData;
 
-        private void SyncMineBaseDatas(MineBaseData mineBaseData) => _mineBaseData = mineBaseData;
+        private void OnSyncMineBaseDatas(MineBaseData mineBaseData) => _mineBaseData = mineBaseData;
 
-        private void SyncMilitaryBaseData(MilitaryBaseData militaryBaseData) => _militaryBaseData= militaryBaseData;
+        private void OnSyncMilitaryBaseData(MilitaryBaseData militaryBaseData) => _militaryBaseData= militaryBaseData;
 
-        private void SyncBuyablesData(BuyablesData buyablesData) => _buyablesData = buyablesData;
+        private void OnSyncBuyablesData(BuyablesData buyablesData) => _buyablesData = buyablesData;
 
         #endregion
    

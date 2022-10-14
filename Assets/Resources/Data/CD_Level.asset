@@ -87,12 +87,12 @@ MonoBehaviour:
         CurrentWorkerAmount: 5
         GemCollectionOffset: 5
       MilitaryBaseData:
-        BaseCapacity: 20
+        BaseCapacity: 0
         TentCapacity: 5
-        CandidateAmount: 17
-        CurrentSoldierAmount: 18
-        SoldierUpgradeTimer: 23
-        SoldierSlotCost: 22
+        CandidateAmount: 0
+        CurrentSoldierAmount: 0
+        SoldierUpgradeTimer: 0
+        SoldierSlotCost: 0
         SlotCount: 7
         Slots:
         - {fileID: 0}
@@ -107,7 +107,7 @@ MonoBehaviour:
         AmmoWorkerLevel: 0
         AvailabilityType: 0
   ScoreData:
-    TotalGemScore: 7500
-    TotalMoneyScore: 7500
+    TotalGemScore: 100
+    TotalMoneyScore: 100
   LevelId: 0
   Key: LevelData

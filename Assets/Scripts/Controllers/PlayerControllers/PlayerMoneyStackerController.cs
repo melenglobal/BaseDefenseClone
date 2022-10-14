@@ -2,9 +2,9 @@
 using System.Threading.Tasks;
 using Abstract.Stackable;
 using Abstract.Stacker;
-using Concrete;
 using DG.Tweening;
 using Enums;
+using Managers.CoreGameManagers;
 using Signals;
 using UnityEngine;
 
@@ -26,7 +26,7 @@ namespace Controllers.PlayerControllers
         private int _stackListConstCount;
 
         private bool _canRemove = true;
-        
+
         private void Awake()
         {
             DOTween.Init(true, true, LogBehaviour.Verbose).SetCapacity(500, 125);
@@ -42,6 +42,7 @@ namespace Controllers.PlayerControllers
         }
         public override void GetStack(GameObject stackableObj)
         {   
+            SetStackHolder(stackableObj.transform);
             _getStackSequence = DOTween.Sequence();
             var randomBouncePosition =CalculateRandomAddStackPosition();
             var randomRotation = CalculateRandomStackRotation();
@@ -52,8 +53,11 @@ namespace Controllers.PlayerControllers
                 stackableObj.transform.rotation = Quaternion.LookRotation(transform.forward);
             
                 StackList.Add(stackableObj);
-            
+
                 stackableObj.transform.DOLocalMove(positionList[StackList.Count - 1], 0.3f);
+                
+                stackableObj.transform.localRotation = new Quaternion(0, 0, 0, 0).normalized;
+                
             });
             
         }
@@ -77,6 +81,7 @@ namespace Controllers.PlayerControllers
             {
                 RemoveStackAnimation(StackList[StackList.Count - 1]);
                 StackList.TrimExcess();
+                CoreGameSignals.Instance.onUpdateMoneyScoreData?.Invoke();
                 await Task.Delay(201);
                 RemoveAllStack();
             }
@@ -86,6 +91,7 @@ namespace Controllers.PlayerControllers
                 {   
                     RemoveStackAnimation(StackList[i]);
                     StackList.TrimExcess();
+                    CoreGameSignals.Instance.onUpdateMoneyScoreData?.Invoke();
                 }
                 _canRemove = true;
             }

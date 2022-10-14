@@ -6,7 +6,7 @@ using Enums;
 using Signals;
 using UnityEngine;
 
-namespace Managers
+namespace Managers.OtherManagers
 {
     public class BulletManager : MonoBehaviour,IReleasePoolObject
     {

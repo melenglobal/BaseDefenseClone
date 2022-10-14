@@ -12,6 +12,8 @@ namespace Controllers.TurretControllers
         
         private Vector2 rotateDirection;
 
+        private float _rotationSpeed = 15f;
+
         [SerializeField] private TurretLocationType turretLocationType;
         
         public void SetInputParams(InputParams input)
@@ -32,6 +34,7 @@ namespace Controllers.TurretControllers
             if (!(angle < 60) || !(angle > -60)) return;
             
             transform.rotation = Quaternion.Euler(new Vector3(0,angle,0));
+            
         }
     }
 }

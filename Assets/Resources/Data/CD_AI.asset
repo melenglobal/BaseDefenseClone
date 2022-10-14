@@ -49,3 +49,8 @@ MonoBehaviour:
       Speed: 0
       ChaseSpeed: 0
       EnemyType: 2
+  EnemySpawnData:
+    NumberOfEnemiesToSpawn: 50
+    SpawnDelay: 2
+    RandomMaxRange: 11
+    MinPossibilityToSpawnEnemy: 30

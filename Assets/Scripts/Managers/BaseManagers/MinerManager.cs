@@ -3,7 +3,7 @@ using Enum;
 using Signals;
 using UnityEngine;
 
-namespace Managers
+namespace Managers.BaseManagers
 {
     public class MinerManager : MonoBehaviour
     {

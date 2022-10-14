@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using Controllers;
-using Controllers.PlayerControllers;
+﻿using System.Collections.Generic;
 using Controllers.TurretControllers;
-using Datas.ValueObject;
 using Enums;
 using Keys;
 using Signals;
 using UnityEngine;
-namespace Managers
+
+namespace Managers.BaseManagers
 {
     public class TurretManager : MonoBehaviour
     {
