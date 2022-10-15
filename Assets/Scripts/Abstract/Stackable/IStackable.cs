@@ -16,10 +16,8 @@ namespace Abstract.Stackable
         void PlayAnimation();
 
         GameObject SendToStack();
-
-        void SendStackable(StackableMoney stackable);
-        public bool IsSelected { get; set; }
-
-        public bool IsCollected { get; set; }
+        
+        bool IsSelected { get; set; }
+        bool IsCollected { get; set; }
     }
 }

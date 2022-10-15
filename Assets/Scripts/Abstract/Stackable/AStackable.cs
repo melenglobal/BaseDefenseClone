@@ -35,11 +35,7 @@ namespace Abstract.Stackable
         }
 
         public abstract GameObject SendToStack();
-        public virtual void SendStackable(StackableMoney stackable)
-        {
-            DOVirtual.DelayedCall(0.1f, () => MoneyWorkerSignals.Instance.onSetStackable?.Invoke(stackable));
-        }
-        
+
 
         public virtual bool IsSelected { get; set; }
         public virtual bool IsCollected { get; set; }

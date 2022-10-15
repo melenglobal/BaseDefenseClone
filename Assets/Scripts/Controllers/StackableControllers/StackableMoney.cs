@@ -8,6 +8,10 @@ namespace Controllers.StackableControllers
 {
     public class StackableMoney : AStackable
     {   
+        
+        public override bool IsSelected { get; set; }
+        public override bool IsCollected { get; set; }
+        
         [SerializeField] private Rigidbody rigidbody;
         [SerializeField] private BoxCollider collider;
 
@@ -25,14 +29,6 @@ namespace Controllers.StackableControllers
             return transform.gameObject;
         }
         
-        public override void SendStackable(StackableMoney stackable)
-        {
-            base.SendStackable(stackable);
-        }
-        
-        public override bool IsSelected { get; set; }
-        public override bool IsCollected { get; set; }
-
         private void EditPhysics()
         {
             rigidbody.useGravity = true;
