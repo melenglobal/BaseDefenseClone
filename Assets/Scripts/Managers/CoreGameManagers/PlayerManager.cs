@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Abstract;
 using Controllers;
 using Controllers.PlayerControllers;
@@ -48,13 +50,18 @@ namespace Managers.CoreGameManagers
         private PlayerData _data;
 
         private WeaponData _weaponData;
-        
+
+        public int _health;
+
+        private const int _increaseAmount = 1;
+
         #endregion
         
         #endregion
         private void Awake()
         {
             _data = GetPlayerData();
+            _health = _data.Health;
             _weaponData = GetWeaponData();
             Init();
         }
@@ -76,11 +83,15 @@ namespace Managers.CoreGameManagers
         {
             InputSignals.Instance.onJoystickInputDragged += OnGetInputValues;
             InputSignals.Instance.onInputHandlerChange += OnDisableMovement;
+            CoreGameSignals.Instance.onGetHealthValue += OnSetHealthValue;
+            CoreGameSignals.Instance.onTakeDamage += OnTakeDamage;
         }
         private void UnsubscribeEvents()
         {
             InputSignals.Instance.onJoystickInputDragged -= OnGetInputValues;
             InputSignals.Instance.onInputHandlerChange -= OnDisableMovement;
+            CoreGameSignals.Instance.onGetHealthValue -= OnSetHealthValue;
+            CoreGameSignals.Instance.onTakeDamage -= OnTakeDamage;
         }
         private void OnDisable()
         {
@@ -99,10 +110,44 @@ namespace Managers.CoreGameManagers
             animationController.AimTarget(true);
             AimEnemy();
         }
+
+        public async void IncreaseHealth()
+        {
+            if (CurrentAreaType != AreaType.Base)
+                return;
+      
+            if (_data.Health == _health)
+            {
+                UISignals.Instance.onHealthVisualClose?.Invoke();
+                return;
+            }
+            _health += _increaseAmount;
+            UISignals.Instance.onHealthUpdate?.Invoke(_health);
+            
+            await Task.Delay(50);
+            IncreaseHealth();
+            
+        }
+
+        private void OnTakeDamage(int damage)
+        {   
+            _health -= damage;
+            UISignals.Instance.onHealthUpdate?.Invoke(_health);
+            if (_health != 0) return;
+            UISignals.Instance.onHealthVisualClose?.Invoke();
+            
+        }
         private void AimEnemy() => movementController.RotatePlayerToTarget(!HasEnemyTarget ? null : EnemyList[0]?.GetTransform());
         public void CheckAreaStatus(AreaType areaType) => meshController.ChangeAreaStatus(CurrentAreaType = areaType);
         private void OnDisableMovement(InputHandlers inputHandler) => movementController.DisableMovement(inputHandler);
         public void SetTurretAnimation(bool onTurret) => animationController.HoldTurret(onTurret);
+
+        private int OnSetHealthValue() => _health;
+
+        public void SetOutDoorHealth() => UISignals.Instance.onOutDoorHealthOpen?.Invoke();
+        
+    
+        
 
     }
 }

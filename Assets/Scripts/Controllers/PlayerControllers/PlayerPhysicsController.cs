@@ -53,10 +53,18 @@ namespace Controllers.PlayerControllers
             var playerIsGoingToFrontYard = other.transform.position.z < transform.position.z;
             gameObject.layer = LayerMask.NameToLayer(playerIsGoingToFrontYard ? "FrondYard" : "Base");
             playerManager.CheckAreaStatus(playerIsGoingToFrontYard ? AreaType.Battle : AreaType.Base);
+
+
+            if (!playerIsGoingToFrontYard)
+            {   
+                playerManager.IncreaseHealth();
+                return;
+            }
             
-            if(!playerIsGoingToFrontYard) return;
+            playerManager.SetOutDoorHealth();
             playerManager.HasEnemyTarget = false;
             playerManager.EnemyList.Clear();
+
         }
 
     }

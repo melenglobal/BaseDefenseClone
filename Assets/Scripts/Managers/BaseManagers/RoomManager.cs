@@ -51,7 +51,7 @@ namespace Managers.BaseManagers
                 CoreGameSignals.Instance.onStopMoneyPayment?.Invoke();
                 return;
             }
-
+            
             _roomData.Cost -= _payedAmount;
             CoreGameSignals.Instance.onStartMoneyPayment?.Invoke();
             roomPaymentTextController.UpdateText(_roomData.Cost);

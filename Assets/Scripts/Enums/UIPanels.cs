@@ -4,6 +4,12 @@
     {
         StartPanel,
         LevelPanel,
-        IdlePanel
+        NextLevel,
+        PlayerHealthPanel,
+        PlayerUpgradePanel,
+        WeaponShopPanel,
+        SoldierUpgradePanel,
+        WorkerUpgradePanel
+        
     }
 }

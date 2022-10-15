@@ -37,9 +37,9 @@ namespace Signals
 
         public UnityAction<TurretLocationType,GameObject> onSetCurrentTurret = delegate(TurretLocationType arg0, GameObject o) {  };
 
-        public Func<bool> onHasEnoughMoney;
+        public Func<bool> onHasEnoughMoney = delegate { return default; };
 
-        public Func<bool> onHasEnoughGem;
+        public Func<bool> onHasEnoughGem = delegate { return default; };
         
         public UnityAction onStartMoneyPayment = delegate {  };
         
@@ -50,6 +50,10 @@ namespace Signals
         public UnityAction onLevel = delegate {  };
         
         public UnityAction onFinish = delegate {  };
+
+        public Func<int> onGetHealthValue = delegate { return default; };
+        
+        public UnityAction<int> onTakeDamage = delegate(int arg0) {  };
 
 
     }

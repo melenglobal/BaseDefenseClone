@@ -6,6 +6,8 @@ namespace Data.ValueObject
     public class PlayerData
     {
         public PlayerMovementData MovementData;
+
+        public int Health;
     }
     
     [Serializable]
@@ -18,5 +20,6 @@ namespace Data.ValueObject
         public float ExitClampRightSide = +0.3f;
 
         public float ExitClampBackSide = -0.6f;
+        
     }
 }

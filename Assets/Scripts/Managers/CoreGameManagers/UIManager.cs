@@ -1,8 +1,11 @@
+using System;
 using Controllers;
+using Controllers.BaseControllers;
 using Enums;
 using Signals;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Managers.CoreGameManagers
 {
@@ -14,16 +17,37 @@ namespace Managers.CoreGameManagers
 
         [SerializeField] 
         private UIPanelController uiPanelController;
+        
         [SerializeField] 
-        private TextMeshProUGUI gemScore; 
+        private TextMeshProUGUI gemScore;
+        
         [SerializeField] 
         private TextMeshProUGUI moneyScore;
+        
         [SerializeField] 
         private TextMeshProUGUI levelText;
+
+        [SerializeField] 
+        private TextMeshProUGUI healthText;
         
+        [SerializeField] 
+        private Scrollbar healthBar;
+
         #endregion SerializeField Variables
 
+        #region Private Variables
+
+        private const int _percentage = 100;
+        
+
+        #endregion
+
         #endregion Self Veriables
+
+        private void Start()
+        {
+            OnGetHealthValue();
+        }
 
         #region Event Subcriptions
 
@@ -36,6 +60,9 @@ namespace Managers.CoreGameManagers
             UISignals.Instance.onOpenPanel += OnOpenPanel;
             UISignals.Instance.onClosePanel += OnClosePanel;
             UISignals.Instance.onSetLevelText += OnSetLevelText;
+            UISignals.Instance.onHealthUpdate += OnHealthUpdate;
+            UISignals.Instance.onHealthVisualClose += OnHealthFull;
+            UISignals.Instance.onOutDoorHealthOpen += OnOutDoorHealthOpen;
             CoreGameSignals.Instance.onPlay += OnPlay;
         }
 
@@ -46,6 +73,9 @@ namespace Managers.CoreGameManagers
             UISignals.Instance.onOpenPanel -= OnOpenPanel;
             UISignals.Instance.onClosePanel -= OnClosePanel;
             UISignals.Instance.onSetLevelText -= OnSetLevelText;
+            UISignals.Instance.onHealthUpdate -= OnHealthUpdate;
+            UISignals.Instance.onHealthVisualClose -= OnHealthFull;
+            UISignals.Instance.onOutDoorHealthOpen -= OnOutDoorHealthOpen;
             CoreGameSignals.Instance.onPlay -= OnPlay;
         }
 
@@ -67,22 +97,36 @@ namespace Managers.CoreGameManagers
 
         public void OnNextLevel()
         {
-            UISignals.Instance.onClosePanel?.Invoke(UIPanels.IdlePanel);
+            UISignals.Instance.onClosePanel?.Invoke(UIPanels.NextLevel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.LevelPanel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
             CoreGameSignals.Instance.onNextLevel?.Invoke();
         }
 
+        private void OnOutDoorHealthOpen() => UISignals.Instance.onOpenPanel?.Invoke(UIPanels.PlayerHealthPanel);
+
+        private void OnHealthFull() =>  UISignals.Instance.onClosePanel?.Invoke(UIPanels.PlayerHealthPanel);
+
         private void OnUpdateMoneyScore(int score) => moneyScore.text = score.ToString();
 
         private void OnUpdateGemScore(int score) =>  gemScore.text = score.ToString();
-
+        
+        private void OnSetHealthText(int healthValue) => healthText.text = healthValue.ToString();
+        
         private void OnSetLevelText(int nextLevel)
         {
             nextLevel++;
-            levelText.text = "Level " + nextLevel;
+            levelText.text = "Base " + nextLevel;
         }
+
+        private void OnGetHealthValue() => OnHealthUpdate(CoreGameSignals.Instance.onGetHealthValue.Invoke());
         
+        private void OnHealthUpdate(int healthValue)
+        {
+            OnSetHealthText(healthValue);
+            healthBar.size = (float)healthValue/_percentage;
+        }
+
 
     }
 }

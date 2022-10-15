@@ -83,19 +83,13 @@ namespace Controllers
                 canRemove = true;
                 return;
             }
-            
-            if(StackList.Count > 0)
-            {
-                RemoveStackAnimation(StackList[StackList.Count - 1],targetTransform);
-                StackList.TrimExcess();
-                if (StackList.Count % 9==0)
-                {
-                    await Task.Delay(100);
-                }
-                await Task.Delay(1);
-                RemoveAllStack(targetTransform);
-                
-            }
+
+            if (StackList.Count <= 0) return;
+            RemoveStackAnimation(StackList[StackList.Count - 1],targetTransform);
+            StackList.TrimExcess();
+            CoreGameSignals.Instance.onUpdateGemScoreData?.Invoke();
+            await Task.Delay(100);
+            RemoveAllStack(targetTransform);
         }
 
         private void RemoveStackAnimation(GameObject removedStack,Transform targetTransform)
@@ -107,11 +101,10 @@ namespace Controllers
             GetStackSequence.Join(removedStack.transform.DOLocalRotate(randomRemovedStackRotation, .1f)).OnComplete(() =>
             {
                 removedStack.transform.rotation = Quaternion.LookRotation(targetTransform.forward);
-                            StackList.Remove(removedStack);
-                //removedStack.transform.parent=targetTransform;           
-                removedStack.transform.DOMove(targetTransform.localPosition+new Vector3(0,targetTransform.localScale.y*2,0), .1f).OnComplete(() =>
+                StackList.Remove(removedStack);
+                          
+                removedStack.transform.DOLocalMove(targetTransform.localPosition+new Vector3(0,targetTransform.localScale.y*2,0), .1f).OnComplete(() =>
                 {
-                    
                     removedStack.transform.DOScale(Vector3.zero, 0.2f);
                     removedStack.transform.SetParent(null);
                     removedStack.SetActive(false);

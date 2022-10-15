@@ -1,4 +1,5 @@
 ﻿using Abstract;
+using Signals;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,7 +12,9 @@ namespace AIBrains.EnemyBrain
         private readonly EnemyAIBrain _enemyAIBrain;
         private static readonly int Attack1 = Animator.StringToHash("Attack");
 
-        private float _attackTimer = 1f;
+        private const int _attackPower = 10;
+
+        private float _attackTimer = 2f;
 
         public Attack(NavMeshAgent agent,Animator animator)
         {
@@ -24,9 +27,9 @@ namespace AIBrains.EnemyBrain
             _attackTimer -= Time.deltaTime;
             if (!(_attackTimer <= 0)) return;
             
-            Debug.Log("ATTACK!");
+            CoreGameSignals.Instance.onTakeDamage?.Invoke(_attackPower);
             _animator.SetTrigger(Attack1);
-            _attackTimer = 1f;
+            _attackTimer = 2f;
 
         }
         

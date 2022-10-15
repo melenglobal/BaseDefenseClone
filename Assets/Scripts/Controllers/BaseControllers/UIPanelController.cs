@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Enums;
 using UnityEngine;
 
-namespace Controllers
+namespace Controllers.BaseControllers
 {
     public class UIPanelController : MonoBehaviour
     {

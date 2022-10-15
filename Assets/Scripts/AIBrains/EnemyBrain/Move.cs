@@ -15,7 +15,7 @@ namespace AIBrains.EnemyBrain
         private static readonly int Speed = Animator.StringToHash("Speed");
         private static readonly int Run = Animator.StringToHash("Run");
 
-        private float _enemySpeed = 2.242956f;
+        private float _enemySpeed = 2.25f;
 
         public Move(EnemyAIBrain enemyAIBrain,NavMeshAgent agent,Animator animator)
         {
@@ -38,7 +38,7 @@ namespace AIBrains.EnemyBrain
             _navMeshAgent.enabled = true;
             _navMeshAgent.SetDestination(_enemyAIBrain.TurretTarget.position);
             _animator.SetTrigger(Run);
-            _navMeshAgent.speed = 2.242956f;
+            _navMeshAgent.speed = _enemySpeed;
         }
 
         public void OnExit()

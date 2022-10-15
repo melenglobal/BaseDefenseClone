@@ -52,5 +52,5 @@ MonoBehaviour:
   EnemySpawnData:
     NumberOfEnemiesToSpawn: 50
     SpawnDelay: 2
-    RandomMaxRange: 11
+    RandomMaxRange: 100
     MinPossibilityToSpawnEnemy: 30
