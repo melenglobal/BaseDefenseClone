@@ -85,6 +85,7 @@ namespace Managers.CoreGameManagers
             InputSignals.Instance.onInputHandlerChange += OnDisableMovement;
             CoreGameSignals.Instance.onGetHealthValue += OnSetHealthValue;
             CoreGameSignals.Instance.onTakeDamage += OnTakeDamage;
+            CoreGameSignals.Instance.onLevelInitialize += OnPlayerInitialize;
         }
         private void UnsubscribeEvents()
         {
@@ -92,7 +93,15 @@ namespace Managers.CoreGameManagers
             InputSignals.Instance.onInputHandlerChange -= OnDisableMovement;
             CoreGameSignals.Instance.onGetHealthValue -= OnSetHealthValue;
             CoreGameSignals.Instance.onTakeDamage -= OnTakeDamage;
+            CoreGameSignals.Instance.onLevelInitialize += OnPlayerInitialize;
         }
+
+        private void OnPlayerInitialize()
+        {   
+            animationController.gameObject.SetActive(true);
+            CoreGameSignals.Instance.onPlayerInitialize?.Invoke(transform);
+        }
+
         private void OnDisable()
         {
             UnsubscribeEvents();

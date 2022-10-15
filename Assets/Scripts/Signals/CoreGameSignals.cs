@@ -1,6 +1,7 @@
 using System;
 using Enums;
 using Extentions;
+using Managers.CoreGameManagers;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -21,7 +22,7 @@ namespace Signals
         
         public UnityAction onReset = delegate { };
         
-        public UnityAction onSetCameraTarget = delegate { };
+        public UnityAction<Transform> onSetCameraTarget = delegate { };
         
         public UnityAction onApplicationPause = delegate { };
         
@@ -54,7 +55,7 @@ namespace Signals
         public Func<int> onGetHealthValue = delegate { return default; };
         
         public UnityAction<int> onTakeDamage = delegate(int arg0) {  };
-
-
+        
+        public UnityAction<Transform> onPlayerInitialize = delegate(Transform arg0) {  };
     }
 }

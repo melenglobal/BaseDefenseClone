@@ -8,13 +8,16 @@ namespace Managers.CoreGameManagers
 {
     public class CameraManager : MonoBehaviour
     {
-    #region Self Variables
+        #region Self Variables
         #region SerilizeField
+        
         [SerializeField] private CinemachineStateDrivenCamera stateDrivenCamera;
-        [SerializeField] private PlayerManager playerManager;
         [SerializeField] private Animator cameraAnimator;
+        
         #endregion
         #region Private Variables
+        
+        private Transform _playerTransform;
 
         #endregion
         #endregion
@@ -29,7 +32,7 @@ namespace Managers.CoreGameManagers
 
         private void SubscribeEvents()
         {
-            CoreGameSignals.Instance.onPlay += OnPlay;
+            CoreGameSignals.Instance.onPlayerInitialize += OnPlayerInitialize;
             CoreGameSignals.Instance.onReset += OnReset;
             CoreGameSignals.Instance.onSetCameraTarget += OnSetCameraTarget;
             CoreGameSignals.Instance.onEnterTurret += OnEnterTurret;
@@ -40,7 +43,7 @@ namespace Managers.CoreGameManagers
 
         private void UnsubscribeEvents()
         {
-            CoreGameSignals.Instance.onPlay -= OnPlay;
+            CoreGameSignals.Instance.onPlayerInitialize-= OnPlayerInitialize;
             CoreGameSignals.Instance.onReset -= OnReset;
             CoreGameSignals.Instance.onSetCameraTarget -= OnSetCameraTarget;
             CoreGameSignals.Instance.onEnterTurret -= OnEnterTurret;
@@ -57,16 +60,17 @@ namespace Managers.CoreGameManagers
         #endregion
 
         #region Evet Methods
-        private void OnPlay()
-        {
+        private void OnPlayerInitialize(Transform playerTransform)
+        {   
+            _playerTransform = playerTransform;
+            CoreGameSignals.Instance.onSetCameraTarget?.Invoke(_playerTransform);
             ChangeCamera(CameraTypes.Level);
-            CoreGameSignals.Instance.onSetCameraTarget?.Invoke();
         }
         
         [Button]
         public void OnFinish()
         {   
-            stateDrivenCamera.Follow = playerManager.transform;
+            stateDrivenCamera.Follow = _playerTransform;
             ChangeCamera(CameraTypes.Finish);
         }
 
@@ -78,19 +82,18 @@ namespace Managers.CoreGameManagers
 
         private void OnLevel()
         {   
-            stateDrivenCamera.Follow = playerManager.transform;
+            stateDrivenCamera.Follow = _playerTransform;
             ChangeCamera(CameraTypes.Level);
         }
         private void OnReset()
         {
-           ChangeCamera(CameraTypes.Level);
-            CoreGameSignals.Instance.onSetCameraTarget?.Invoke();
+            ChangeCamera(CameraTypes.Level);
+            CoreGameSignals.Instance.onSetCameraTarget?.Invoke(_playerTransform);
         }
 
-        private void OnSetCameraTarget()
+        private void OnSetCameraTarget(Transform playerTransform)
         {
-            playerManager = FindObjectOfType<PlayerManager>();
-            stateDrivenCamera.Follow = playerManager.transform;
+            stateDrivenCamera.Follow = _playerTransform;
             ChangeCamera(CameraTypes.Level);
         }
 
