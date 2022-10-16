@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Abstract.Interfaces.Pool;
 using AIBrains.SoldierBrain;
 using Data.ValueObject;
 using Enums;
@@ -10,7 +11,7 @@ using UnityEngine;
 
 namespace Managers.BaseManagers
 {
-    public class MilitaryBaseManager : MonoBehaviour
+    public class MilitaryBaseManager : MonoBehaviour,IGetPoolObject
     {
         #region Self Variables
 
@@ -142,7 +143,7 @@ namespace Managers.BaseManagers
         {
             UpdateSoldierAmount();
         }
-        [Button]
+        
         private async void UpdateSoldierAmount()
         {
             if(!_isTentAvaliable) return;
@@ -178,7 +179,6 @@ namespace Managers.BaseManagers
         
         #region SaveSignals
         
-        [Button]
         private void SaveData()
         {
             InitializeDataSignals.Instance.onSaveMilitaryBaseData.Invoke(_data);

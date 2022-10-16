@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using Abstract;
-using Controllers.WorkerPhysicsControllers;
 using Data.UnityObject;
 using Data.ValueObject;
 using Enums;

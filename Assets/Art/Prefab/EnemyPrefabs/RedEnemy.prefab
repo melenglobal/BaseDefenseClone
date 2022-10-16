@@ -827,7 +827,11 @@ MonoBehaviour:
   CurrentTarget: {fileID: 0}
   TurretTarget: {fileID: 0}
   spawnPosition: {fileID: 8965314844710460317, guid: 81322c27152a7994896025ef68b85537, type: 3}
-  enemyType: 0
+  enemyType: 1
+  navMeshAgent: {fileID: 3243807756733028532}
+  animator: {fileID: 5272086749041213176}
+  _playerPhysicsController: {fileID: 0}
+  _soldierHealthController: {fileID: 0}
 --- !u!1 &3431285260894626589
 GameObject:
   m_ObjectHideFlags: 0

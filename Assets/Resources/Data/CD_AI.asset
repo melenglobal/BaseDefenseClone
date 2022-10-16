@@ -24,7 +24,7 @@ MonoBehaviour:
     Speed: 1.47
   SoldierAIData:
     Damage: 0
-    Health: 0
+    Health: 40
     Speed: 0
     AttackRate: 0
     AttackRadius: 0
@@ -54,3 +54,10 @@ MonoBehaviour:
     SpawnDelay: 2
     RandomMaxRange: 100
     MinPossibilityToSpawnEnemy: 30
+  EnemyBossData:
+    Health: 250
+    Damage: 50
+    AttackRange: 10
+    Speed: 2
+    ChaseSpeed: 0
+    EnemyType: 3

@@ -18,8 +18,7 @@ namespace AIBrains.SoldierBrain
         
         public bool HasReachedSlotTarget;
         public bool HasReachedFrontYard;
-        public bool HasEnemyTarget = false;
-        
+
         public Transform TentPosition;
         public Transform FrontYardStartPosition;
         public List<IDamageable> enemyList = new List<IDamageable>();
@@ -27,11 +26,15 @@ namespace AIBrains.SoldierBrain
         public IDamageable DamageableEnemy;
         public Transform WeaponHolder;
         public bool HasSoldiersActivated;
+        
+        private int _health;
+        public int Health { get  =>  _health; set => _health = value; }
+        
         #endregion
 
         #region Serialized Variables
         [SerializeField]
-        private Animator animator;  //Data
+        private Animator animator; 
         
         [SerializeField]
         private NavMeshAgent _navMeshAgent;
@@ -52,7 +55,14 @@ namespace AIBrains.SoldierBrain
         private void Awake()
         {
             _data = GetSoldierAIData();
-        } private void Start()
+        }
+
+        private void OnEnable()
+        {
+            _health = _data.Health;
+        }
+
+        private void Start()
         {
             GetStateReferences();
         }
@@ -65,6 +75,7 @@ namespace AIBrains.SoldierBrain
             var moveToFrontYard = new MoveToFrontYard(this,_navMeshAgent,FrontYardStartPosition,animator);
             var patrol = new Patrol(this,_navMeshAgent,animator);
             var shootTarget = new ShootTarget(this,_navMeshAgent,animator);
+            var death = new Death(this, animator, _navMeshAgent);
             _stateMachine = new StateMachine();
             
             At(idle,moveToSlotZone,hasSlotTransformList());
@@ -77,13 +88,17 @@ namespace AIBrains.SoldierBrain
 
             _stateMachine.SetState(idle);
             void At(IState to,IState from,Func<bool> condition) =>_stateMachine.AddTransition(to,from,condition);
+            _stateMachine.AddAnyTransition(death,hasSoldierDied());
 
             Func<bool> hasSlotTransformList()=> ()=> _slotTransform!= null;
             Func<bool> hasReachToSlot()=> ()=> _slotTransform != null && HasReachedSlotTarget;
             Func<bool> hasSoldiersActivated()=> ()=> FrontYardStartPosition != null && HasSoldiersActivated;
             Func<bool> hasReachedFrontYard()=> ()=> FrontYardStartPosition != null && HasReachedFrontYard;
-            Func<bool> hasEnemyTarget() => () => HasEnemyTarget;
-            Func<bool> hasNoEnemyTarget() => () => !HasEnemyTarget;
+            Func<bool> hasEnemyTarget() => () => EnemyTarget;
+            Func<bool> hasNoEnemyTarget() => () => !EnemyTarget;
+            
+            Func<bool> hasSoldierDied() => () => Health == 0;
+            
         }
         private void Update() =>  _stateMachine.Tick();
         public void GetSlotTransform(Vector3 slotTransfrom)=>  _slotTransform = slotTransfrom;

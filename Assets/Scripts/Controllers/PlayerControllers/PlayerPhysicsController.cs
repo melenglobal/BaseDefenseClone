@@ -4,6 +4,7 @@ using Controllers.TurretControllers;
 using Enums;
 using Managers;
 using Managers.CoreGameManagers;
+using Signals;
 using UnityEngine;
 
 namespace Controllers.PlayerControllers
@@ -21,6 +22,11 @@ namespace Controllers.PlayerControllers
         #endregion
         private void OnTriggerEnter(Collider other)
         {
+            if (other.TryGetComponent(out IAttacker attacker))
+            {   
+                Debug.Log("DAMAGE!");
+                CoreGameSignals.Instance.onTakePlayerDamage?.Invoke(attacker.Damage());
+            }
             if (other.TryGetComponent(out GatePhysicsController physicsController))
             {
                 GateEnter(other);

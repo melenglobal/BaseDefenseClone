@@ -1855,6 +1855,8 @@ MonoBehaviour:
   TurretTarget: {fileID: 0}
   spawnPosition: {fileID: 8965314844710460317, guid: 81322c27152a7994896025ef68b85537, type: 3}
   enemyType: 0
+  navMeshAgent: {fileID: 6421847800292410631}
+  animator: {fileID: 3497094948755642170}
 --- !u!1 &6454500306923120509
 GameObject:
   m_ObjectHideFlags: 0

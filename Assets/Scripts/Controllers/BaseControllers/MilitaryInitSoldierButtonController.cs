@@ -7,10 +7,9 @@ namespace Controllers.BaseControllers
     {
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Player"))
-            {
-                AISignals.Instance.onSoldierAmountUpgrade?.Invoke();
-            }
+            if (!other.CompareTag("Player")) return;
+            AISignals.Instance.onSoldierAmountUpgrade?.Invoke();
+            Debug.Log("Player Enter");
         }
     }
 }

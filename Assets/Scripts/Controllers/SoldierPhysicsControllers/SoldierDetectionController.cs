@@ -27,13 +27,12 @@ namespace Controllers.SoldierPhysicsControllers
         private void OnTriggerEnter(Collider other)
         {
             if (!other.TryGetComponent(out IDamageable damagable)) return;
-            if(damagable.IsTaken) return;
-            damagable.IsTaken = true;
+            if(damagable.IsTaken || damagable.IsDead) return;
             soldierAIBrain.enemyList.Add(damagable);
+            damagable.IsTaken = true;
             if (soldierAIBrain.EnemyTarget != null) return;
             soldierAIBrain.EnemyTarget = soldierAIBrain.enemyList[0].GetTransform();
             soldierAIBrain.DamageableEnemy = soldierAIBrain.enemyList[0];
-            soldierAIBrain.HasEnemyTarget = true;
         }
         private void OnTriggerExit(Collider other)
         {
@@ -44,7 +43,6 @@ namespace Controllers.SoldierPhysicsControllers
             if (soldierAIBrain.enemyList.Count == 0)
             {
                 soldierAIBrain.EnemyTarget = null;
-                soldierAIBrain.HasEnemyTarget = false;
             }
             damagable.IsTaken = false;
         }

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using Abstract.Interfaces.Pool;
 using AIBrains.EnemyBrain;
 using Buyablezone.ConditionHandlers;
+using Controllers.AIControllers;
+using Controllers.Throw;
 using Data.UnityObject;
 using Data.ValueObject;
 using Enums;
@@ -23,11 +25,23 @@ namespace Managers.AIManagers
         
         private List<GameObject> enemyList = new List<GameObject>();
 
-        [SerializeField] private List<Transform> randomTargetTransform;
+        [SerializeField] 
+        private List<Transform> randomTargetTransform;
 
-        [SerializeField] private Transform spawnTransform;
+        [SerializeField] 
+        private Transform spawnTransform;
 
-        [SerializeField] private EnemySpawnData enemySpawnData;
+        [SerializeField] 
+        private EnemySpawnData enemySpawnData;
+        
+        [SerializeField]
+        private Transform bossSpawnPos;
+
+        [SerializeField]
+        private GameObject spriteTarget;
+
+        [SerializeField] 
+        private PortalController portalController;
 
         private const string _dataPath = "Data/CD_AI";
 
@@ -59,6 +73,7 @@ namespace Managers.AIManagers
             AISignals.Instance.getSpawnTransform += SetSpawnTransform;
             AISignals.Instance.getRandomTransform += SetRandomTransform;
             AISignals.Instance.onReleaseObjectUpdate += OnReleasedObjectCount;
+            CoreGameSignals.Instance.onOpenPortal += OnOpenPortal;
         }
 
         private void UnsubscribeEvents()
@@ -66,6 +81,7 @@ namespace Managers.AIManagers
             AISignals.Instance.getSpawnTransform -= SetSpawnTransform;
             AISignals.Instance.getRandomTransform -= SetRandomTransform;
             AISignals.Instance.onReleaseObjectUpdate -= OnReleasedObjectCount;
+            CoreGameSignals.Instance.onOpenPortal -= OnOpenPortal;
         }
 
         private void OnDisable()
@@ -87,6 +103,7 @@ namespace Managers.AIManagers
         private void Start()
         {
             StartCoroutine(SpawnEnemies());
+            StartCoroutine(SpawnBoss());
         }
         
         private IEnumerator SpawnEnemies()
@@ -144,5 +161,19 @@ namespace Managers.AIManagers
         {
             return CoreGameSignals.Instance.onGetObjectFromPool(poolName);
         }
+        private IEnumerator SpawnBoss()
+        {
+            yield return new WaitForSeconds(enemySpawnData.SpawnDelay);
+            var bossObj = GetObject(PoolType.BossEnemy);
+            bossObj.GetComponentInChildren<ThrowEventController>().SpriteTarget = spriteTarget;
+            bossObj.transform.position = new Vector3(0f, 0.1f, 175.399994f);
+            
+        }
+        
+        private void OnOpenPortal()
+        {
+            portalController.OpenPortal();
+        }
+
     }
 }

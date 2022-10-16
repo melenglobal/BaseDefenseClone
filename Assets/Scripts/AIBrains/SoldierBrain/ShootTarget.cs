@@ -73,11 +73,18 @@ namespace AIBrains.SoldierBrain
         
         private void SetEnemyTargetTransform()
         {
-            _soldierAIBrain.HasEnemyTarget = false;
-            if(_soldierAIBrain.enemyList.Count ==0) return;
-            _soldierAIBrain.EnemyTarget = _soldierAIBrain.enemyList[0].GetTransform();
             _soldierAIBrain.DamageableEnemy = _soldierAIBrain.enemyList[0];
-            _soldierAIBrain.HasEnemyTarget = true;
+            if (_soldierAIBrain.DamageableEnemy.IsTaken)
+            {
+                _soldierAIBrain.EnemyTarget = null;
+                RemoveTarget();
+            }
+            else
+            {
+                _soldierAIBrain.DamageableEnemy.IsTaken = true;
+                if(_soldierAIBrain.enemyList.Count ==0) return;
+                _soldierAIBrain.EnemyTarget = _soldierAIBrain.DamageableEnemy.GetTransform();
+            }
         }
         private void EnemyTargetStatus()
         {
@@ -87,7 +94,7 @@ namespace AIBrains.SoldierBrain
             }
             else
             {
-                _soldierAIBrain.HasEnemyTarget = false;
+                _soldierAIBrain.EnemyTarget = null;
             }
         } 
         private void RemoveTarget()

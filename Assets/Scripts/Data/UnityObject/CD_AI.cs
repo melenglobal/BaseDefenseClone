@@ -17,5 +17,7 @@ namespace Data.UnityObject
         public EnemyAIData EnemyAIData;
         
         public EnemySpawnData EnemySpawnData;
+
+        public EnemyBossData EnemyBossData;
     }
 }

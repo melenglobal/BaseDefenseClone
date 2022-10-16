@@ -1,15 +1,17 @@
 ﻿using Abstract;
 using Abstract.Interfaces;
 using AIBrains.EnemyBrain;
-using Controllers.PlayerControllers;
-using Managers;
 using UnityEngine;
 
-namespace Controllers.WorkerPhysicsControllers
+namespace Controllers.AIControllers
 {
     public class EnemyPhysicsController : MonoBehaviour,IDamageable
     {
-        
+        private void OnEnable()
+        {
+            IsDead = false;
+        }
+
         [SerializeField]
         private EnemyAIBrain _enemyAIBrain;
         public bool IsTaken { get; set; }
@@ -29,15 +31,10 @@ namespace Controllers.WorkerPhysicsControllers
             }
         }
 
-        public Vector3 GetNearestPosition(GameObject gO)
-        {
-            return gO?.transform.position ?? Vector3.zero;
-        }
-        
         public int TakeDamage(int damage)
         {
             if (_enemyAIBrain.Health <= 0) return 0;
-            _enemyAIBrain.Health = _enemyAIBrain.Health - damage;
+            _enemyAIBrain.Health -= damage;
             
             if (_enemyAIBrain.Health != 0) return _enemyAIBrain.Health;
             

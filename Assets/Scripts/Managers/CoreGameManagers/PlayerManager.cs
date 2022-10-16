@@ -84,7 +84,7 @@ namespace Managers.CoreGameManagers
             InputSignals.Instance.onJoystickInputDragged += OnGetInputValues;
             InputSignals.Instance.onInputHandlerChange += OnDisableMovement;
             CoreGameSignals.Instance.onGetHealthValue += OnSetHealthValue;
-            CoreGameSignals.Instance.onTakeDamage += OnTakeDamage;
+            CoreGameSignals.Instance.onTakePlayerDamage += OnTakeDamage;
             CoreGameSignals.Instance.onLevelInitialize += OnPlayerInitialize;
         }
         private void UnsubscribeEvents()
@@ -92,7 +92,7 @@ namespace Managers.CoreGameManagers
             InputSignals.Instance.onJoystickInputDragged -= OnGetInputValues;
             InputSignals.Instance.onInputHandlerChange -= OnDisableMovement;
             CoreGameSignals.Instance.onGetHealthValue -= OnSetHealthValue;
-            CoreGameSignals.Instance.onTakeDamage -= OnTakeDamage;
+            CoreGameSignals.Instance.onTakePlayerDamage -= OnTakeDamage;
             CoreGameSignals.Instance.onLevelInitialize += OnPlayerInitialize;
         }
 
@@ -139,9 +139,22 @@ namespace Managers.CoreGameManagers
         }
 
         private void OnTakeDamage(int damage)
-        {   
+        {
+            if (_health <= 0)
+            {
+                //DEath anim
+                //Respawn
+                UISignals.Instance.onHealthVisualClose?.Invoke();
+                _health = _data.Health;
+                UISignals.Instance.onHealthUpdate?.Invoke(_health);
+                return; 
+            }
             _health -= damage;
-            UISignals.Instance.onHealthUpdate?.Invoke(_health);
+            if (_health >= 0)
+            {
+                UISignals.Instance.onHealthUpdate?.Invoke(_health);
+            }
+            
             if (_health != 0) return;
             UISignals.Instance.onHealthVisualClose?.Invoke();
             

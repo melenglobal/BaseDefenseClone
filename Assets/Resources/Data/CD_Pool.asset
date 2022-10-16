@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CD_Pool
   m_EditorClassIdentifier: 
   PoolDataDic:
-    m_Keys: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000
+    m_Keys: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e0000000f00000010000000
     m_Values:
     - ObjectType: {fileID: 862312575517477984, guid: 2fac699c0375e6d46bcb2af1935510da, type: 3}
       PoolHolder: {fileID: 0}
@@ -67,9 +67,9 @@ MonoBehaviour:
       PoolHolder: {fileID: 0}
       initalAmount: 50
       isDynamic: 1
-    - ObjectType: {fileID: 0}
+    - ObjectType: {fileID: 8986287384279758473, guid: 6913c5484633f7d4f97499f9379ccc20, type: 3}
       PoolHolder: {fileID: 0}
-      initalAmount: 0
+      initalAmount: 1
       isDynamic: 0
     - ObjectType: {fileID: 5825511027792451468, guid: 3bd9b5b145062f24098a8550fa33bfaf, type: 3}
       PoolHolder: {fileID: 0}
@@ -78,4 +78,8 @@ MonoBehaviour:
     - ObjectType: {fileID: 5910510186796030129, guid: 8902d6257d949314da4001da173bdb83, type: 3}
       PoolHolder: {fileID: 0}
       initalAmount: 200
+      isDynamic: 1
+    - ObjectType: {fileID: 445013897161806018, guid: 88c897216e7095e4db07cda987bd60fa, type: 3}
+      PoolHolder: {fileID: 0}
+      initalAmount: 10
       isDynamic: 1

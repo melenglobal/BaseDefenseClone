@@ -4,6 +4,7 @@
     {
         OrangeEnemy,
         RedEnemy,
-        BigRedEnemy
+        BigRedEnemy,
+        BossEnemy,
     }
 }

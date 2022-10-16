@@ -54,8 +54,10 @@ namespace Signals
 
         public Func<int> onGetHealthValue = delegate { return default; };
         
-        public UnityAction<int> onTakeDamage = delegate(int arg0) {  };
+        public UnityAction<int> onTakePlayerDamage = delegate(int arg0) {  };
         
         public UnityAction<Transform> onPlayerInitialize = delegate(Transform arg0) {  };
+        
+        public UnityAction onOpenPortal = delegate { };
     }
 }

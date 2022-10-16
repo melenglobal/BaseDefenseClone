@@ -11,25 +11,25 @@ namespace AIBrains.EnemyBrain
         private readonly Animator _animator;
         private readonly EnemyAIBrain _enemyAIBrain;
         private static readonly int Attack1 = Animator.StringToHash("Attack");
+        private static readonly int Run = Animator.StringToHash("Run");
 
-        private const int _attackPower = 10;
+        private float _attackTimer = 1f;
+        
 
-        private float _attackTimer = 2f;
-
-        public Attack(NavMeshAgent agent,Animator animator)
+        public Attack(NavMeshAgent agent,Animator animator,EnemyAIBrain enemyAIBrain)
         {
             _navMeshAgent = agent;
             _animator = animator;
+            _enemyAIBrain = enemyAIBrain;
         }
         public void Tick()
         {
 
             _attackTimer -= Time.deltaTime;
             if (!(_attackTimer <= 0)) return;
-            
-            CoreGameSignals.Instance.onTakeDamage?.Invoke(_attackPower);
+            _enemyAIBrain.HitDamage();
             _animator.SetTrigger(Attack1);
-            _attackTimer = 2f;
+            _attackTimer = 1f;
 
         }
         
@@ -39,7 +39,7 @@ namespace AIBrains.EnemyBrain
 
         public void OnExit()
         {
-            
+            //_animator.SetTrigger(Run);
         }
     }
 }
