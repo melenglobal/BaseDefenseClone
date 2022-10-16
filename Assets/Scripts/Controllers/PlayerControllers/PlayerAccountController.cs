@@ -9,6 +9,7 @@ namespace Controllers.PlayerControllers
 {
     public class PlayerAccountController : MonoBehaviour,ICustomer
     {
+        public SphereCollider Collider;
         
         [SerializeField] private PlayerMoneyStackerController playerMoneyStackerController;
         private void OnTriggerEnter(Collider other)

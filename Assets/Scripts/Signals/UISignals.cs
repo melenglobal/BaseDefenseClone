@@ -11,8 +11,8 @@ namespace Signals
         public UnityAction<int> onSetLevelText=delegate { };
         public UnityAction<int> onUpdateMoneyScore = delegate(int arg0) {  };
         public UnityAction<int> onUpdateGemScore = delegate(int arg0) {  };
-        public UnityAction onOutDoorHealthOpen = delegate {  };
-        public UnityAction onHealthVisualClose = delegate {  };
+        public UnityAction onHealthBarOpen = delegate {  };
+        public UnityAction onHealthBarClose = delegate {  };
         public UnityAction<int> onHealthUpdate = delegate(int arg0) {  };
     }
 }

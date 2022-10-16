@@ -23,8 +23,7 @@ namespace Controllers.PlayerControllers
         private void OnTriggerEnter(Collider other)
         {
             if (other.TryGetComponent(out IAttacker attacker))
-            {   
-                Debug.Log("DAMAGE!");
+            {
                 CoreGameSignals.Instance.onTakePlayerDamage?.Invoke(attacker.Damage());
             }
             if (other.TryGetComponent(out GatePhysicsController physicsController))
@@ -71,6 +70,11 @@ namespace Controllers.PlayerControllers
             playerManager.HasEnemyTarget = false;
             playerManager.EnemyList.Clear();
 
+        }
+
+        public void PlayerReset()
+        {
+            gameObject.layer = LayerMask.NameToLayer("Base");
         }
 
     }

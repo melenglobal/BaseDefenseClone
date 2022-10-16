@@ -1,4 +1,5 @@
 using System;
+using Controllers.StackableControllers;
 using Enums;
 using Extentions;
 using Managers.CoreGameManagers;
@@ -22,6 +23,8 @@ namespace Signals
         
         public UnityAction onReset = delegate { };
         
+        public UnityAction onResetPlayer = delegate {  };
+
         public UnityAction<Transform> onSetCameraTarget = delegate { };
         
         public UnityAction onApplicationPause = delegate { };
@@ -59,5 +62,7 @@ namespace Signals
         public UnityAction<Transform> onPlayerInitialize = delegate(Transform arg0) {  };
         
         public UnityAction onOpenPortal = delegate { };
+        
+        public UnityAction<StackableMoney> onMoneyReleased  = delegate(StackableMoney arg0) {  };
     }
 }

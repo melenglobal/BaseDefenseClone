@@ -61,8 +61,8 @@ namespace Managers.CoreGameManagers
             UISignals.Instance.onClosePanel += OnClosePanel;
             UISignals.Instance.onSetLevelText += OnSetLevelText;
             UISignals.Instance.onHealthUpdate += OnHealthUpdate;
-            UISignals.Instance.onHealthVisualClose += OnHealthFull;
-            UISignals.Instance.onOutDoorHealthOpen += OnOutDoorHealthOpen;
+            UISignals.Instance.onHealthBarClose += OnHealthBarClose;
+            UISignals.Instance.onHealthBarOpen += OnHealthBarOpen;
             CoreGameSignals.Instance.onPlay += OnPlay;
         }
 
@@ -74,8 +74,8 @@ namespace Managers.CoreGameManagers
             UISignals.Instance.onClosePanel -= OnClosePanel;
             UISignals.Instance.onSetLevelText -= OnSetLevelText;
             UISignals.Instance.onHealthUpdate -= OnHealthUpdate;
-            UISignals.Instance.onHealthVisualClose -= OnHealthFull;
-            UISignals.Instance.onOutDoorHealthOpen -= OnOutDoorHealthOpen;
+            UISignals.Instance.onHealthBarClose -= OnHealthBarClose;
+            UISignals.Instance.onHealthBarOpen -= OnHealthBarOpen;
             CoreGameSignals.Instance.onPlay -= OnPlay;
         }
 
@@ -103,9 +103,9 @@ namespace Managers.CoreGameManagers
             CoreGameSignals.Instance.onNextLevel?.Invoke();
         }
 
-        private void OnOutDoorHealthOpen() => UISignals.Instance.onOpenPanel?.Invoke(UIPanels.PlayerHealthPanel);
+        private void OnHealthBarOpen() => UISignals.Instance.onOpenPanel?.Invoke(UIPanels.PlayerHealthPanel);
 
-        private void OnHealthFull() =>  UISignals.Instance.onClosePanel?.Invoke(UIPanels.PlayerHealthPanel);
+        private void OnHealthBarClose() =>  UISignals.Instance.onClosePanel?.Invoke(UIPanels.PlayerHealthPanel);
 
         private void OnUpdateMoneyScore(int score) => moneyScore.text = score.ToString();
 

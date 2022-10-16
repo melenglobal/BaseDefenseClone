@@ -7,7 +7,8 @@
         Pistol,
         Riffle,
         ShotGun,
-        MiniGun
+        MiniGun,
+        Die
         
     }
 }

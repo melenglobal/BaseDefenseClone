@@ -5,7 +5,7 @@ namespace Controllers.Bomb
 {
     public class BombPhysicController : MonoBehaviour, IAttacker
     {
-        private const int DAMAGE = 95;
+        private const int DAMAGE = 40;
 
         public int Damage()
         {

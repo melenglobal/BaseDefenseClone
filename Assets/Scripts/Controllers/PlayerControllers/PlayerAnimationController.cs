@@ -111,7 +111,7 @@ namespace Controllers.PlayerControllers
                     : PlayerAnimationStates.Idle);
             }
         }
-        private void ChangeAnimations(PlayerAnimationStates animationStates)
+       public void ChangeAnimations(PlayerAnimationStates animationStates)
         {
             if (animationStates == _currentAnimationState) return;
              animator.Play(animationStates.ToString());
@@ -120,6 +120,11 @@ namespace Controllers.PlayerControllers
         public void AimTarget(bool hasTarget)
         {
             animator.SetBool("Aimed",hasTarget);
+        }
+
+        public void DeathAnimation()
+        {
+            animator.Play(PlayerAnimationStates.Die.ToString());
         }
 
         public void HoldTurret(bool hold)

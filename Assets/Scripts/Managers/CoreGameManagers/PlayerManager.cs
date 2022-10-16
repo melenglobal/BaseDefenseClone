@@ -6,7 +6,9 @@ using Controllers;
 using Controllers.PlayerControllers;
 using Data.UnityObject;
 using Data.ValueObject;
+using DG.Tweening;
 using Enums;
+using Enums.Player;
 using Keys;
 using Signals;
 using UnityEngine;
@@ -32,7 +34,7 @@ namespace Managers.CoreGameManagers
         #endregion
 
         #region Serialized Variables
-
+        
         [SerializeField] 
         private PlayerMeshController meshController;
         [SerializeField] 
@@ -43,6 +45,15 @@ namespace Managers.CoreGameManagers
         private PlayerShootingController shootingController;
         [SerializeField]
         private PlayerMovementController movementController;
+
+        [SerializeField] 
+        private PlayerMoneyStackerController playerMoneyStackerController;
+
+        [SerializeField] 
+        private PlayerPhysicsController playerPhysicsController;
+
+        [SerializeField] 
+        private PlayerAccountController playerAccountController;
         #endregion
 
         #region Private Variables
@@ -54,6 +65,10 @@ namespace Managers.CoreGameManagers
         public int _health;
 
         private const int _increaseAmount = 1;
+
+        private bool _canReset;
+        
+        
 
         #endregion
         
@@ -93,7 +108,7 @@ namespace Managers.CoreGameManagers
             InputSignals.Instance.onInputHandlerChange -= OnDisableMovement;
             CoreGameSignals.Instance.onGetHealthValue -= OnSetHealthValue;
             CoreGameSignals.Instance.onTakePlayerDamage -= OnTakeDamage;
-            CoreGameSignals.Instance.onLevelInitialize += OnPlayerInitialize;
+            CoreGameSignals.Instance.onLevelInitialize -= OnPlayerInitialize;
         }
 
         private void OnPlayerInitialize()
@@ -127,7 +142,7 @@ namespace Managers.CoreGameManagers
       
             if (_data.Health == _health)
             {
-                UISignals.Instance.onHealthVisualClose?.Invoke();
+                UISignals.Instance.onHealthBarClose?.Invoke();
                 return;
             }
             _health += _increaseAmount;
@@ -139,25 +154,24 @@ namespace Managers.CoreGameManagers
         }
 
         private void OnTakeDamage(int damage)
-        {
+        {   
+            _health -= damage;
             if (_health <= 0)
             {
-                //DEath anim
-                //Respawn
-                UISignals.Instance.onHealthVisualClose?.Invoke();
-                _health = _data.Health;
-                UISignals.Instance.onHealthUpdate?.Invoke(_health);
-                return; 
+                if (!_canReset)
+                {
+                    _canReset = true;
+                    _health = 0;
+                    UISignals.Instance.onHealthUpdate?.Invoke(_health);
+                    ResetPlayer();
+                    UISignals.Instance.onHealthBarClose?.Invoke();
+                }
+               
             }
-            _health -= damage;
-            if (_health >= 0)
+            else
             {
                 UISignals.Instance.onHealthUpdate?.Invoke(_health);
             }
-            
-            if (_health != 0) return;
-            UISignals.Instance.onHealthVisualClose?.Invoke();
-            
         }
         private void AimEnemy() => movementController.RotatePlayerToTarget(!HasEnemyTarget ? null : EnemyList[0]?.GetTransform());
         public void CheckAreaStatus(AreaType areaType) => meshController.ChangeAreaStatus(CurrentAreaType = areaType);
@@ -166,7 +180,33 @@ namespace Managers.CoreGameManagers
 
         private int OnSetHealthValue() => _health;
 
-        public void SetOutDoorHealth() => UISignals.Instance.onOutDoorHealthOpen?.Invoke();
+        public void SetOutDoorHealth() => UISignals.Instance.onHealthBarOpen?.Invoke();
+
+        private void ResetPlayer()
+        { 
+           playerAccountController.Collider.enabled = false;
+           playerMoneyStackerController.ResetStack();
+           CoreGameSignals.Instance.onResetPlayer?.Invoke();
+           DOVirtual.DelayedCall(.2f,()=>animationController.DeathAnimation());
+           playerPhysicsController.PlayerReset();
+           EnemyList.Clear();
+           HasEnemyTarget = false;
+           CheckAreaStatus(AreaType.Base);
+           CoreGameSignals.Instance.onReset?.Invoke();
+           OnDisableMovement(InputHandlers.None);
+           DOVirtual.DelayedCall(3f, () =>
+           {
+
+               playerAccountController.Collider.enabled = true;
+               UISignals.Instance.onHealthBarOpen?.Invoke();
+               IncreaseHealth();
+               _canReset = false;
+               transform.position = Vector3.zero;
+               CoreGameSignals.Instance.onPlay?.Invoke();
+               animationController.ChangeAnimations(PlayerAnimationStates.Idle);
+
+           });
+        }
         
     
         

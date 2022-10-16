@@ -101,9 +101,9 @@ namespace Managers.AIManagers
             return randomTargetTransform[Random.Range(0,randomTargetTransform.Count)];
         }
         private void Start()
-        {
+        {   
+            SpawnBoss();
             StartCoroutine(SpawnEnemies());
-            StartCoroutine(SpawnBoss());
         }
         
         private IEnumerator SpawnEnemies()
@@ -161,9 +161,8 @@ namespace Managers.AIManagers
         {
             return CoreGameSignals.Instance.onGetObjectFromPool(poolName);
         }
-        private IEnumerator SpawnBoss()
+        private void SpawnBoss()
         {
-            yield return new WaitForSeconds(enemySpawnData.SpawnDelay);
             var bossObj = GetObject(PoolType.BossEnemy);
             bossObj.GetComponentInChildren<ThrowEventController>().SpriteTarget = spriteTarget;
             bossObj.transform.position = new Vector3(0f, 0.1f, 175.399994f);

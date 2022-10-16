@@ -58,7 +58,6 @@ namespace Managers.CoreGameManagers
         {
             _levelID++;
             SaveLevelID(_levelID);
-            CoreGameSignals.Instance.onReset?.Invoke();
         }
 
         private void SaveLevelID(int levelID)

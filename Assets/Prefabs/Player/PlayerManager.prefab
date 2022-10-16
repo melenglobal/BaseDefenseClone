@@ -669,6 +669,7 @@ MonoBehaviour:
   StackList: []
   positionList: []
   radiusAround: 1.2
+  PoolHolder: {fileID: 0}
 --- !u!1 &55668683580031999
 GameObject:
   m_ObjectHideFlags: 0
@@ -759,8 +760,7 @@ Transform:
   m_LocalRotation: {x: -1.1237233e-11, y: -0.9999553, z: -0.009459168, w: -1.0459189e-10}
   m_LocalPosition: {x: 0, y: 0.12900002, z: -0.85}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 7414854890768826635}
+  m_Children: []
   m_Father: {fileID: 1899695481115673496}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
@@ -776,7 +776,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc7c1726977e4622829dda9a0723de4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridHolder: {fileID: 7414854890768826635}
+  gridHolder: {fileID: 0}
   stackingSystem: 1
   stackAreaType: 0
   stackAreaGridData:
@@ -810,6 +810,7 @@ MonoBehaviour:
   StackList: []
   positionList: []
   radiusAround: 1.2
+  PoolHolder: {fileID: 0}
 --- !u!1 &1247038928101026856
 GameObject:
   m_ObjectHideFlags: 0
@@ -964,36 +965,6 @@ Transform:
   m_Children:
   - {fileID: 9049628446943797724}
   m_Father: {fileID: 1868390577503992238}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2661831004717982713
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7414854890768826635}
-  m_Layer: 0
-  m_Name: MoneyTransformHolder
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7414854890768826635
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2661831004717982713}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 5717430135950709696}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2937686117582838643
@@ -1336,6 +1307,9 @@ MonoBehaviour:
   weaponController: {fileID: 1868632370789283655}
   shootingController: {fileID: 1293167552933739697}
   movementController: {fileID: 1409226603}
+  playerMoneyStackerController: {fileID: 1409226607}
+  playerPhysicsController: {fileID: 5211623285971570121}
+  playerAccountController: {fileID: 7593014632168649672}
   _health: 0
 --- !u!54 &3066750386707274183
 Rigidbody:
@@ -1818,6 +1792,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbe86d40851b464e95c52e0a6e9667e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Collider: {fileID: 4498633671592508039}
   playerMoneyStackerController: {fileID: 1409226607}
 --- !u!1 &5484463364987856886
 GameObject:
@@ -2012,7 +1987,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5937356065129926815
 Transform:
   m_ObjectHideFlags: 0

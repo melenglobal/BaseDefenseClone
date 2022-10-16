@@ -29,11 +29,11 @@ namespace Controllers.StackableControllers
             return transform.gameObject;
         }
         
-        private void EditPhysics()
+        public void EditPhysics()
         {
             rigidbody.useGravity = true;
             rigidbody.isKinematic = false;
-  
+            collider.enabled = true;
         }
     }
 }

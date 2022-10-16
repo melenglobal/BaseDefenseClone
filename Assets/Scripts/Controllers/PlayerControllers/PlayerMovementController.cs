@@ -94,9 +94,13 @@ namespace Controllers.PlayerControllers
 
         public void DisableMovement(InputHandlers inputHandlers)
         {
-            if (inputHandlers != InputHandlers.Turret) return;
-                rigidbody.velocity = Vector3.zero;
+            // if (inputHandlers != InputHandlers.Turret) return;
+            //
+            rigidbody.velocity = Vector3.zero;
+            rigidbody.angularVelocity = Vector3.zero;
+            rigidbody.angularDrag = 0f;
             transform.rotation = new Quaternion(0, 0, 0, 0);
+            _isReadyToMove = false;
         }
 
     }

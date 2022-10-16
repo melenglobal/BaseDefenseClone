@@ -16,6 +16,9 @@ namespace Controllers.PlayerControllers
         [SerializeField] private List<Vector3> positionList;
 
         [SerializeField] private float radiusAround;
+
+        [SerializeField]
+        private Transform PoolHolder;
         
         private float _stackDelay = 0.5f;
 
@@ -31,11 +34,7 @@ namespace Controllers.PlayerControllers
         {
             DOTween.Init(true, true, LogBehaviour.Verbose).SetCapacity(500, 125);
         }
-        private new List<GameObject> StackList
-        {
-            get => base.StackList;
-            set => base.StackList = value;
-        }
+        private new List<GameObject> StackList = new List<GameObject>();
         public override void SetStackHolder(Transform otherTransform)
         {
            otherTransform.SetParent(transform);
@@ -115,10 +114,21 @@ namespace Controllers.PlayerControllers
                 });
             });
         }
-        public override void ResetStack(IStackable stackable)
-        {
-           
-        } 
+
+        public async void ResetStack()
+        {   
+            Debug.Log(StackList.Count);
+            if (StackList.Count == 0)
+            {
+                return;
+            }
+            StackList[0].transform.SetParent(PoolHolder);
+            StackList.Remove(StackList[0]);
+            StackList.TrimExcess();
+            await Task.Delay(10);
+            ResetStack();
+        }
+        
         public void GetStackPositions(List<Vector3> stackPositions)
         {
             positionList = stackPositions;
