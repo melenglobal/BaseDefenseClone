@@ -101,6 +101,8 @@ namespace Managers.CoreGameManagers
             CoreGameSignals.Instance.onGetHealthValue += OnSetHealthValue;
             CoreGameSignals.Instance.onTakePlayerDamage += OnTakeDamage;
             CoreGameSignals.Instance.onLevelInitialize += OnPlayerInitialize;
+            CoreGameSignals.Instance.onNextLevel += OnNextLevel;
+            CoreGameSignals.Instance.onPreNextLevel += OnPreNextLevel;
         }
         private void UnsubscribeEvents()
         {
@@ -109,6 +111,8 @@ namespace Managers.CoreGameManagers
             CoreGameSignals.Instance.onGetHealthValue -= OnSetHealthValue;
             CoreGameSignals.Instance.onTakePlayerDamage -= OnTakeDamage;
             CoreGameSignals.Instance.onLevelInitialize -= OnPlayerInitialize;
+            CoreGameSignals.Instance.onNextLevel -= OnNextLevel;
+            CoreGameSignals.Instance.onPreNextLevel -= OnPreNextLevel;
         }
 
         private void OnPlayerInitialize()
@@ -158,15 +162,13 @@ namespace Managers.CoreGameManagers
             _health -= damage;
             if (_health <= 0)
             {
-                if (!_canReset)
-                {
-                    _canReset = true;
-                    _health = 0;
-                    UISignals.Instance.onHealthUpdate?.Invoke(_health);
-                    ResetPlayer();
-                    UISignals.Instance.onHealthBarClose?.Invoke();
-                }
-               
+                if (_canReset) return;
+                _canReset = true;
+                _health = 0;
+                UISignals.Instance.onHealthUpdate?.Invoke(_health);
+                ResetPlayer();
+                UISignals.Instance.onHealthBarClose?.Invoke();
+
             }
             else
             {
@@ -186,9 +188,9 @@ namespace Managers.CoreGameManagers
         { 
            playerAccountController.Collider.enabled = false;
            playerMoneyStackerController.ResetStack();
-           CoreGameSignals.Instance.onResetPlayer?.Invoke();
-           DOVirtual.DelayedCall(.2f,()=>animationController.DeathAnimation());
-           playerPhysicsController.PlayerReset();
+           CoreGameSignals.Instance.onResetPlayerStack?.Invoke();
+           DOVirtual.DelayedCall(.3f,()=>animationController.DeathAnimation());
+           playerPhysicsController.ResetPlayerLayer();
            EnemyList.Clear();
            HasEnemyTarget = false;
            CheckAreaStatus(AreaType.Base);
@@ -196,7 +198,6 @@ namespace Managers.CoreGameManagers
            OnDisableMovement(InputHandlers.None);
            DOVirtual.DelayedCall(3f, () =>
            {
-
                playerAccountController.Collider.enabled = true;
                UISignals.Instance.onHealthBarOpen?.Invoke();
                IncreaseHealth();
@@ -207,9 +208,38 @@ namespace Managers.CoreGameManagers
 
            });
         }
-        
-    
-        
+
+        private void OnPreNextLevel()
+        {   
+            animationController.ChangeAnimations(PlayerAnimationStates.Idle);
+            OnDisableMovement(InputHandlers.None);
+            CoreGameSignals.Instance.onReset?.Invoke();
+            playerAccountController.Collider.enabled = false;
+            UISignals.Instance.onHealthUpdate?.Invoke(_data.Health);
+            UISignals.Instance.onHealthBarClose?.Invoke();
+            EnemyList.Clear();
+            HasEnemyTarget = false;
+            playerMoneyStackerController.ResetStack();
+            playerPhysicsController.ResetPlayerLayer();
+            CoreGameSignals.Instance.onResetPlayerStack?.Invoke();
+            CheckAreaStatus(AreaType.Base);
+            animationController.gameObject.SetActive(false);
+        }
+        private void OnNextLevel()
+        {   
+            animationController.gameObject.SetActive(true);
+            UISignals.Instance.onHealthUpdate?.Invoke(_data.Health);
+            UISignals.Instance.onHealthBarClose?.Invoke();
+            playerPhysicsController.ResetPlayerLayer();
+            EnemyList.Clear();
+            HasEnemyTarget = false;
+            CheckAreaStatus(AreaType.Base);
+            transform.position = Vector3.zero;
+            animationController.ChangeAnimations(PlayerAnimationStates.Idle);
+            playerAccountController.Collider.enabled = true;
+            CoreGameSignals.Instance.onReset?.Invoke();
+            CoreGameSignals.Instance.onPlay?.Invoke();
+        }
 
     }
 }

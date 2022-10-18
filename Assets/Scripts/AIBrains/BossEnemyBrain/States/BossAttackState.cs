@@ -4,7 +4,7 @@ using Enums;
 using Signals;
 using UnityEngine;
 
-namespace StateMachines.AIBrain.EnemyBrain.BossEnemyBrain.States
+namespace AIBrains.BossEnemyBrain.States
 {
     public class BossAttackState : IState, IReleasePoolObject
     {
@@ -12,7 +12,7 @@ namespace StateMachines.AIBrain.EnemyBrain.BossEnemyBrain.States
 
         #region Private Variables
 
-        private readonly AIBrains.BossEnemyBrain.BossEnemyBrain _bossEnemyBrain;
+        private readonly BossEnemyBrain _bossEnemyBrain;
         private readonly Animator _animator;
         private readonly float _attackRange;
         private readonly Transform _bombHolder;
@@ -21,7 +21,7 @@ namespace StateMachines.AIBrain.EnemyBrain.BossEnemyBrain.States
         #endregion
 
         #endregion
-        public BossAttackState(Animator animator, AIBrains.BossEnemyBrain.BossEnemyBrain bossEnemyBrain, float attackRange,ref Transform bombHolder )
+        public BossAttackState(Animator animator, BossEnemyBrain bossEnemyBrain, float attackRange,ref Transform bombHolder )
         {
             _bossEnemyBrain = bossEnemyBrain;
             _animator = animator;

@@ -3,6 +3,7 @@ using Controllers;
 using Controllers.BaseControllers;
 using Enums;
 using Signals;
+using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -63,7 +64,10 @@ namespace Managers.CoreGameManagers
             UISignals.Instance.onHealthUpdate += OnHealthUpdate;
             UISignals.Instance.onHealthBarClose += OnHealthBarClose;
             UISignals.Instance.onHealthBarOpen += OnHealthBarOpen;
+            CoreGameSignals.Instance.onPreNextLevel += OnPreNextLevel;
             CoreGameSignals.Instance.onPlay += OnPlay;
+            CoreGameSignals.Instance.onNextLevel += OnNextLevel;
+            
         }
 
         private void UnsubscribeEvents()
@@ -76,7 +80,9 @@ namespace Managers.CoreGameManagers
             UISignals.Instance.onHealthUpdate -= OnHealthUpdate;
             UISignals.Instance.onHealthBarClose -= OnHealthBarClose;
             UISignals.Instance.onHealthBarOpen -= OnHealthBarOpen;
+            CoreGameSignals.Instance.onPreNextLevel -= OnPreNextLevel;
             CoreGameSignals.Instance.onPlay -= OnPlay;
+            CoreGameSignals.Instance.onNextLevel -= OnNextLevel;
         }
 
         private void OnDisable() => UnsubscribeEvents();
@@ -88,6 +94,8 @@ namespace Managers.CoreGameManagers
         private void OnClosePanel(UIPanels panels) => uiPanelController.ClosePanel(panels);
    
         public void Play() =>  CoreGameSignals.Instance.onPlay?.Invoke();
+        
+        public void NextLevel() => CoreGameSignals.Instance.onNextLevel?.Invoke();
 
         private void OnPlay()
         {
@@ -95,12 +103,16 @@ namespace Managers.CoreGameManagers
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.LevelPanel);
         }
 
-        public void OnNextLevel()
+        private void OnNextLevel()
         {
             UISignals.Instance.onClosePanel?.Invoke(UIPanels.NextLevel);
             UISignals.Instance.onOpenPanel?.Invoke(UIPanels.LevelPanel);
-            UISignals.Instance.onOpenPanel?.Invoke(UIPanels.StartPanel);
-            CoreGameSignals.Instance.onNextLevel?.Invoke();
+        }
+
+        private void OnPreNextLevel()
+        {
+            UISignals.Instance.onClosePanel?.Invoke(UIPanels.LevelPanel);
+            UISignals.Instance.onOpenPanel?.Invoke(UIPanels.NextLevel);
         }
 
         private void OnHealthBarOpen() => UISignals.Instance.onOpenPanel?.Invoke(UIPanels.PlayerHealthPanel);
@@ -126,7 +138,6 @@ namespace Managers.CoreGameManagers
             OnSetHealthText(healthValue);
             healthBar.size = (float)healthValue/_percentage;
         }
-
 
     }
 }

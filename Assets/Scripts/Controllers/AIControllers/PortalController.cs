@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using DG.Tweening;
+using Signals;
 using UnityEngine;
 
 namespace Controllers.AIControllers
@@ -28,7 +30,36 @@ namespace Controllers.AIControllers
         private const float dissolveTime = 2f; 
 
         #endregion
+        
+        
+        #region Event Subscription
 
+        private void OnEnable()
+        {
+            SubscribeEvents();
+        }
+
+        private void SubscribeEvents()
+        {
+            CoreGameSignals.Instance.onFailed += OnFailed;
+        }
+        private void UnsubscribeEvents()
+        {   
+            CoreGameSignals.Instance.onFailed -= OnFailed;
+        }
+
+        private void OnFailed()
+        {
+           gameObject.SetActive(false);
+           Debug.Log("OnFailed portal!");
+        }
+
+        private void OnDisable()
+        {
+            UnsubscribeEvents();
+        }
+
+        #endregion
         private void Awake()
         {
             portalCollider.enabled = false;

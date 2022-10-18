@@ -35,6 +35,7 @@ namespace Managers.CoreGameManagers
             CoreGameSignals.Instance.onUpdateMoneyScoreData += OnUpdateMoneyScore;
             CoreGameSignals.Instance.onStartMoneyPayment += OnStartMoneyPayment;
             CoreGameSignals.Instance.onStopMoneyPayment += OnStopMoneyPayment;
+            CoreGameSignals.Instance.onPreNextLevel += OnPreNextLevel;
         }
         private void UnsubscribeEvents()
         {   
@@ -45,6 +46,7 @@ namespace Managers.CoreGameManagers
             CoreGameSignals.Instance.onUpdateMoneyScoreData -= OnUpdateMoneyScore;
             CoreGameSignals.Instance.onStartMoneyPayment -= OnStartMoneyPayment;
             CoreGameSignals.Instance.onStopMoneyPayment -= OnStopMoneyPayment;
+            CoreGameSignals.Instance.onPreNextLevel -= OnPreNextLevel;
         }
         private void OnDisable()
         {
@@ -96,5 +98,10 @@ namespace Managers.CoreGameManagers
         }
 
         private void UpdateGameScoreData() => InitializeDataSignals.Instance.onSaveGameScore?.Invoke(_scoreData);
+
+        private void OnPreNextLevel()
+        {
+            InitializeDataSignals.Instance.onSaveGameScore?.Invoke(_scoreData);
+        }
     }
 }

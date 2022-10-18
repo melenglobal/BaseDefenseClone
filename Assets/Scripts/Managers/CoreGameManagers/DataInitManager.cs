@@ -22,9 +22,7 @@ namespace Managers.CoreGameManagers
     
         [SerializeField] 
         private CD_Level cdLevel;
-    
-        [SerializeField] 
-        private CD_AI cdAI;
+        
 
         #endregion
     
@@ -92,13 +90,16 @@ namespace Managers.CoreGameManagers
             InitializeDataSignals.Instance.onSaveMilitaryBaseData += OnSyncMilitaryBaseData;
             InitializeDataSignals.Instance.onSaveBuyablesData += OnSyncBuyablesData;
             InitializeDataSignals.Instance.onSaveGameScore += OnSyncScoreData;
-        
+            CoreGameSignals.Instance.onLevelInitialize += OnLoad;
+
             InitializeDataSignals.Instance.onLoadMilitaryBaseData += OnLoadMilitaryBaseData;
             InitializeDataSignals.Instance.onLoadBaseRoomData += OnLoadBaseRoomData;
             InitializeDataSignals.Instance.onLoadBuyablesData += OnLoadBuyablesData;
             InitializeDataSignals.Instance.onLoadMineBaseData += OnLoadMineBaseData;
             InitializeDataSignals.Instance.onLoadGameScore += OnLoadScoreData;
             CoreGameSignals.Instance.onApplicationQuit += OnSave;
+            CoreGameSignals.Instance.onApplicationPause += OnSave;
+
         }
 
         private void UnsubscribeEvents()
@@ -110,6 +111,8 @@ namespace Managers.CoreGameManagers
             InitializeDataSignals.Instance.onSaveMilitaryBaseData -= OnSyncMilitaryBaseData;
             InitializeDataSignals.Instance.onSaveBuyablesData -= OnSyncBuyablesData;
             InitializeDataSignals.Instance.onSaveGameScore -= OnSyncScoreData;
+            CoreGameSignals.Instance.onLevelInitialize -= OnLoad;
+            
         
             InitializeDataSignals.Instance.onLoadMilitaryBaseData -= OnLoadMilitaryBaseData;
             InitializeDataSignals.Instance.onLoadBaseRoomData -= OnLoadBaseRoomData;
@@ -117,6 +120,10 @@ namespace Managers.CoreGameManagers
             InitializeDataSignals.Instance.onLoadMineBaseData -= OnLoadMineBaseData;
             InitializeDataSignals.Instance.onLoadGameScore -= OnLoadScoreData;
             CoreGameSignals.Instance.onApplicationQuit -= OnSave;
+            CoreGameSignals.Instance.onPreNextLevel -= OnSave;
+            CoreGameSignals.Instance.onApplicationPause -= OnSave;
+            
+            
         }
         private void OnDisable() => UnsubscribeEvents();
 
@@ -135,6 +142,9 @@ namespace Managers.CoreGameManagers
         #region Level Save - Load
 
         private void OnSave() => Save(_uniqueID);
+
+        private void OnLoad() => Load(_uniqueID);
+        
         public void Save(int uniqueId)
         {
             cdLevel = new CD_Level(_levelID,levelDatas,_scoreData);

@@ -1,11 +1,13 @@
 using System;
 using Abstract;
+using AIBrains.BossEnemyBrain.States;
+using Controllers.AIControllers;
+using Controllers.Throw;
 using Data.UnityObject;
 using Data.ValueObject;
 using Enums;
 using Sirenix.OdinInspector;
 using StateBehaviour;
-using StateMachines.AIBrain.EnemyBrain.BossEnemyBrain;
 using StateMachines.AIBrain.EnemyBrain.BossEnemyBrain.States;
 using UnityEngine;
 
@@ -17,23 +19,19 @@ namespace AIBrains.BossEnemyBrain
 
         #region Public Variables 
 
-        [BoxGroup("Public Variables")]
+
         public Transform PlayerTarget;
-        [BoxGroup("Public Variables")]
-        public int Health;
+        
+        public int Health { get => _health; set => _health = value; }
+        private int _health;
         #endregion
 
-        #region Serilizable Variables
+        #region Serialized Variables
 
-        [BoxGroup("Serializable Variables")]
-        [SerializeField]
-        private EnemyType enemyType;
+        [SerializeField] private BossHealthController bossHealthController;
 
-        [BoxGroup("Serializable Variables")]
-        [SerializeField]
-        private BossEnemyDetector detector;
-
-        [BoxGroup("Serializable Variables")]
+        [SerializeField] private ThrowEventController throwEventController;
+        
         [SerializeField]
         private Transform bombHolder;
 
@@ -44,6 +42,8 @@ namespace AIBrains.BossEnemyBrain
         private EnemyBossData _enemyBossData;
         private StateMachine _stateMachine;
         private Animator _animator;
+        
+
 
         #region States
 
@@ -60,6 +60,7 @@ namespace AIBrains.BossEnemyBrain
         private void Awake()
         {
             _enemyBossData = GetAIData();
+            bossHealthController.SetHealth(_enemyBossData.Health);
             SetEnemyVariables(); 
             GetReferenceStates();
         }
@@ -67,7 +68,7 @@ namespace AIBrains.BossEnemyBrain
         private void SetEnemyVariables()
         {
             _animator = GetComponentInChildren<Animator>();
-            Health = _enemyBossData.Health;
+            _health = _enemyBossData.Health;
         }
 
         #region Data Jobs
@@ -84,16 +85,14 @@ namespace AIBrains.BossEnemyBrain
 
             _waitState = new BossWaitState(_animator, this);
             _attackState = new BossAttackState( _animator, this, _enemyBossData.AttackRange, ref bombHolder);
-            _deathState = new BossDeathState( _animator);
-
-            //Statemachine statelerden sonra tanimlanmali ?
+            _deathState = new BossDeathState(_animator,this);
+            
             _stateMachine = new StateMachine();
 
             At(_waitState, _attackState, IAttackPlayer()); 
             At(_attackState, _waitState, INoAttackPlayer()); 
 
             _stateMachine.AddAnyTransition(_deathState, AmIDead());
-            //SetState state durumlari belirlendikten sonra default deger cagirilmali
             _stateMachine.SetState(_waitState);
 
             void At(IState to, IState from, Func<bool> condition) => _stateMachine.AddTransition(to, from, condition);
@@ -105,12 +104,16 @@ namespace AIBrains.BossEnemyBrain
 
         #endregion
 
-        private void Update() => _stateMachine.Tick();
+        private void Update()
+        {
+            _stateMachine.Tick();
+        } 
 
         [Button]
         private void BossDeathState()
         {
             Health = 0;
-        } 
+        }
+        
     }
 }

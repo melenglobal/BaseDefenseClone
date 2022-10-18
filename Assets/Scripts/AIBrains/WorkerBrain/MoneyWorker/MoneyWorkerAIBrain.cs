@@ -3,7 +3,6 @@ using System.Collections;
 using Abstract;
 using Data.UnityObject;
 using Data.ValueObject;
-using Enums;
 using Signals;
 using Sirenix.OdinInspector;
 using StateBehaviour;
@@ -52,7 +51,6 @@ namespace AIBrains.WorkerBrain.MoneyWorker
         #endregion
 
         #endregion
-
 
         private void Awake()
         {
@@ -119,7 +117,7 @@ namespace AIBrains.WorkerBrain.MoneyWorker
         private void SetTarget()
         {
             CurrentTarget = GetMoneyPosition();
-            if (CurrentTarget)
+            if (CurrentTarget != null)
                 _navmeshAgent.SetDestination(CurrentTarget.position);
         }
         public void SetInitPosition(Vector3 slotPosition)
@@ -167,6 +165,6 @@ namespace AIBrains.WorkerBrain.MoneyWorker
             }
         }
         #endregion
-
+        
     }
 }

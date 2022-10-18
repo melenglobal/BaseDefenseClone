@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Abstract;
+using Abstract.AbstractClasses;
 using Extentions;
 
 namespace Managers.CoreGameManagers
@@ -18,7 +18,7 @@ namespace Managers.CoreGameManagers
             }
         }
 
-        private readonly Dictionary<string, AbstractObjectPool> _pools;
+        private readonly Dictionary<string, AbstractObjectPool> _pools; // Dictionary yerine Stack kullan
 
         /// <summary>
         /// Creates the Object Pool Manager
@@ -191,5 +191,6 @@ namespace Managers.CoreGameManagers
         {
             _pools[poolName] = null;
         }
+        
     }
     }

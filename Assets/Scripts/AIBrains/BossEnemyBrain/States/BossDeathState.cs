@@ -1,9 +1,10 @@
 using Abstract;
-using Enums;
+using AIBrains.EnemyBrain;
+using DG.Tweening;
 using Signals;
 using UnityEngine;
 
-namespace StateMachines.AIBrain.EnemyBrain.BossEnemyBrain.States
+namespace AIBrains.BossEnemyBrain.States
 {
     public class BossDeathState : IState
     {
@@ -13,21 +14,26 @@ namespace StateMachines.AIBrain.EnemyBrain.BossEnemyBrain.States
         
         private readonly Animator _animator;
 
+        private BossEnemyBrain _bossEnemyBrain;
+
 
         #endregion
 
         #endregion
 
-        public BossDeathState(Animator animator)
+        public BossDeathState(Animator animator,BossEnemyBrain bossEnemyAIBrain)
         {
             _animator = animator;
+            _bossEnemyBrain = bossEnemyAIBrain;
         }
         public void OnEnter()
         {
 
             _animator.SetTrigger("Death");
             CoreGameSignals.Instance.onOpenPortal?.Invoke();
-            //Level Completed
+
+            DOVirtual.DelayedCall(2f, () => _bossEnemyBrain.gameObject.SetActive(false));
+
         }
 
         public void OnExit()

@@ -8,6 +8,7 @@ namespace Data.ValueObject
     [Serializable]
     public class MoneyWorkerAIData : Worker
     {
+        public int Cost;
         public MoneyWorkerAIData(float speed, int capacity) : base(speed, capacity)
         {
         }

@@ -21,11 +21,11 @@ namespace Controllers.AIControllers
         {
 
             if (!other.TryGetComponent(out IAttacker attacker)) return;
-
+            
             var damage = attacker.Damage();
             _enemyAIBrain.Health -= damage;
   
-            if (_enemyAIBrain.Health ==0)
+            if (_enemyAIBrain.Health == 0)
             {
                 IsDead = true;
             }

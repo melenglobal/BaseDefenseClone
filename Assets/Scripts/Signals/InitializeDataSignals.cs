@@ -2,7 +2,6 @@
 using Data.ValueObject;
 using Extentions;
 using UnityEngine.Events;
-using UnityEngine.SocialPlatforms.Impl;
 
 namespace Signals
 {

@@ -69,7 +69,7 @@ namespace Controllers.PlayerControllers
             RemoveAllStack();
         }
 
-        private async void RemoveAllStack()
+        public async void RemoveAllStack()
         {
             if (StackList.Count == 0)
             {
@@ -116,19 +116,34 @@ namespace Controllers.PlayerControllers
         }
 
         public async void ResetStack()
-        {   
-            Debug.Log(StackList.Count);
+        {
             if (StackList.Count == 0)
             {
                 return;
             }
-            StackList[0].transform.SetParent(PoolHolder);
+            StackList[0].transform.SetParent(null);
             StackList.Remove(StackList[0]);
             StackList.TrimExcess();
             await Task.Delay(10);
             ResetStack();
         }
-        
+        public void PaymentStackAnimation(Transform transform)
+        {
+            _getStackSequence = DOTween.Sequence();
+            var randomBouncePosition = CalculateRandomAddStackPositionWithObjTransform();
+            var randomRotation = CalculateRandomStackRotation();
+            var moneyObj = CoreGameSignals.Instance.onGetObjectFromPool?.Invoke(PoolType.Money);
+            moneyObj.transform.position = this.transform.parent.transform.position;
+            moneyObj.GetComponent<Collider>().enabled = false;
+            _getStackSequence.Append(moneyObj.transform.DOMove(randomBouncePosition, .5f));
+            _getStackSequence.Join(moneyObj.transform.DOLocalRotate(randomRotation, .5f)).OnComplete(() =>
+            {
+                moneyObj.transform.rotation = Quaternion.LookRotation(transform.forward);
+                moneyObj.transform.DOMove(transform.position, 0.3f).OnComplete(() => CoreGameSignals.Instance.onReleaseObjectFromPool?.Invoke(PoolType.Money,moneyObj));
+
+            });
+        }
+
         public void GetStackPositions(List<Vector3> stackPositions)
         {
             positionList = stackPositions;
@@ -155,6 +170,14 @@ namespace Controllers.PlayerControllers
             var randomRotationY = Random.Range(-90, 90);
             var randomRotationZ = Random.Range(-90, 90);
             return new Vector3(randomRotationX,randomRotationY,randomRotationZ);
+        }
+        private Vector3 CalculateRandomAddStackPositionWithObjTransform()
+        {
+            var randomHeight = Random.Range(0.1f, 3f);
+            var randomAngle = Random.Range(230, 310);
+            var rad = randomAngle * Mathf.Deg2Rad;
+            return new Vector3(transform.parent.position.x + radiusAround * Mathf.Cos(rad),
+                transform.parent.position.y + randomHeight, transform.parent.position.z + -radiusAround * Mathf.Sin(rad));
         }
     }
 }

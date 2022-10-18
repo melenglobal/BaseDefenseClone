@@ -98,9 +98,19 @@ namespace Controllers.Throw
         }
         private void DeactiveSpriteTargetDelay()
         {
-            bombPhysicController.enabled = true;
-            SpriteTarget.SetActive(false);
-            bombPhysicController.enabled = false;
+            if (bombPhysicController)
+            {
+                bombPhysicController.enabled = true;
+                bombPhysicController.enabled = false;
+            }
+            if (SpriteTarget.activeInHierarchy)
+            {
+                SpriteTarget.SetActive(false);
+            }
+            if (_throwBomb!= null)
+            {
+                ReleaseObject(_throwBomb,PoolType.Bomb);
+            }
         }
 
         /*

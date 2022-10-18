@@ -16,7 +16,7 @@ namespace Managers.OtherManagers
 
         private void SubscribeEvents()
         {
-            CoreGameSignals.Instance.onResetPlayer += OnResetPlayerStack;
+            CoreGameSignals.Instance.onResetPlayerStack += OnResetPlayerStack;
         }
         
         private void OnDisable()
@@ -26,7 +26,7 @@ namespace Managers.OtherManagers
 
         private void UnsubscribeEvents()
         {
-            CoreGameSignals.Instance.onResetPlayer -= OnResetPlayerStack;
+            CoreGameSignals.Instance.onResetPlayerStack -= OnResetPlayerStack;
         }
         
         private void OnResetPlayerStack()

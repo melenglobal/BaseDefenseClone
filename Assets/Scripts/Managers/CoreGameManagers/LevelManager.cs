@@ -37,6 +37,7 @@ namespace Managers.CoreGameManagers
             InitializeDataSignals.Instance.onLoadLevelID += OnLoadLevelID;
             CoreGameSignals.Instance.onLevelInitialize += OnInitializeLevel;
             CoreGameSignals.Instance.onClearActiveLevel += OnClearActiveLevel;
+            CoreGameSignals.Instance.onPreNextLevel += OnPreNextLevel;
             CoreGameSignals.Instance.onNextLevel += OnNextLevel;
         }
 
@@ -45,6 +46,7 @@ namespace Managers.CoreGameManagers
             InitializeDataSignals.Instance.onLoadLevelID -= OnLoadLevelID;
             CoreGameSignals.Instance.onLevelInitialize -= OnInitializeLevel;
             CoreGameSignals.Instance.onClearActiveLevel -= OnClearActiveLevel;
+            CoreGameSignals.Instance.onPreNextLevel -= OnPreNextLevel;
             CoreGameSignals.Instance.onNextLevel -= OnNextLevel;
         }
         private void OnDisable()
@@ -55,6 +57,12 @@ namespace Managers.CoreGameManagers
         #endregion
 
         private void OnNextLevel()
+        {
+            CoreGameSignals.Instance.onClearActiveLevel?.Invoke();
+            CoreGameSignals.Instance.onLevelInitialize?.Invoke();
+        }
+
+        private void OnPreNextLevel()
         {
             _levelID++;
             SaveLevelID(_levelID);

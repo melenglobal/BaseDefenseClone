@@ -10,7 +10,6 @@ namespace Signals
 {
     public class CoreGameSignals : MonoSingleton<CoreGameSignals>
     {
-
         public UnityAction onLevelInitialize = delegate { };
 
         public UnityAction onClearActiveLevel = delegate { };
@@ -19,11 +18,13 @@ namespace Signals
 
         public UnityAction onNextLevel = delegate { };
         
+        public UnityAction onPreNextLevel = delegate { };
+        
         public UnityAction onPlay = delegate { };
         
         public UnityAction onReset = delegate { };
         
-        public UnityAction onResetPlayer = delegate {  };
+        public UnityAction onResetPlayerStack = delegate {  };
 
         public UnityAction<Transform> onSetCameraTarget = delegate { };
         

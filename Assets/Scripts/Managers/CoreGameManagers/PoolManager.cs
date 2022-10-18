@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Data.UnityObject;
 using Data.ValueObject;
 using Enums;
@@ -17,6 +18,8 @@ namespace Managers.CoreGameManagers
         [ShowInInspector]
         private SerializedDictionary<PoolType, PoolData> _data;
         private int _listCountCache;
+
+        [SerializeField] private List<Transform> activeObjectTransforms = new List<Transform>();
         #endregion
 
         #endregion
@@ -25,6 +28,7 @@ namespace Managers.CoreGameManagers
         {
             _data = GetData();
             InitializePools();
+            
         }
 
         #region Event Subscription
@@ -39,21 +43,42 @@ namespace Managers.CoreGameManagers
         {
             CoreGameSignals.Instance.onGetObjectFromPool += OnGetObjectFromPoolType;
             CoreGameSignals.Instance.onReleaseObjectFromPool += OnReleaseObjectFromPool;
+            // CoreGameSignals.Instance.onClearActiveLevel -= OnClearPool;
+            // CoreGameSignals.Instance.onLevelInitialize -= OnInitPool;
 
         }
+
         private void UnsubscribeEvents()
         {
             CoreGameSignals.Instance.onGetObjectFromPool -= OnGetObjectFromPoolType;
             CoreGameSignals.Instance.onReleaseObjectFromPool -= OnReleaseObjectFromPool;
+            // CoreGameSignals.Instance.onClearActiveLevel -= OnClearPool;
+            // CoreGameSignals.Instance.onLevelInitialize -= OnInitPool;
         }
 
+     
         private void OnDisable()
         {
             UnsubscribeEvents();
         }
 
         #endregion
+        private void OnInitPool()
+        {
+            InitializePools();
+        }
 
+        // private void OnClearPool()
+        // {
+        //     var poolCount = System.Enum.GetNames(typeof(EnemyType)).Length;
+        //     for (int i = 0; i < poolCount; i++)
+        //     {
+        //         PoolType poolName = (PoolType)i;
+        //         
+        //
+        //     }
+        //    
+        // }
         private GameObject OnGetObjectFromPoolType(PoolType poolType)
         {
             _listCountCache = (int)poolType;
@@ -85,7 +110,7 @@ namespace Managers.CoreGameManagers
 
         private void InitPool(PoolType poolType, int initalAmount, bool isDynamic)
         {
-            ObjectPoolManager.Instance.AddObjectPool<GameObject>(FactoryMethod, TurnOnObject, TurnOffObject, poolType.ToString(), initalAmount, isDynamic);
+            ObjectPoolManager.Instance.AddObjectPool<GameObject>(CreatePoolObject, TurnOnObject, TurnOffObject, poolType.ToString(), initalAmount, isDynamic);
         }
 
 
@@ -102,8 +127,9 @@ namespace Managers.CoreGameManagers
             obj.SetActive(false);
         }
 
-        private GameObject FactoryMethod()
+        private GameObject CreatePoolObject()
         {
+           
             var go = Instantiate(_data[(PoolType)_listCountCache].ObjectType,transform);
             return go;
         }

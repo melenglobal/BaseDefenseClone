@@ -1,7 +1,9 @@
-﻿using Abstract.Interfaces;
+﻿using System;
+using Abstract.Interfaces;
 using Controllers.BaseControllers;
 using Controllers.TurretControllers;
 using Enums;
+using Keys;
 using Managers;
 using Managers.CoreGameManagers;
 using Signals;
@@ -20,6 +22,7 @@ namespace Controllers.PlayerControllers
         #endregion
         
         #endregion
+        
         private void OnTriggerEnter(Collider other)
         {
             if (other.TryGetComponent(out IAttacker attacker))
@@ -34,6 +37,11 @@ namespace Controllers.PlayerControllers
             if (other.TryGetComponent(out TurretPhysicsController turretPhysicsController))
             {
                 playerManager.SetTurretAnimation(true);
+            }
+
+            if (other.CompareTag("Finish"))
+            {
+                CoreGameSignals.Instance.onPreNextLevel?.Invoke();
             }
         }
         private void OnTriggerExit(Collider other)
@@ -72,7 +80,7 @@ namespace Controllers.PlayerControllers
 
         }
 
-        public void PlayerReset()
+        public void ResetPlayerLayer()
         {
             gameObject.layer = LayerMask.NameToLayer("Base");
         }

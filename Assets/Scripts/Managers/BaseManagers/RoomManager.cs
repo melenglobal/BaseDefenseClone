@@ -14,6 +14,8 @@ namespace Managers.BaseManagers
         private RoomTypes roomTypes;
         [SerializeField] 
         private RoomPaymentTextController roomPaymentTextController;
+
+        [SerializeField] private Transform paymentTarget;
         
         private RoomData _roomData;
         private int _payedAmount = 10;
@@ -51,7 +53,7 @@ namespace Managers.BaseManagers
                 CoreGameSignals.Instance.onStopMoneyPayment?.Invoke();
                 return;
             }
-            
+            customer.PlayPaymentAnimation(paymentTarget);
             _roomData.Cost -= _payedAmount;
             CoreGameSignals.Instance.onStartMoneyPayment?.Invoke();
             roomPaymentTextController.UpdateText(_roomData.Cost);

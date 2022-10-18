@@ -32,6 +32,10 @@ namespace Controllers.PlayerControllers
         #region Account
 
         public bool CanPay { get => CoreGameSignals.Instance.onHasEnoughMoney.Invoke(); set { } }
+        public void PlayPaymentAnimation(Transform transform)
+        {
+            playerMoneyStackerController.PaymentStackAnimation(transform);
+        }
 
         #endregion
        

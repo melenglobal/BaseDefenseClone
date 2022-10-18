@@ -3,7 +3,7 @@ using Enums;
 using Signals;
 using UnityEngine;
 
-namespace Controllers.PlayerControllers
+namespace Controllers
 {
     public class FireController : IGetPoolObject
     {

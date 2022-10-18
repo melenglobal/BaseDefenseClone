@@ -20,5 +20,6 @@ namespace Enums
         MinerWorkerAI,
         TurretBullet,
         Bomb,
+        MiniGunBullet
     } 
 }

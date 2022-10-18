@@ -19,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2128250471331262682
 Transform:
   m_ObjectHideFlags: 0
@@ -137,7 +137,7 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.21404392
+        time: 0.25254184
         value: 0
         inSlope: 0
         outSlope: 0
