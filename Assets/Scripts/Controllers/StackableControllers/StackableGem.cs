@@ -1,7 +1,4 @@
-﻿using System;
-using Abstract.Stackable;
-using Enums;
-using Signals;
+﻿using Abstract.Stackable;
 using UnityEngine;
 
 namespace Controllers.StackableControllers
@@ -12,6 +9,5 @@ namespace Controllers.StackableControllers
         {
             return transform.gameObject;
         }
-        
     }
 }

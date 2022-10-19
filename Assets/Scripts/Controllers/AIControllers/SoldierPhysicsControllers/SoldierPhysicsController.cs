@@ -1,7 +1,7 @@
 ﻿using Abstract.Interfaces;
 using UnityEngine;
 
-namespace Controllers.SoldierPhysicsControllers
+namespace Controllers.AIControllers.SoldierPhysicsControllers
 {
     public class SoldierPhysicsController : MonoBehaviour,IInteractable
     {

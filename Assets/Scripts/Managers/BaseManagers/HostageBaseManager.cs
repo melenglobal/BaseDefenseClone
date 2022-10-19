@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Abstract.Interfaces.Pool;
 using Data.ValueObject;
-using Data.ValueObject.FrontyardData;
 using Enum;
 using Enums;
 using Signals;

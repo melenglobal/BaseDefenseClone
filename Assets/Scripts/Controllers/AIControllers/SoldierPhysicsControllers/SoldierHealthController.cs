@@ -1,11 +1,9 @@
-﻿using System;
-using Abstract;
+﻿using Abstract;
 using Abstract.Interfaces;
 using AIBrains.SoldierBrain;
-using DG.Tweening.Core;
 using UnityEngine;
 
-namespace Controllers.SoldierPhysicsControllers
+namespace Controllers.AIControllers.SoldierPhysicsControllers
 {
     public class SoldierHealthController : MonoBehaviour, IInteractable,IDamageable
     {

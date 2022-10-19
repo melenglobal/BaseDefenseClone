@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Abstract;
+using Controllers.AIControllers.SoldierPhysicsControllers;
 using Controllers.PlayerControllers;
-using Controllers.SoldierPhysicsControllers;
 using Data.UnityObject;
 using Data.ValueObject;
 using Enums;

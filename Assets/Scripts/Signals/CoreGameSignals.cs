@@ -2,7 +2,6 @@ using System;
 using Controllers.StackableControllers;
 using Enums;
 using Extentions;
-using Managers.CoreGameManagers;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -13,8 +12,6 @@ namespace Signals
         public UnityAction onLevelInitialize = delegate { };
 
         public UnityAction onClearActiveLevel = delegate { };
-
-        public UnityAction onFailed = delegate { };
 
         public UnityAction onNextLevel = delegate { };
         
@@ -64,6 +61,5 @@ namespace Signals
         
         public UnityAction onOpenPortal = delegate { };
         
-        public UnityAction<StackableMoney> onMoneyReleased  = delegate(StackableMoney arg0) {  };
     }
 }

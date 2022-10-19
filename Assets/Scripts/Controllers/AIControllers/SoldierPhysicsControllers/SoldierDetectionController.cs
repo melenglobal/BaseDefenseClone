@@ -2,7 +2,7 @@
 using AIBrains.SoldierBrain;
 using UnityEngine;
 
-namespace Controllers.SoldierPhysicsControllers
+namespace Controllers.AIControllers.SoldierPhysicsControllers
 {
     public class SoldierDetectionController : MonoBehaviour
     {

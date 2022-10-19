@@ -1,6 +1,7 @@
 using Abstract;
 using AI.MinerAI;
 using Enum;
+using Enums;
 using Managers;
 using Managers.BaseManagers;
 using UnityEngine;

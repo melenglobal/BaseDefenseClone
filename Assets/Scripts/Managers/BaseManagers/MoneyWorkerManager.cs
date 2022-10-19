@@ -6,6 +6,7 @@ using Abstract.Interfaces;
 using Abstract.Interfaces.Pool;
 using AIBrains.WorkerBrain.MoneyWorker;
 using Controllers.AIControllers;
+using Controllers.AIControllers.MoneyWorkerAIControllers;
 using Controllers.StackableControllers;
 using Data.UnityObject;
 using Data.ValueObject;
@@ -192,12 +193,12 @@ namespace Managers.BaseManagers
             _canTake = canTake;
             if (!_canTake)
                 return;
-            UpdatePayment(customer);
+            UpdatePaymentAsync(customer);
         }
         private void SetInitCost(int cost) => paymentTextController.SetInitText(cost);
         public void StopWorkerPayment(bool canTake) => _canTake = canTake;
 
-        private async void UpdatePayment(ICustomer customer)
+        private async Task UpdatePaymentAsync(ICustomer customer) // Value Task,normal task alocationa sebep olur. Unitask // promiseler unity ile entege calisir
         {
             if (_workerCost == 0)
             {
@@ -220,7 +221,7 @@ namespace Managers.BaseManagers
             CoreGameSignals.Instance.onStartMoneyPayment?.Invoke();
             paymentTextController.UpdateText(_workerCost);
             await Task.Delay(100);
-            UpdatePayment(customer);
+            UpdatePaymentAsync(customer); // recursion stackoverflow yersin,readability düser,while yap
         }
 
         private void UpdateWorkerData()

@@ -31,35 +31,6 @@ namespace Controllers.AIControllers
 
         #endregion
         
-        
-        #region Event Subscription
-
-        private void OnEnable()
-        {
-            SubscribeEvents();
-        }
-
-        private void SubscribeEvents()
-        {
-            CoreGameSignals.Instance.onFailed += OnFailed;
-        }
-        private void UnsubscribeEvents()
-        {   
-            CoreGameSignals.Instance.onFailed -= OnFailed;
-        }
-
-        private void OnFailed()
-        {
-           gameObject.SetActive(false);
-           Debug.Log("OnFailed portal!");
-        }
-
-        private void OnDisable()
-        {
-            UnsubscribeEvents();
-        }
-
-        #endregion
         private void Awake()
         {
             portalCollider.enabled = false;

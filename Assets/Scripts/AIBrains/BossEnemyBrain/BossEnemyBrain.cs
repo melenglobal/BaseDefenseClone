@@ -1,8 +1,7 @@
 using System;
 using Abstract;
-using AIBrains.BossEnemyBrain.States;
 using Controllers.AIControllers;
-using Controllers.Throw;
+using Controllers.ThrowControllers;
 using Data.UnityObject;
 using Data.ValueObject;
 using Enums;

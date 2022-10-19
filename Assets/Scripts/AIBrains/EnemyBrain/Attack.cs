@@ -1,5 +1,4 @@
 ﻿using Abstract;
-using Signals;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -39,7 +38,6 @@ namespace AIBrains.EnemyBrain
 
         public void OnExit()
         {
-            //_animator.SetTrigger(Run);
         }
     }
 }

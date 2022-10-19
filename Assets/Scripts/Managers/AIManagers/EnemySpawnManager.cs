@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Abstract.Interfaces.Pool;
 using Controllers.AIControllers;
-using Controllers.Throw;
+using Controllers.ThrowControllers;
 using Data.UnityObject;
 using Data.ValueObject;
 using Enums;
@@ -73,7 +73,6 @@ namespace Managers.AIManagers
             AISignals.Instance.getRandomTransform += SetRandomTransform;
             AISignals.Instance.onReleaseObjectUpdate += OnReleasedObjectCount;
             CoreGameSignals.Instance.onOpenPortal += OnOpenPortal;
-            CoreGameSignals.Instance.onFailed += OnFailed;
         }
 
         private void UnsubscribeEvents()
@@ -82,7 +81,6 @@ namespace Managers.AIManagers
             AISignals.Instance.getRandomTransform -= SetRandomTransform;
             AISignals.Instance.onReleaseObjectUpdate -= OnReleasedObjectCount;
             CoreGameSignals.Instance.onOpenPortal -= OnOpenPortal;
-            CoreGameSignals.Instance.onFailed -= OnFailed;
         }
 
         private void OnDisable()
@@ -175,12 +173,5 @@ namespace Managers.AIManagers
             portalController.OpenPortal();
         }
         
-        private void OnFailed()
-        {
-            gameObject.SetActive(false);
-        }
-
-        
-
     }
 }
