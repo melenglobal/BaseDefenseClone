@@ -6,12 +6,11 @@ namespace AIBrains.SoldierBrain
 {
     public class Patrol : IState
     {
-        private SoldierAIBrain _soldierAIBrain;
+    private SoldierAIBrain _soldierAIBrain;
         private Vector3? _destination;
         private NavMeshAgent _navMeshAgent;
         private Quaternion _lookRotation;
         private Vector3 _direction;
-        private float _turnSpeed = 30;
         private Vector3 lastPosition = Vector3.zero;
         private float _timeStack;
         private Animator _animator;

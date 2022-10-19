@@ -1,44 +1,39 @@
 ﻿using Abstract.Stackable;
+using DG.Tweening;
+using Signals;
 using UnityEngine;
 
 namespace Controllers.StackableControllers
 {
     public class StackableMoney : AStackable
     {   
+        
+        public override bool IsSelected { get; set; }
+        public override bool IsCollected { get; set; }
+        
         [SerializeField] private Rigidbody rigidbody;
         [SerializeField] private BoxCollider collider;
-        
-        public override void SetInit(Transform initTransform, Vector3 position)
-        {
-            base.SetInit(initTransform, position);
-        }
 
-        public override void SetVibration(bool isVibrate)
+        private void OnEnable()
         {
-            base.SetVibration(isVibrate);
-        }
-
-        public override void SetSound()
-        {
-            base.SetSound();
-        }
-
-        public override void EmitParticle()
-        {
-            base.EmitParticle();
-        }
-
-        public override void PlayAnimation()
-        {
-            base.PlayAnimation();
+            EditPhysics();
+            DOVirtual.DelayedCall(2f,() => MoneyWorkerSignals.Instance.onSetStackable?.Invoke(this));
         }
 
         public override GameObject SendToStack()
-        {   
-            rigidbody.useGravity = false;
-            rigidbody.isKinematic = true;
+        {
             collider.enabled = false;
+            rigidbody.isKinematic = true;
+            rigidbody.useGravity = false;
             return transform.gameObject;
         }
+        
+        public void EditPhysics()
+        {
+            rigidbody.useGravity = true;
+            rigidbody.isKinematic = false;
+            collider.enabled = true;
+        }
+        
     }
 }

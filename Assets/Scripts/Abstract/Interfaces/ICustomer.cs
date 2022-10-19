@@ -1,9 +1,12 @@
-﻿namespace Abstract.Interfaces
+﻿using UnityEngine;
+
+namespace Abstract.Interfaces
 {
     public interface ICustomer
     {
+        bool CanPay { get; set; }
 
-        public bool canPay { get; set; } 
-        void MakePayment();
+        void PlayPaymentAnimation(Transform transform);
+
     }
 }

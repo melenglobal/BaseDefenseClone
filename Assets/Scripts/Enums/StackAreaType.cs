@@ -5,5 +5,6 @@
        AmmoDropZone,
        GemDropZone,
        SoldierSlotZone,
+       MoneyWorkerSlotZone
     }
 }

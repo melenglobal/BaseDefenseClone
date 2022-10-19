@@ -7,6 +7,5 @@
         FirstLeftTurret,
         SecondRightTurret,
         SecondLeftTurret,
-      
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Abstract.Interfaces;
+using Managers.BaseManagers;
 using UnityEngine;
 
 namespace Controllers.BaseControllers
@@ -9,14 +10,12 @@ namespace Controllers.BaseControllers
         private void OnTriggerEnter(Collider other)
         {
             if (!other.TryGetComponent(out ICustomer customer)) return;
-            customer.MakePayment();
-            roomManager.StartRoomPayment(customer.canPay,customer);
+            roomManager.StartRoomPayment(customer.CanPay,customer);
         }
         private void OnTriggerExit(Collider other)
         {   
             if (!other.TryGetComponent(out ICustomer customer)) return;
-            customer.canPay = false;
-            customer.MakePayment();
+            customer.CanPay = false;
             roomManager.StopRoomPayment(false);
         }
     }

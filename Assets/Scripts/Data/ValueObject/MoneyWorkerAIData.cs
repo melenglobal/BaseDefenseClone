@@ -1,5 +1,6 @@
 ﻿using System;
 using Abstract;
+using Abstract.AbstractClasses;
 using UnityEngine;
 
 namespace Data.ValueObject
@@ -7,7 +8,7 @@ namespace Data.ValueObject
     [Serializable]
     public class MoneyWorkerAIData : Worker
     {
-        public Vector3 InitPosition;
+        public int Cost;
         public MoneyWorkerAIData(float speed, int capacity) : base(speed, capacity)
         {
         }

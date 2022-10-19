@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Controllers.BaseControllers;
 using Data.ValueObject;
 using Enums;
@@ -30,7 +31,7 @@ namespace Managers.BaseManagers
             baseRoomData = GetData();
             SetExistingRooms();
         }
-        
+
 
         #region Event Subscription
         

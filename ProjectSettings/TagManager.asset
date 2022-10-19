@@ -8,6 +8,8 @@ TagManager:
   - Collectable
   - AmmoSpawner
   - Gem
+  - Target
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -32,10 +34,10 @@ TagManager:
   - BombBody
   - BombAggro
   - Gate
-  - 
-  - 
-  - 
-  - 
+  - TurretEnemyDetection
+  - Bullets
+  - Buyable
+  - Bomb
   - 
   - 
   - 

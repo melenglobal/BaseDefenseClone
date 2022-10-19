@@ -16,90 +16,96 @@ MonoBehaviour:
   - StackingSystem: 0
     StaticGridDatas:
     - isDynamic: 0
-      StackerType: 0
-      StackAreaType: 0
       GridSize: {x: 3, y: 7, z: 3}
       Offset: {x: 1.2, y: 0.5, z: 1.2}
       DrawnedMesh: {fileID: 0}
-    - isDynamic: 0
       StackerType: 0
-      StackAreaType: 1
+      StackAreaType: 0
+    - isDynamic: 0
       GridSize: {x: 5, y: 10, z: 5}
       Offset: {x: 1, y: 1, z: 1}
-      DrawnedMesh: {fileID: 0}
-    - isDynamic: 0
+      DrawnedMesh: {fileID: -1248044278159708556, guid: afad3945c1f92094dbda4d85f7a2ead2, type: 3}
       StackerType: 0
-      StackAreaType: 2
+      StackAreaType: 1
+    - isDynamic: 0
       GridSize: {x: 5, y: 1, z: 1}
       Offset: {x: 2, y: 2, z: 2}
       DrawnedMesh: {fileID: 0}
+      StackerType: 0
+      StackAreaType: 2
+    - isDynamic: 0
+      GridSize: {x: 5, y: 1, z: 1}
+      Offset: {x: 2, y: 2, z: 2}
+      DrawnedMesh: {fileID: -975067480899571371, guid: 390aafe7529e7df40bbbf2f86d3d64af, type: 3}
+      StackerType: 0
+      StackAreaType: 3
     DynamicGridDatas:
     - isDynamic: 1
-      StackerType: 0
-      StackAreaType: 0
       GridSize: {x: 0, y: 0, z: 0}
       Offset: {x: 1, y: 1, z: 1}
       DrawnedMesh: {fileID: -2929563531361107545, guid: e784bc962bb74704c8746354d33d56d9, type: 3}
-    - isDynamic: 1
-      StackerType: 1
+      StackerType: 0
       StackAreaType: 0
+    - isDynamic: 1
       GridSize: {x: 0, y: 0, z: 0}
       Offset: {x: 2, y: 2, z: 2}
       DrawnedMesh: {fileID: -2644728490783520961, guid: 896509484a75f7e4b805f332ae594c0d, type: 3}
-    - isDynamic: 1
-      StackerType: 2
+      StackerType: 1
       StackAreaType: 0
+    - isDynamic: 1
       GridSize: {x: 0, y: 0, z: 0}
       Offset: {x: 0.5, y: 0.5, z: 0.5}
       DrawnedMesh: {fileID: -5768064660643979799, guid: 896509484a75f7e4b805f332ae594c0d, type: 3}
-    - isDynamic: 1
-      StackerType: 3
+      StackerType: 2
       StackAreaType: 0
+    - isDynamic: 1
       GridSize: {x: 0, y: 0, z: 0}
       Offset: {x: 0.2, y: 0.2, z: 0.2}
       DrawnedMesh: {fileID: 852317729166869766, guid: 896509484a75f7e4b805f332ae594c0d, type: 3}
+      StackerType: 3
+      StackAreaType: 0
   - StackingSystem: 1
     StaticGridDatas:
     - isDynamic: 0
-      StackerType: 0
-      StackAreaType: 0
       GridSize: {x: 0, y: 0, z: 0}
       Offset: {x: 0.3, y: 0.3, z: 0.3}
       DrawnedMesh: {fileID: -2315663613580718024, guid: 53547d138a98fbb41b548f321e193441, type: 3}
-    - isDynamic: 0
       StackerType: 0
-      StackAreaType: 1
+      StackAreaType: 0
+    - isDynamic: 0
       GridSize: {x: 0, y: 0, z: 0}
       Offset: {x: 1.4, y: 1.4, z: 1.4}
       DrawnedMesh: {fileID: 2649434910937755009, guid: d2f4fd1f4a7596b48af0220a94a31e47, type: 3}
-    - isDynamic: 0
       StackerType: 0
-      StackAreaType: 2
+      StackAreaType: 1
+    - isDynamic: 0
       GridSize: {x: 0, y: 0, z: 0}
       Offset: {x: 1.2, y: 1.2, z: 1.2}
       DrawnedMesh: {fileID: -6403090969542723414, guid: 886207b34405d8044872e334c6ee35ff, type: 3}
+      StackerType: 0
+      StackAreaType: 2
     DynamicGridDatas:
     - isDynamic: 1
-      StackerType: 0
-      StackAreaType: 0
       GridSize: {x: 1, y: 10, z: 15}
       Offset: {x: 0.02, y: 0.5, z: 0.2}
       DrawnedMesh: {fileID: 0}
-    - isDynamic: 1
-      StackerType: 1
+      StackerType: 0
       StackAreaType: 0
+    - isDynamic: 1
       GridSize: {x: 1, y: 1, z: 1}
       Offset: {x: 1, y: 1, z: 1}
       DrawnedMesh: {fileID: -5517973829356945692, guid: 2c7f45a076b64c84e8eb8d82f56dfd24, type: 3}
-    - isDynamic: 1
-      StackerType: 2
+      StackerType: 1
       StackAreaType: 0
+    - isDynamic: 1
       GridSize: {x: 1, y: 10, z: 15}
       Offset: {x: 0.05, y: 0.2, z: 0.09}
       DrawnedMesh: {fileID: -2929563531361107545, guid: e784bc962bb74704c8746354d33d56d9, type: 3}
-    - isDynamic: 1
-      StackerType: 3
+      StackerType: 2
       StackAreaType: 0
+    - isDynamic: 1
       GridSize: {x: 1, y: 1, z: 1}
       Offset: {x: 0.1, y: 0.1, z: 0.1}
       DrawnedMesh: {fileID: 1051210855347695726, guid: c364e2d4d253f114aadd9d7a6bbdd83d, type: 3}
+      StackerType: 3
+      StackAreaType: 0

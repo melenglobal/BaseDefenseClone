@@ -1,4 +1,4 @@
-namespace Enum
+namespace Enums
 {
     public enum MinerItems
     {

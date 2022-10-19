@@ -1,4 +1,6 @@
 ﻿using Abstract;
+using Controllers;
+using Controllers.PlayerControllers;
 using Enums;
 using UnityEngine;
 using UnityEngine.AI;
@@ -8,14 +10,14 @@ namespace AIBrains.SoldierBrain
     public class ShootTarget : IState
     {
         
-        private SoldierAIBrain _soldierAIBrain;
+      private SoldierAIBrain _soldierAIBrain;
         private NavMeshAgent _navMeshAgent;
-        private float _timer=0.2f;
-        private float _attackTime = 0.5f;
+        private float _fireRate=0.2f;
+        private const float _attackTime = 0.4f;
         private Animator _animator;
-        private static readonly int Attacked = Animator.StringToHash("Attack");
-        private static readonly int Speed = Animator.StringToHash("Speed");
-        private static readonly int HasTarget = Animator.StringToHash("HasTarget");
+        private static readonly int _speed = Animator.StringToHash("Speed");
+        private static readonly int _hasTarget = Animator.StringToHash("HasTarget");
+        private FireController _bulletFireController;
 
         public ShootTarget(SoldierAIBrain soldierAIBrain,NavMeshAgent navMeshAgent,Animator animator)
         {
@@ -25,43 +27,84 @@ namespace AIBrains.SoldierBrain
         } 
         public void Tick()
         {
-            if (_soldierAIBrain.Damageable.IsDead)
+            if (_soldierAIBrain.DamageableEnemy.IsDead)
             {
-                _soldierAIBrain.RemoveTarget();
+                RemoveTarget();
             }
             if (_soldierAIBrain.EnemyTarget != null)
             {
                 LookTarget();
             }
-            _timer -= Time.deltaTime*_attackTime;
-            if (_timer <= 0 )
+            _fireRate -= Time.deltaTime*_attackTime;
+            if (_fireRate <= 0)
             {
-                _soldierAIBrain.GetObject(PoolType.PistolBullet);
-                _timer = 0.2f;
+                FireBullets();
+                _fireRate = 0.2f;
             }
         }
         private void LookTarget()
         {
-            _animator.SetFloat(Speed,_navMeshAgent.velocity.magnitude);
+            _animator.SetFloat(_speed,_navMeshAgent.velocity.magnitude);
+            
             var enemyPosition = _soldierAIBrain.EnemyTarget.transform;
             
             var lookDirection = enemyPosition.position - _soldierAIBrain.transform.position;
 
             Quaternion lookRotation = Quaternion.LookRotation(lookDirection, Vector3.up);
 
-            var slerpRotation = Quaternion.Slerp(_soldierAIBrain.transform.rotation, lookRotation,3f*Time.deltaTime);
+            var slerpRotation = Quaternion.Slerp(_soldierAIBrain.transform.rotation, lookRotation,20f*Time.deltaTime);
 
             _soldierAIBrain.transform.rotation = slerpRotation;
             
         }
         public void OnEnter()
         {
+             _bulletFireController = new FireController(WeaponTypes.PistolBullet);
             _navMeshAgent.speed = 1.801268E-05f;
-            _animator.SetBool(HasTarget,true);
+            _animator.SetBool(_hasTarget,true);
         }
         public void OnExit()
         {
-            _animator.SetBool(HasTarget,false);
+            _animator.SetBool(_hasTarget,false);
+        }
+        private void FireBullets()
+        {
+            _bulletFireController.FireBullets(_soldierAIBrain.WeaponHolder);
+        }
+        
+        private void SetEnemyTargetTransform()
+        {
+            _soldierAIBrain.DamageableEnemy = _soldierAIBrain.enemyList[0];
+            if (_soldierAIBrain.DamageableEnemy.IsTaken)
+            {
+                _soldierAIBrain.EnemyTarget = null;
+                RemoveTarget();
+            }
+            else
+            {
+                _soldierAIBrain.DamageableEnemy.IsTaken = true;
+                if(_soldierAIBrain.enemyList.Count ==0) return;
+                _soldierAIBrain.EnemyTarget = _soldierAIBrain.DamageableEnemy.GetTransform();
+            }
+        }
+        private void EnemyTargetStatus()
+        {
+            if (_soldierAIBrain.enemyList.Count != 0)
+            {
+                SetEnemyTargetTransform();
+            }
+            else
+            {
+                _soldierAIBrain.EnemyTarget = null;
+            }
+        } 
+        private void RemoveTarget()
+        {
+            if (_soldierAIBrain.enemyList.Count == 0) return;
+            _soldierAIBrain.enemyList.RemoveAt(0);
+            _soldierAIBrain.enemyList.TrimExcess();
+            _soldierAIBrain.EnemyTarget = null;
+            EnemyTargetStatus();
         }
     }
 }

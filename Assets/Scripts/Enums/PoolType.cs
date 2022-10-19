@@ -17,6 +17,9 @@ namespace Enums
         RedEnemy,
         BigRedEnemy,
         BossEnemy,
-        MinerWorkerAI
+        MinerWorkerAI,
+        TurretBullet,
+        Bomb,
+        MiniGunBullet
     } 
 }

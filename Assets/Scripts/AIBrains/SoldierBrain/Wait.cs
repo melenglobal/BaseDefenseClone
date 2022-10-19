@@ -8,7 +8,7 @@ namespace AIBrains.SoldierBrain
     {
         private Animator _animator;
         private NavMeshAgent _navMeshAgent;
-        private static readonly int Speed = Animator.StringToHash("Speed");
+        private static readonly int _speed = Animator.StringToHash("Speed");
 
         public Wait(Animator animator,NavMeshAgent navMeshAgent)
         {
@@ -17,17 +17,16 @@ namespace AIBrains.SoldierBrain
         }
         public void Tick()
         {
-            
+
         }
         public void OnEnter()
         {
-            Debug.Log("WaitEntered");
             _navMeshAgent.speed = 1.801268E-05f;
-            _animator.SetFloat(Speed,_navMeshAgent.velocity.magnitude);
+            _animator.SetFloat(_speed,_navMeshAgent.velocity.magnitude);
         }
         public void OnExit()
         {
-            
+
         }
     }
 }

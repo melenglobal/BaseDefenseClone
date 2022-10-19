@@ -17,15 +17,15 @@ MonoBehaviour:
     Speed: 6.4
     WorkerINitTransform: {fileID: 0}
   MoneyWorkerAIData:
-    Capacity: 7
-    Speed: 9.03
-    InitPosition: {x: 0, y: 0, z: 8}
+    Capacity: 6
+    Speed: 2.202521
+    Cost: 750
   MineWorkerAIData:
     Capacity: 10
     Speed: 1.47
   SoldierAIData:
     Damage: 0
-    Health: 0
+    Health: 40
     Speed: 0
     AttackRate: 0
     AttackRadius: 0
@@ -38,35 +38,27 @@ MonoBehaviour:
       Speed: 0
       ChaseSpeed: 0
       EnemyType: 0
-      TargetList:
-      - {fileID: 3852332971795383485, guid: 448d22774e1293a489264200d9c12849, type: 3}
-      - {fileID: 4588384430701986907, guid: 64525b4bfe41f9a4d9921c789e4cdfc3, type: 3}
-      - {fileID: 6809973167118917132, guid: 4aefcce81a230ef4195bd3277d67dfd4, type: 3}
-      - {fileID: 1188944300144623194, guid: 887ff0fc5cf83f340b674d4ee45be329, type: 3}
-      - {fileID: 8178642115774907111, guid: 59a2eb00ca532b04dbefbc282db33e40, type: 3}
-      - {fileID: 3496609261866872995, guid: 0f74dab1dce75b6428600fb2a9707291, type: 3}
-      - {fileID: 134614171339021996, guid: fc458dd8f5bd5b540afd88ab57d25fc3, type: 3}
-      SpawnPosition: {fileID: 6564808086716466647, guid: 72d320f9a7b083f45981461ba881c671, type: 3}
     - Health: 100
       Damage: 25
       AttackRange: 0
       Speed: 0
       ChaseSpeed: 0
       EnemyType: 1
-      TargetList:
-      - {fileID: 3852332971795383485, guid: 448d22774e1293a489264200d9c12849, type: 3}
-      - {fileID: 4588384430701986907, guid: 64525b4bfe41f9a4d9921c789e4cdfc3, type: 3}
-      - {fileID: 6809973167118917132, guid: 4aefcce81a230ef4195bd3277d67dfd4, type: 3}
-      - {fileID: 1188944300144623194, guid: 887ff0fc5cf83f340b674d4ee45be329, type: 3}
-      - {fileID: 8178642115774907111, guid: 59a2eb00ca532b04dbefbc282db33e40, type: 3}
-      - {fileID: 3496609261866872995, guid: 0f74dab1dce75b6428600fb2a9707291, type: 3}
-      - {fileID: 134614171339021996, guid: fc458dd8f5bd5b540afd88ab57d25fc3, type: 3}
-      SpawnPosition: {fileID: 6564808086716466647, guid: 72d320f9a7b083f45981461ba881c671, type: 3}
     - Health: 100
       Damage: 25
       AttackRange: 0
       Speed: 0
       ChaseSpeed: 0
       EnemyType: 2
-      TargetList: []
-      SpawnPosition: {fileID: 0}
+  EnemySpawnData:
+    NumberOfEnemiesToSpawn: 50
+    SpawnDelay: 2
+    RandomMaxRange: 100
+    MinPossibilityToSpawnEnemy: 30
+  EnemyBossData:
+    Health: 1500
+    Damage: 50
+    AttackRange: 10
+    Speed: 2
+    ChaseSpeed: 0
+    EnemyType: 3

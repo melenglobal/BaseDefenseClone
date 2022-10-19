@@ -1,4 +1,7 @@
 ﻿using Abstract.Interfaces;
+using Controllers.StackableControllers;
+using DG.Tweening;
+using Signals;
 using UnityEngine;
 
 namespace Abstract.Stackable
@@ -33,5 +36,8 @@ namespace Abstract.Stackable
 
         public abstract GameObject SendToStack();
 
+
+        public virtual bool IsSelected { get; set; }
+        public virtual bool IsCollected { get; set; }
     }
 }

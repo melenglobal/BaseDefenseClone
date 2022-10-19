@@ -1,4 +1,5 @@
 using System;
+using Controllers.StackableControllers;
 using Enums;
 using Extentions;
 using UnityEngine;
@@ -8,20 +9,21 @@ namespace Signals
 {
     public class CoreGameSignals : MonoSingleton<CoreGameSignals>
     {
-
         public UnityAction onLevelInitialize = delegate { };
 
         public UnityAction onClearActiveLevel = delegate { };
 
-        public UnityAction onFailed = delegate { };
-
         public UnityAction onNextLevel = delegate { };
+        
+        public UnityAction onPreNextLevel = delegate { };
         
         public UnityAction onPlay = delegate { };
         
         public UnityAction onReset = delegate { };
         
-        public UnityAction onSetCameraTarget = delegate { };
+        public UnityAction onResetPlayerStack = delegate {  };
+
+        public UnityAction<Transform> onSetCameraTarget = delegate { };
         
         public UnityAction onApplicationPause = delegate { };
         
@@ -31,19 +33,15 @@ namespace Signals
         
         public UnityAction<PoolType,GameObject> onReleaseObjectFromPool = delegate {  };
 
-        public UnityAction<int> onUpdateGemScoreData = delegate(int arg0) {  };
+        public UnityAction onUpdateGemScoreData = delegate {  };
         
-        public UnityAction<int> onUpdateMoneyScoreData = delegate(int arg0) {  };
-        
-        public UnityAction<InputHandlers> onInputHandlerChange = delegate(InputHandlers arg0) {  };
-
-        public UnityAction onCharacterInputRelease = delegate {  };
+        public UnityAction onUpdateMoneyScoreData = delegate {  };
 
         public UnityAction<TurretLocationType,GameObject> onSetCurrentTurret = delegate(TurretLocationType arg0, GameObject o) {  };
 
-        public Func<bool> onHasEnoughMoney;
+        public Func<bool> onHasEnoughMoney = delegate { return default; };
 
-        public Func<bool> onHasEnoughGem;
+        public Func<bool> onHasEnoughGem = delegate { return default; };
         
         public UnityAction onStartMoneyPayment = delegate {  };
         
@@ -55,6 +53,13 @@ namespace Signals
         
         public UnityAction onFinish = delegate {  };
 
-
+        public Func<int> onGetHealthValue = delegate { return default; };
+        
+        public UnityAction<int> onTakePlayerDamage = delegate(int arg0) {  };
+        
+        public UnityAction<Transform> onPlayerInitialize = delegate(Transform arg0) {  };
+        
+        public UnityAction onOpenPortal = delegate { };
+        
     }
 }

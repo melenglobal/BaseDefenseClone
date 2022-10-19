@@ -10,7 +10,7 @@ using Signals;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Managers
+namespace Managers.BaseManagers
 {
     public class MineBaseManager : MonoBehaviour,IGetPoolObject
     {
@@ -50,10 +50,13 @@ namespace Managers
             InstantiateAllMiners();
             AssignMinerValuesToDictionary();
         }
-       
 
         private void InstantiateAllMiners()
         {
+            if (_mineBaseData.CurrentWorkerAmount == 0)
+            {
+                return;
+            }
             for (int index = 0; index < _mineBaseData.CurrentWorkerAmount; index++)
             {
                 GameObject _currentObject = GetObject(PoolType.MinerWorkerAI);

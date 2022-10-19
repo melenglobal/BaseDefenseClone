@@ -4,6 +4,7 @@
     {
         Character,
         Turret,
-        Drone
+        Drone,
+        None
     }
 }

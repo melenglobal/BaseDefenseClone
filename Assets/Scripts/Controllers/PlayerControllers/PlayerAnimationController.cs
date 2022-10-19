@@ -3,6 +3,7 @@ using Enums;
 using Enums.Player;
 using Keys;
 using Managers;
+using Managers.CoreGameManagers;
 using UnityEngine;
 
 namespace Controllers.PlayerControllers
@@ -46,7 +47,7 @@ namespace Controllers.PlayerControllers
             _animationStatesMap = new Dictionary<WeaponTypes, PlayerAnimationStates>()
             {
                 {WeaponTypes.PistolBullet, PlayerAnimationStates.Pistol},
-                {WeaponTypes.RiffleBullet, PlayerAnimationStates.Riffle},
+                {WeaponTypes.RifleBullet, PlayerAnimationStates.Riffle},
                 {WeaponTypes.PumpBullet, PlayerAnimationStates.ShotGun},
                 {WeaponTypes.MiniGunBullet, PlayerAnimationStates.MiniGun},
             };
@@ -57,11 +58,11 @@ namespace Controllers.PlayerControllers
         }
         public void PlayAnimation(InputParams inputParams)
         { 
-            if (playerManager.currentAreaType == AreaType.Battle)
+            if (playerManager.CurrentAreaType == AreaType.Battle)
             {
                 animator.SetLayerWeight(1,1);
                 animator.SetBool("IsBattleOn",true);
-                ChangeAnimations(_animationStatesMap[playerManager.WeaponTypes]);
+                ChangeAnimations(_animationStatesMap[playerManager.WeaponType]);
                 animator.SetBool("Aimed",true);
                 _velocityX = inputParams.InputValues.x;
                 _velocityZ = inputParams.InputValues.y;
@@ -110,7 +111,7 @@ namespace Controllers.PlayerControllers
                     : PlayerAnimationStates.Idle);
             }
         }
-        private void ChangeAnimations(PlayerAnimationStates animationStates)
+       public void ChangeAnimations(PlayerAnimationStates animationStates)
         {
             if (animationStates == _currentAnimationState) return;
              animator.Play(animationStates.ToString());
@@ -119,6 +120,16 @@ namespace Controllers.PlayerControllers
         public void AimTarget(bool hasTarget)
         {
             animator.SetBool("Aimed",hasTarget);
+        }
+
+        public void DeathAnimation()
+        {
+            animator.Play(PlayerAnimationStates.Die.ToString());
+        }
+
+        public void HoldTurret(bool hold)
+        {
+            animator.SetLayerWeight(2,hold ? 1:0);
         }
     }
     }

@@ -8,17 +8,19 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: PlayerSkin
-  m_Shader: {fileID: 4800000, guid: 7ffc1bc2bbb1ef64f84b552b2d2f0619, type: 3}
+  m_Shader: {fileID: 4800000, guid: 733fefdcde0d35f4b822d2935d5a22f4, type: 3}
   m_ShaderKeywords: TCP2_REFLECTIONS_FRESNEL TCP2_RIM_LIGHTING_LIGHTMASK TCP2_UV_NORMALS_FULL
-    _FRESNELHIGHLIGHTS_ON _MK_ARTISTIC_PROJECTION_SCREEN_SPACE _MK_DETAIL_BLEND_MIX
-    _MK_ENVIRONMENT_REFLECTIONS_AMBIENT _MK_FRESNEL_HIGHLIGHTS _MK_LIGHT_CEL _MK_OUTLINE_NOISE
-    _MK_RECEIVE_SHADOWS _MK_WRAPPED_DIFFUSE _RECEIVESHADOWS_ON _WRAPPEDLIGHTING_ON
-  m_LightmapFlags: 6
+    _FRESNELHIGHLIGHTS_ON _MK_ARTISTIC_PROJECTION_SCREEN_SPACE _MK_COLOR_GRADING_ALBEDO
+    _MK_DETAIL_BLEND_MIX _MK_EMISSION _MK_ENVIRONMENT_REFLECTIONS_AMBIENT _MK_FRESNEL_HIGHLIGHTS
+    _MK_LIGHT_CEL _MK_OUTLINE_NOISE _MK_RECEIVE_SHADOWS _MK_RIM_SPLIT _MK_WRAPPED_DIFFUSE
+    _RECEIVESHADOWS_ON _WRAPPEDLIGHTING_ON
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 2000
   stringTagMap:
     IGNOREPROJECTOR: False
+    RenderType: Opaque
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -215,7 +217,7 @@ Material:
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
-    - _ColorGrading: 0
+    - _ColorGrading: 1
     - _Contrast: 1
     - _Cull: 2
     - _Cutoff: 0.5
@@ -225,7 +227,7 @@ Material:
     - _DetailNormalMapIntensity: 1
     - _DetailNormalMapScale: 1
     - _Diffuse: 0
-    - _DiffuseSmoothness: 0
+    - _DiffuseSmoothness: 1
     - _DiffuseThresholdOffset: 0.25
     - _DirectIntensityOutline: 1
     - _Dissolve: 0
@@ -258,7 +260,7 @@ Material:
     - _Light: 1
     - _LightBands: 4
     - _LightBandsScale: 0.5
-    - _LightThreshold: 0.5
+    - _LightThreshold: 0.531
     - _LightTransmission: 0
     - _LightTransmissionDistortion: 0.25
     - _LightTransmissionIntensity: 1
@@ -306,10 +308,10 @@ Material:
     - _RenderFace: 2
     - _RenderPriority: 0
     - _RenderingMode: 0
-    - _Rim: 0
+    - _Rim: 2
     - _RimMax: 1
     - _RimMin: 0.5
-    - _RimSize: 1
+    - _RimSize: 1.72
     - _RimSmoothness: 0.5
     - _RimThresholdOffset: 0.25
     - _Roughness: 0.5
@@ -366,21 +368,21 @@ Material:
     - _ZTest: 4
     - _ZWrite: 1
     m_Colors:
-    - _AlbedoColor: {r: 0.3443396, g: 0.80978316, b: 1, a: 1}
-    - _BaseColor: {r: 0.16509432, g: 0.8128661, b: 1, a: 1}
+    - _AlbedoColor: {r: 0, g: 0.8980393, b: 1, a: 1}
+    - _BaseColor: {r: 0.2627451, g: 0.80392164, b: 1, a: 1}
     - _Color: {r: 0.8, g: 0.8, b: 0.8, a: 1}
     - _DetailColor: {r: 1, g: 1, b: 1, a: 1}
     - _DissolveBorderColor: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionColor: {r: 0, g: 0.53459144, b: 0.8018868, a: 1}
     - _GoochBrightColor: {r: 1, g: 1, b: 1, a: 1}
-    - _GoochDarkColor: {r: 0, g: 0, b: 0, a: 1}
+    - _GoochDarkColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _HColor: {r: 1, g: 1, b: 1, a: 1}
     - _IridescenceColor: {r: 1, g: 1, b: 1, a: 0.5}
     - _LightTransmissionColor: {r: 1, g: 0.65, b: 0, a: 1}
     - _MatCapColor: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _ReflectionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _RimBrightColor: {r: 1, g: 1, b: 1, a: 1}
+    - _RimBrightColor: {r: 0.38431376, g: 0.7843138, b: 0.92549026, a: 1}
     - _RimColor: {r: 0.8, g: 0.8, b: 0.8, a: 0.5}
     - _RimDarkColor: {r: 0, g: 0, b: 0, a: 1}
     - _SColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}

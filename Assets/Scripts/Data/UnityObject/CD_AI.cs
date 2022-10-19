@@ -7,9 +7,17 @@ namespace Data.UnityObject
     public class CD_AI : ScriptableObject
     {
         public AmmoWorkerAIData AmmoWorkerAIData;
+        
         public MoneyWorkerAIData MoneyWorkerAIData;
+        
         public MineWorkerAIData MineWorkerAIData;
+        
         public SoldierAIData SoldierAIData;
-        public EnemyAIData EnemyAIData; // Make list when level
+        
+        public EnemyAIData EnemyAIData;
+        
+        public EnemySpawnData EnemySpawnData;
+
+        public EnemyBossData EnemyBossData;
     }
 }

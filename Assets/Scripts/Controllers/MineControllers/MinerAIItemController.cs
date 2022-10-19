@@ -1,12 +1,11 @@
 using System.Collections.Generic;
-using System.Linq;
 using Abstract.Interfaces.Pool;
 using Enum;
 using Enums;
 using Signals;
 using UnityEngine;
 
-namespace Controllers
+namespace Controllers.MineControllers
 {
     public class MinerAIItemController : MonoBehaviour,IGetPoolObject,IReleasePoolObject
     {
@@ -29,18 +28,9 @@ namespace Controllers
         private void Awake()
         {
             AddToDictionary();
-            CloseAllObject();
-            
-        }
 
-        private void CloseAllObject()
-        {
-            for (int index = 0; index < ItemList.Count; index++)
-            {
-                ItemList.ElementAt(index).Value.SetActive(false);
-            }
         }
-
+        
         private void AddToDictionary()
         {
             ItemList.Add(MinerItems.Gem, gem);

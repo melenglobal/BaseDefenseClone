@@ -8,10 +8,6 @@ namespace Controllers.PlayerControllers
     {
         #region Self Variables
 
-        #region Public Variables
-        
-        #endregion
-
         #region Serialized Variables,
          
         [SerializeField] private Transform manager;

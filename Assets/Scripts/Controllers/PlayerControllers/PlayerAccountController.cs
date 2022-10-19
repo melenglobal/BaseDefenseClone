@@ -1,5 +1,7 @@
-﻿using Abstract.Interfaces;
+﻿using System;
+using Abstract.Interfaces;
 using Abstract.Stackable;
+using Controllers.BaseControllers;
 using Signals;
 using UnityEngine;
 
@@ -7,16 +9,21 @@ namespace Controllers.PlayerControllers
 {
     public class PlayerAccountController : MonoBehaviour,ICustomer
     {
+        public SphereCollider Collider;
         
         [SerializeField] private PlayerMoneyStackerController playerMoneyStackerController;
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent<IStackable>(out IStackable stackable))
-            {
-                playerMoneyStackerController.SetStackHolder(stackable.SendToStack().transform);
-                playerMoneyStackerController.GetStack(stackable.SendToStack());
-            }
-            else if (other.TryGetComponent<IInteractable>(out IInteractable interactable))
+            if (!other.TryGetComponent<IStackable>(out IStackable stackable)) return;
+            stackable.IsCollected = true;
+            MoneyWorkerSignals.Instance.onThisMoneyTaken?.Invoke();
+            playerMoneyStackerController.GetStack(stackable.SendToStack());
+
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.TryGetComponent<GatePhysicsController>(out GatePhysicsController gatePhysics))
             {
                 playerMoneyStackerController.OnRemoveAllStack();
             }
@@ -24,17 +31,10 @@ namespace Controllers.PlayerControllers
 
         #region Account
 
-        public bool canPay { get => CoreGameSignals.Instance.onHasEnoughMoney.Invoke(); set { } }
-        public void MakePayment()
+        public bool CanPay { get => CoreGameSignals.Instance.onHasEnoughMoney.Invoke(); set { } }
+        public void PlayPaymentAnimation(Transform transform)
         {
-            if (!canPay)
-            {
-                CoreGameSignals.Instance.onStopMoneyPayment?.Invoke();
-                Debug.Log("StopPayment");
-                return;
-            }
-            CoreGameSignals.Instance.onStartMoneyPayment?.Invoke();
-            Debug.Log("StartPayment");
+            playerMoneyStackerController.PaymentStackAnimation(transform);
         }
 
         #endregion

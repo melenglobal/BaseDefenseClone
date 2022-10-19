@@ -6,26 +6,22 @@ namespace AIBrains.SoldierBrain
 {
     public class Idle : IState
     {
-        private SoldierAIBrain _soldierAIBrain;
         private Transform _tentPosition;
         private NavMeshAgent _navMeshAgent;
-        private Animator _animator;
-        public Idle(SoldierAIBrain soldierAIBrain,Transform tentPosition, NavMeshAgent navMeshAgent,Animator animator)
+        public Idle(Transform tentPosition, NavMeshAgent navMeshAgent)
         {
-            _soldierAIBrain = soldierAIBrain;
             _tentPosition= tentPosition;
             _navMeshAgent = navMeshAgent;
-            _animator = animator;
         }
         public void Tick()
         {
-           
+
         }
         public void OnEnter()
         {
             GetTentSpawnPosition();
             _navMeshAgent.enabled = true;
-            
+
         }
         public void OnExit()
         {

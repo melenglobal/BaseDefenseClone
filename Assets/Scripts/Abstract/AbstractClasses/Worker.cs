@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Abstract
+﻿namespace Abstract.AbstractClasses
 {
     public abstract class Worker
     {
@@ -8,7 +6,7 @@ namespace Abstract
 
         public float Speed;
 
-        protected Worker(float speed, int capacity)
+        protected Worker(float speed, int capacity) // Constructor savelenirken abstractin kini mi newleycez,yoksa concrete classin mi 
         {
             Speed = speed;
             Capacity = capacity;

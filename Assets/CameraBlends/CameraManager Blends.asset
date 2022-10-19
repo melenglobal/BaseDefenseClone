@@ -27,8 +27,8 @@ MonoBehaviour:
   - m_From: LevelCam
     m_To: FinishCam
     m_Blend:
-      m_Style: 1
-      m_Time: 2
+      m_Style: 3
+      m_Time: 3
       m_CustomCurve:
         serializedVersion: 2
         m_Curve: []

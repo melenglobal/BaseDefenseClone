@@ -226,6 +226,7 @@ GameObject:
   m_Component:
   - component: {fileID: 426376219805111661}
   - component: {fileID: 6583077500156414268}
+  - component: {fileID: 8990876367909071983}
   m_Layer: 14
   m_Name: Detection
   m_TagString: Untagged
@@ -260,6 +261,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 20
   m_Center: {x: 0, y: 0, z: -0}
+--- !u!114 &8990876367909071983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 528150921998645129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49a2212647f54bd9ba9b2378fc61c775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyAIBrain: {fileID: 6421847800292410630}
 --- !u!1 &769187838600581297
 GameObject:
   m_ObjectHideFlags: 0
@@ -1784,7 +1798,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6421847800292410626
 Transform:
   m_ObjectHideFlags: 0
@@ -1815,8 +1829,8 @@ NavMeshAgent:
   m_Speed: 6.256049
   m_Acceleration: 40
   avoidancePriority: 30
-  m_AngularSpeed: 270
-  m_StoppingDistance: 1
+  m_AngularSpeed: 360
+  m_StoppingDistance: 1.3
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -1841,12 +1855,8 @@ MonoBehaviour:
   TurretTarget: {fileID: 0}
   spawnPosition: {fileID: 8965314844710460317, guid: 81322c27152a7994896025ef68b85537, type: 3}
   enemyType: 0
-  targetList:
-  - {fileID: 6009953371363724169, guid: e03c7992ea6c8f442a2c19ab26943e77, type: 3}
-  - {fileID: 6540085594896736554, guid: c809b96b508fb554c8d51ce82e55dc28, type: 3}
-  - {fileID: 7562009722535035351, guid: e3f25961582031d4e959be59e7dba0ae, type: 3}
-  - {fileID: 3661513579959121681, guid: bd563e9ce43ed1f458073f97d2df549e, type: 3}
-  - {fileID: 3116730548557065255, guid: 1072025235bec6d45b08a19417fa7401, type: 3}
+  navMeshAgent: {fileID: 6421847800292410631}
+  animator: {fileID: 3497094948755642170}
 --- !u!1 &6454500306923120509
 GameObject:
   m_ObjectHideFlags: 0
@@ -2485,10 +2495,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2.9333344
+  m_Radius: 0.5462682
+  m_Height: 3.0101745
   m_Direction: 1
-  m_Center: {x: -0, y: 1.2981081, z: -0}
+  m_Center: {x: -0.013012648, y: 1.3365282, z: -0}
 --- !u!1 &8305099969605802261
 GameObject:
   m_ObjectHideFlags: 0

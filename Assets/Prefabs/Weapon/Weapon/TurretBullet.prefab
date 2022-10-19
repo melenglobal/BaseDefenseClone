@@ -100,7 +100,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4502503274855225501
 Transform:
   m_ObjectHideFlags: 0
@@ -110,7 +110,7 @@ Transform:
   m_GameObject: {fileID: 5910510186796030129}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 1410163488329753533}
   - {fileID: 772997214697872311}
@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45f1fdb497194236ad19990ae38e6fa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponType: 1
+  weaponType: 4
   physicsController: {fileID: 5870069527895995986}
 --- !u!114 &6556710508350579973
 MonoBehaviour:
@@ -201,7 +201,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.1
+  m_Time: 0.5
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -210,7 +210,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0.52205086
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -218,7 +218,7 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.19988377
+        time: 0.46654636
         value: 0
         inSlope: 0
         outSlope: 0
@@ -278,7 +278,7 @@ GameObject:
   - component: {fileID: 772997214697872311}
   - component: {fileID: 5870069527895995986}
   - component: {fileID: 2455131860651324925}
-  m_Layer: 13
+  m_Layer: 24
   m_Name: Physics
   m_TagString: Untagged
   m_Icon: {fileID: 0}

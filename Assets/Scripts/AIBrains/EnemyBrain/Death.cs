@@ -65,6 +65,7 @@ namespace AIBrains.EnemyBrain
             {
                 _enemyAIBrain.transform.DOMoveY(-3f,1f).OnComplete(()=> ReleaseObject(_enemyAIBrain.gameObject,poolType));
             });
+            AISignals.Instance.onReleaseObjectUpdate?.Invoke(_enemyAIBrain.gameObject);
         }
 
         public void ReleaseObject(GameObject obj, PoolType poolName)

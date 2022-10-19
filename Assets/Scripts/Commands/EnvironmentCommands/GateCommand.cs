@@ -8,7 +8,9 @@ namespace Commands.EnvironmentCommands
         #region Self Variables
         
         #region Private Variables
+        
         private float _gateAngleZ;
+        
         #endregion
 
         #endregion
