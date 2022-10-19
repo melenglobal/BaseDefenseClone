@@ -178,7 +178,6 @@ namespace Managers.AIManagers
         private void OnFailed()
         {
             gameObject.SetActive(false);
-            Debug.Log("Onfailed enemyManager");
         }
 
         

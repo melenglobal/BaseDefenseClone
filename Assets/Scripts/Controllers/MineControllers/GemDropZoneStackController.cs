@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Abstract.Stack;
-using Controllers;
 using Data.UnityObject;
 using Data.ValueObject;
 using Enums;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Concrete
+namespace Controllers.MineControllers
 {
     public class GemDropZoneStackController : AStack
     {
@@ -131,11 +129,12 @@ namespace Concrete
             gemStackerController.GetStackPositions(gridPositionsData);
         }
 
+
         private void OnDrawGizmos()
         {
-            for (int i = 0; i < gridPositionsData.Count; i++)
+            foreach (var t in gridPositionsData)
             {
-                Gizmos.DrawMesh(_gridData.DrawnedMesh,gridPositionsData[i]);
+                Gizmos.DrawMesh(_gridData.DrawnedMesh,t);
             }
         }
     }

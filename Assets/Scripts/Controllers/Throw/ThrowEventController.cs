@@ -5,16 +5,12 @@ using Data.ValueObject;
 using DG.Tweening;
 using Enums;
 using Signals;
-using StateMachines.AIBrain.EnemyBrain.BossEnemyBrain;
 using UnityEngine;
 
 namespace Controllers.Throw
 {
     public class ThrowEventController : MonoBehaviour, IReleasePoolObject, IGetPoolObject
     {
-        /// <summary>
-        /// Call Animation Event
-        /// </summary>
 
         #region Self Variables
 
@@ -92,7 +88,7 @@ namespace Controllers.Throw
             Vector3 velocityY = Vector3.up * Mathf.Sqrt(-2 * _throwData.Gravity * _throwData.Height); // y de ki velocity hesabi
             Vector3 velocityXZ = distXZ / time; // zamana bagli olarak alacagi yol 
 
-            DOVirtual.DelayedCall(time ,() => DeactiveSpriteTargetDelay());
+            DOVirtual.DelayedCall(time +0.1f ,() => DeactiveSpriteTargetDelay());
 
             return new ThrowInputData(velocityXZ + velocityY * -Mathf.Sign(_throwData.Gravity), time);
         }
@@ -100,7 +96,6 @@ namespace Controllers.Throw
         {
             if (bombPhysicController)
             {
-                bombPhysicController.enabled = true;
                 bombPhysicController.enabled = false;
             }
             if (SpriteTarget.activeInHierarchy)

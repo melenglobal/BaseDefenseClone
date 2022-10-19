@@ -21,7 +21,7 @@ namespace Controllers.TurretControllers
 
         public bool readyToAttack { get; set; }
         
-        private const float _fireRate = 0.3f;
+        private const float _fireRate = 0.6f;
 
         private float maxRadius = 14f;
 
@@ -61,11 +61,8 @@ namespace Controllers.TurretControllers
             if (!readyToAttack)
                 return;
             
-            if (damageables.Count != 0) // Check bullet count
+            if (damageables.Count != 0) 
             {
-                // Vector3 direction = damageables[0].GetTransform().position - transform.position;
-                //
-                // Quaternion enemyRotation = Quaternion.LookRotation(direction, Vector3.up);
                 StartCoroutine(FireBullet());
             }
         }
@@ -107,6 +104,10 @@ namespace Controllers.TurretControllers
 
         private IEnumerator FireBullet()
         {
+            if (!readyToAttack)
+            {
+                yield return null;
+            }
             yield return new WaitForSeconds(_fireRate);
                 fireController.FireBullets(weaponHolder);
                 ShootTheTarget();

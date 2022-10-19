@@ -8,7 +8,6 @@ using Data.ValueObject;
 using Enums;
 using Sirenix.OdinInspector;
 using StateBehaviour;
-using StateMachines.AIBrain.EnemyBrain.BossEnemyBrain.States;
 using UnityEngine;
 
 namespace AIBrains.BossEnemyBrain

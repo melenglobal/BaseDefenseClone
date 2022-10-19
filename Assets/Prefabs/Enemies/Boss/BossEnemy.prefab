@@ -58,7 +58,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 594142657675172728}
   m_LocalRotation: {x: -0, y: -1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.00869751}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3587029970803297001}
@@ -71,8 +71,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 12}
-  m_SizeDelta: {x: 5.4, y: 2.4}
+  m_AnchoredPosition: {x: -0.00040000677, y: 12.033601}
+  m_SizeDelta: {x: 5.4439, y: 2.4195}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &4316072964066959393
 Canvas:
@@ -1983,7 +1983,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8986287383595011285}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.00005, y: 0.00264, z: 0.00115}
+  m_LocalPosition: {x: 0.00005, y: 0.00264, z: 0.00003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1490967577269591256}
@@ -2039,9 +2039,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerTarget: {fileID: 0}
-  enemyType: 3
-  detector: {fileID: 8986287385174017237}
   bossHealthController: {fileID: 7314854867632744573}
+  throwEventController: {fileID: 0}
   bombHolder: {fileID: 8986287383595011284}
 --- !u!136 &8986287384279758472
 CapsuleCollider:

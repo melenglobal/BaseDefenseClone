@@ -24,7 +24,7 @@ MonoBehaviour:
     - isDynamic: 0
       GridSize: {x: 5, y: 10, z: 5}
       Offset: {x: 1, y: 1, z: 1}
-      DrawnedMesh: {fileID: 0}
+      DrawnedMesh: {fileID: -1248044278159708556, guid: afad3945c1f92094dbda4d85f7a2ead2, type: 3}
       StackerType: 0
       StackAreaType: 1
     - isDynamic: 0

@@ -109,10 +109,7 @@ namespace Controllers
                     removedStack.transform.SetParent(null);
                     removedStack.SetActive(false);
                 });
-
-                
             });
-             
         }
 
         public override void ResetStack(IStackable stackable)

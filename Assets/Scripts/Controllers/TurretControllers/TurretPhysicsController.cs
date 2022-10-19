@@ -1,7 +1,4 @@
-﻿using System.Runtime.Serialization;
-using Abstract;
-using Enums;
-using Managers;
+﻿using Enums;
 using Managers.CoreGameManagers;
 using Signals;
 using UnityEngine;
@@ -11,7 +8,6 @@ namespace Controllers.TurretControllers
     public class TurretPhysicsController : MonoBehaviour
     {
         [SerializeField] private TurretLocationType turretLocationType;
-        [SerializeField] private new BoxCollider collider;
         [SerializeField] private TurretShootController turretShootController;
        
         private void OnTriggerEnter(Collider other)
@@ -30,9 +26,6 @@ namespace Controllers.TurretControllers
             turretShootController.readyToAttack = false;
             turretShootController.DeSizeDetectionRadius();
         }
-        private void SetCollider(bool isActive)
-        {
-            collider.enabled = isActive;
-        }
+
     }
 }

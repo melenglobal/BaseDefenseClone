@@ -1,7 +1,7 @@
 using Abstract;
 using UnityEngine;
 
-namespace StateMachines.AIBrain.EnemyBrain.BossEnemyBrain.States
+namespace AIBrains.BossEnemyBrain.States
 {
     public class BossWaitState : IState
     {

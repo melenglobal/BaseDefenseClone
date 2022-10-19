@@ -19,13 +19,7 @@ namespace Managers.BaseManagers
         private List<TurretMovementController> turretMovementControllers = new List<TurretMovementController>(6);
 
         [SerializeField] private WeaponTypes weaponTypes = WeaponTypes.TurretBullet;
-
-
-
-        // [SerializeField]
-        // private TurretOtoAtackController _otoAtackController;
-        // [SerializeField]
-        // private TurretShootController ShootController;
+        
         #endregion
 
         #region Private Variables
@@ -46,8 +40,6 @@ namespace Managers.BaseManagers
             CoreGameSignals.Instance.onSetCurrentTurret += OnGetCurrentTurretMovementController;
             InputSignals.Instance.onJoystickInputDraggedforTurret += OnGetInputValues;
             InputSignals.Instance.onCharacterInputRelease += OnCharacterRelease;
-            // TurretSignals.Instance.onPressTurretButton += OnPressTurretButton;
-            // TurretSignals.Instance.onDeadEnemy += OnDeadEnemy;
         }
 
         private void UnsubscribeEvents()
@@ -56,24 +48,12 @@ namespace Managers.BaseManagers
             CoreGameSignals.Instance.onSetCurrentTurret -= OnGetCurrentTurretMovementController;
             InputSignals.Instance.onJoystickInputDraggedforTurret -= OnGetInputValues;
             InputSignals.Instance.onCharacterInputRelease -= OnCharacterRelease;
-            // TurretSignals.Instance.onPressTurretButton -= OnPressTurretButton;
-            // TurretSignals.Instance.onDeadEnemy -= OnDeadEnemy;
         }
 
         private void OnDisable() => UnsubscribeEvents();
 
         #endregion
         
-        #region BotController
-        public void IsFollowEnemyInTurretRange()
-        {
-            // ShootController.ActiveGattaling();
-            // //transform.GetComponentInChildren<AmmoContaynerManager>().IsTurretAttack();
-            // _otoAtackController.FollowToEnemy();
-        }
-
-   
-        #endregion
 
         #region Character on the Turret
 
