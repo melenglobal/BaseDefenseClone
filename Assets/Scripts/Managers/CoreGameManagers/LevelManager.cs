@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Commands.LevelCommands;
 using Data.UnityObject;
 using Signals;
@@ -56,9 +57,10 @@ namespace Managers.CoreGameManagers
 
         #endregion
 
-        private void OnNextLevel()
+        private async void OnNextLevel()
         {
             CoreGameSignals.Instance.onClearActiveLevel?.Invoke();
+            await Task.Delay(10);
             CoreGameSignals.Instance.onLevelInitialize?.Invoke();
         }
 

@@ -69,8 +69,11 @@ namespace Controllers.ThrowControllers
 
         private void Throw()
         {
-            SpriteTarget.SetActive(true);
-            SpriteTarget.transform.position = bossBrain.PlayerTarget.position + new Vector3(0, 0.2f, 0);
+            if (SpriteTarget!=null)
+            {
+                SpriteTarget.SetActive(true);
+                SpriteTarget.transform.position = bossBrain.PlayerTarget.position + new Vector3(0, 0.2f, 0);
+            }
             _throwBomb.transform.SetParent(null);
             var rb = _throwBomb.GetComponent<Rigidbody>();
             Physics.gravity = Vector3.up * _throwData.Gravity;
@@ -91,19 +94,25 @@ namespace Controllers.ThrowControllers
             return new ThrowInputData(velocityXZ + velocityY * -Mathf.Sign(_throwData.Gravity), time);
         }
         private void DeactiveSpriteTargetDelay()
-        {
+        {   
+            if (_throwBomb!= null)
+            {
+                ReleaseObject(_throwBomb,PoolType.Bomb);
+            }
             if (bombPhysicController)
             {
                 bombPhysicController.enabled = false;
+            }
+
+            if (!SpriteTarget)
+            {
+                return;
             }
             if (SpriteTarget.activeInHierarchy)
             {
                 SpriteTarget.SetActive(false);
             }
-            if (_throwBomb!= null)
-            {
-                ReleaseObject(_throwBomb,PoolType.Bomb);
-            }
+          
         }
 
         /*

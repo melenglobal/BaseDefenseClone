@@ -1,16 +1,16 @@
-﻿using System;
-using Abstract;
+﻿using Abstract;
 using Abstract.Interfaces;
 using AIBrains.BossEnemyBrain;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Controllers.AIControllers
+namespace Controllers.AIControllers.BossAIControllers
 {
     public class BossHealthController: MonoBehaviour,IDamageable
     {
-        [SerializeField] private Image fillImage;
+        [SerializeField] 
+        private Image fillImage;
         
         [SerializeField]
         private TextMeshProUGUI healthText;

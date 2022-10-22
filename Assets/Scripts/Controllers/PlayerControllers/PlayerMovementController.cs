@@ -1,4 +1,5 @@
-﻿using Data.ValueObject;
+﻿using System;
+using Data.ValueObject;
 using Enums;
 using Keys;
 using Managers;
@@ -45,15 +46,18 @@ namespace Controllers.PlayerControllers
         {
             PlayerMove();
         }
+
+        private void LateUpdate()
+        {
+            if (manager.EnemyTarget == null || manager.EnemyList.Count == 0) 
+                return; 
+            RotatePlayerToTarget(manager.EnemyList[0].GetTransform());
+        }
+
         public void UpdateInputValues(InputParams inputParams)
         {
             _inputVector = inputParams.InputValues;
             EnableMovement(_inputVector.sqrMagnitude > 0);
-            
-            if (!_hasEnemyTarget)
-            {
-                
-            }
         }
         
         private void PlayerMove()
@@ -83,8 +87,8 @@ namespace Controllers.PlayerControllers
 
         public void RotatePlayerToTarget(Transform enemyTarget)
         {
-            if (enemyTarget == null) return;
-            transform.LookAt(enemyTarget,Vector3.up * 3f);
+            if(enemyTarget == null) return;
+            transform.LookAt(new Vector3(enemyTarget.position.x,0,enemyTarget.position.z), Vector3.up*3f);
         }
 
         private void EnableMovement(bool movementStatus)

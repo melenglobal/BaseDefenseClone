@@ -68,8 +68,6 @@ namespace Managers.CoreGameManagers
 
         private bool _canReset;
         
-        
-
         #endregion
         
         #endregion
@@ -130,13 +128,12 @@ namespace Managers.CoreGameManagers
         {
             movementController.UpdateInputValues(inputParams);
             animationController.PlayAnimation(inputParams);
-            AimEnemy();
         }
         public void SetEnemyTarget()
         {
             shootingController.SetEnemyTargetTransform();
             animationController.AimTarget(true);
-            AimEnemy();
+  
         }
 
         public async void IncreaseHealth()
@@ -175,7 +172,6 @@ namespace Managers.CoreGameManagers
                 UISignals.Instance.onHealthUpdate?.Invoke(_health);
             }
         }
-        private void AimEnemy() => movementController.RotatePlayerToTarget(!HasEnemyTarget ? null : EnemyList[0]?.GetTransform());
         public void CheckAreaStatus(AreaType areaType) => meshController.ChangeAreaStatus(CurrentAreaType = areaType);
         private void OnDisableMovement(InputHandlers inputHandler) => movementController.DisableMovement(inputHandler);
         public void SetTurretAnimation(bool onTurret) => animationController.HoldTurret(onTurret);
@@ -215,10 +211,8 @@ namespace Managers.CoreGameManagers
             OnDisableMovement(InputHandlers.None);
             CoreGameSignals.Instance.onReset?.Invoke();
             playerAccountController.Collider.enabled = false;
-            UISignals.Instance.onHealthUpdate?.Invoke(_data.Health);
-            UISignals.Instance.onHealthBarClose?.Invoke();
-            EnemyList.Clear();
-            HasEnemyTarget = false;
+            ResetPlayerHealth();
+            ResetPlayerTargets();
             playerMoneyStackerController.ResetStack();
             playerPhysicsController.ResetPlayerLayer();
             CoreGameSignals.Instance.onResetPlayerStack?.Invoke();
@@ -228,8 +222,7 @@ namespace Managers.CoreGameManagers
         private void OnNextLevel()
         {   
             animationController.gameObject.SetActive(true);
-            UISignals.Instance.onHealthUpdate?.Invoke(_data.Health);
-            UISignals.Instance.onHealthBarClose?.Invoke();
+            ResetPlayerHealth();
             playerPhysicsController.ResetPlayerLayer();
             EnemyList.Clear();
             HasEnemyTarget = false;
@@ -239,6 +232,18 @@ namespace Managers.CoreGameManagers
             playerAccountController.Collider.enabled = true;
             CoreGameSignals.Instance.onReset?.Invoke();
             CoreGameSignals.Instance.onPlay?.Invoke();
+        }
+
+        private void ResetPlayerHealth()
+        {
+            UISignals.Instance.onHealthUpdate?.Invoke(_data.Health);
+            UISignals.Instance.onHealthBarClose?.Invoke();
+        }
+
+        private void ResetPlayerTargets()
+        {
+            EnemyList.Clear();
+            HasEnemyTarget = false;
         }
 
     }

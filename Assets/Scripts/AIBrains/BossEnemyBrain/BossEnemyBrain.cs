@@ -1,6 +1,7 @@
 using System;
 using Abstract;
 using Controllers.AIControllers;
+using Controllers.AIControllers.BossAIControllers;
 using Controllers.ThrowControllers;
 using Data.UnityObject;
 using Data.ValueObject;
@@ -37,12 +38,11 @@ namespace AIBrains.BossEnemyBrain
         #endregion
 
         #region Private Variables
+        
         private EnemyBossData _enemyBossData;
         private StateMachine _stateMachine;
         private Animator _animator;
         
-
-
         #region States
 
         private BossWaitState _waitState;
